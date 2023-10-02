@@ -3,4 +3,5 @@ class AppRoutes {
   static const LOGIN = '/login';
   static const SCHEDULE = '/schedule';
   static const SCHEDULES = '/schedules';
+  static const RATING = '/rating';
 }
