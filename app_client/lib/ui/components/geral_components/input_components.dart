@@ -28,6 +28,61 @@ Widget geralTextInput({
   );
 }
 
+Widget geralMultilineTextInput({
+  required BuildContext context,
+  required String text,
+  required TextEditingController textController,
+  TextInputType type = TextInputType.text,
+}) {
+  return Column(
+    children: [
+      SizedBox(
+        width: MediaQuery.of(context).size.width * 0.9,
+        child: TextFormField(
+          maxLines: 5,
+          decoration: InputDecoration(
+            filled: true,
+            fillColor: Colors.white,
+            border: const OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10))),
+            hintText: text,
+          ),
+          controller: textController,
+        ),
+      ),
+      const SizedBox(
+        height: 10,
+      ),
+    ],
+  );
+}
+
+Widget geralInativeTextInput({
+  required BuildContext context,
+  required String text,
+}) {
+  return Column(
+    children: [
+      SizedBox(
+        width: MediaQuery.of(context).size.width * 0.9,
+        child: TextFormField(
+          enabled: false,
+          decoration: InputDecoration(
+            filled: true,
+            fillColor: Colors.white,
+            border: const OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10))),
+            hintText: text,
+          ),
+        ),
+      ),
+      const SizedBox(
+        height: 10,
+      ),
+    ],
+  );
+}
+
 Widget geralDropInput(
   BuildContext context,
   List<String> list,
