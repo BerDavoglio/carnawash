@@ -8,4 +8,6 @@ class AppRoutes {
   static const HELP = '/help';
   static const PERFIL = '/perfil';
   static const ACCOUNT = '/account';
+  static const VEHICLES = '/vehicles';
+  static const VEHICLES_EDIT = '/vehicles_edit';
 }

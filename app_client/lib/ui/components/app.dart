@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       routes: {
-        AppRoutes.HOME: (_) => const AccountPage(),
+        AppRoutes.HOME: (_) => const VehiclesEditPage(),
         AppRoutes.LOGIN: (_) => const LoginPage(),
         AppRoutes.SCHEDULE: (_) => const SchedulePage(),
         AppRoutes.SCHEDULES: (_) => const SchedulesPage(),
@@ -24,6 +24,8 @@ class MyApp extends StatelessWidget {
         AppRoutes.HELP: (_) => const HelpPage(),
         AppRoutes.PERFIL: (_) => const PerfilPage(),
         AppRoutes.ACCOUNT: (_) => const AccountPage(),
+        AppRoutes.VEHICLES: (_) => const VehiclesPage(),
+        AppRoutes.VEHICLES_EDIT: (_) => const VehiclesEditPage(),
       },
     );
   }
