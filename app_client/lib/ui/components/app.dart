@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       routes: {
-        AppRoutes.HOME: (_) => const PerfilPage(),
+        AppRoutes.HOME: (_) => const AccountPage(),
         AppRoutes.LOGIN: (_) => const LoginPage(),
         AppRoutes.SCHEDULE: (_) => const SchedulePage(),
         AppRoutes.SCHEDULES: (_) => const SchedulesPage(),
@@ -23,6 +23,7 @@ class MyApp extends StatelessWidget {
         AppRoutes.HISTORY: (_) => const HistoryPage(),
         AppRoutes.HELP: (_) => const HelpPage(),
         AppRoutes.PERFIL: (_) => const PerfilPage(),
+        AppRoutes.ACCOUNT: (_) => const AccountPage(),
       },
     );
   }
