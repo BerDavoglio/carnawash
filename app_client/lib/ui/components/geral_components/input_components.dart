@@ -6,11 +6,12 @@ Widget geralTextInput({
   required String text,
   required TextEditingController textController,
   TextInputType type = TextInputType.text,
+  double larg = 0.9,
 }) {
   return Column(
     children: [
       SizedBox(
-        width: MediaQuery.of(context).size.width * 0.9,
+        width: MediaQuery.of(context).size.width * larg,
         child: TextFormField(
           decoration: InputDecoration(
             filled: true,
@@ -61,11 +62,12 @@ Widget geralMultilineTextInput({
 Widget geralInativeTextInput({
   required BuildContext context,
   required String text,
+  double larg = 0.9,
 }) {
   return Column(
     children: [
       SizedBox(
-        width: MediaQuery.of(context).size.width * 0.9,
+        width: MediaQuery.of(context).size.width * larg,
         child: TextFormField(
           enabled: false,
           decoration: InputDecoration(

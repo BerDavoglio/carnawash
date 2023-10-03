@@ -9,3 +9,5 @@ export './schedule_page.dart';
 export './schedules_page.dart';
 export './vehicles_edit_page.dart';
 export './vehicles_page.dart';
+export './wallet_edit_page.dart';
+export './wallet_page.dart';
