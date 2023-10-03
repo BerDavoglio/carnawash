@@ -15,13 +15,14 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       routes: {
-        AppRoutes.HOME: (_) => const HelpPage(),
+        AppRoutes.HOME: (_) => const PerfilPage(),
         AppRoutes.LOGIN: (_) => const LoginPage(),
         AppRoutes.SCHEDULE: (_) => const SchedulePage(),
         AppRoutes.SCHEDULES: (_) => const SchedulesPage(),
         AppRoutes.RATING: (_) => const RatingPage(),
         AppRoutes.HISTORY: (_) => const HistoryPage(),
         AppRoutes.HELP: (_) => const HelpPage(),
+        AppRoutes.PERFIL: (_) => const PerfilPage(),
       },
     );
   }

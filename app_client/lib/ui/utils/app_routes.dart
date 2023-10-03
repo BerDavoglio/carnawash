@@ -6,4 +6,5 @@ class AppRoutes {
   static const RATING = '/rating';
   static const HISTORY = '/history';
   static const HELP = '/help';
+  static const PERFIL = '/perfil';
 }
