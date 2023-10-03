@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 Widget geralTextInput({
   required BuildContext context,
@@ -164,6 +165,42 @@ Widget passwordConfirmTextInput(
             hintText: 'Confirm Password',
           ),
           controller: textController,
+        ),
+      ),
+      const SizedBox(
+        height: 10,
+      ),
+    ],
+  );
+}
+
+Widget geralDateInput({
+  required BuildContext context,
+  required String text,
+  required TextEditingController textController,
+}) {
+  var maskFormatter = MaskTextInputFormatter(
+    mask: '##/##/####',
+    filter: {"#": RegExp(r'[0-9]')},
+    type: MaskAutoCompletionType.lazy,
+  );
+
+  return Column(
+    children: [
+      SizedBox(
+        width: MediaQuery.of(context).size.width * 0.32,
+        child: TextFormField(
+          keyboardType: TextInputType.datetime,
+          decoration: InputDecoration(
+            filled: true,
+            fillColor: Colors.white,
+            border: const OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10))),
+            hintText: 'mm/dd/yyyy',
+            labelText: text,
+          ),
+          controller: textController,
+          inputFormatters: [maskFormatter],
         ),
       ),
       const SizedBox(
