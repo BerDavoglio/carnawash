@@ -4,6 +4,7 @@ export './history_page.dart';
 export './home_page.dart';
 export './language_page.dart';
 export './login_page.dart';
+export './notifications_page.dart';
 export './perfil_page.dart';
 export './rating_page.dart';
 export './schedule_page.dart';

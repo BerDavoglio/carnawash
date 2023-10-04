@@ -13,4 +13,5 @@ class AppRoutes {
   static const WALLET = '/wallet';
   static const WALLET_EDIT = '/wallet_edit';
   static const LANGUAGE = '/language';
+  static const NOTIFICATION = '/notification';
 }
