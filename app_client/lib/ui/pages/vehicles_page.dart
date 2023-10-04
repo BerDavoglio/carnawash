@@ -52,9 +52,11 @@ class _VehiclesPageState extends State<VehiclesPage> {
                   vehicleBox(),
                   vehicleBox(),
                   vehicleBox(),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10),
-                    child: Text(
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pushNamed(AppRoutes.VEHICLES_EDIT);
+                    },
+                    child: const Text(
                       'Register another Vehicle',
                       style: TextStyle(
                           color: Colors.amber, fontWeight: FontWeight.bold),

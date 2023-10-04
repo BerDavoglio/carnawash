@@ -276,9 +276,14 @@ class _SchedulePageState extends State<SchedulePage> {
             ),
           ),
         ),
-        const Text(
-          'Choose another car to be washed',
-          style: TextStyle(color: Colors.amber, fontSize: 18),
+        TextButton(
+          onPressed: () {
+            Navigator.of(context).pushNamed(AppRoutes.VEHICLES_EDIT);
+          },
+          child: const Text(
+            'Choose another car to be washed',
+            style: TextStyle(color: Colors.amber, fontSize: 18),
+          ),
         ),
       ],
     );

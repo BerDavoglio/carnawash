@@ -110,7 +110,9 @@ class _WalletEditPageState extends State<WalletEditPage> {
                         ),
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
                     child: const Text(
                       'Save',
                       style: TextStyle(

@@ -50,12 +50,17 @@ class _WalletPageState extends State<WalletPage> {
                   creditcardBox(),
                   creditcardBox(),
                   creditcardBox(),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10),
-                    child: Text(
-                      'Register another credit card',
-                      style: TextStyle(
-                          color: Colors.amber, fontWeight: FontWeight.bold),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pushNamed(AppRoutes.WALLET_EDIT);
+                      },
+                      child: const Text(
+                        'Register another credit card',
+                        style: TextStyle(
+                            color: Colors.amber, fontWeight: FontWeight.bold),
+                      ),
                     ),
                   ),
                 ],

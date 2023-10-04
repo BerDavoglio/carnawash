@@ -330,7 +330,9 @@ class _VehiclesEditPageState extends State<VehiclesEditPage> {
                             ),
                           ),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
                         child: const Text(
                           'Save',
                           style: TextStyle(
