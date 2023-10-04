@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../ui.dart';
 
-class SignInComponent extends StatelessWidget {
+class SignInComponent extends StatefulWidget {
   const SignInComponent({
     super.key,
     required this.emailController,
@@ -11,6 +11,13 @@ class SignInComponent extends StatelessWidget {
 
   final TextEditingController emailController;
   final TextEditingController passwordController;
+
+  @override
+  State<SignInComponent> createState() => _SignInComponentState();
+}
+
+class _SignInComponentState extends State<SignInComponent> {
+  bool hidden = true;
 
   @override
   Widget build(BuildContext context) {
@@ -33,14 +40,17 @@ class SignInComponent extends StatelessWidget {
               geralTextInput(
                 context: context,
                 text: 'E-mail',
-                textController: emailController,
+                textController: widget.emailController,
               ),
               const SizedBox(
                 height: 10,
               ),
               passwordTextInput(
                 context,
-                passwordController,
+                widget.passwordController,
+                () => setState(() {
+                  hidden = !hidden;
+                }),
               ),
               const SizedBox(
                 height: 10,

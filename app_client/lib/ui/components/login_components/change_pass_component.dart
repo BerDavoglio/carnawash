@@ -12,6 +12,8 @@ class ChangePassComponent extends StatefulWidget {
 }
 
 class _ChangePassComponentState extends State<ChangePassComponent> {
+  bool hidden = true;
+
   @override
   Widget build(BuildContext context) {
     TextEditingController emailController = TextEditingController();
@@ -40,9 +42,11 @@ class _ChangePassComponentState extends State<ChangePassComponent> {
                 textController: emailController,
               ),
               passwordTextInput(
-                context,
-                passwordController,
-              ),
+                  context,
+                  passwordController,
+                  () => setState(() {
+                        hidden = !hidden;
+                      })),
               passwordConfirmTextInput(
                 context,
                 passConfirmController,

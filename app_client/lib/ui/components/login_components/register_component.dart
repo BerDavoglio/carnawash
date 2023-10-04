@@ -19,6 +19,7 @@ class _RegisterComponentState extends State<RegisterComponent> {
   String? modelSelected;
   String? colorSelected;
   int sizeSelected = 1;
+  bool hidden = true;
 
   @override
   void initState() {
@@ -424,6 +425,9 @@ class _RegisterComponentState extends State<RegisterComponent> {
           passwordTextInput(
             context,
             passwordController,
+            () => setState(() {
+              hidden = !hidden;
+            }),
           ),
           passwordConfirmTextInput(
             context,
