@@ -30,21 +30,7 @@ class _PerfilPageState extends State<PerfilPage> {
                 children: [
                   Row(
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.only(right: 10),
-                        child: CircleAvatar(
-                          radius: 20,
-                          backgroundColor: Colors.amber,
-                          child: IconButton(
-                            iconSize: 24,
-                            color: Colors.white,
-                            onPressed: () {},
-                            icon: const Icon(
-                              Icons.arrow_back,
-                            ),
-                          ),
-                        ),
-                      ),
+                      backButtonComponent(context),
                       const Text(
                         'Profile',
                         style: TextStyle(
@@ -54,13 +40,7 @@ class _PerfilPageState extends State<PerfilPage> {
                       )
                     ],
                   ),
-                  IconButton(
-                    iconSize: 30,
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.notifications_outlined,
-                    ),
-                  )
+                  notificationGeralButtonComponent(context),
                 ],
               ),
               const SizedBox(height: 25),

@@ -40,21 +40,7 @@ class _LanguagePageState extends State<LanguagePage> {
                 children: [
                   Row(
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.only(right: 10),
-                        child: CircleAvatar(
-                          radius: 20,
-                          backgroundColor: Colors.amber,
-                          child: IconButton(
-                            iconSize: 24,
-                            color: Colors.white,
-                            onPressed: () {},
-                            icon: const Icon(
-                              Icons.arrow_back,
-                            ),
-                          ),
-                        ),
-                      ),
+                      backButtonComponent(context),
                       const Text(
                         'Language',
                         style: TextStyle(
@@ -64,13 +50,7 @@ class _LanguagePageState extends State<LanguagePage> {
                       )
                     ],
                   ),
-                  IconButton(
-                    iconSize: 30,
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.notifications_outlined,
-                    ),
-                  )
+                  notificationGeralButtonComponent(context),
                 ],
               ),
               const SizedBox(height: 15),

@@ -36,21 +36,7 @@ class _AccountPageState extends State<AccountPage> {
                 children: [
                   Row(
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.only(right: 10),
-                        child: CircleAvatar(
-                          radius: 20,
-                          backgroundColor: Colors.amber,
-                          child: IconButton(
-                            iconSize: 24,
-                            color: Colors.white,
-                            onPressed: () {},
-                            icon: const Icon(
-                              Icons.arrow_back,
-                            ),
-                          ),
-                        ),
-                      ),
+                      backButtonComponent(context),
                       const Text(
                         'My Account Information',
                         style: TextStyle(
@@ -60,13 +46,7 @@ class _AccountPageState extends State<AccountPage> {
                       )
                     ],
                   ),
-                  IconButton(
-                    iconSize: 30,
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.notifications_outlined,
-                    ),
-                  )
+                  notificationGeralButtonComponent(context),
                 ],
               ),
               const SizedBox(height: 15),

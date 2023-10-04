@@ -31,21 +31,7 @@ class _NotificationConfigPageState extends State<NotificationConfigPage> {
                 children: [
                   Row(
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.only(right: 10),
-                        child: CircleAvatar(
-                          radius: 20,
-                          backgroundColor: Colors.amber,
-                          child: IconButton(
-                            iconSize: 24,
-                            color: Colors.white,
-                            onPressed: () {},
-                            icon: const Icon(
-                              Icons.arrow_back,
-                            ),
-                          ),
-                        ),
-                      ),
+                      backButtonComponent(context),
                       const Text(
                         'Notification Settings',
                         style: TextStyle(
@@ -55,13 +41,7 @@ class _NotificationConfigPageState extends State<NotificationConfigPage> {
                       )
                     ],
                   ),
-                  IconButton(
-                    iconSize: 30,
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.notifications_outlined,
-                    ),
-                  )
+                  notificationGeralButtonComponent(context),
                 ],
               ),
               const SizedBox(height: 15),
@@ -76,11 +56,13 @@ class _NotificationConfigPageState extends State<NotificationConfigPage> {
                       });
                     },
                   ),
-                  const Text('Push Notifications',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
-                      ),),
+                  const Text(
+                    'Push Notifications',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                    ),
+                  ),
                 ],
               )
             ],

@@ -26,39 +26,13 @@ class _NotificationPageState extends State<NotificationPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(right: 10),
-                        child: CircleAvatar(
-                          radius: 20,
-                          backgroundColor: Colors.amber,
-                          child: IconButton(
-                            iconSize: 24,
-                            color: Colors.white,
-                            onPressed: () {},
-                            icon: const Icon(
-                              Icons.arrow_back,
-                            ),
-                          ),
-                        ),
-                      ),
-                      const Text(
-                        'Notification',
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      )
-                    ],
-                  ),
-                  IconButton(
-                    iconSize: 30,
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.notifications_outlined,
+                  backButtonComponent(context),
+                  const Text(
+                    'Notification',
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
                     ),
                   )
                 ],

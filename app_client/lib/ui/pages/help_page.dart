@@ -25,21 +25,7 @@ class HelpPage extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.only(right: 10),
-                        child: CircleAvatar(
-                          radius: 20,
-                          backgroundColor: Colors.amber,
-                          child: IconButton(
-                            iconSize: 24,
-                            color: Colors.white,
-                            onPressed: () {},
-                            icon: const Icon(
-                              Icons.arrow_back,
-                            ),
-                          ),
-                        ),
-                      ),
+                      backButtonComponent(context),
                       const Text(
                         'Help',
                         style: TextStyle(
@@ -49,13 +35,7 @@ class HelpPage extends StatelessWidget {
                       )
                     ],
                   ),
-                  IconButton(
-                    iconSize: 30,
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.notifications_outlined,
-                    ),
-                  )
+                  notificationGeralButtonComponent(context),
                 ],
               ),
               const SizedBox(height: 25),

@@ -33,17 +33,7 @@ class _HomePageState extends State<HomePage> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 15),
-                        child: IconButton(
-                          iconSize: 40,
-                          icon: const Icon(
-                            Icons.notifications_outlined,
-                            color: Colors.black,
-                          ),
-                          onPressed: () {},
-                        ),
-                      ),
+                      notificationHomeButtonComponent(context),
                       const Text(
                         'Welcome, Jorge!',
                         style: TextStyle(
@@ -503,7 +493,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                       onPressed: () {},
                       child: const Text(
-                        'Make a new Booking',
+                        'Send for us',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.amber,
