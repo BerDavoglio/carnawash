@@ -12,4 +12,5 @@ class AppRoutes {
   static const VEHICLES_EDIT = '/vehicles_edit';
   static const WALLET = '/wallet';
   static const WALLET_EDIT = '/wallet_edit';
+  static const LANGUAGE = '/language';
 }
