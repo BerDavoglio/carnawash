@@ -118,13 +118,17 @@ Widget geralIconTextInput({
 }
 
 Widget passwordTextInput(
-    BuildContext context, TextEditingController textController, Function func) {
+  BuildContext context,
+  TextEditingController textController,
+  Function func,
+  bool hidden,
+) {
   return Column(
     children: [
       SizedBox(
         width: MediaQuery.of(context).size.width * 0.9,
         child: TextFormField(
-          obscureText: true,
+          obscureText: hidden,
           decoration: InputDecoration(
             suffixIcon: IconButton(
                 onPressed: () => func,

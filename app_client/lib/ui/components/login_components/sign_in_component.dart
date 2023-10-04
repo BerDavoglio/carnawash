@@ -51,35 +51,42 @@ class _SignInComponentState extends State<SignInComponent> {
                 () => setState(() {
                   hidden = !hidden;
                 }),
+                hidden,
               ),
-              const SizedBox(
-                height: 10,
-              ),
-              const Text(
-                'Forgot Password',
-                style: TextStyle(
-                  color: Colors.white,
+              TextButton(
+                onPressed: () {},
+                child: const Text(
+                  'Forgot Password',
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ],
           ),
         ),
         Padding(
-          padding: const EdgeInsets.all(5),
+          padding: const EdgeInsets.only(bottom: 5, left: 5, right: 5),
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.amber,
                 fixedSize: Size(MediaQuery.of(context).size.width * 0.9, 50)),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pushNamed(AppRoutes.HOME);
+            },
             child: const Text('Login'),
           ),
         ),
-        const Text(
-          "Don't have an Account?",
-          style: TextStyle(
-            color: Colors.white,
+        TextButton(
+          onPressed: () {},
+          child: const Text(
+            "Don't have an Account?",
+            style: TextStyle(
+              color: Colors.white,
+            ),
           ),
         ),
+        const SizedBox(height: 10),
       ],
     );
   }

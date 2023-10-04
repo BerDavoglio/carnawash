@@ -1,6 +1,8 @@
 import 'package:app_client/ui/components/components.dart';
 import 'package:flutter/material.dart';
 
+import '../ui.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -295,7 +297,9 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).pushNamed(AppRoutes.SCHEDULE);
+                },
                 child: const Text(
                   'Make a new Booking',
                   style: TextStyle(

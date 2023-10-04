@@ -42,11 +42,15 @@ class _ChangePassComponentState extends State<ChangePassComponent> {
                 textController: emailController,
               ),
               passwordTextInput(
-                  context,
-                  passwordController,
-                  () => setState(() {
-                        hidden = !hidden;
-                      })),
+                context,
+                passwordController,
+                () => setState(
+                  () {
+                    hidden = !hidden;
+                  },
+                ),
+                hidden,
+              ),
               passwordConfirmTextInput(
                 context,
                 passConfirmController,

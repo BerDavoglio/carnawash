@@ -16,7 +16,7 @@ class _SchedulePageState extends State<SchedulePage> {
   TextEditingController couponController = TextEditingController();
   int carSelected = 1;
   int washSelected = 1;
-  int n = 6;
+  int n = 1;
 
   TimeOfDay _time = TimeOfDay(
     hour: DateTime.now().hour,
@@ -61,14 +61,39 @@ class _SchedulePageState extends State<SchedulePage> {
                 children: [
                   Row(
                     children: [
-                      backButtonComponent(context),
-                      Text(
-                        n == 5 ? 'Payment' : 'Schedule',
-                        style: const TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
+                      Padding(
+                        padding: const EdgeInsets.only(right: 10),
+                        child: CircleAvatar(
+                          radius: 20,
+                          backgroundColor: Colors.amber,
+                          child: IconButton(
+                            iconSize: 24,
+                            color: Colors.white,
+                            icon: const Icon(
+                              Icons.arrow_back,
+                            ),
+                            onPressed: () => {
+                              if (n == 6)
+                                {
+                                  n == 1,
+                                  Navigator.of(context)
+                                      .pushReplacementNamed(AppRoutes.HOME),
+                                }
+                              else if (n == 1)
+                                {
+                                  Navigator.of(context)
+                                      .pushReplacementNamed(AppRoutes.HOME),
+                                }
+                              else
+                                {
+                                  setState(() {
+                                    n--;
+                                  })
+                                }
+                            },
+                          ),
                         ),
-                      )
+                      ),
                     ],
                   ),
                   notificationGeralButtonComponent(context),
@@ -105,7 +130,6 @@ class _SchedulePageState extends State<SchedulePage> {
                           ),
                         ),
                       ),
-                      onPressed: () {},
                       child: const Text(
                         'Next',
                         style: TextStyle(
@@ -113,6 +137,11 @@ class _SchedulePageState extends State<SchedulePage> {
                           color: Colors.white,
                         ),
                       ),
+                      onPressed: () {
+                        setState(() {
+                          n++;
+                        });
+                      },
                     ),
             ],
           ),
@@ -932,7 +961,11 @@ class _SchedulePageState extends State<SchedulePage> {
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  setState(() {
+                    n++;
+                  });
+                },
                 child: const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -960,7 +993,11 @@ class _SchedulePageState extends State<SchedulePage> {
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  setState(() {
+                    n++;
+                  });
+                },
                 child: const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -979,12 +1016,17 @@ class _SchedulePageState extends State<SchedulePage> {
                 ),
               ),
               const SizedBox(height: 10),
-              const Center(
-                child: Text(
-                  'Pay with another credit card',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.amber,
+              Center(
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pushNamed(AppRoutes.WALLET_EDIT);
+                  },
+                  child: const Text(
+                    'Pay with another credit card',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.amber,
+                    ),
                   ),
                 ),
               ),

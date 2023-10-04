@@ -428,6 +428,7 @@ class _RegisterComponentState extends State<RegisterComponent> {
             () => setState(() {
               hidden = !hidden;
             }),
+            hidden,
           ),
           passwordConfirmTextInput(
             context,
