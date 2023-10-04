@@ -84,7 +84,7 @@ class _RatingPageState extends State<RatingPage> {
             color: Colors.amber,
           ),
           onRatingUpdate: (rating) {
-            print(rating);
+            // print(rating);
           },
         ),
         const SizedBox(height: 10),

@@ -1,4 +1,3 @@
-import 'package:app_client/ui/components/components.dart';
 import 'package:flutter/material.dart';
 
 import '../ui.dart';
