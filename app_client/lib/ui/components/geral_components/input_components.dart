@@ -86,33 +86,28 @@ Widget geralInativeTextInput({
   );
 }
 
-Widget geralDropInput(
-  BuildContext context,
-  List<String> list,
-  String itemSelected,
-  Function setStateFunct,
-) {
+Widget geralIconTextInput({
+  required BuildContext context,
+  required String text,
+  required TextEditingController textController,
+  required IconData icon,
+  TextInputType type = TextInputType.text,
+  double larg = 0.9,
+}) {
   return Column(
     children: [
-      Container(
-        width: MediaQuery.of(context).size.width * 0.9,
-        decoration: BoxDecoration(
-            color: Colors.white,
-            border: Border.all(color: Colors.grey[700]!),
-            borderRadius: const BorderRadius.all(Radius.circular(10))),
-        child: DropdownButton(
-          padding: const EdgeInsets.symmetric(
-            vertical: 5,
-            horizontal: 10,
+      SizedBox(
+        width: MediaQuery.of(context).size.width * larg,
+        child: TextFormField(
+          decoration: InputDecoration(
+            suffixIcon: Icon(icon),
+            filled: true,
+            fillColor: Colors.white,
+            border: const OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10))),
+            hintText: text,
           ),
-          value: itemSelected,
-          items: list
-              .map((item) => DropdownMenuItem<String>(
-                    value: item,
-                    child: Text(item),
-                  ))
-              .toList(),
-          onChanged: (item) => setStateFunct(item),
+          controller: textController,
         ),
       ),
       const SizedBox(
@@ -123,19 +118,20 @@ Widget geralDropInput(
 }
 
 Widget passwordTextInput(
-  BuildContext context,
-  TextEditingController textController,
-) {
+    BuildContext context, TextEditingController textController, Function func) {
   return Column(
     children: [
       SizedBox(
         width: MediaQuery.of(context).size.width * 0.9,
         child: TextFormField(
           obscureText: true,
-          decoration: const InputDecoration(
+          decoration: InputDecoration(
+            suffixIcon: IconButton(
+                onPressed: () => func,
+                icon: const Icon(Icons.remove_red_eye_outlined)),
             filled: true,
             fillColor: Colors.white,
-            border: OutlineInputBorder(
+            border: const OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(10))),
             hintText: 'Password',
           ),
