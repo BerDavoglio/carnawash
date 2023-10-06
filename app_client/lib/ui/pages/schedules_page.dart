@@ -169,7 +169,14 @@ class _SchedulesPageState extends State<SchedulesPage> {
                       ),
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => SchedulePage(initial: 3),
+                      ),
+                    );
+                  },
                   child: const Text(
                     'Reschedule',
                     style: TextStyle(

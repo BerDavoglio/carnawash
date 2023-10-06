@@ -16,6 +16,7 @@ class _HistoryPageState extends State<HistoryPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[100],
       bottomNavigationBar: navigationBarComponent(context),
       body: SingleChildScrollView(
         child: Padding(
@@ -85,10 +86,11 @@ class _HistoryPageState extends State<HistoryPage> {
                           color: Colors.blue,
                           style: ButtonStyle(
                             fixedSize: MaterialStateProperty.all(
-                              const Size(50, 50),
+                              Size(MediaQuery.of(context).size.width * 0.12,
+                                  MediaQuery.of(context).size.width * 0.12),
                             ),
                           ),
-                          iconSize: 50,
+                          iconSize: MediaQuery.of(context).size.width * 0.12,
                           onPressed: () {},
                           icon: const Icon(Icons.check_box),
                         ),
@@ -117,11 +119,9 @@ class _HistoryPageState extends State<HistoryPage> {
     return Column(
       children: [
         Container(
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: Colors.grey,
-            ),
-            borderRadius: const BorderRadius.all(
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.all(
               Radius.circular(10),
             ),
           ),
@@ -163,6 +163,7 @@ class _HistoryPageState extends State<HistoryPage> {
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,

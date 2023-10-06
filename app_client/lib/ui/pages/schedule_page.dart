@@ -1,13 +1,22 @@
+// ignore_for_file: must_be_immutable, no_logic_in_create_state
+
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import '../ui.dart';
 
 class SchedulePage extends StatefulWidget {
-  const SchedulePage({super.key});
+  int? initial;
+
+  SchedulePage({
+    super.key,
+    required this.initial,
+  });
 
   @override
-  State<SchedulePage> createState() => _SchedulePageState();
+  State<SchedulePage> createState() => _SchedulePageState(
+        initial: initial,
+      );
 }
 
 class _SchedulePageState extends State<SchedulePage> {
@@ -16,7 +25,17 @@ class _SchedulePageState extends State<SchedulePage> {
   TextEditingController couponController = TextEditingController();
   int carSelected = 1;
   int washSelected = 1;
-  int n = 1;
+  int? initial;
+  late int n;
+
+  _SchedulePageState({required this.initial});
+
+  @override
+  void initState() {
+    super.initState();
+
+    n = initial ?? 1;
+  }
 
   TimeOfDay _time = TimeOfDay(
     hour: DateTime.now().hour,
@@ -83,6 +102,10 @@ class _SchedulePageState extends State<SchedulePage> {
                                 {
                                   Navigator.of(context)
                                       .pushReplacementNamed(AppRoutes.HOME),
+                                }
+                              else if (initial == 3)
+                                {
+                                  Navigator.of(context).pop(),
                                 }
                               else
                                 {

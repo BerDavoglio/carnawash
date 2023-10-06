@@ -297,7 +297,12 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 onPressed: () {
-                  Navigator.of(context).pushNamed(AppRoutes.SCHEDULE);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => SchedulePage(initial: 1),
+                    ),
+                  );
                 },
                 child: const Text(
                   'Make a new Booking',
@@ -366,60 +371,70 @@ class _HomePageState extends State<HomePage> {
                         ],
                       ),
                       width: MediaQuery.of(context).size.width * 0.9,
-                      height: 160,
-                      child: const Padding(
-                        padding: EdgeInsets.all(10),
+                      child: Padding(
+                        padding: const EdgeInsets.all(10),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
+                                const Text(
                                   'Nissan March',
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 16,
                                   ),
                                 ),
-                                Text(
-                                  'Book Again',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.blue,
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            SchedulePage(initial: 3),
+                                      ),
+                                    );
+                                  },
+                                  child: const Text(
+                                    'Book Again',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      color: Colors.blue,
+                                    ),
                                   ),
                                 )
                               ],
                             ),
-                            Padding(
+                            const Padding(
                               padding: EdgeInsets.only(top: 5),
                               child: Text(
                                 'September 10, 2023',
                                 style: TextStyle(color: Colors.grey),
                               ),
                             ),
-                            Padding(
+                            const Padding(
                               padding: EdgeInsets.only(top: 5),
                               child: Text(
                                 'Wash Outside only',
                                 style: TextStyle(color: Colors.grey),
                               ),
                             ),
-                            Padding(
+                            const Padding(
                               padding: EdgeInsets.only(top: 5),
                               child: Text(
                                 '+ Pet Hair',
                                 style: TextStyle(color: Colors.grey),
                               ),
                             ),
-                            Padding(
+                            const Padding(
                               padding: EdgeInsets.only(top: 5),
                               child: Text(
                                 '\$ 60,00',
                                 style: TextStyle(color: Colors.grey),
                               ),
                             ),
-                            Padding(
+                            const Padding(
                               padding: EdgeInsets.only(top: 5),
                               child: Row(
                                 children: [

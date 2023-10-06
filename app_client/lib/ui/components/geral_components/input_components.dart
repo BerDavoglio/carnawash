@@ -190,7 +190,7 @@ Widget geralDateInput({
   return Column(
     children: [
       SizedBox(
-        width: MediaQuery.of(context).size.width * 0.32,
+        width: MediaQuery.of(context).size.width * 0.35,
         child: TextFormField(
           keyboardType: TextInputType.datetime,
           decoration: InputDecoration(
