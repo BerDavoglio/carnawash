@@ -18,7 +18,8 @@ class MyApp extends StatelessWidget {
         AppRoutes.HOME: (_) => const HomePage(),
         AppRoutes.LOGIN: (_) => const LoginPage(),
         AppRoutes.SCHEDULES: (_) => const SchedulesPage(),
-        AppRoutes.HISTORY: (_) => const HistoryPage(),
+        AppRoutes.SUPPLY: (_) => const SupplyPage(),
+        AppRoutes.PAYMENTS: (_) => const PaymentsPage(),
         AppRoutes.HELP: (_) => const HelpPage(),
         AppRoutes.PERFIL: (_) => const PerfilPage(),
         AppRoutes.ACCOUNT: (_) => const AccountPage(),
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
         AppRoutes.NOTIFICATION_CONFIG: (_) => const NotificationConfigPage(),
         AppRoutes.NOTIFICATION: (_) => const NotificationPage(),
         AppRoutes.TERMS: (_) => const TermsConditionsPage(),
+        AppRoutes.AVAILABILITY: (_) => const AvailabilityPage(),
       },
     );
   }

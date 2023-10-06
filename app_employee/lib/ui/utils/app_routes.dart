@@ -4,7 +4,8 @@ class AppRoutes {
   static const HOME = '/';
   static const LOGIN = '/login';
   static const SCHEDULES = '/schedules';
-  static const HISTORY = '/history';
+  static const SUPPLY = '/supply';
+  static const PAYMENTS = '/payments';
   static const HELP = '/help';
   static const PERFIL = '/perfil';
   static const ACCOUNT = '/account';
@@ -15,4 +16,5 @@ class AppRoutes {
   static const NOTIFICATION_CONFIG = '/notification_config';
   static const NOTIFICATION = '/notification';
   static const TERMS = '/terms';
+  static const AVAILABILITY = '/availability';
 }

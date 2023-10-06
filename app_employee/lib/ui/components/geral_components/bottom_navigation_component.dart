@@ -14,7 +14,7 @@ NavigationBar navigationBarComponent(BuildContext context) {
           Navigator.of(context).pushNamed(AppRoutes.SCHEDULES);
           break;
         case 2:
-          Navigator.of(context).pushNamed(AppRoutes.HISTORY);
+          Navigator.of(context).pushNamed(AppRoutes.PAYMENTS);
           break;
         case 3:
           Navigator.of(context).pushNamed(AppRoutes.HELP);
@@ -34,8 +34,8 @@ NavigationBar navigationBarComponent(BuildContext context) {
         label: 'Schedules',
       ),
       NavigationDestination(
-        icon: Icon(Icons.timer_outlined),
-        label: 'History',
+        icon: Icon(Icons.attach_money_outlined),
+        label: 'Payments',
       ),
       NavigationDestination(
         icon: Icon(Icons.help_outline),

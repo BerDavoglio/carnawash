@@ -117,6 +117,35 @@ Widget geralIconTextInput({
   );
 }
 
+Widget geralInativeIconTextInput({
+  required BuildContext context,
+  required String text,
+  required IconData icon,
+  double larg = 0.9,
+}) {
+  return Column(
+    children: [
+      SizedBox(
+        width: MediaQuery.of(context).size.width * larg,
+        child: TextFormField(
+          enabled: false,
+          decoration: InputDecoration(
+            suffixIcon: Icon(icon),
+            filled: true,
+            fillColor: Colors.white,
+            border: const OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10))),
+            hintText: text,
+          ),
+        ),
+      ),
+      const SizedBox(
+        height: 10,
+      ),
+    ],
+  );
+}
+
 Widget passwordTextInput(
   BuildContext context,
   TextEditingController textController,

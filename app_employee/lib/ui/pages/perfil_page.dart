@@ -79,20 +79,14 @@ class _PerfilPageState extends State<PerfilPage> {
               profileButton(
                 context,
                 'My Supppliers',
-                Icons.directions_car,
-                AppRoutes.HOME,
+                Icons.book_outlined,
+                AppRoutes.SUPPLY,
               ),
               profileButton(
                 context,
                 'Availability',
-                Icons.directions_car,
-                AppRoutes.HOME,
-              ),
-              profileButton(
-                context,
-                'Training Area',
-                Icons.directions_car,
-                AppRoutes.HOME,
+                Icons.timer_outlined,
+                AppRoutes.AVAILABILITY,
               ),
               profileButton(
                 context,

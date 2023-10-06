@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 
 import '../ui.dart';
 
-class HistoryPage extends StatefulWidget {
-  const HistoryPage({super.key});
+class PaymentsPage extends StatefulWidget {
+  const PaymentsPage({super.key});
 
   @override
-  State<HistoryPage> createState() => _HistoryPageState();
+  State<PaymentsPage> createState() => _PaymentsPageState();
 }
 
-class _HistoryPageState extends State<HistoryPage> {
+class _PaymentsPageState extends State<PaymentsPage> {
   TextEditingController initialDateController = TextEditingController();
   TextEditingController finalDateController = TextEditingController();
 
@@ -100,10 +100,6 @@ class _HistoryPageState extends State<HistoryPage> {
                   Column(
                     children: [
                       historyBoxComponent(),
-                      historyBoxComponent(),
-                      historyBoxComponent(),
-                      historyBoxComponent(),
-                      historyBoxComponent(),
                     ],
                   ),
                 ],
@@ -125,11 +121,11 @@ class _HistoryPageState extends State<HistoryPage> {
               Radius.circular(10),
             ),
           ),
-          child: const Padding(
-            padding: EdgeInsets.all(10),
+          child: Padding(
+            padding: const EdgeInsets.all(10),
             child: Column(
               children: [
-                Row(
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -137,7 +133,7 @@ class _HistoryPageState extends State<HistoryPage> {
                       'Washer: John',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 18,
+                        fontSize: 14,
                       ),
                     ),
                     Column(
@@ -147,21 +143,45 @@ class _HistoryPageState extends State<HistoryPage> {
                           'September 10, 2023',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 16,
+                            fontSize: 14,
                           ),
                         ),
                         Text(
                           '10:00 am',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 16,
+                            fontSize: 14,
                           ),
                         ),
                       ],
                     ),
                   ],
                 ),
-                Row(
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.2,
+                        child: const Text(
+                          'Vehicle 1',
+                          style: TextStyle(
+                            color: Colors.grey,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        decoration: const BoxDecoration(
+                          color: Colors.grey,
+                        ),
+                        width: MediaQuery.of(context).size.width * 0.6,
+                        height: 1,
+                      ),
+                    ],
+                  ),
+                ),
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
@@ -194,14 +214,26 @@ class _HistoryPageState extends State<HistoryPage> {
                         ),
                       ],
                     ),
-                    Text(
-                      '\$ 94.00',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 24,
-                      ),
-                    ),
                   ],
+                ),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  child: const Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Text(
+                        '\$ 94.00',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 24,
+                        ),
+                      ),
+                      Text(
+                        'Recivied in: September 16, 2023',
+                        style: TextStyle(color: Colors.grey),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),

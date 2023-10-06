@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import '../ui.dart';
@@ -42,7 +41,7 @@ class _SchedulesPageState extends State<SchedulesPage> {
                     children: [
                       backButtonComponent(context),
                       const Text(
-                        'My appointments',
+                        'My bookings',
                         style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
@@ -102,27 +101,31 @@ class _SchedulesPageState extends State<SchedulesPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const Text(
-                      'Washer: John',
+                      'Costumer: Jorge',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    RatingBarIndicator(
-                      rating: 2.75,
-                      itemBuilder: (context, index) => const Icon(
-                        Icons.star,
-                        color: Colors.amber,
+                    TextButton(
+                      style: ButtonStyle(
+                        padding: MaterialStateProperty.all(
+                          const EdgeInsets.all(0),
+                        ),
                       ),
-                      itemCount: 5,
-                      itemSize: 20,
-                      direction: Axis.horizontal,
+                      onPressed: () {},
+                      child: const Text(
+                        'View',
+                        style: TextStyle(
+                          color: Colors.black,
+                        ),
+                      ),
                     ),
                   ],
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10),
+                const Padding(
+                  padding: EdgeInsets.only(bottom: 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Column(
+                      Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text('Nissan - March',
@@ -134,22 +137,6 @@ class _SchedulesPageState extends State<SchedulesPage> {
                           Text('+ Pet Small',
                               style: TextStyle(color: Colors.grey)),
                         ],
-                      ),
-                      Container(
-                        width: 100,
-                        height: 40,
-                        decoration: BoxDecoration(
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(100),
-                          ),
-                          border: Border.all(color: Colors.green),
-                        ),
-                        child: const Center(
-                          child: Text(
-                            'Confirmed',
-                            style: TextStyle(color: Colors.green),
-                          ),
-                        ),
                       ),
                     ],
                   ),
@@ -171,7 +158,7 @@ class _SchedulesPageState extends State<SchedulesPage> {
                   ),
                   onPressed: () {},
                   child: const Text(
-                    'Reschedule',
+                    'Accept',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
@@ -183,7 +170,7 @@ class _SchedulesPageState extends State<SchedulesPage> {
             const Padding(
               padding: EdgeInsets.only(top: 10),
               child: Text(
-                'Cancel',
+                'Reject',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                 ),
