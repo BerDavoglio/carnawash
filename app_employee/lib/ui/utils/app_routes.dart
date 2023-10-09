@@ -2,6 +2,7 @@
 
 class AppRoutes {
   static const HOME = '/';
+  static const FIRST_LOGIN_HOME = '/first_login_home';
   static const LOGIN = '/login';
   static const SCHEDULES = '/schedules';
   static const SUPPLY = '/supply';
@@ -17,4 +18,5 @@ class AppRoutes {
   static const NOTIFICATION = '/notification';
   static const TERMS = '/terms';
   static const AVAILABILITY = '/availability';
+  static const WASH_REQUEST = '/wash_request';
 }

@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
       ),
       routes: {
         AppRoutes.HOME: (_) => const HomePage(),
+        AppRoutes.FIRST_LOGIN_HOME: (_) => const FirstLoginHomePage(),
         AppRoutes.LOGIN: (_) => const LoginPage(),
         AppRoutes.SCHEDULES: (_) => const SchedulesPage(),
         AppRoutes.SUPPLY: (_) => const SupplyPage(),
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
         AppRoutes.NOTIFICATION: (_) => const NotificationPage(),
         AppRoutes.TERMS: (_) => const TermsConditionsPage(),
         AppRoutes.AVAILABILITY: (_) => const AvailabilityPage(),
+        AppRoutes.WASH_REQUEST: (_) => const WashRequestPage(),
       },
     );
   }

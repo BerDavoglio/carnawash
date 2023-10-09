@@ -53,15 +53,6 @@ class _SignInComponentState extends State<SignInComponent> {
                 }),
                 hidden,
               ),
-              TextButton(
-                onPressed: () {},
-                child: const Text(
-                  'Forgot Password',
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
-                ),
-              ),
             ],
           ),
         ),
@@ -78,9 +69,16 @@ class _SignInComponentState extends State<SignInComponent> {
           ),
         ),
         TextButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const LoginPage(index: 2),
+              ),
+            );
+          },
           child: const Text(
-            "Don't have an Account?",
+            "First Login",
             style: TextStyle(
               color: Colors.white,
             ),

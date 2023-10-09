@@ -3,7 +3,12 @@ import 'package:flutter/material.dart';
 import '../ui.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+  const LoginPage({
+    Key? key,
+    this.index = 1,
+  }) : super(key: key);
+
+  final int index;
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -12,7 +17,15 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  int n = 1;
+
+  TextEditingController nameController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+  TextEditingController addressController = TextEditingController();
+  TextEditingController abnController = TextEditingController();
+  TextEditingController driveController = TextEditingController();
+  TextEditingController pictureController = TextEditingController();
+  TextEditingController accountNameController = TextEditingController();
+  TextEditingController accountNumberController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -44,12 +57,22 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 ),
-                n == 1
+                widget.index == 1
                     ? SignInComponent(
                         emailController: emailController,
                         passwordController: passwordController,
                       )
-                    : const RegisterComponent(),
+                    : FirstLoginComponent(
+                        nameController: nameController,
+                        emailController: emailController,
+                        phoneController: phoneController,
+                        addressController: addressController,
+                        abnController: abnController,
+                        driveController: driveController,
+                        pictureController: pictureController,
+                        accountNameController: accountNameController,
+                        accountNumberController: accountNumberController,
+                      ),
               ],
             ),
           ),
