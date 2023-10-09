@@ -31,7 +31,7 @@ class _NotificationPageState extends State<NotificationPage> {
                   const Text(
                     'Notification',
                     style: TextStyle(
-                      fontSize: 24,
+                      fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
                   )

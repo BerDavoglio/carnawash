@@ -78,7 +78,14 @@ class _SignInComponentState extends State<SignInComponent> {
           ),
         ),
         TextButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const LoginPage(index: 2),
+              ),
+            );
+          },
           child: const Text(
             "Don't have an Account?",
             style: TextStyle(

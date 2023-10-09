@@ -13,6 +13,7 @@ class _VehiclesPageState extends State<VehiclesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[100]!,
       bottomNavigationBar: navigationBarComponent(context),
       body: SingleChildScrollView(
         child: Padding(
@@ -75,9 +76,9 @@ class _VehiclesPageState extends State<VehiclesPage> {
     return Column(
       children: [
         Container(
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey),
-            borderRadius: const BorderRadius.all(
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.all(
               Radius.circular(10),
             ),
           ),
@@ -93,7 +94,7 @@ class _VehiclesPageState extends State<VehiclesPage> {
                       'Nissan',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 18,
+                        fontSize: 16,
                       ),
                     ),
                     Row(
@@ -120,12 +121,14 @@ class _VehiclesPageState extends State<VehiclesPage> {
                     color: Colors.grey,
                   ),
                 ),
+                const SizedBox(height: 5),
                 const Text(
                   'Red',
                   style: TextStyle(
                     color: Colors.grey,
                   ),
                 ),
+                const SizedBox(height: 5),
                 const Text(
                   '3SAM123',
                   style: TextStyle(
@@ -138,7 +141,7 @@ class _VehiclesPageState extends State<VehiclesPage> {
                     'Small',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 18,
+                      fontSize: 16,
                     ),
                   ),
                 ),

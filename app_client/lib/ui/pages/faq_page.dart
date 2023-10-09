@@ -43,6 +43,7 @@ class _FAQPageState extends State<FAQPage> {
     TextEditingController searchController = TextEditingController();
 
     return Scaffold(
+      backgroundColor: Colors.grey[100]!,
       bottomNavigationBar: navigationBarComponent(context),
       body: SingleChildScrollView(
         child: Padding(
@@ -64,7 +65,7 @@ class _FAQPageState extends State<FAQPage> {
                       const Text(
                         'FAQ',
                         style: TextStyle(
-                          fontSize: 24,
+                          fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),
                       )
@@ -115,15 +116,7 @@ class _FAQPageState extends State<FAQPage> {
         Container(
           width: MediaQuery.of(context).size.width * 0.9,
           decoration: BoxDecoration(
-            color: Colors.amber,
-            boxShadow: const [
-              BoxShadow(
-                color: Colors.grey,
-                spreadRadius: 1,
-                blurRadius: 10,
-                offset: Offset(0, 3), // changes position of shadow
-              ),
-            ],
+            color: Colors.amber[300]!,
             borderRadius: !obj.isOpen
                 ? const BorderRadius.all(
                     Radius.circular(10),
@@ -160,18 +153,9 @@ class _FAQPageState extends State<FAQPage> {
         ),
         obj.isOpen
             ? Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                     color: Colors.white,
-                    boxShadow: const [
-                      BoxShadow(
-                        color: Colors.grey,
-                        spreadRadius: 1,
-                        blurRadius: 10,
-                        offset: Offset(0, 3), // changes position of shadow
-                      ),
-                    ],
-                    border: Border.all(color: Colors.grey),
-                    borderRadius: const BorderRadius.only(
+                    borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(10),
                       bottomRight: Radius.circular(10),
                     )),

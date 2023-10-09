@@ -59,12 +59,18 @@ class _AccountPageState extends State<AccountPage> {
                             context: context, text: 'Phone Number'),
                         geralInativeTextInput(
                             context: context, text: 'Address'),
-                        const SizedBox(height: 10),
-                        const Text(
-                          'Edit Information',
-                          style: TextStyle(
-                            color: Colors.amber,
-                            fontWeight: FontWeight.bold,
+                        TextButton(
+                          onPressed: () {
+                            setState(() {
+                              edit = true;
+                            });
+                          },
+                          child: const Text(
+                            'Edit Information',
+                            style: TextStyle(
+                              color: Colors.amber,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ],
@@ -107,7 +113,11 @@ class _AccountPageState extends State<AccountPage> {
                               ),
                             ),
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            setState(() {
+                              edit = false;
+                            });
+                          },
                           child: const Text(
                             'Save',
                             style: TextStyle(

@@ -13,6 +13,7 @@ class _WalletPageState extends State<WalletPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[100]!,
       bottomNavigationBar: navigationBarComponent(context),
       body: SingleChildScrollView(
         child: Padding(
@@ -76,9 +77,9 @@ class _WalletPageState extends State<WalletPage> {
     return Column(
       children: [
         Container(
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey),
-            borderRadius: const BorderRadius.all(
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.all(
               Radius.circular(10),
             ),
           ),

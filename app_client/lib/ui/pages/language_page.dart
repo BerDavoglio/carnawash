@@ -44,7 +44,7 @@ class _LanguagePageState extends State<LanguagePage> {
                       const Text(
                         'Language',
                         style: TextStyle(
-                          fontSize: 24,
+                          fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),
                       )

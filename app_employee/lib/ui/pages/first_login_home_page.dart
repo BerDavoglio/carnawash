@@ -451,7 +451,7 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
                   const Text(
                     'First Steps',
                     style: TextStyle(
-                      fontSize: 24,
+                      fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
                   )
@@ -561,7 +561,7 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
                   const Text(
                     'First Steps',
                     style: TextStyle(
-                      fontSize: 24,
+                      fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
                   )
@@ -735,7 +735,7 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
                   const Text(
                     'First Steps',
                     style: TextStyle(
-                      fontSize: 24,
+                      fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
                   )
@@ -806,7 +806,7 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
                   const Text(
                     'First Steps',
                     style: TextStyle(
-                      fontSize: 24,
+                      fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
                   )
@@ -1071,7 +1071,7 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
                   const Text(
                     'First Steps',
                     style: TextStyle(
-                      fontSize: 24,
+                      fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
                   )

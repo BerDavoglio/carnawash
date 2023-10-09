@@ -38,7 +38,7 @@ class _RatingPageState extends State<RatingPage> {
                       const Text(
                         'Rate us',
                         style: TextStyle(
-                          fontSize: 24,
+                          fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),
                       )

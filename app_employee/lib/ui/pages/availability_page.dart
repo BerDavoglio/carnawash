@@ -126,7 +126,7 @@ class _AvailabilityPageState extends State<AvailabilityPage> {
                       const Text(
                         'Availability',
                         style: TextStyle(
-                          fontSize: 24,
+                          fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),
                       )
@@ -182,9 +182,12 @@ class _AvailabilityPageState extends State<AvailabilityPage> {
                   SizedBox(height: 5),
                   Center(
                     child: TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context)
+                            .pushReplacementNamed(AppRoutes.LOGIN);
+                      },
                       child: Text(
-                        'Log out',
+                        'Logout',
                         style: TextStyle(
                           color: Colors.amber,
                           fontSize: 16,

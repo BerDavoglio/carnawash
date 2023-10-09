@@ -29,7 +29,7 @@ class HelpPage extends StatelessWidget {
                       const Text(
                         'Help',
                         style: TextStyle(
-                          fontSize: 24,
+                          fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),
                       )

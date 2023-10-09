@@ -23,6 +23,7 @@ class _SchedulesPageState extends State<SchedulesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: navigationBarComponent(context),
+      backgroundColor: Colors.grey[100]!,
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.only(
@@ -43,7 +44,7 @@ class _SchedulesPageState extends State<SchedulesPage> {
                       const Text(
                         'My bookings',
                         style: TextStyle(
-                          fontSize: 24,
+                          fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),
                       )
@@ -74,6 +75,7 @@ class _SchedulesPageState extends State<SchedulesPage> {
               ),
               const SizedBox(height: 15),
               scheduleBox(context),
+              const SizedBox(height: 15),
             ],
           ),
         ),
@@ -83,9 +85,10 @@ class _SchedulesPageState extends State<SchedulesPage> {
 
   Container scheduleBox(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-          borderRadius: const BorderRadius.all(Radius.circular(10)),
-          border: Border.all(color: Colors.grey)),
+      decoration: const BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(10)),
+        color: Colors.white,
+      ),
       child: Padding(
         padding: const EdgeInsets.all(10),
         child: Column(

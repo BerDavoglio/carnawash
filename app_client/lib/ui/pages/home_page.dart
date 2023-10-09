@@ -17,6 +17,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[100]!,
       bottomNavigationBar: navigationBarComponent(context),
       body: SingleChildScrollView(
         child: Padding(
@@ -57,17 +58,18 @@ class _HomePageState extends State<HomePage> {
                 child: Container(
                   width: MediaQuery.of(context).size.width * 0.9,
                   height: 150,
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                     color: Colors.blue,
-                    borderRadius: BorderRadius.all(
+                    borderRadius: const BorderRadius.all(
                       Radius.circular(20),
                     ),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.grey,
-                        spreadRadius: 3,
-                        blurRadius: 7,
-                        offset: Offset(0, 3), // changes position of shadow
+                        color: Colors.grey[100]!,
+                        spreadRadius: 1,
+                        blurRadius: 1,
+                        offset:
+                            const Offset(0, 3), // changes position of shadow
                       ),
                     ],
                   ),
@@ -129,9 +131,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 25,
-              ),
+              const SizedBox(height: 25),
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.9,
                 child: Column(
@@ -140,25 +140,15 @@ class _HomePageState extends State<HomePage> {
                     const Text(
                       'Washing Process:',
                       style: TextStyle(
-                        fontSize: 18,
+                        fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     const SizedBox(height: 5),
                     Container(
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         color: Colors.white,
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(15)),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 3,
-                            blurRadius: 7,
-                            offset: const Offset(
-                                0, 3), // changes position of shadow
-                          ),
-                        ],
+                        borderRadius: BorderRadius.all(Radius.circular(15)),
                       ),
                       width: MediaQuery.of(context).size.width * 0.9,
                       height: 180,
@@ -189,11 +179,12 @@ class _HomePageState extends State<HomePage> {
                                     Text(
                                       '4.6',
                                       style: TextStyle(
-                                        fontSize: 18,
+                                        fontSize: 16,
                                       ),
                                     ),
                                     Icon(
                                       Icons.star,
+                                      size: 20,
                                       color: Colors.amber,
                                     ),
                                   ],
@@ -268,6 +259,14 @@ class _HomePageState extends State<HomePage> {
                                     border:
                                         Border.all(color: Colors.blueAccent),
                                   ),
+                                  child: const Center(
+                                    child: Text(
+                                      'Started',
+                                      style: TextStyle(
+                                        color: Colors.blue,
+                                      ),
+                                    ),
+                                  ),
                                 ),
                               ],
                             ),
@@ -278,9 +277,7 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
               ),
-              const SizedBox(
-                height: 25,
-              ),
+              const SizedBox(height: 25),
               TextButton(
                 style: ButtonStyle(
                   elevation: MaterialStateProperty.all(5),
@@ -312,9 +309,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 10,
-              ),
+              const SizedBox(height: 10),
               TextButton(
                 style: ButtonStyle(
                   elevation: MaterialStateProperty.all(5),
@@ -339,9 +334,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 25,
-              ),
+              const SizedBox(height: 25),
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.9,
                 child: Column(
@@ -350,25 +343,15 @@ class _HomePageState extends State<HomePage> {
                     const Text(
                       'Your last Wash:',
                       style: TextStyle(
-                        fontSize: 18,
+                        fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     const SizedBox(height: 5),
                     Container(
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         color: Colors.white,
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(15)),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 3,
-                            blurRadius: 7,
-                            offset: const Offset(
-                                0, 3), // changes position of shadow
-                          ),
-                        ],
+                        borderRadius: BorderRadius.all(Radius.circular(15)),
                       ),
                       width: MediaQuery.of(context).size.width * 0.9,
                       child: Padding(
@@ -456,9 +439,7 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
               ),
-              const SizedBox(
-                height: 25,
-              ),
+              const SizedBox(height: 25),
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.9,
                 child: Column(
@@ -467,7 +448,7 @@ class _HomePageState extends State<HomePage> {
                     const Text(
                       'Refer to my Friends!',
                       style: TextStyle(
-                        fontSize: 18,
+                        fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -520,7 +501,8 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ],
                 ),
-              )
+              ),
+              const SizedBox(height: 15),
             ],
           ),
         ),

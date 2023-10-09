@@ -35,7 +35,7 @@ class _NotificationConfigPageState extends State<NotificationConfigPage> {
                       const Text(
                         'Notification Settings',
                         style: TextStyle(
-                          fontSize: 20,
+                          fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),
                       )

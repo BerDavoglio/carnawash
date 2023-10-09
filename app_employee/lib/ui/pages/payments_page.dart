@@ -38,7 +38,7 @@ class _PaymentsPageState extends State<PaymentsPage> {
                       const Text(
                         'History',
                         style: TextStyle(
-                          fontSize: 24,
+                          fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),
                       )

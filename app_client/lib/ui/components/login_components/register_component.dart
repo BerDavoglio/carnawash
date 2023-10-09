@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import '../../ui.dart';
@@ -18,6 +19,7 @@ class _RegisterComponentState extends State<RegisterComponent> {
   String? brandSelected;
   String? modelSelected;
   String? colorSelected;
+  int n = 1;
   int sizeSelected = 1;
   bool hidden = true;
 
@@ -39,7 +41,6 @@ class _RegisterComponentState extends State<RegisterComponent> {
     TextEditingController registrationController = TextEditingController();
     TextEditingController passwordController = TextEditingController();
     TextEditingController passConfirmController = TextEditingController();
-    int n = 2;
 
     return Column(
       children: [
@@ -67,13 +68,34 @@ class _RegisterComponentState extends State<RegisterComponent> {
             style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.amber,
                 fixedSize: Size(MediaQuery.of(context).size.width * 0.9, 50)),
-            onPressed: () {},
+            onPressed: () {
+              setState(() {
+                if (n != 2) {
+                  n++;
+                } else {
+                  Navigator.of(context).pushReplacementNamed(AppRoutes.HOME);
+                }
+              });
+            },
             child: const Text('Next'),
           ),
         ),
-        const Padding(
-          padding: EdgeInsets.all(10),
-          child: Text(
+        TextButton(
+          onPressed: () {
+            setState(() {
+              if (n != 0) {
+                n--;
+              } else {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const LoginPage(index: 1),
+                  ),
+                );
+              }
+            });
+          },
+          child: const Text(
             "Back",
             style: TextStyle(
               color: Colors.white,
@@ -83,13 +105,36 @@ class _RegisterComponentState extends State<RegisterComponent> {
         ),
         SizedBox(
           width: MediaQuery.of(context).size.width,
-          child: const Padding(
-            padding: EdgeInsets.all(20),
-            child: Text(
-              "By creating an account I agree to the terms and conditions of our Terms of Service.",
+          child: Padding(
+            padding: const EdgeInsets.only(
+              left: 20,
+              right: 20,
+              bottom: 20,
+            ),
+            child: RichText(
               textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.white,
+              text: TextSpan(
+                children: [
+                  const TextSpan(
+                    text:
+                        'By creating an account I agree to the terms and conditions of our ',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  TextSpan(
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () =>
+                          Navigator.of(context).pushNamed(AppRoutes.TERMS),
+                    text: 'Terms of Service',
+                    style: const TextStyle(
+                      color: Colors.amber,
+                      decoration: TextDecoration.underline,
+                    ),
+                  ),
+                  const TextSpan(
+                    text: '.',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ],
               ),
             ),
           ),
