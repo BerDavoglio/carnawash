@@ -291,34 +291,37 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
       children: [
         Container(
           decoration: const BoxDecoration(color: Colors.white),
-          child: Padding(
-            padding: const EdgeInsets.only(
-              top: 50,
-              left: 25,
-              right: 25,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+          child: Center(
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width * 0.85,
+              child: Padding(
+                padding: const EdgeInsets.only(
+                  top: 50,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    notificationHomeButtonComponent(context),
-                    const Text(
-                      'Welcome, John!',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        notificationHomeButtonComponent(context),
+                        const Text(
+                          'Welcome, John!',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const Image(
+                      width: 125,
+                      image: AssetImage('images/logo.png'),
                     ),
                   ],
                 ),
-                const Image(
-                  width: 125,
-                  image: AssetImage('images/logo.png'),
-                ),
-              ],
+              ),
             ),
           ),
         ),
@@ -414,80 +417,83 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
   }
 
   Widget partTwo(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(
-        top: 50,
-        left: 25,
-        right: 25,
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Center(
+      child: SizedBox(
+        width: MediaQuery.of(context).size.width * 0.85,
+        child: Padding(
+          padding: const EdgeInsets.only(
+            top: 50,
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(right: 10),
-                    child: CircleAvatar(
-                      radius: 20,
-                      backgroundColor: Colors.amber,
-                      child: IconButton(
-                        iconSize: 24,
-                        color: Colors.white,
-                        icon: const Icon(
-                          Icons.arrow_back,
+                  Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right: 10),
+                        child: CircleAvatar(
+                          radius: 20,
+                          backgroundColor: Colors.amber,
+                          child: IconButton(
+                            iconSize: 24,
+                            color: Colors.white,
+                            icon: const Icon(
+                              Icons.arrow_back,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                n = 1;
+                              });
+                            },
+                          ),
                         ),
-                        onPressed: () {
-                          setState(() {
-                            n = 1;
-                          });
-                        },
                       ),
-                    ),
+                      const Text(
+                        'First Steps',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      )
+                    ],
                   ),
-                  const Text(
-                    'First Steps',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  )
+                  notificationGeralButtonComponent(context),
                 ],
               ),
-              notificationGeralButtonComponent(context),
-            ],
-          ),
-          const SizedBox(height: 15),
-          Row(
-            children: [
-              circularIndex('1', oneTrue),
-              circularIndex('2', twoTrue),
-              circularIndex('3', threeTrue),
-            ],
-          ),
-          const SizedBox(height: 15),
-          const Text(
-            'Quiz',
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(height: 15),
-          const Text('Watch the video and answer the quiz below'),
-          const SizedBox(height: 15),
-          InkWell(
-            onTap: () {},
-            child: const Text(
-              'Carnawash Video',
-              style: TextStyle(
-                color: Colors.blue,
-                decoration: TextDecoration.underline,
+              const SizedBox(height: 15),
+              Row(
+                children: [
+                  circularIndex('1', oneTrue),
+                  circularIndex('2', twoTrue),
+                  circularIndex('3', threeTrue),
+                ],
               ),
-            ),
+              const SizedBox(height: 15),
+              const Text(
+                'Quiz',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 15),
+              const Text('Watch the video and answer the quiz below'),
+              const SizedBox(height: 15),
+              InkWell(
+                onTap: () {},
+                child: const Text(
+                  'Carnawash Video',
+                  style: TextStyle(
+                    color: Colors.blue,
+                    decoration: TextDecoration.underline,
+                  ),
+                ),
+              ),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.4),
+            ],
           ),
-          SizedBox(height: MediaQuery.of(context).size.height * 0.4),
-        ],
+        ),
       ),
     );
   }
@@ -517,107 +523,110 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
   }
 
   Widget partThree(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(
-        top: 50,
-        left: 25,
-        right: 25,
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Center(
+      child: SizedBox(
+        width: MediaQuery.of(context).size.width * 0.85,
+        child: Padding(
+          padding: const EdgeInsets.only(
+            top: 50,
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(right: 10),
-                    child: CircleAvatar(
-                      radius: 20,
-                      backgroundColor: Colors.amber,
-                      child: IconButton(
-                        iconSize: 24,
-                        color: Colors.white,
-                        icon: const Icon(
-                          Icons.arrow_back,
+                  Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right: 10),
+                        child: CircleAvatar(
+                          radius: 20,
+                          backgroundColor: Colors.amber,
+                          child: IconButton(
+                            iconSize: 24,
+                            color: Colors.white,
+                            icon: const Icon(
+                              Icons.arrow_back,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                if (questionValue == 0) {
+                                  n = 2;
+                                  oneTrue = true;
+                                  twoTrue = false;
+                                  threeTrue = false;
+                                } else {
+                                  questionValue--;
+                                }
+                              });
+                            },
+                          ),
                         ),
-                        onPressed: () {
-                          setState(() {
-                            if (questionValue == 0) {
-                              n = 2;
-                              oneTrue = true;
-                              twoTrue = false;
-                              threeTrue = false;
-                            } else {
-                              questionValue--;
-                            }
-                          });
-                        },
                       ),
-                    ),
+                      const Text(
+                        'First Steps',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      )
+                    ],
                   ),
-                  const Text(
-                    'First Steps',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  )
+                  notificationGeralButtonComponent(context),
                 ],
               ),
-              notificationGeralButtonComponent(context),
+              const SizedBox(height: 15),
+              Row(
+                children: [
+                  circularIndex('1', oneTrue),
+                  circularIndex('2', twoTrue),
+                  circularIndex('3', threeTrue),
+                ],
+              ),
+              const SizedBox(height: 15),
+              const Text(
+                'Questions',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 15),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  questionsMarker(
+                    context,
+                    true,
+                  ),
+                  questionsMarker(
+                    context,
+                    false,
+                  ),
+                  questionsMarker(
+                    context,
+                    false,
+                  ),
+                  questionsMarker(
+                    context,
+                    false,
+                  ),
+                ],
+              ),
+              const SizedBox(height: 15),
+              Column(
+                children: List.generate(
+                  chunk(questionList, 4)[questionValue].length,
+                  (index) {
+                    return questionBox(context,
+                        chunk(questionList, 4)[questionValue][index], index);
+                  },
+                ),
+              ),
             ],
           ),
-          const SizedBox(height: 15),
-          Row(
-            children: [
-              circularIndex('1', oneTrue),
-              circularIndex('2', twoTrue),
-              circularIndex('3', threeTrue),
-            ],
-          ),
-          const SizedBox(height: 15),
-          const Text(
-            'Questions',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          const SizedBox(height: 15),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              questionsMarker(
-                context,
-                true,
-              ),
-              questionsMarker(
-                context,
-                false,
-              ),
-              questionsMarker(
-                context,
-                false,
-              ),
-              questionsMarker(
-                context,
-                false,
-              ),
-            ],
-          ),
-          const SizedBox(height: 15),
-          Column(
-            children: List.generate(
-              chunk(questionList, 4)[questionValue].length,
-              (index) {
-                return questionBox(context,
-                    chunk(questionList, 4)[questionValue][index], index);
-              },
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }
@@ -695,141 +704,147 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
   }
 
   Widget partFour(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(
-        top: 50,
-        left: 25,
-        right: 25,
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Center(
+      child: SizedBox(
+        width: MediaQuery.of(context).size.width * 0.85,
+        child: Padding(
+          padding: const EdgeInsets.only(
+            top: 50,
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(right: 10),
-                    child: CircleAvatar(
-                      radius: 20,
-                      backgroundColor: Colors.amber,
-                      child: IconButton(
-                        iconSize: 24,
-                        color: Colors.white,
-                        icon: const Icon(
-                          Icons.arrow_back,
+                  Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right: 10),
+                        child: CircleAvatar(
+                          radius: 20,
+                          backgroundColor: Colors.amber,
+                          child: IconButton(
+                            iconSize: 24,
+                            color: Colors.white,
+                            icon: const Icon(
+                              Icons.arrow_back,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                n = 3;
+                                oneTrue = false;
+                                twoTrue = true;
+                                threeTrue = false;
+                              });
+                            },
+                          ),
                         ),
-                        onPressed: () {
-                          setState(() {
-                            n = 3;
-                            oneTrue = false;
-                            twoTrue = true;
-                            threeTrue = false;
-                          });
-                        },
                       ),
-                    ),
+                      const Text(
+                        'First Steps',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      )
+                    ],
                   ),
-                  const Text(
-                    'First Steps',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  )
+                  notificationGeralButtonComponent(context),
                 ],
               ),
-              notificationGeralButtonComponent(context),
+              const SizedBox(height: 15),
+              Row(
+                children: [
+                  circularIndex('1', oneTrue),
+                  circularIndex('2', twoTrue),
+                  circularIndex('3', threeTrue),
+                ],
+              ),
+              const SizedBox(height: 15),
+              const Text(
+                'Quiz',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 15),
+              const Text('Congratulations!\nYou got 80% of the quiz right.'),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.45),
             ],
           ),
-          const SizedBox(height: 15),
-          Row(
-            children: [
-              circularIndex('1', oneTrue),
-              circularIndex('2', twoTrue),
-              circularIndex('3', threeTrue),
-            ],
-          ),
-          const SizedBox(height: 15),
-          const Text(
-            'Quiz',
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(height: 15),
-          const Text('Congratulations!\nYou got 80% of the quiz right.'),
-          SizedBox(height: MediaQuery.of(context).size.height * 0.45),
-        ],
+        ),
       ),
     );
   }
 
   Widget partFive(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(
-        top: 50,
-        left: 25,
-        right: 25,
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Center(
+      child: SizedBox(
+        width: MediaQuery.of(context).size.width * 0.85,
+        child: Padding(
+          padding: const EdgeInsets.only(
+            top: 50,
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(right: 10),
-                    child: CircleAvatar(
-                      radius: 20,
-                      backgroundColor: Colors.amber,
-                      child: IconButton(
-                        iconSize: 24,
-                        color: Colors.white,
-                        icon: const Icon(
-                          Icons.arrow_back,
+                  Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right: 10),
+                        child: CircleAvatar(
+                          radius: 20,
+                          backgroundColor: Colors.amber,
+                          child: IconButton(
+                            iconSize: 24,
+                            color: Colors.white,
+                            icon: const Icon(
+                              Icons.arrow_back,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                n = 4;
+                                oneTrue = false;
+                                twoTrue = true;
+                                threeTrue = false;
+                              });
+                            },
+                          ),
                         ),
-                        onPressed: () {
-                          setState(() {
-                            n = 4;
-                            oneTrue = false;
-                            twoTrue = true;
-                            threeTrue = false;
-                          });
-                        },
                       ),
-                    ),
+                      const Text(
+                        'First Steps',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      )
+                    ],
                   ),
-                  const Text(
-                    'First Steps',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  )
+                  notificationGeralButtonComponent(context),
                 ],
               ),
-              notificationGeralButtonComponent(context),
+              const SizedBox(height: 15),
+              const Text(
+                'Set your current availability',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 15),
+              faqBox(context, 0),
+              faqBox(context, 1),
+              faqBox(context, 2),
+              faqBox(context, 3),
+              faqBox(context, 4),
+              faqBox(context, 5),
+              faqBox(context, 6),
+              const SizedBox(height: 15),
             ],
           ),
-          const SizedBox(height: 15),
-          const Text(
-            'Set your current availability',
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(height: 15),
-          faqBox(context, 0),
-          faqBox(context, 1),
-          faqBox(context, 2),
-          faqBox(context, 3),
-          faqBox(context, 4),
-          faqBox(context, 5),
-          faqBox(context, 6),
-          const SizedBox(height: 15),
-        ],
+        ),
       ),
     );
   }
@@ -1031,90 +1046,93 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
   }
 
   Widget partSix(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(
-        top: 50,
-        left: 25,
-        right: 25,
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Center(
+      child: SizedBox(
+        width: MediaQuery.of(context).size.width * 0.85,
+        child: Padding(
+          padding: const EdgeInsets.only(
+            top: 50,
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(right: 10),
-                    child: CircleAvatar(
-                      radius: 20,
-                      backgroundColor: Colors.amber,
-                      child: IconButton(
-                        iconSize: 24,
-                        color: Colors.white,
-                        icon: const Icon(
-                          Icons.arrow_back,
+                  Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right: 10),
+                        child: CircleAvatar(
+                          radius: 20,
+                          backgroundColor: Colors.amber,
+                          child: IconButton(
+                            iconSize: 24,
+                            color: Colors.white,
+                            icon: const Icon(
+                              Icons.arrow_back,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                n = 4;
+                                oneTrue = false;
+                                twoTrue = true;
+                                threeTrue = false;
+                              });
+                            },
+                          ),
                         ),
-                        onPressed: () {
-                          setState(() {
-                            n = 4;
-                            oneTrue = false;
-                            twoTrue = true;
-                            threeTrue = false;
-                          });
-                        },
                       ),
-                    ),
+                      const Text(
+                        'First Steps',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      )
+                    ],
                   ),
-                  const Text(
-                    'First Steps',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  )
+                  notificationGeralButtonComponent(context),
                 ],
               ),
-              notificationGeralButtonComponent(context),
+              const SizedBox(height: 15),
+              Center(
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.2,
+                    ),
+                    const Icon(
+                      Icons.verified,
+                      color: Colors.green,
+                      size: 40,
+                    ),
+                    const SizedBox(height: 20),
+                    const Text(
+                      'Information Sent!',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    const Text(
+                      'Our team will update your details and will contact you shortly',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.grey,
+                      ),
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.2,
+                    ),
+                  ],
+                ),
+              )
             ],
           ),
-          const SizedBox(height: 15),
-          Center(
-            child: Column(
-              children: [
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.2,
-                ),
-                const Icon(
-                  Icons.verified,
-                  color: Colors.green,
-                  size: 40,
-                ),
-                const SizedBox(height: 20),
-                const Text(
-                  'Information Sent!',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                  ),
-                ),
-                const SizedBox(height: 20),
-                const Text(
-                  'Our team will update your details and will contact you shortly',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.grey,
-                  ),
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.2,
-                ),
-              ],
-            ),
-          )
-        ],
+        ),
       ),
     );
   }

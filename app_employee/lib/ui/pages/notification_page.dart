@@ -15,60 +15,63 @@ class _NotificationPageState extends State<NotificationPage> {
     return Scaffold(
       bottomNavigationBar: navigationBarComponent(context),
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.only(
-            top: 50,
-            left: 25,
-            right: 25,
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
+        child: Center(
+          child: SizedBox(
+            width: MediaQuery.of(context).size.width * 0.85,
+            child: Padding(
+              padding: const EdgeInsets.only(
+                top: 50,
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  backButtonComponent(context),
-                  const Text(
-                    'Notification',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  )
+                  Row(
+                    children: [
+                      backButtonComponent(context),
+                      const Text(
+                        'Notification',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      )
+                    ],
+                  ),
+                  const SizedBox(height: 15),
+                  notificationBox(
+                    context,
+                    'Support responded to chat',
+                    '1 hour ago',
+                    Icons.chat_bubble_outline,
+                  ),
+                  notificationBox(
+                    context,
+                    'Your Nissan wash request has been approved',
+                    '1 hour ago',
+                    Icons.check_circle_outline,
+                  ),
+                  notificationBox(
+                    context,
+                    'Your Nissan wash request has been rejected',
+                    '1 hour ago',
+                    Icons.close,
+                  ),
+                  notificationBox(
+                    context,
+                    'Your wash has started!',
+                    '1 hour ago',
+                    Icons.directions_car,
+                  ),
+                  notificationBox(
+                    context,
+                    'Your wash has finished. Rate us!',
+                    '1 hour ago',
+                    Icons.directions_car,
+                  ),
                 ],
               ),
-              const SizedBox(height: 15),
-              notificationBox(
-                context,
-                'Support responded to chat',
-                '1 hour ago',
-                Icons.chat_bubble_outline,
-              ),
-              notificationBox(
-                context,
-                'Your Nissan wash request has been approved',
-                '1 hour ago',
-                Icons.check_circle_outline,
-              ),
-              notificationBox(
-                context,
-                'Your Nissan wash request has been rejected',
-                '1 hour ago',
-                Icons.close,
-              ),
-              notificationBox(
-                context,
-                'Your wash has started!',
-                '1 hour ago',
-                Icons.directions_car,
-              ),
-              notificationBox(
-                context,
-                'Your wash has finished. Rate us!',
-                '1 hour ago',
-                Icons.directions_car,
-              ),
-            ],
+            ),
           ),
         ),
       ),

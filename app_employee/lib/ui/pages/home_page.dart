@@ -34,34 +34,37 @@ class _HomePageState extends State<HomePage> {
           children: [
             Container(
               decoration: const BoxDecoration(color: Colors.white),
-              child: Padding(
-                padding: const EdgeInsets.only(
-                  top: 50,
-                  left: 25,
-                  right: 25,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
+              child: Center(
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.85,
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                      top: 50,
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        notificationHomeButtonComponent(context),
-                        const Text(
-                          'Welcome, Jorge!',
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                          ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            notificationHomeButtonComponent(context),
+                            const Text(
+                              'Welcome, Jorge!',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                        const Image(
+                          width: 125,
+                          image: AssetImage('images/logo.png'),
                         ),
                       ],
                     ),
-                    const Image(
-                      width: 125,
-                      image: AssetImage('images/logo.png'),
-                    ),
-                  ],
+                  ),
                 ),
               ),
             ),

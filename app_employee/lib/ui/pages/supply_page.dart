@@ -15,53 +15,56 @@ class _SupplyPageState extends State<SupplyPage> {
     return Scaffold(
       bottomNavigationBar: navigationBarComponent(context),
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.only(
-            top: 50,
-            left: 25,
-            right: 25,
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
+        child: Center(
+          child: SizedBox(
+            width: MediaQuery.of(context).size.width * 0.85,
+            child: Padding(
+              padding: const EdgeInsets.only(
+                top: 50,
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  backButtonComponent(context),
+                  Row(
+                    children: [
+                      backButtonComponent(context),
+                      const Text(
+                        'My Suppliers',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      )
+                    ],
+                  ),
+                  const SizedBox(height: 25),
                   const Text(
-                    'My Suppliers',
+                    'Find your main suppliers here',
                     style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
+                      color: Colors.grey,
                     ),
-                  )
+                  ),
+                  const SizedBox(height: 10),
+                  supplyBox(
+                    context,
+                    'Work Manual',
+                  ),
+                  supplyBox(
+                    context,
+                    'Tyre Shine',
+                  ),
+                  supplyBox(
+                    context,
+                    'Interior & Tyres',
+                  ),
+                  supplyBox(
+                    context,
+                    'Exterior Waterless',
+                  ),
                 ],
               ),
-              const SizedBox(height: 25),
-              const Text(
-                'Find your main suppliers here',
-                style: TextStyle(
-                  color: Colors.grey,
-                ),
-              ),
-              const SizedBox(height: 10),
-              supplyBox(
-                context,
-                'Work Manual',
-              ),
-              supplyBox(
-                context,
-                'Tyre Shine',
-              ),
-              supplyBox(
-                context,
-                'Interior & Tyres',
-              ),
-              supplyBox(
-                context,
-                'Exterior Waterless',
-              ),
-            ],
+            ),
           ),
         ),
       ),
