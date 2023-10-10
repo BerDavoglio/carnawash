@@ -19,96 +19,101 @@ class _HistoryPageState extends State<HistoryPage> {
       backgroundColor: Colors.grey[100],
       bottomNavigationBar: navigationBarComponent(context),
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.only(
-            top: 50,
-            left: 25,
-            right: 25,
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      backButtonComponent(context),
-                      const Text(
-                        'History',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      )
-                    ],
-                  ),
-                  notificationGeralButtonComponent(context),
-                ],
+        child: Center(
+          child: SizedBox(
+            width: MediaQuery.of(context).size.width * 0.85,
+            child: Padding(
+              padding: const EdgeInsets.only(
+                top: 50,
               ),
-              const SizedBox(height: 15),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'Filter the date',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            backButtonComponent(context),
+                            const Text(
+                              'History',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            )
+                          ],
+                        ),
+                        notificationGeralButtonComponent(context),
+                      ],
                     ),
-                  ),
-                  const SizedBox(height: 10),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          geralDateInput(
-                            context: context,
-                            text: 'Date',
-                            textController: initialDateController,
+                    const SizedBox(height: 15),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'Filter the date',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
                           ),
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.01,
-                          ),
-                          geralDateInput(
-                            context: context,
-                            text: 'End Date',
-                            textController: finalDateController,
-                          ),
-                        ],
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 10),
-                        child: IconButton(
-                          padding: const EdgeInsets.all(0),
-                          color: Colors.blue,
-                          style: ButtonStyle(
-                            fixedSize: MaterialStateProperty.all(
-                              Size(MediaQuery.of(context).size.width * 0.12,
-                                  MediaQuery.of(context).size.width * 0.12),
-                            ),
-                          ),
-                          iconSize: MediaQuery.of(context).size.width * 0.12,
-                          onPressed: () {},
-                          icon: const Icon(Icons.check_box),
                         ),
-                      )
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      historyBoxComponent(),
-                      historyBoxComponent(),
-                      historyBoxComponent(),
-                      historyBoxComponent(),
-                      historyBoxComponent(),
-                    ],
-                  ),
-                ],
+                        const SizedBox(height: 10),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                geralDateInput(
+                                  context: context,
+                                  text: 'Date',
+                                  textController: initialDateController,
+                                ),
+                                SizedBox(
+                                  width: MediaQuery.of(context).size.width * 0.01,
+                                ),
+                                geralDateInput(
+                                  context: context,
+                                  text: 'End Date',
+                                  textController: finalDateController,
+                                ),
+                              ],
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 10),
+                              child: IconButton(
+                                padding: const EdgeInsets.all(0),
+                                color: Colors.blue,
+                                style: ButtonStyle(
+                                  fixedSize: MaterialStateProperty.all(
+                                    Size(MediaQuery.of(context).size.width * 0.12,
+                                        MediaQuery.of(context).size.width * 0.12),
+                                  ),
+                                ),
+                                iconSize: MediaQuery.of(context).size.width * 0.12,
+                                onPressed: () {},
+                                icon: const Icon(Icons.check_box),
+                              ),
+                            )
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            historyBoxComponent(),
+                            historyBoxComponent(),
+                            historyBoxComponent(),
+                            historyBoxComponent(),
+                            historyBoxComponent(),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            ],
+            ),
           ),
         ),
       ),
@@ -136,7 +141,6 @@ class _HistoryPageState extends State<HistoryPage> {
                     Text(
                       'Washer: John',
                       style: TextStyle(
-                        fontWeight: FontWeight.bold,
                         fontSize: 18,
                       ),
                     ),
@@ -146,14 +150,12 @@ class _HistoryPageState extends State<HistoryPage> {
                         Text(
                           'September 10, 2023',
                           style: TextStyle(
-                            fontWeight: FontWeight.bold,
                             fontSize: 16,
                           ),
                         ),
                         Text(
                           '10:00 am',
                           style: TextStyle(
-                            fontWeight: FontWeight.bold,
                             fontSize: 16,
                           ),
                         ),
@@ -197,7 +199,7 @@ class _HistoryPageState extends State<HistoryPage> {
                     Text(
                       '\$ 94.00',
                       style: TextStyle(
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w600,
                         fontSize: 24,
                       ),
                     ),

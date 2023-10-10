@@ -21,109 +21,112 @@ class _WalletEditPageState extends State<WalletEditPage> {
     return Scaffold(
       bottomNavigationBar: navigationBarComponent(context),
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.only(
-            top: 50,
-            left: 25,
-            right: 25,
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      backButtonComponent(context),
-                      Text(
-                        edit ? 'Edit Card' : 'Create Card',
-                        style: const TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      )
-                    ],
-                  ),
-                  notificationGeralButtonComponent(context),
-                ],
+        child: Center(
+          child: SizedBox(
+            width: MediaQuery.of(context).size.width * 0.85,
+            child: Padding(
+              padding: const EdgeInsets.only(
+                top: 50,
               ),
-              const SizedBox(height: 15),
-              Column(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Column(
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      geralTextInput(
-                        context: context,
-                        text: 'Number',
-                        textController: numberController,
-                      ),
-                      geralTextInput(
-                        context: context,
-                        text: 'Cardholder Name',
-                        textController: holderController,
-                      ),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          backButtonComponent(context),
+                          Text(
+                            edit ? 'Edit Card' : 'Create Card',
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          )
+                        ],
+                      ),
+                      notificationGeralButtonComponent(context),
+                    ],
+                  ),
+                  const SizedBox(height: 15),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Column(
                         children: [
                           geralTextInput(
                             context: context,
-                            text: 'Expires',
-                            textController: expiresController,
-                            larg: 0.4,
+                            text: 'Number',
+                            textController: numberController,
                           ),
                           geralTextInput(
                             context: context,
-                            text: 'CVV',
-                            textController: cvvController,
-                            larg: 0.4,
+                            text: 'Cardholder Name',
+                            textController: holderController,
                           ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              geralTextInput(
+                                context: context,
+                                text: 'Expires',
+                                textController: expiresController,
+                                larg: 0.4,
+                              ),
+                              geralTextInput(
+                                context: context,
+                                text: 'CVV',
+                                textController: cvvController,
+                                larg: 0.4,
+                              ),
+                            ],
+                          ),
+                          edit
+                              ? const Text(
+                                  'Delete this credit card',
+                                  style: TextStyle(
+                                    color: Colors.amber,
+                                  ),
+                                )
+                              : const SizedBox(),
                         ],
                       ),
-                      edit
-                          ? const Text(
-                              'Delete this credit card',
-                              style: TextStyle(
-                                color: Colors.amber,
-                              ),
-                            )
-                          : const SizedBox(),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  TextButton(
-                    style: ButtonStyle(
-                      elevation: MaterialStateProperty.all(5),
-                      fixedSize: MaterialStateProperty.all<Size>(
-                        Size(MediaQuery.of(context).size.width * 0.85, 50),
+                      const SizedBox(
+                        height: 10,
                       ),
-                      backgroundColor: MaterialStateProperty.all<Color>(
-                        Colors.amber,
-                      ),
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5),
+                      TextButton(
+                        style: ButtonStyle(
+                          elevation: MaterialStateProperty.all(5),
+                          fixedSize: MaterialStateProperty.all<Size>(
+                            Size(MediaQuery.of(context).size.width * 0.85, 50),
+                          ),
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                            Colors.amber,
+                          ),
+                          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                          ),
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: const Text(
+                          'Save',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
-                    ),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: const Text(
-                      'Save',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                    ),
+                    ],
                   ),
                 ],
               ),
-            ],
+            ),
           ),
         ),
       ),
