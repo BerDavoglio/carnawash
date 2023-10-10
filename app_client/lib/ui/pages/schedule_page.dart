@@ -141,7 +141,7 @@ class _SchedulePageState extends State<SchedulePage> {
                       style: ButtonStyle(
                         elevation: MaterialStateProperty.all(5),
                         fixedSize: MaterialStateProperty.all<Size>(
-                          Size(MediaQuery.of(context).size.width * 0.9, 50),
+                          Size(MediaQuery.of(context).size.width * 0.85, 50),
                         ),
                         backgroundColor: MaterialStateProperty.all<Color>(
                           Colors.amber,
@@ -177,7 +177,7 @@ class _SchedulePageState extends State<SchedulePage> {
     return Column(
       children: [
         SizedBox(
-          width: MediaQuery.of(context).size.width * 0.9,
+          width: MediaQuery.of(context).size.width * 0.85,
           child: const Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -200,7 +200,7 @@ class _SchedulePageState extends State<SchedulePage> {
           ),
         ),
         SizedBox(
-          width: MediaQuery.of(context).size.width * 0.9,
+          width: MediaQuery.of(context).size.width * 0.85,
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 10),
             child: Column(
@@ -316,7 +316,7 @@ class _SchedulePageState extends State<SchedulePage> {
     return Column(
       children: [
         SizedBox(
-          width: MediaQuery.of(context).size.width * 0.9,
+          width: MediaQuery.of(context).size.width * 0.85,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -461,7 +461,7 @@ class _SchedulePageState extends State<SchedulePage> {
                     ),
                     borderRadius: const BorderRadius.all(Radius.circular(15)),
                   ),
-                  width: MediaQuery.of(context).size.width * 0.9,
+                  width: MediaQuery.of(context).size.width * 0.85,
                   child: const Padding(
                     padding: EdgeInsets.all(10),
                     child: Column(
@@ -555,7 +555,7 @@ class _SchedulePageState extends State<SchedulePage> {
               ),
               const SizedBox(height: 10),
               Container(
-                width: MediaQuery.of(context).size.width * 0.9,
+                width: MediaQuery.of(context).size.width * 0.85,
                 decoration: BoxDecoration(
                   borderRadius: const BorderRadius.all(Radius.circular(10)),
                   color: Colors.grey.withOpacity(0.1),
@@ -648,7 +648,7 @@ class _SchedulePageState extends State<SchedulePage> {
     return Column(
       children: [
         SizedBox(
-          width: MediaQuery.of(context).size.width * 0.9,
+          width: MediaQuery.of(context).size.width * 0.85,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -709,7 +709,7 @@ class _SchedulePageState extends State<SchedulePage> {
     return Column(
       children: [
         SizedBox(
-          width: MediaQuery.of(context).size.width * 0.9,
+          width: MediaQuery.of(context).size.width * 0.85,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -903,7 +903,7 @@ class _SchedulePageState extends State<SchedulePage> {
                 ],
               ),
               Container(
-                width: MediaQuery.of(context).size.width * 0.9,
+                width: MediaQuery.of(context).size.width * 0.85,
                 decoration: BoxDecoration(
                   borderRadius: const BorderRadius.all(Radius.circular(10)),
                   color: Colors.grey.withOpacity(0.1),
@@ -941,7 +941,7 @@ class _SchedulePageState extends State<SchedulePage> {
     return Column(
       children: [
         SizedBox(
-          width: MediaQuery.of(context).size.width * 0.9,
+          width: MediaQuery.of(context).size.width * 0.85,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -983,7 +983,7 @@ class _SchedulePageState extends State<SchedulePage> {
               OutlinedButton(
                 style: OutlinedButton.styleFrom(
                   side: const BorderSide(width: 2, color: Colors.blue),
-                  fixedSize: Size(MediaQuery.of(context).size.width * 0.9, 50),
+                  fixedSize: Size(MediaQuery.of(context).size.width * 0.85, 50),
                   backgroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
@@ -1015,7 +1015,7 @@ class _SchedulePageState extends State<SchedulePage> {
               OutlinedButton(
                 style: OutlinedButton.styleFrom(
                   side: const BorderSide(width: 2, color: Colors.blue),
-                  fixedSize: Size(MediaQuery.of(context).size.width * 0.9, 50),
+                  fixedSize: Size(MediaQuery.of(context).size.width * 0.85, 50),
                   backgroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
@@ -1071,7 +1071,7 @@ class _SchedulePageState extends State<SchedulePage> {
       child: Column(
         children: [
           SizedBox(
-            width: MediaQuery.of(context).size.width * 0.9,
+            width: MediaQuery.of(context).size.width * 0.85,
             child: const Center(
               child: Column(
                 children: [

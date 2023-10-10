@@ -105,7 +105,7 @@ class _FirstLoginComponentState extends State<FirstLoginComponent> {
                     )
                   : Column(children: [
                       Container(
-                        width: MediaQuery.of(context).size.width * 0.9,
+                        width: MediaQuery.of(context).size.width * 0.85,
                         decoration: BoxDecoration(
                             color: Colors.white,
                             border: Border.all(color: Colors.grey[700]!),
@@ -153,7 +153,7 @@ class _FirstLoginComponentState extends State<FirstLoginComponent> {
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.amber,
-                fixedSize: Size(MediaQuery.of(context).size.width * 0.9, 50)),
+                fixedSize: Size(MediaQuery.of(context).size.width * 0.85, 50)),
             onPressed: () {
               if (n == 1) {
                 setState(() {

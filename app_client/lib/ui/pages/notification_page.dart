@@ -82,7 +82,7 @@ class _NotificationPageState extends State<NotificationPage> {
     IconData icon,
   ) {
     return SizedBox(
-      width: MediaQuery.of(context).size.width * 0.9,
+      width: MediaQuery.of(context).size.width * 0.85,
       child: Column(
         children: [
           Row(

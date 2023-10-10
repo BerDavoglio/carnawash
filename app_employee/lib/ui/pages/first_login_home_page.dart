@@ -207,7 +207,7 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
                 style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.amber,
                     fixedSize:
-                        Size(MediaQuery.of(context).size.width * 0.9, 50)),
+                        Size(MediaQuery.of(context).size.width * 0.85, 50)),
                 onPressed: () {
                   if (n == 1) {
                     setState(() {
@@ -324,7 +324,7 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
         ),
         const SizedBox(height: 25),
         SizedBox(
-          width: MediaQuery.of(context).size.width * 0.9,
+          width: MediaQuery.of(context).size.width * 0.85,
           child: const Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -841,7 +841,7 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
     return Column(
       children: [
         Container(
-          width: MediaQuery.of(context).size.width * 0.9,
+          width: MediaQuery.of(context).size.width * 0.85,
           decoration: BoxDecoration(
             color: Colors.amber[300]!,
             borderRadius: const BorderRadius.all(

@@ -61,7 +61,7 @@ class _SignInComponentState extends State<SignInComponent> {
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.amber,
-                fixedSize: Size(MediaQuery.of(context).size.width * 0.9, 50)),
+                fixedSize: Size(MediaQuery.of(context).size.width * 0.85, 50)),
             onPressed: () {
               Navigator.of(context).pushNamed(AppRoutes.HOME);
             },

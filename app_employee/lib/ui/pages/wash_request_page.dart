@@ -69,7 +69,7 @@ class _WashRequestPageState extends State<WashRequestPage> {
                       elevation: MaterialStateProperty.all(5),
                       fixedSize: MaterialStateProperty.all<Size>(
                         Size(
-                          MediaQuery.of(context).size.width * 0.9,
+                          MediaQuery.of(context).size.width * 0.85,
                           50,
                         ),
                       ),
@@ -189,7 +189,7 @@ class _WashRequestPageState extends State<WashRequestPage> {
             ),
             const SizedBox(height: 10),
             Container(
-              width: MediaQuery.of(context).size.width * 0.9,
+              width: MediaQuery.of(context).size.width * 0.85,
               height: 100,
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.black),

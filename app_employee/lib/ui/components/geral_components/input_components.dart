@@ -39,7 +39,7 @@ Widget geralMultilineTextInput({
   return Column(
     children: [
       SizedBox(
-        width: MediaQuery.of(context).size.width * 0.9,
+        width: MediaQuery.of(context).size.width * 0.85,
         child: TextFormField(
           maxLines: 5,
           decoration: InputDecoration(
@@ -155,7 +155,7 @@ Widget passwordTextInput(
   return Column(
     children: [
       SizedBox(
-        width: MediaQuery.of(context).size.width * 0.9,
+        width: MediaQuery.of(context).size.width * 0.85,
         child: TextFormField(
           obscureText: hidden,
           decoration: InputDecoration(
@@ -185,7 +185,7 @@ Widget passwordConfirmTextInput(
   return Column(
     children: [
       SizedBox(
-        width: MediaQuery.of(context).size.width * 0.9,
+        width: MediaQuery.of(context).size.width * 0.85,
         child: TextFormField(
           obscureText: true,
           decoration: const InputDecoration(

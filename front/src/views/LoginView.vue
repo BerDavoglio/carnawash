@@ -67,9 +67,9 @@
   </div>
 </template>
 
-<script setup>
+<!-- <script setup>
 import { useLoginStore } from '../store/store';
-</script>
+</script> -->
 
 <script>
 export default {
@@ -92,23 +92,23 @@ export default {
   },
   methods: {
     async login() {
-      const store = useLoginStore();
-      await store.requestLogin(
-        this.email,
-        this.password,
-        (destiny) => {
-          this.goPage(destiny);
-        },
-      );
+      // const store = useLoginStore();
+      // await store.requestLogin(
+      //   this.email,
+      //   this.password,
+      //   (destiny) => {
+      //     this.goPage(destiny);
+      //   },
+      // );
     },
     async signin() {
-      const store = useLoginStore();
-      await store.createPerfil(
-        this.user,
-        (destiny) => {
-          this.goPage(destiny);
-        },
-      );
+      // const store = useLoginStore();
+      // await store.createPerfil(
+      //   this.user,
+      //   (destiny) => {
+      //     this.goPage(destiny);
+      //   },
+      // );
     },
     goPage(route) {
       this.$router.push({ name: route });

@@ -114,7 +114,7 @@ class _FAQPageState extends State<FAQPage> {
     return Column(
       children: [
         Container(
-          width: MediaQuery.of(context).size.width * 0.9,
+          width: MediaQuery.of(context).size.width * 0.85,
           decoration: BoxDecoration(
             color: Colors.amber[300]!,
             borderRadius: !obj.isOpen

@@ -118,7 +118,7 @@ class _AccountPageState extends State<AccountPage> {
                           ),
                         ),
                         Container(
-                          width: MediaQuery.of(context).size.width * 0.9,
+                          width: MediaQuery.of(context).size.width * 0.85,
                           decoration: BoxDecoration(
                               color: Colors.white,
                               border: Border.all(color: Colors.grey[400]!),
@@ -226,7 +226,7 @@ class _AccountPageState extends State<AccountPage> {
                           ),
                         ),
                         Container(
-                          width: MediaQuery.of(context).size.width * 0.9,
+                          width: MediaQuery.of(context).size.width * 0.85,
                           decoration: BoxDecoration(
                               color: Colors.white,
                               border: Border.all(color: Colors.grey[700]!),
@@ -266,7 +266,7 @@ class _AccountPageState extends State<AccountPage> {
                           style: ButtonStyle(
                             elevation: MaterialStateProperty.all(5),
                             fixedSize: MaterialStateProperty.all<Size>(
-                              Size(MediaQuery.of(context).size.width * 0.9, 50),
+                              Size(MediaQuery.of(context).size.width * 0.85, 50),
                             ),
                             backgroundColor: MaterialStateProperty.all<Color>(
                               Colors.amber,

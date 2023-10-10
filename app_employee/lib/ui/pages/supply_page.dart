@@ -73,7 +73,7 @@ class _SupplyPageState extends State<SupplyPage> {
     String text,
   ) {
     return SizedBox(
-      width: MediaQuery.of(context).size.width * 0.9,
+      width: MediaQuery.of(context).size.width * 0.85,
       child: Column(
         children: [
           Row(

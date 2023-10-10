@@ -63,7 +63,7 @@ class _ChangePassComponentState extends State<ChangePassComponent> {
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.amber,
-                fixedSize: Size(MediaQuery.of(context).size.width * 0.9, 50)),
+                fixedSize: Size(MediaQuery.of(context).size.width * 0.85, 50)),
             onPressed: () {},
             child: const Text('Next'),
           ),

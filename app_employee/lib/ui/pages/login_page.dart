@@ -38,7 +38,7 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               children: [
                 Container(
-                  width: MediaQuery.of(context).size.width * 0.9,
+                  width: MediaQuery.of(context).size.width * 0.85,
                   height: 300,
                   decoration: const BoxDecoration(
                     color: Colors.white,

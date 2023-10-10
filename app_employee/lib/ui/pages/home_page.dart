@@ -101,7 +101,7 @@ class _HomePageState extends State<HomePage> {
           ),
           const SizedBox(height: 20),
           Container(
-            width: MediaQuery.of(context).size.width * 0.9,
+            width: MediaQuery.of(context).size.width * 0.85,
             decoration: const BoxDecoration(
               borderRadius: BorderRadius.all(
                 Radius.circular(10),
@@ -174,7 +174,7 @@ class _HomePageState extends State<HomePage> {
           ),
           const SizedBox(height: 10),
           SizedBox(
-            width: MediaQuery.of(context).size.width * 0.9,
+            width: MediaQuery.of(context).size.width * 0.85,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -191,7 +191,7 @@ class _HomePageState extends State<HomePage> {
                     color: Colors.white,
                     borderRadius: BorderRadius.all(Radius.circular(15)),
                   ),
-                  width: MediaQuery.of(context).size.width * 0.9,
+                  width: MediaQuery.of(context).size.width * 0.85,
                   child: Padding(
                     padding: const EdgeInsets.all(10),
                     child: Column(
@@ -271,7 +271,7 @@ class _HomePageState extends State<HomePage> {
                             elevation: MaterialStateProperty.all(5),
                             fixedSize: MaterialStateProperty.all<Size>(
                               Size(
-                                MediaQuery.of(context).size.width * 0.9,
+                                MediaQuery.of(context).size.width * 0.85,
                                 50,
                               ),
                             ),

@@ -67,7 +67,7 @@ class _RegisterComponentState extends State<RegisterComponent> {
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.amber,
-                fixedSize: Size(MediaQuery.of(context).size.width * 0.9, 50)),
+                fixedSize: Size(MediaQuery.of(context).size.width * 0.85, 50)),
             onPressed: () {
               setState(() {
                 if (n != 2) {
@@ -207,7 +207,7 @@ class _RegisterComponentState extends State<RegisterComponent> {
           Column(
             children: [
               Container(
-                width: MediaQuery.of(context).size.width * 0.9,
+                width: MediaQuery.of(context).size.width * 0.85,
                 decoration: BoxDecoration(
                     color: Colors.white,
                     border: Border.all(color: Colors.grey[700]!),
@@ -233,7 +233,7 @@ class _RegisterComponentState extends State<RegisterComponent> {
                 height: 10,
               ),
               Container(
-                width: MediaQuery.of(context).size.width * 0.9,
+                width: MediaQuery.of(context).size.width * 0.85,
                 decoration: BoxDecoration(
                     color: Colors.white,
                     border: Border.all(color: Colors.grey[700]!),
@@ -259,7 +259,7 @@ class _RegisterComponentState extends State<RegisterComponent> {
                 height: 10,
               ),
               Container(
-                width: MediaQuery.of(context).size.width * 0.9,
+                width: MediaQuery.of(context).size.width * 0.85,
                 decoration: BoxDecoration(
                     color: Colors.white,
                     border: Border.all(color: Colors.grey[700]!),
