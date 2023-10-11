@@ -126,6 +126,7 @@ class _AccountPageState extends State<AccountPage> {
                                   borderRadius:
                                       const BorderRadius.all(Radius.circular(10))),
                               child: DropdownButton(
+                                isExpanded: true,
                                 padding: const EdgeInsets.symmetric(
                                   vertical: 5,
                                   horizontal: 10,
@@ -234,6 +235,7 @@ class _AccountPageState extends State<AccountPage> {
                                   borderRadius:
                                       const BorderRadius.all(Radius.circular(10))),
                               child: DropdownButton(
+                                isExpanded: true,
                                 padding: const EdgeInsets.symmetric(
                                   vertical: 5,
                                   horizontal: 10,

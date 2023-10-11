@@ -91,7 +91,7 @@ class _NotificationPageState extends State<NotificationPage> {
           Row(
             children: [
               Padding(
-                padding: const EdgeInsets.all(10),
+                padding: const EdgeInsets.all(20),
                 child: Icon(
                   icon,
                   size: 30,
@@ -101,24 +101,24 @@ class _NotificationPageState extends State<NotificationPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.7,
+                    width: MediaQuery.of(context).size.width * 0.65,
                     child: Text(
                       text,
-                      style: const TextStyle(fontSize: 18),
                     ),
                   ),
+                  const SizedBox(height: 5),
                   SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.7,
+                    width: MediaQuery.of(context).size.width * 0.65,
                     child: Text(
                       time,
-                      style: const TextStyle(color: Colors.grey),
+                      style: const TextStyle(color: Colors.grey, fontSize: 12),
                     ),
                   ),
                 ],
               ),
             ],
           ),
-          const Divider(),
+          const Divider(thickness: 1,),
         ],
       ),
     );

@@ -218,7 +218,7 @@ class _SchedulePageState extends State<SchedulePage> {
             padding: const EdgeInsets.symmetric(vertical: 10),
             child: Column(
               children: List.generate(
-                3,
+                6,
                 (index) {
                   return selectCarBox(
                     context,
@@ -531,6 +531,7 @@ class _SchedulePageState extends State<SchedulePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       additionalBoxComponent(
                         context: context,
@@ -602,15 +603,15 @@ class _SchedulePageState extends State<SchedulePage> {
     );
   }
 
-  Container additionalBoxComponent({
+  Widget additionalBoxComponent({
     required BuildContext context,
     required String text,
     required IconData icon,
     required String value,
   }) {
     return Container(
-      width: MediaQuery.of(context).size.width * 0.4,
-      height: MediaQuery.of(context).size.width * 0.4,
+      width: MediaQuery.of(context).size.width * 0.42,
+      height: MediaQuery.of(context).size.width * 0.42,
       decoration: BoxDecoration(
           borderRadius: const BorderRadius.all(Radius.circular(10)),
           border: Border.all(color: Colors.grey)),
@@ -935,7 +936,7 @@ class _SchedulePageState extends State<SchedulePage> {
     );
   }
 
-  Column fifthPart(BuildContext context) {
+  Widget fifthPart(BuildContext context) {
     return Column(
       children: [
         SizedBox(
@@ -956,105 +957,113 @@ class _SchedulePageState extends State<SchedulePage> {
                 text: 'Type the code',
                 textController: couponController,
               ),
-              const SizedBox(height: 90),
-              const Column(
+              const SizedBox(height: 10),
+              Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'Total:',
-                    style: TextStyle(
-                      fontSize: 18,
+                  const Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Total:',
+                        style: TextStyle(
+                          fontSize: 18,
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(vertical: 20),
+                        child: Text(
+                          '\$ 125.00',
+                          style: TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                      side: const BorderSide(width: 2, color: Colors.blue),
+                      fixedSize: Size(
+                          MediaQuery.of(context).size.width * 0.85, 50),
+                      backgroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        n++;
+                      });
+                    },
+                    child: const Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Pay credit card **** 1234',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            color: Colors.blue,
+                          ),
+                        ),
+                        Image(
+                          height: 30,
+                          image: AssetImage('images/mastercard-logo.png'),
+                        ),
+                      ],
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(vertical: 20),
-                    child: Text(
-                      '\$ 125.00',
-                      style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
+                  const SizedBox(height: 10),
+                  OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                      side: const BorderSide(width: 2, color: Colors.blue),
+                      fixedSize: Size(
+                          MediaQuery.of(context).size.width * 0.85, 50),
+                      backgroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        n++;
+                      });
+                    },
+                    child: const Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Pay credit card **** 4321',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.blue,
+                          ),
+                        ),
+                        Image(
+                          height: 30,
+                          image: AssetImage('images/visa-logo.png'),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  Center(
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.of(context)
+                            .pushNamed(AppRoutes.WALLET_EDIT);
+                      },
+                      child: const Text(
+                        'Pay with another credit card',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.amber,
+                        ),
                       ),
                     ),
                   ),
                 ],
-              ),
-              OutlinedButton(
-                style: OutlinedButton.styleFrom(
-                  side: const BorderSide(width: 2, color: Colors.blue),
-                  fixedSize: Size(MediaQuery.of(context).size.width * 0.85, 50),
-                  backgroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-                onPressed: () {
-                  setState(() {
-                    n++;
-                  });
-                },
-                child: const Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Pay credit card **** 1234',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        color: Colors.blue,
-                      ),
-                    ),
-                    Image(
-                      height: 30,
-                      image: AssetImage('images/mastercard-logo.png'),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 10),
-              OutlinedButton(
-                style: OutlinedButton.styleFrom(
-                  side: const BorderSide(width: 2, color: Colors.blue),
-                  fixedSize: Size(MediaQuery.of(context).size.width * 0.85, 50),
-                  backgroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-                onPressed: () {
-                  setState(() {
-                    n++;
-                  });
-                },
-                child: const Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Pay credit card **** 4321',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.blue,
-                      ),
-                    ),
-                    Image(
-                      height: 30,
-                      image: AssetImage('images/visa-logo.png'),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 10),
-              Center(
-                child: TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pushNamed(AppRoutes.WALLET_EDIT);
-                  },
-                  child: const Text(
-                    'Pay with another credit card',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.amber,
-                    ),
-                  ),
-                ),
               ),
             ],
           ),

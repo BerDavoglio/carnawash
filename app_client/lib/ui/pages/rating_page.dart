@@ -12,7 +12,7 @@ class RatingPage extends StatefulWidget {
 
 class _RatingPageState extends State<RatingPage> {
   TextEditingController rateController = TextEditingController();
-  bool wasRated = true;
+  bool wasRated = false;
 
   @override
   Widget build(BuildContext context) {
@@ -87,14 +87,19 @@ class _RatingPageState extends State<RatingPage> {
             color: Colors.amber,
           ),
           onRatingUpdate: (rating) {
-            // print(rating);
+            setState(() {
+              wasRated = true;
+            });
           },
         ),
         const SizedBox(height: 10),
         const Text('Let us know your feedback:'),
         const SizedBox(height: 10),
         geralMultilineTextInput(
-            context: context, text: '', textController: rateController)
+          context: context,
+          text: '',
+          textController: rateController,
+        )
       ],
     );
   }

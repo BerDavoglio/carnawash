@@ -112,6 +112,7 @@ class _FirstLoginComponentState extends State<FirstLoginComponent> {
                             borderRadius:
                                 const BorderRadius.all(Radius.circular(10))),
                         child: DropdownButton(
+                          isExpanded: true,
                           padding: const EdgeInsets.symmetric(
                             vertical: 5,
                             horizontal: 10,

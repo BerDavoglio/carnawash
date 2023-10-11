@@ -54,9 +54,16 @@ class _SignInComponentState extends State<SignInComponent> {
                 hidden,
               ),
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const LoginPage(index: 3),
+              ),
+            );
+                },
                 child: const Text(
-                  'Forgot Password',
+                  'I forgot the password',
                   style: TextStyle(
                     color: Colors.white,
                   ),
@@ -74,7 +81,12 @@ class _SignInComponentState extends State<SignInComponent> {
             onPressed: () {
               Navigator.of(context).pushNamed(AppRoutes.HOME);
             },
-            child: const Text('Login'),
+            child: const Text(
+              'Login',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ),
         ),
         TextButton(
@@ -87,7 +99,7 @@ class _SignInComponentState extends State<SignInComponent> {
             );
           },
           child: const Text(
-            "Don't have an Account?",
+            "Don't have an Account? Sign Up",
             style: TextStyle(
               color: Colors.white,
             ),

@@ -85,9 +85,10 @@ class _VehiclesEditPageState extends State<VehiclesEditPage> {
                             decoration: BoxDecoration(
                                 color: Colors.white,
                                 border: Border.all(color: Colors.grey[700]!),
-                                borderRadius:
-                                    const BorderRadius.all(Radius.circular(10))),
+                                borderRadius: const BorderRadius.all(
+                                    Radius.circular(10))),
                             child: DropdownButton(
+                              isExpanded: true,
                               padding: const EdgeInsets.symmetric(
                                 vertical: 5,
                                 horizontal: 10,
@@ -104,17 +105,16 @@ class _VehiclesEditPageState extends State<VehiclesEditPage> {
                               }),
                             ),
                           ),
-                          const SizedBox(
-                            height: 10,
-                          ),
+                          const SizedBox(height: 10),
                           Container(
                             width: MediaQuery.of(context).size.width * 0.85,
                             decoration: BoxDecoration(
                                 color: Colors.white,
                                 border: Border.all(color: Colors.grey[700]!),
-                                borderRadius:
-                                    const BorderRadius.all(Radius.circular(10))),
+                                borderRadius: const BorderRadius.all(
+                                    Radius.circular(10))),
                             child: DropdownButton(
+                              isExpanded: true,
                               padding: const EdgeInsets.symmetric(
                                 vertical: 5,
                                 horizontal: 10,
@@ -139,9 +139,10 @@ class _VehiclesEditPageState extends State<VehiclesEditPage> {
                             decoration: BoxDecoration(
                                 color: Colors.white,
                                 border: Border.all(color: Colors.grey[700]!),
-                                borderRadius:
-                                    const BorderRadius.all(Radius.circular(10))),
+                                borderRadius: const BorderRadius.all(
+                                    Radius.circular(10))),
                             child: DropdownButton(
+                              isExpanded: true,
                               padding: const EdgeInsets.symmetric(
                                 vertical: 5,
                                 horizontal: 10,
@@ -315,17 +316,19 @@ class _VehiclesEditPageState extends State<VehiclesEditPage> {
                               ),
                             ],
                           ),
+                          const SizedBox(height: 20),
                           TextButton(
                             style: ButtonStyle(
                               elevation: MaterialStateProperty.all(5),
                               fixedSize: MaterialStateProperty.all<Size>(
-                                Size(MediaQuery.of(context).size.width * 0.85, 50),
+                                Size(MediaQuery.of(context).size.width * 0.85,
+                                    50),
                               ),
                               backgroundColor: MaterialStateProperty.all<Color>(
                                 Colors.amber,
                               ),
-                              shape:
-                                  MaterialStateProperty.all<RoundedRectangleBorder>(
+                              shape: MaterialStateProperty.all<
+                                  RoundedRectangleBorder>(
                                 RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(5),
                                 ),

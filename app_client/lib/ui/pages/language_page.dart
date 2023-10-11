@@ -54,11 +54,12 @@ class _LanguagePageState extends State<LanguagePage> {
                       notificationGeralButtonComponent(context),
                     ],
                   ),
-                  const SizedBox(height: 15),
+                  const SizedBox(height: 30),
                   const Text(
                     'Select your language',
                     style: TextStyle(
                       fontSize: 18,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                   const SizedBox(height: 10),
@@ -67,8 +68,10 @@ class _LanguagePageState extends State<LanguagePage> {
                     decoration: BoxDecoration(
                         color: Colors.white,
                         border: Border.all(color: Colors.grey[700]!),
-                        borderRadius: const BorderRadius.all(Radius.circular(10))),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(10))),
                     child: DropdownButton(
+                      isExpanded: true,
                       padding: const EdgeInsets.symmetric(
                         vertical: 5,
                         horizontal: 10,

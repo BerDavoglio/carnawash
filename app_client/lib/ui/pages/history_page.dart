@@ -62,41 +62,31 @@ class _HistoryPageState extends State<HistoryPage> {
                         ),
                         const SizedBox(height: 10),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            Row(
-                              children: [
-                                geralDateInput(
-                                  context: context,
-                                  text: 'Date',
-                                  textController: initialDateController,
-                                ),
-                                SizedBox(
-                                  width: MediaQuery.of(context).size.width * 0.01,
-                                ),
-                                geralDateInput(
-                                  context: context,
-                                  text: 'End Date',
-                                  textController: finalDateController,
-                                ),
-                              ],
+                            geralDateInput(
+                              context: context,
+                              text: 'Date',
+                              textController: initialDateController,
+                            ),
+                            geralDateInput(
+                              context: context,
+                              text: 'End Date',
+                              textController: finalDateController,
                             ),
                             Padding(
                               padding: const EdgeInsets.only(bottom: 10),
                               child: IconButton(
                                 padding: const EdgeInsets.all(0),
                                 color: Colors.blue,
-                                style: ButtonStyle(
-                                  fixedSize: MaterialStateProperty.all(
-                                    Size(MediaQuery.of(context).size.width * 0.12,
-                                        MediaQuery.of(context).size.width * 0.12),
-                                  ),
-                                ),
-                                iconSize: MediaQuery.of(context).size.width * 0.12,
+
+                                iconSize:
+                                    MediaQuery.of(context).size.width *
+                                        0.12,
                                 onPressed: () {},
                                 icon: const Icon(Icons.check_box),
                               ),
-                            )
+                            ),
                           ],
                         ),
                         Column(

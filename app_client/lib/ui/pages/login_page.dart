@@ -53,7 +53,9 @@ class _LoginPageState extends State<LoginPage> {
                         emailController: emailController,
                         passwordController: passwordController,
                       )
-                    : const RegisterComponent(),
+                    : widget.index == 2
+                        ? const RegisterComponent()
+                        : const ChangePassComponent(),
               ],
             ),
           ),

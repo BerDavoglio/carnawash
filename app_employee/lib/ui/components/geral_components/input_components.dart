@@ -6,7 +6,7 @@ Widget geralTextInput({
   required String text,
   required TextEditingController textController,
   TextInputType type = TextInputType.text,
-  double larg = 0.9,
+  double larg = 0.85,
 }) {
   return Column(
     children: [
@@ -62,7 +62,7 @@ Widget geralMultilineTextInput({
 Widget geralInativeTextInput({
   required BuildContext context,
   required String text,
-  double larg = 0.9,
+  double larg = 0.85,
 }) {
   return Column(
     children: [
@@ -92,7 +92,7 @@ Widget geralIconTextInput({
   required TextEditingController textController,
   required IconData icon,
   TextInputType type = TextInputType.text,
-  double larg = 0.9,
+  double larg = 0.85,
 }) {
   return Column(
     children: [
@@ -121,7 +121,7 @@ Widget geralInativeIconTextInput({
   required BuildContext context,
   required String text,
   required IconData icon,
-  double larg = 0.9,
+  double larg = 0.85,
 }) {
   return Column(
     children: [

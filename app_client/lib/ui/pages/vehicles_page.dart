@@ -109,7 +109,10 @@ class _VehiclesPageState extends State<VehiclesPage> {
                             padding: const EdgeInsets.all(0),
                             splashRadius: 20,
                             iconSize: 18.0,
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.of(context)
+                                  .pushNamed(AppRoutes.VEHICLES_EDIT);
+                            },
                             icon: const Icon(Icons.edit_outlined)),
                         IconButton(
                             padding: const EdgeInsets.all(0),

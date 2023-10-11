@@ -213,6 +213,7 @@ class _RegisterComponentState extends State<RegisterComponent> {
                     border: Border.all(color: Colors.grey[700]!),
                     borderRadius: const BorderRadius.all(Radius.circular(10))),
                 child: DropdownButton(
+                  isExpanded: true,
                   padding: const EdgeInsets.symmetric(
                     vertical: 5,
                     horizontal: 10,
@@ -239,6 +240,7 @@ class _RegisterComponentState extends State<RegisterComponent> {
                     border: Border.all(color: Colors.grey[700]!),
                     borderRadius: const BorderRadius.all(Radius.circular(10))),
                 child: DropdownButton(
+                  isExpanded: true,
                   padding: const EdgeInsets.symmetric(
                     vertical: 5,
                     horizontal: 10,
@@ -265,6 +267,7 @@ class _RegisterComponentState extends State<RegisterComponent> {
                     border: Border.all(color: Colors.grey[700]!),
                     borderRadius: const BorderRadius.all(Radius.circular(10))),
                 child: DropdownButton(
+                  isExpanded: true,
                   padding: const EdgeInsets.symmetric(
                     vertical: 5,
                     horizontal: 10,

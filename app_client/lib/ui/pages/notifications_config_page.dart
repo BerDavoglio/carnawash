@@ -45,7 +45,7 @@ class _NotificationConfigPageState extends State<NotificationConfigPage> {
                       notificationGeralButtonComponent(context),
                     ],
                   ),
-                  const SizedBox(height: 15),
+                  const SizedBox(height: 30),
                   Row(
                     children: [
                       Switch(

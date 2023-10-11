@@ -433,7 +433,7 @@ class _HomePageState extends State<HomePage> {
                       color: Colors.blue,
                     ),
                   ),
-                )
+                ),
               ],
             ),
             Padding(
@@ -479,6 +479,18 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed(AppRoutes.RATING);
+              },
+              child: const Text(
+                'Rate',
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.blue,
+                ),
+              ),
+            ),
           ],
         ),
       ),
@@ -495,7 +507,6 @@ class _HomePageState extends State<HomePage> {
         borderRadius: BorderRadius.all(Radius.circular(15)),
       ),
       width: MediaQuery.of(context).size.width * 0.85,
-      height: 180,
       child: Padding(
         padding: const EdgeInsets.all(10),
         child: Column(

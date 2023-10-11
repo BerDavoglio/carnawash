@@ -117,7 +117,6 @@ class _PerfilPageState extends State<PerfilPage> {
                         'Terms and Conditions',
                         style: TextStyle(
                           color: Colors.amber,
-                          fontWeight: FontWeight.w600,
                           fontSize: 18,
                         ),
                       ),
@@ -133,7 +132,6 @@ class _PerfilPageState extends State<PerfilPage> {
                         'Logout',
                         style: TextStyle(
                           color: Colors.amber,
-                          fontWeight: FontWeight.bold,
                           fontSize: 18,
                         ),
                       ),
