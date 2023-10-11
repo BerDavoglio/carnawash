@@ -40,7 +40,7 @@ class _PaymentsPageState extends State<PaymentsPage> {
                             'History',
                             style: TextStyle(
                               fontSize: 18,
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.w600,
                             ),
                           )
                         ],
@@ -56,7 +56,7 @@ class _PaymentsPageState extends State<PaymentsPage> {
                         'Filter the date',
                         style: TextStyle(
                           fontSize: 18,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                       const SizedBox(height: 10),
@@ -135,7 +135,7 @@ class _PaymentsPageState extends State<PaymentsPage> {
                     Text(
                       'Washer: John',
                       style: TextStyle(
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w600,
                         fontSize: 14,
                       ),
                     ),
@@ -145,14 +145,14 @@ class _PaymentsPageState extends State<PaymentsPage> {
                         Text(
                           'September 10, 2023',
                           style: TextStyle(
-                            fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.w600,
                             fontSize: 14,
                           ),
                         ),
                         Text(
                           '10:00 am',
                           style: TextStyle(
-                            fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.w600,
                             fontSize: 14,
                           ),
                         ),
@@ -227,7 +227,7 @@ class _PaymentsPageState extends State<PaymentsPage> {
                       Text(
                         '\$ 94.00',
                         style: TextStyle(
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w600,
                           fontSize: 24,
                         ),
                       ),

@@ -41,7 +41,7 @@ class _HistoryPageState extends State<HistoryPage> {
                               'History',
                               style: TextStyle(
                                 fontSize: 18,
-                                fontWeight: FontWeight.bold,
+                                fontWeight: FontWeight.w600,
                               ),
                             )
                           ],
@@ -57,7 +57,7 @@ class _HistoryPageState extends State<HistoryPage> {
                           'Filter the date',
                           style: TextStyle(
                             fontSize: 18,
-                            fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.w600,
                           ),
                         ),
                         const SizedBox(height: 10),
@@ -199,7 +199,7 @@ class _HistoryPageState extends State<HistoryPage> {
                     Text(
                       '\$ 94.00',
                       style: TextStyle(
-                        fontWeight: FontWeight.w600,
+                        fontWeight: FontWeight.bold,
                         fontSize: 24,
                       ),
                     ),

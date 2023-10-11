@@ -36,7 +36,7 @@ class _PerfilPageState extends State<PerfilPage> {
                             'Profile',
                             style: TextStyle(
                               fontSize: 18,
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.w600,
                             ),
                           )
                         ],
@@ -56,7 +56,7 @@ class _PerfilPageState extends State<PerfilPage> {
                           'Jorge Williams',
                           style: TextStyle(
                             fontSize: 18,
-                            fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.w600,
                           ),
                         ),
                         Text(

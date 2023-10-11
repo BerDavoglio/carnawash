@@ -37,7 +37,7 @@ class _NotificationConfigPageState extends State<NotificationConfigPage> {
                             'Notification Settings',
                             style: TextStyle(
                               fontSize: 18,
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.w600,
                             ),
                           )
                         ],

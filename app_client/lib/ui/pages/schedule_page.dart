@@ -64,6 +64,7 @@ class _SchedulePageState extends State<SchedulePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[100]!,
       bottomNavigationBar: navigationBarComponent(context),
       body: SingleChildScrollView(
         child: Center(
@@ -118,6 +119,13 @@ class _SchedulePageState extends State<SchedulePage> {
                               ),
                             ),
                           ),
+                          const Text(
+                            'Schedule',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          )
                         ],
                       ),
                       notificationGeralButtonComponent(context),
@@ -142,13 +150,14 @@ class _SchedulePageState extends State<SchedulePage> {
                           style: ButtonStyle(
                             elevation: MaterialStateProperty.all(5),
                             fixedSize: MaterialStateProperty.all<Size>(
-                              Size(MediaQuery.of(context).size.width * 0.85, 50),
+                              Size(
+                                  MediaQuery.of(context).size.width * 0.85, 50),
                             ),
                             backgroundColor: MaterialStateProperty.all<Color>(
                               Colors.amber,
                             ),
-                            shape:
-                                MaterialStateProperty.all<RoundedRectangleBorder>(
+                            shape: MaterialStateProperty.all<
+                                RoundedRectangleBorder>(
                               RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(5),
                               ),
@@ -188,8 +197,8 @@ class _SchedulePageState extends State<SchedulePage> {
               Text(
                 'Choose your car to be washed',
                 style: TextStyle(
-                  fontWeight: FontWeight.bold,
                   fontSize: 18,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
               SizedBox(height: 10),
@@ -208,98 +217,15 @@ class _SchedulePageState extends State<SchedulePage> {
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 10),
             child: Column(
-              children: [
-                SizedBox(
-                  width: MediaQuery.of(context).size.width,
-                  child: ListTile(
-                    title: const Text(
-                      'Nissan March - SMALL',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    subtitle: const Text(
-                      'Red; 3SAM123',
-                      style: TextStyle(
-                        color: Colors.black,
-                      ),
-                    ),
-                    leading: Radio(
-                      value: 1,
-                      groupValue: carSelected,
-                      fillColor: MaterialStateColor.resolveWith(
-                        (states) => Colors.black,
-                      ),
-                      onChanged: (value) {
-                        setState(() {
-                          carSelected = value!;
-                        });
-                      },
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width,
-                  child: ListTile(
-                    title: const Text(
-                      'Nissan March - SMALL',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    subtitle: const Text(
-                      'Red; 3SAM122',
-                      style: TextStyle(
-                        color: Colors.black,
-                      ),
-                    ),
-                    leading: Radio(
-                      value: 2,
-                      groupValue: carSelected,
-                      fillColor: MaterialStateColor.resolveWith(
-                        (states) => Colors.black,
-                      ),
-                      onChanged: (value) {
-                        setState(() {
-                          carSelected = value!;
-                        });
-                      },
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width,
-                  child: ListTile(
-                    title: const Text(
-                      'Nissan Kicks - 2DV SUVs',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    subtitle: const Text(
-                      'Red; 3SAM126',
-                      style: TextStyle(
-                        color: Colors.black,
-                      ),
-                    ),
-                    leading: Radio(
-                      value: 3,
-                      groupValue: carSelected,
-                      fillColor: MaterialStateColor.resolveWith(
-                        (states) => Colors.black,
-                      ),
-                      onChanged: (value) {
-                        setState(() {
-                          carSelected = value!;
-                        });
-                      },
-                    ),
-                  ),
-                ),
-              ],
+              children: List.generate(
+                3,
+                (index) {
+                  return selectCarBox(
+                    context,
+                    index,
+                  );
+                },
+              ),
             ),
           ),
         ),
@@ -316,6 +242,89 @@ class _SchedulePageState extends State<SchedulePage> {
     );
   }
 
+  Widget selectCarBox(
+    BuildContext context,
+    int index,
+  ) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10),
+      child: ListTile(
+        visualDensity: const VisualDensity(
+          horizontal: VisualDensity.minimumDensity,
+          vertical: VisualDensity.minimumDensity,
+        ),
+        title: Container(
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.all(
+              Radius.circular(10),
+            ),
+          ),
+          child: const Padding(
+            padding: EdgeInsets.all(10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Nissan',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                SizedBox(height: 10),
+                Text(
+                  'March',
+                  style: TextStyle(
+                    color: Colors.grey,
+                  ),
+                ),
+                Text(
+                  'Red',
+                  style: TextStyle(
+                    color: Colors.grey,
+                  ),
+                ),
+                Text(
+                  '3SAM123',
+                  style: TextStyle(
+                    color: Colors.grey,
+                  ),
+                ),
+                SizedBox(height: 10),
+                Text(
+                  'Small',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        leading: Radio(
+          splashRadius: 20,
+          visualDensity: const VisualDensity(
+            horizontal: VisualDensity.minimumDensity,
+            vertical: VisualDensity.minimumDensity,
+          ),
+          materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+          value: index,
+          groupValue: carSelected,
+          fillColor: MaterialStateColor.resolveWith(
+            (states) => Colors.black,
+          ),
+          onChanged: (value) {
+            setState(() {
+              carSelected = value!;
+            });
+          },
+        ),
+      ),
+    );
+  }
+
   Column secondPart(BuildContext context) {
     return Column(
       children: [
@@ -328,7 +337,7 @@ class _SchedulePageState extends State<SchedulePage> {
                 'Confirm your Vehicle details',
                 style: TextStyle(
                   fontSize: 18,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
               const SizedBox(height: 10),
@@ -369,7 +378,7 @@ class _SchedulePageState extends State<SchedulePage> {
                         Text(
                           'Small',
                           style: TextStyle(
-                            fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.w600,
                           ),
                         ),
                         Text(
@@ -396,7 +405,7 @@ class _SchedulePageState extends State<SchedulePage> {
               const Text(
                 'Choose the type of washing',
                 style: TextStyle(
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
               Column(
@@ -514,7 +523,7 @@ class _SchedulePageState extends State<SchedulePage> {
               const Text(
                 'Add our additional services',
                 style: TextStyle(
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
               const SizedBox(height: 10),
@@ -660,7 +669,7 @@ class _SchedulePageState extends State<SchedulePage> {
                 'Choose the day and time',
                 style: TextStyle(
                   fontSize: 18,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
               const SizedBox(height: 10),
@@ -688,7 +697,7 @@ class _SchedulePageState extends State<SchedulePage> {
                 'Enter the address',
                 style: TextStyle(
                   fontSize: 18,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
               const SizedBox(height: 10),
@@ -721,7 +730,7 @@ class _SchedulePageState extends State<SchedulePage> {
                 'Confirm your booking',
                 style: TextStyle(
                   fontSize: 18,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
               const SizedBox(height: 10),
@@ -755,7 +764,7 @@ class _SchedulePageState extends State<SchedulePage> {
                       Text(
                         'Vehicle',
                         style: TextStyle(
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                       SizedBox(height: 5),
@@ -800,7 +809,7 @@ class _SchedulePageState extends State<SchedulePage> {
                       Text(
                         'Type of washing',
                         style: TextStyle(
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                       SizedBox(height: 5),
@@ -812,21 +821,6 @@ class _SchedulePageState extends State<SchedulePage> {
                       ),
                     ],
                   ),
-                  // Container(
-                  //   height: 40,
-                  //   width: 100,
-                  //   decoration: BoxDecoration(
-                  //     borderRadius: const BorderRadius.all(Radius.circular(20)),
-                  //     color: Colors.grey.withOpacity(0.3),
-                  //   ),
-                  //   child: const Center(
-                  //       child: Text(
-                  //     '\$ 45.00',
-                  //     style: TextStyle(
-                  //       fontWeight: FontWeight.bold,
-                  //     ),
-                  //   )),
-                  // ),
                 ],
               ),
               const Column(
@@ -845,7 +839,7 @@ class _SchedulePageState extends State<SchedulePage> {
                       Text(
                         'Addicional Service',
                         style: TextStyle(
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                       SizedBox(height: 5),
@@ -887,7 +881,7 @@ class _SchedulePageState extends State<SchedulePage> {
                   Text(
                     '15 September 23',
                     style: TextStyle(
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                   SizedBox(height: 5),
@@ -953,7 +947,7 @@ class _SchedulePageState extends State<SchedulePage> {
                 'Do you have a coupon?',
                 style: TextStyle(
                   fontSize: 18,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
               const SizedBox(height: 10),
@@ -1004,7 +998,7 @@ class _SchedulePageState extends State<SchedulePage> {
                     Text(
                       'Pay credit card **** 1234',
                       style: TextStyle(
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w600,
                         color: Colors.blue,
                       ),
                     ),
@@ -1090,7 +1084,7 @@ class _SchedulePageState extends State<SchedulePage> {
                       'Booking requested',
                       style: TextStyle(
                         fontSize: 24,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
                   ),

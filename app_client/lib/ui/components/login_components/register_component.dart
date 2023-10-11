@@ -300,7 +300,7 @@ class _RegisterComponentState extends State<RegisterComponent> {
                         'What is the size of your vehicle?',
                         style: TextStyle(
                           color: Colors.white,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                       Text(
@@ -323,7 +323,7 @@ class _RegisterComponentState extends State<RegisterComponent> {
                         'Small',
                         style: TextStyle(
                           color: Colors.white,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                       subtitle: const Text(
@@ -353,7 +353,7 @@ class _RegisterComponentState extends State<RegisterComponent> {
                         'SUVs',
                         style: TextStyle(
                           color: Colors.white,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                       subtitle: const Text(
@@ -383,7 +383,7 @@ class _RegisterComponentState extends State<RegisterComponent> {
                         '4WD SUVs',
                         style: TextStyle(
                           color: Colors.white,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                       subtitle: const Text(
@@ -413,7 +413,7 @@ class _RegisterComponentState extends State<RegisterComponent> {
                         'Extra Large 4WD SUVs',
                         style: TextStyle(
                           color: Colors.white,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                       subtitle: const Text(

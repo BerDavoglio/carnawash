@@ -128,7 +128,7 @@ class _AvailabilityPageState extends State<AvailabilityPage> {
                             'Availability',
                             style: TextStyle(
                               fontSize: 18,
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.w600,
                             ),
                           )
                         ],
@@ -144,7 +144,7 @@ class _AvailabilityPageState extends State<AvailabilityPage> {
                         'Set your working hours',
                         style: TextStyle(
                           fontSize: 16,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                       SizedBox(height: 5),

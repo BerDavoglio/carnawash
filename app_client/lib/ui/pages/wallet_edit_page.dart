@@ -42,7 +42,7 @@ class _WalletEditPageState extends State<WalletEditPage> {
                             edit ? 'Edit Card' : 'Create Card',
                             style: const TextStyle(
                               fontSize: 18,
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.w600,
                             ),
                           )
                         ],

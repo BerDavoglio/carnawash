@@ -46,7 +46,7 @@ class _LanguagePageState extends State<LanguagePage> {
                             'Language',
                             style: TextStyle(
                               fontSize: 18,
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.w600,
                             ),
                           )
                         ],

@@ -37,7 +37,7 @@ class _VehiclesPageState extends State<VehiclesPage> {
                             'My Vehicles',
                             style: TextStyle(
                               fontSize: 18,
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.w600,
                             ),
                           )
                         ],
@@ -56,12 +56,15 @@ class _VehiclesPageState extends State<VehiclesPage> {
                       vehicleBox(),
                       TextButton(
                         onPressed: () {
-                          Navigator.of(context).pushNamed(AppRoutes.VEHICLES_EDIT);
+                          Navigator.of(context)
+                              .pushNamed(AppRoutes.VEHICLES_EDIT);
                         },
                         child: const Text(
                           'Register another Vehicle',
                           style: TextStyle(
-                              color: Colors.amber, fontWeight: FontWeight.bold),
+                            color: Colors.amber,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ],
@@ -96,7 +99,7 @@ class _VehiclesPageState extends State<VehiclesPage> {
                     const Text(
                       'Nissan',
                       style: TextStyle(
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w600,
                         fontSize: 16,
                       ),
                     ),
@@ -143,7 +146,7 @@ class _VehiclesPageState extends State<VehiclesPage> {
                   child: Text(
                     'Small',
                     style: TextStyle(
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w600,
                       fontSize: 16,
                     ),
                   ),

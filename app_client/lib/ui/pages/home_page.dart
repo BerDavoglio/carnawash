@@ -9,6 +9,52 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
+class WashSelectionModel {
+  WashSelectionModel({
+    required this.date,
+    required this.washer,
+    required this.car,
+    required this.side,
+    required this.additional,
+    required this.address,
+    required this.status,
+    required this.price,
+  });
+
+  String date;
+  WasherModel washer;
+  CarModel car;
+  String side;
+  List additional;
+  String address;
+  String status;
+  double price;
+}
+
+class WasherModel {
+  WasherModel({
+    required this.name,
+    required this.rate,
+  });
+
+  String name;
+  double rate;
+}
+
+class CarModel {
+  CarModel({
+    required this.brand,
+    required this.model,
+    required this.size,
+    required this.licence,
+  });
+
+  String brand;
+  String model;
+  String size;
+  String licence;
+}
+
 class _HomePageState extends State<HomePage> {
   TextEditingController emailOneController = TextEditingController();
   TextEditingController emailTwoController = TextEditingController();
@@ -75,65 +121,69 @@ class _HomePageState extends State<HomePage> {
                         ],
                       ),
                       child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           const Image(
                             width: 175,
                             image: AssetImage('images/car.png'),
                           ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                width: 125,
-                                child: Column(
-                                  children: [
-                                    const Text(
-                                      'Get 10% off your next wash with the coupon.',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.bold,
+                          Padding(
+                            padding: const EdgeInsets.only(right: 5),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SizedBox(
+                                  width: 125,
+                                  child: Column(
+                                    children: [
+                                      const Text(
+                                        'Get 10% off your next wash with the coupon.',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w600,
+                                        ),
                                       ),
-                                    ),
-                                    const SizedBox(
-                                      height: 10,
-                                    ),
-                                    TextButton(
-                                      style: ButtonStyle(
-                                        fixedSize:
-                                            MaterialStateProperty.all<Size>(
-                                          const Size(120, 30),
-                                        ),
-                                        backgroundColor:
-                                            MaterialStateProperty.all<Color>(
-                                          Colors.white,
-                                        ),
-                                        shape: MaterialStateProperty.all<
-                                            RoundedRectangleBorder>(
-                                          RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(18.0),
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      TextButton(
+                                        style: ButtonStyle(
+                                          fixedSize:
+                                              MaterialStateProperty.all<Size>(
+                                            const Size(120, 30),
+                                          ),
+                                          backgroundColor:
+                                              MaterialStateProperty.all<Color>(
+                                            Colors.white,
+                                          ),
+                                          shape: MaterialStateProperty.all<
+                                              RoundedRectangleBorder>(
+                                            RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(18.0),
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      onPressed: () {},
-                                      child: const Text(
-                                        'CARNA10',
-                                        style: TextStyle(
-                                          color: Colors.black,
+                                        onPressed: () {},
+                                        child: const Text(
+                                          'CARNA10',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                          ),
                                         ),
-                                      ),
-                                    )
-                                  ],
+                                      )
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ],
                       ),
                     ),
                   ),
-                  const SizedBox(height: 25),
+                  const SizedBox(height: 30),
                   SizedBox(
                     width: MediaQuery.of(context).size.width * 0.85,
                     child: Column(
@@ -147,142 +197,32 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                         const SizedBox(height: 5),
-                        Container(
-                          decoration: const BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.all(Radius.circular(15)),
-                          ),
-                          width: MediaQuery.of(context).size.width * 0.85,
-                          height: 180,
-                          child: Padding(
-                            padding: const EdgeInsets.all(10),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Text(
-                                  'September 10, 2023 - 10PM',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                  ),
-                                ),
-                                const Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      'Washer: John',
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                      ),
-                                    ),
-                                    Row(
-                                      children: [
-                                        Text(
-                                          '4.6',
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                        Icon(
-                                          Icons.star,
-                                          size: 20,
-                                          color: Colors.amber,
-                                        ),
-                                      ],
-                                    )
-                                  ],
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    const Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Padding(
-                                          padding: EdgeInsets.only(top: 5),
-                                          child: Text(
-                                            'Nissan March - Small',
-                                            style: TextStyle(
-                                              color: Colors.grey,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsets.only(top: 5),
-                                          child: Text(
-                                            '3SAM123',
-                                            style: TextStyle(
-                                              color: Colors.grey,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsets.only(top: 5),
-                                          child: Text(
-                                            'Wash Outside only',
-                                            style:
-                                                TextStyle(color: Colors.grey),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsets.only(top: 5),
-                                          child: Text(
-                                            '+ Pet Hair',
-                                            style:
-                                                TextStyle(color: Colors.grey),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsets.only(top: 5),
-                                          child: Row(
-                                            children: [
-                                              Icon(
-                                                Icons.location_on_outlined,
-                                                color: Colors.amber,
-                                              ),
-                                              Text(
-                                                'Monaco St, Bundall',
-                                                style: TextStyle(
-                                                    color: Colors.grey),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    Container(
-                                      width: 100,
-                                      height: 40,
-                                      decoration: BoxDecoration(
-                                        borderRadius: const BorderRadius.all(
-                                          Radius.circular(100),
-                                        ),
-                                        border: Border.all(
-                                            color: Colors.blueAccent),
-                                      ),
-                                      child: const Center(
-                                        child: Text(
-                                          'Started',
-                                          style: TextStyle(
-                                            color: Colors.blue,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                        washingProcessBox(
+                          context,
+                          WashSelectionModel(
+                              date: 'September 10, 2023 - 10:00PM',
+                              washer: WasherModel(
+                                name: 'John',
+                                rate: 4.6,
+                              ),
+                              car: CarModel(
+                                brand: 'Nissan',
+                                model: 'March',
+                                size: 'Small',
+                                licence: '3SAM123',
+                              ),
+                              side: 'Outside Only',
+                              additional: [
+                                'Pet Hair',
                               ],
-                            ),
-                          ),
-                        )
+                              address: 'Monaco St, Bundall',
+                              status: 'Started',
+                              price: 95.00),
+                        ),
                       ],
                     ),
                   ),
-                  const SizedBox(height: 25),
+                  const SizedBox(height: 30),
                   TextButton(
                     style: ButtonStyle(
                       elevation: MaterialStateProperty.all(5),
@@ -309,7 +249,7 @@ class _HomePageState extends State<HomePage> {
                     child: const Text(
                       'Make a new Booking',
                       style: TextStyle(
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w600,
                         color: Colors.white,
                       ),
                     ),
@@ -339,7 +279,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 25),
+                  const SizedBox(height: 30),
                   SizedBox(
                     width: MediaQuery.of(context).size.width * 0.85,
                     child: Column(
@@ -353,98 +293,33 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                         const SizedBox(height: 5),
-                        Container(
-                          decoration: const BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.all(Radius.circular(15)),
-                          ),
-                          width: MediaQuery.of(context).size.width * 0.85,
-                          child: Padding(
-                            padding: const EdgeInsets.all(10),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    const Text(
-                                      'Nissan March',
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                      ),
-                                    ),
-                                    TextButton(
-                                      onPressed: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                SchedulePage(initial: 3),
-                                          ),
-                                        );
-                                      },
-                                      child: const Text(
-                                        'Book Again',
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          color: Colors.blue,
-                                        ),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                                const Padding(
-                                  padding: EdgeInsets.only(top: 5),
-                                  child: Text(
-                                    'September 10, 2023',
-                                    style: TextStyle(color: Colors.grey),
-                                  ),
-                                ),
-                                const Padding(
-                                  padding: EdgeInsets.only(top: 5),
-                                  child: Text(
-                                    'Wash Outside only',
-                                    style: TextStyle(color: Colors.grey),
-                                  ),
-                                ),
-                                const Padding(
-                                  padding: EdgeInsets.only(top: 5),
-                                  child: Text(
-                                    '+ Pet Hair',
-                                    style: TextStyle(color: Colors.grey),
-                                  ),
-                                ),
-                                const Padding(
-                                  padding: EdgeInsets.only(top: 5),
-                                  child: Text(
-                                    '\$ 60,00',
-                                    style: TextStyle(color: Colors.grey),
-                                  ),
-                                ),
-                                const Padding(
-                                  padding: EdgeInsets.only(top: 5),
-                                  child: Row(
-                                    children: [
-                                      Icon(
-                                        Icons.location_on_outlined,
-                                        color: Colors.amber,
-                                      ),
-                                      Text(
-                                        '\$ 60,00',
-                                        style: TextStyle(color: Colors.grey),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
+                        lastWashBox(
+                          context,
+                          WashSelectionModel(
+                            date: 'September 10, 2023 - 10:00PM',
+                            washer: WasherModel(
+                              name: 'John',
+                              rate: 4.6,
                             ),
+                            car: CarModel(
+                              brand: 'Nissan',
+                              model: 'March',
+                              size: 'Small',
+                              licence: '3SAM123',
+                            ),
+                            side: 'Outside Only',
+                            additional: [
+                              'Pet Hair',
+                            ],
+                            address: 'Monaco St, Bundall',
+                            status: 'Started',
+                            price: 95.00,
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ),
-                  const SizedBox(height: 25),
+                  const SizedBox(height: 30),
                   SizedBox(
                     width: MediaQuery.of(context).size.width * 0.85,
                     child: Column(
@@ -513,6 +388,236 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ),
+        ),
+      ),
+    );
+  }
+
+  Container lastWashBox(
+    BuildContext context,
+    WashSelectionModel obj,
+  ) {
+    return Container(
+      decoration: const BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.all(Radius.circular(15)),
+      ),
+      width: MediaQuery.of(context).size.width * 0.85,
+      child: Padding(
+        padding: const EdgeInsets.all(10),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  '${obj.car.brand} ${obj.car.model}',
+                  style: const TextStyle(
+                    fontSize: 16,
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => SchedulePage(initial: 3),
+                      ),
+                    );
+                  },
+                  child: const Text(
+                    'Book Again',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.blue,
+                    ),
+                  ),
+                )
+              ],
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 5),
+              child: Text(
+                'Wash ${obj.side}',
+                style: const TextStyle(color: Colors.grey),
+              ),
+            ),
+            Column(
+              children: List.generate(
+                obj.additional.length,
+                (index) {
+                  return Padding(
+                    padding: const EdgeInsets.only(top: 5),
+                    child: Text(
+                      '+ ${obj.additional[index]}',
+                      style: const TextStyle(color: Colors.grey),
+                    ),
+                  );
+                },
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 5),
+              child: Text(
+                '\$ ${obj.price}',
+                style: const TextStyle(color: Colors.grey),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 5),
+              child: Row(
+                children: [
+                  const Icon(
+                    Icons.location_on_outlined,
+                    color: Colors.amber,
+                  ),
+                  Text(
+                    obj.address,
+                    style: const TextStyle(color: Colors.grey),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Container washingProcessBox(
+    BuildContext context,
+    WashSelectionModel obj,
+  ) {
+    return Container(
+      decoration: const BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.all(Radius.circular(15)),
+      ),
+      width: MediaQuery.of(context).size.width * 0.85,
+      height: 180,
+      child: Padding(
+        padding: const EdgeInsets.all(10),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              obj.date,
+              style: const TextStyle(
+                fontSize: 16,
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Washer: ${obj.washer.name}',
+                  style: const TextStyle(
+                    fontSize: 16,
+                  ),
+                ),
+                Row(
+                  children: [
+                    Text(
+                      obj.washer.rate.toString(),
+                      style: const TextStyle(
+                        fontSize: 16,
+                      ),
+                    ),
+                    const Icon(
+                      Icons.star,
+                      size: 20,
+                      color: Colors.amber,
+                    ),
+                  ],
+                )
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 5),
+                      child: Text(
+                        '${obj.car.brand} ${obj.car.model} - ${obj.car.size}',
+                        style: const TextStyle(
+                          color: Colors.grey,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 5),
+                      child: Text(
+                        obj.car.licence,
+                        style: const TextStyle(
+                          color: Colors.grey,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 5),
+                      child: Text(
+                        'Wash ${obj.side}',
+                        style: const TextStyle(color: Colors.grey),
+                      ),
+                    ),
+                    Column(
+                      children: List.generate(
+                        obj.additional.length,
+                        (index) {
+                          return Padding(
+                            padding: const EdgeInsets.only(top: 5),
+                            child: Text(
+                              '+ ${obj.additional[index]}',
+                              style: const TextStyle(color: Colors.grey),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 5),
+                      child: Row(
+                        children: [
+                          const Icon(
+                            Icons.location_on_outlined,
+                            color: Colors.amber,
+                          ),
+                          Text(
+                            obj.address,
+                            style: const TextStyle(color: Colors.grey),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                Container(
+                  width: 100,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(100),
+                    ),
+                    border: Border.all(color: Colors.blueAccent),
+                  ),
+                  child: Center(
+                    child: Text(
+                      obj.status,
+                      style: const TextStyle(
+                        color: Colors.blue,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );

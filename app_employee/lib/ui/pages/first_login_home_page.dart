@@ -310,7 +310,7 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
                           'Welcome, John!',
                           style: TextStyle(
                             fontSize: 20,
-                            fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.w600,
                           ),
                         ),
                       ],
@@ -405,7 +405,7 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
                 'CARNAWASH TEAM',
                 style: TextStyle(
                   fontSize: 16,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
             ],
@@ -456,7 +456,7 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
                         'First Steps',
                         style: TextStyle(
                           fontSize: 18,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w600,
                         ),
                       )
                     ],
@@ -475,7 +475,7 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
               const SizedBox(height: 15),
               const Text(
                 'Quiz',
-                style: TextStyle(fontWeight: FontWeight.bold),
+                style: TextStyle(fontWeight: FontWeight.w600),
               ),
               const SizedBox(height: 15),
               const Text('Watch the video and answer the quiz below'),
@@ -569,7 +569,7 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
                         'First Steps',
                         style: TextStyle(
                           fontSize: 18,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w600,
                         ),
                       )
                     ],
@@ -589,7 +589,7 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
               const Text(
                 'Questions',
                 style: TextStyle(
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
               const SizedBox(height: 15),
@@ -653,7 +653,7 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
         Text(
           quest[0],
           style: const TextStyle(
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.w600,
           ),
         ),
         Column(
@@ -746,7 +746,7 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
                         'First Steps',
                         style: TextStyle(
                           fontSize: 18,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w600,
                         ),
                       )
                     ],
@@ -765,7 +765,7 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
               const SizedBox(height: 15),
               const Text(
                 'Quiz',
-                style: TextStyle(fontWeight: FontWeight.bold),
+                style: TextStyle(fontWeight: FontWeight.w600),
               ),
               const SizedBox(height: 15),
               const Text('Congratulations!\nYou got 80% of the quiz right.'),
@@ -820,7 +820,7 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
                         'First Steps',
                         style: TextStyle(
                           fontSize: 18,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w600,
                         ),
                       )
                     ],
@@ -831,7 +831,7 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
               const SizedBox(height: 15),
               const Text(
                 'Set your current availability',
-                style: TextStyle(fontWeight: FontWeight.bold),
+                style: TextStyle(fontWeight: FontWeight.w600),
               ),
               const SizedBox(height: 15),
               faqBox(context, 0),
@@ -1088,7 +1088,7 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
                         'First Steps',
                         style: TextStyle(
                           fontSize: 18,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w600,
                         ),
                       )
                     ],
@@ -1112,7 +1112,7 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
                     const Text(
                       'Information Sent!',
                       style: TextStyle(
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w600,
                         fontSize: 20,
                       ),
                     ),

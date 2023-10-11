@@ -89,7 +89,7 @@ class _HomePageState extends State<HomePage> {
           const Text(
             'Your rate',
             style: TextStyle(
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.w600,
             ),
           ),
           RatingBarIndicator(
@@ -185,7 +185,7 @@ class _HomePageState extends State<HomePage> {
                   'Washing Process:',
                   style: TextStyle(
                     fontSize: 18,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
                 const SizedBox(height: 5),
@@ -203,14 +203,14 @@ class _HomePageState extends State<HomePage> {
                         const Text(
                           'September 10, 2023 - 10PM',
                           style: TextStyle(
-                            fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.w600,
                             fontSize: 16,
                           ),
                         ),
                         const Text(
                           'Costumer: Jorge',
                           style: TextStyle(
-                            fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.w600,
                             fontSize: 16,
                           ),
                         ),
@@ -223,7 +223,7 @@ class _HomePageState extends State<HomePage> {
                                 'Nissan March - Small',
                                 style: TextStyle(
                                   color: Colors.grey,
-                                  fontWeight: FontWeight.bold,
+                                  fontWeight: FontWeight.w600,
                                 ),
                               ),
                             ),
@@ -233,7 +233,7 @@ class _HomePageState extends State<HomePage> {
                                 '3SAM123',
                                 style: TextStyle(
                                   color: Colors.grey,
-                                  fontWeight: FontWeight.bold,
+                                  fontWeight: FontWeight.w600,
                                 ),
                               ),
                             ),
@@ -341,7 +341,7 @@ class _HomePageState extends State<HomePage> {
                 const SizedBox(width: 10),
                 const Text('Your information is processing',
                     style:
-                        TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                        TextStyle(fontWeight: FontWeight.w600, fontSize: 16)),
               ],
             ),
           ),

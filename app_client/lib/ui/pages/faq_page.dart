@@ -67,7 +67,7 @@ class _FAQPageState extends State<FAQPage> {
                             'FAQ',
                             style: TextStyle(
                               fontSize: 18,
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.w600,
                             ),
                           )
                         ],

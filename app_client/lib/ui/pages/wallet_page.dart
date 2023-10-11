@@ -37,7 +37,7 @@ class _WalletPageState extends State<WalletPage> {
                             'Wallet',
                             style: TextStyle(
                               fontSize: 18,
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.w600,
                             ),
                           )
                         ],
@@ -62,8 +62,9 @@ class _WalletPageState extends State<WalletPage> {
                           child: const Text(
                             'Register another credit card',
                             style: TextStyle(
-                                color: Colors.amber,
-                                fontWeight: FontWeight.bold),
+                              color: Colors.amber,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ),
@@ -121,7 +122,7 @@ class _WalletPageState extends State<WalletPage> {
                 const Text(
                   '**** **** **** 1234',
                   style: TextStyle(
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w600,
                     fontSize: 18,
                   ),
                 ),

@@ -40,7 +40,7 @@ class _RatingPageState extends State<RatingPage> {
                             'Rate us',
                             style: TextStyle(
                               fontSize: 18,
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.w600,
                             ),
                           )
                         ],
@@ -65,7 +65,7 @@ class _RatingPageState extends State<RatingPage> {
         const Text(
           'Rate Us!',
           style: TextStyle(
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.w600,
             fontSize: 24,
           ),
         ),
@@ -109,7 +109,7 @@ class _RatingPageState extends State<RatingPage> {
           const Text(
             'Thank you for your rating!',
             style: TextStyle(
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.w600,
               fontSize: 20,
             ),
           ),

@@ -55,7 +55,7 @@ class _VehiclesEditPageState extends State<VehiclesEditPage> {
                             edit ? 'Edit Vehicle' : 'Register',
                             style: const TextStyle(
                               fontSize: 18,
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.w600,
                             ),
                           )
                         ],
@@ -74,7 +74,7 @@ class _VehiclesEditPageState extends State<VehiclesEditPage> {
                           style: TextStyle(
                             fontSize: 18,
                             color: Colors.black,
-                            fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.w600,
                           ),
                         ),
                       ),
@@ -177,7 +177,7 @@ class _VehiclesEditPageState extends State<VehiclesEditPage> {
                                     'What is the size of your vehicle?',
                                     style: TextStyle(
                                       color: Colors.black,
-                                      fontWeight: FontWeight.bold,
+                                      fontWeight: FontWeight.w600,
                                     ),
                                   ),
                                   Text(
@@ -200,7 +200,7 @@ class _VehiclesEditPageState extends State<VehiclesEditPage> {
                                     'Small',
                                     style: TextStyle(
                                       color: Colors.black,
-                                      fontWeight: FontWeight.bold,
+                                      fontWeight: FontWeight.w600,
                                     ),
                                   ),
                                   subtitle: const Text(
@@ -230,7 +230,7 @@ class _VehiclesEditPageState extends State<VehiclesEditPage> {
                                     'SUVs',
                                     style: TextStyle(
                                       color: Colors.black,
-                                      fontWeight: FontWeight.bold,
+                                      fontWeight: FontWeight.w600,
                                     ),
                                   ),
                                   subtitle: const Text(
@@ -260,7 +260,7 @@ class _VehiclesEditPageState extends State<VehiclesEditPage> {
                                     '4WD SUVs',
                                     style: TextStyle(
                                       color: Colors.black,
-                                      fontWeight: FontWeight.bold,
+                                      fontWeight: FontWeight.w600,
                                     ),
                                   ),
                                   subtitle: const Text(
@@ -290,7 +290,7 @@ class _VehiclesEditPageState extends State<VehiclesEditPage> {
                                     'Extra Large 4WD SUVs',
                                     style: TextStyle(
                                       color: Colors.black,
-                                      fontWeight: FontWeight.bold,
+                                      fontWeight: FontWeight.w600,
                                     ),
                                   ),
                                   subtitle: const Text(

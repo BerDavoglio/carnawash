@@ -31,7 +31,7 @@ class TermsConditionsPage extends StatelessWidget {
                             'Terms and Conditions',
                             style: TextStyle(
                               fontSize: 18,
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.w600,
                             ),
                           )
                         ],
