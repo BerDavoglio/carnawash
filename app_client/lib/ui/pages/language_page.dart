@@ -46,7 +46,7 @@ class _LanguagePageState extends State<LanguagePage> {
                             'Language',
                             style: TextStyle(
                               fontSize: 18,
-                              fontWeight: FontWeight.w600,
+                              fontWeight: FontWeight.w500,
                             ),
                           )
                         ],
@@ -59,10 +59,10 @@ class _LanguagePageState extends State<LanguagePage> {
                     'Select your language',
                     style: TextStyle(
                       fontSize: 18,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w400,
                     ),
                   ),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 20),
                   Container(
                     width: MediaQuery.of(context).size.width * 0.85,
                     decoration: BoxDecoration(

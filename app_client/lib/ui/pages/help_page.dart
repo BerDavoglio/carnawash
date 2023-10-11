@@ -31,7 +31,7 @@ class HelpPage extends StatelessWidget {
                             'Help',
                             style: TextStyle(
                               fontSize: 18,
-                              fontWeight: FontWeight.w600,
+                              fontWeight: FontWeight.w500,
                             ),
                           )
                         ],
@@ -45,7 +45,7 @@ class HelpPage extends StatelessWidget {
                     children: [
                       const Text(
                         'Talk to us!',
-                        style: TextStyle(fontWeight: FontWeight.w600),
+                        style: TextStyle(fontWeight: FontWeight.w400),
                       ),
                       const SizedBox(height: 10),
                       const Text(

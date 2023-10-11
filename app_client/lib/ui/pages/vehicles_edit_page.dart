@@ -1,12 +1,21 @@
+// ignore_for_file: no_logic_in_create_state, must_be_immutable
+
 import 'package:flutter/material.dart';
 
 import '../ui.dart';
 
 class VehiclesEditPage extends StatefulWidget {
-  const VehiclesEditPage({super.key});
+  bool? initial;
+
+  VehiclesEditPage({
+    super.key,
+    required this.initial,
+  });
 
   @override
-  State<VehiclesEditPage> createState() => _VehiclesEditPageState();
+  State<VehiclesEditPage> createState() => _VehiclesEditPageState(
+        initial: initial,
+      );
 }
 
 class _VehiclesEditPageState extends State<VehiclesEditPage> {
@@ -18,11 +27,16 @@ class _VehiclesEditPageState extends State<VehiclesEditPage> {
   String? modelSelected;
   String? colorSelected;
   int sizeSelected = 1;
-  bool edit = false;
+  bool? initial;
+  late bool edit;
+
+  _VehiclesEditPageState({required this.initial});
 
   @override
   void initState() {
     super.initState();
+
+    edit = initial!;
 
     brandSelected = listBrand[0];
     modelSelected = listModel[0];
@@ -55,7 +69,7 @@ class _VehiclesEditPageState extends State<VehiclesEditPage> {
                             edit ? 'Edit Vehicle' : 'Register',
                             style: const TextStyle(
                               fontSize: 18,
-                              fontWeight: FontWeight.w600,
+                              fontWeight: FontWeight.w500,
                             ),
                           )
                         ],
@@ -74,7 +88,7 @@ class _VehiclesEditPageState extends State<VehiclesEditPage> {
                           style: TextStyle(
                             fontSize: 18,
                             color: Colors.black,
-                            fontWeight: FontWeight.w600,
+                            fontWeight: FontWeight.w500,
                           ),
                         ),
                       ),
@@ -178,7 +192,7 @@ class _VehiclesEditPageState extends State<VehiclesEditPage> {
                                     'What is the size of your vehicle?',
                                     style: TextStyle(
                                       color: Colors.black,
-                                      fontWeight: FontWeight.w600,
+                                      fontWeight: FontWeight.w500,
                                     ),
                                   ),
                                   Text(
@@ -201,7 +215,7 @@ class _VehiclesEditPageState extends State<VehiclesEditPage> {
                                     'Small',
                                     style: TextStyle(
                                       color: Colors.black,
-                                      fontWeight: FontWeight.w600,
+                                      fontWeight: FontWeight.w500,
                                     ),
                                   ),
                                   subtitle: const Text(
@@ -231,7 +245,7 @@ class _VehiclesEditPageState extends State<VehiclesEditPage> {
                                     'SUVs',
                                     style: TextStyle(
                                       color: Colors.black,
-                                      fontWeight: FontWeight.w600,
+                                      fontWeight: FontWeight.w500,
                                     ),
                                   ),
                                   subtitle: const Text(
@@ -261,7 +275,7 @@ class _VehiclesEditPageState extends State<VehiclesEditPage> {
                                     '4WD SUVs',
                                     style: TextStyle(
                                       color: Colors.black,
-                                      fontWeight: FontWeight.w600,
+                                      fontWeight: FontWeight.w500,
                                     ),
                                   ),
                                   subtitle: const Text(
@@ -291,7 +305,7 @@ class _VehiclesEditPageState extends State<VehiclesEditPage> {
                                     'Extra Large 4WD SUVs',
                                     style: TextStyle(
                                       color: Colors.black,
-                                      fontWeight: FontWeight.w600,
+                                      fontWeight: FontWeight.w500,
                                     ),
                                   ),
                                   subtitle: const Text(

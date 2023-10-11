@@ -46,7 +46,7 @@ class _SchedulesPageState extends State<SchedulesPage> {
                             'My bookings',
                             style: TextStyle(
                               fontSize: 18,
-                              fontWeight: FontWeight.w600,
+                              fontWeight: FontWeight.w500,
                             ),
                           )
                         ],
@@ -71,7 +71,7 @@ class _SchedulesPageState extends State<SchedulesPage> {
                   const Text(
                     'Booking date:',
                     style: TextStyle(
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w400,
                     ),
                   ),
                   const SizedBox(height: 15),
@@ -101,14 +101,14 @@ class _SchedulesPageState extends State<SchedulesPage> {
               children: [
                 const Text(
                   'September 10, 2023 - 10:00 am',
-                  style: TextStyle(fontWeight: FontWeight.w600),
+                  style: TextStyle(fontWeight: FontWeight.w500),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const Text(
                       'Costumer: Jorge',
-                      style: TextStyle(fontWeight: FontWeight.w600),
+                      style: TextStyle(fontWeight: FontWeight.w500),
                     ),
                     TextButton(
                       style: ButtonStyle(

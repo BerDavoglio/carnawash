@@ -56,7 +56,7 @@ class _AccountPageState extends State<AccountPage> {
                             'My Account Information',
                             style: TextStyle(
                               fontSize: 18,
-                              fontWeight: FontWeight.w600,
+                              fontWeight: FontWeight.w500,
                             ),
                           )
                         ],
@@ -74,7 +74,7 @@ class _AccountPageState extends State<AccountPage> {
                               child: Text(
                                 'Basic information info',
                                 style: TextStyle(
-                                  fontWeight: FontWeight.w600,
+                                  fontWeight: FontWeight.w500,
                                   fontSize: 16,
                                 ),
                               ),
@@ -113,7 +113,7 @@ class _AccountPageState extends State<AccountPage> {
                               child: Text(
                                 'Bank Information',
                                 style: TextStyle(
-                                  fontWeight: FontWeight.w600,
+                                  fontWeight: FontWeight.w500,
                                   fontSize: 16,
                                 ),
                               ),
@@ -176,7 +176,7 @@ class _AccountPageState extends State<AccountPage> {
                               child: Text(
                                 'Basic information info',
                                 style: TextStyle(
-                                  fontWeight: FontWeight.w600,
+                                  fontWeight: FontWeight.w500,
                                   fontSize: 16,
                                 ),
                               ),
@@ -222,7 +222,7 @@ class _AccountPageState extends State<AccountPage> {
                               child: Text(
                                 'Bank Information',
                                 style: TextStyle(
-                                  fontWeight: FontWeight.w600,
+                                  fontWeight: FontWeight.w500,
                                   fontSize: 16,
                                 ),
                               ),

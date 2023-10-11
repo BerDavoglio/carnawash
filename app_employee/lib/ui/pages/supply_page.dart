@@ -33,7 +33,7 @@ class _SupplyPageState extends State<SupplyPage> {
                         'My Suppliers',
                         style: TextStyle(
                           fontSize: 18,
-                          fontWeight: FontWeight.w600,
+                          fontWeight: FontWeight.w500,
                         ),
                       )
                     ],
@@ -97,7 +97,7 @@ class _SupplyPageState extends State<SupplyPage> {
                       text,
                       style: const TextStyle(
                         fontSize: 18,
-                        fontWeight: FontWeight.w600,
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
                   ),

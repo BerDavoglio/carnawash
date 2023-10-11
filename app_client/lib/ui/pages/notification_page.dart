@@ -33,7 +33,7 @@ class _NotificationPageState extends State<NotificationPage> {
                         'Notification',
                         style: TextStyle(
                           fontSize: 18,
-                          fontWeight: FontWeight.w600,
+                          fontWeight: FontWeight.w500,
                         ),
                       )
                     ],

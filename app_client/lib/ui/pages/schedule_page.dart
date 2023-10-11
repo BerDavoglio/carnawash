@@ -143,7 +143,6 @@ class _SchedulePageState extends State<SchedulePage> {
                                   : n == 5
                                       ? fifthPart(context)
                                       : sixthPart(context),
-                  const SizedBox(height: 15),
                   (n == 5 || n == 6)
                       ? const SizedBox()
                       : TextButton(
@@ -198,7 +197,7 @@ class _SchedulePageState extends State<SchedulePage> {
                 'Choose your car to be washed',
                 style: TextStyle(
                   fontSize: 18,
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
               SizedBox(height: 10),
@@ -231,7 +230,12 @@ class _SchedulePageState extends State<SchedulePage> {
         ),
         TextButton(
           onPressed: () {
-            Navigator.of(context).pushNamed(AppRoutes.VEHICLES_EDIT);
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => VehiclesEditPage(initial: false),
+              ),
+            );
           },
           child: const Text(
             'Choose another car to be washed',
@@ -269,7 +273,7 @@ class _SchedulePageState extends State<SchedulePage> {
                   'Nissan',
                   style: TextStyle(
                     color: Colors.black,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
                 SizedBox(height: 10),
@@ -296,7 +300,7 @@ class _SchedulePageState extends State<SchedulePage> {
                   'Small',
                   style: TextStyle(
                     color: Colors.black,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
               ],
@@ -337,7 +341,7 @@ class _SchedulePageState extends State<SchedulePage> {
                 'Confirm your Vehicle details',
                 style: TextStyle(
                   fontSize: 18,
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
               const SizedBox(height: 10),
@@ -378,7 +382,7 @@ class _SchedulePageState extends State<SchedulePage> {
                         Text(
                           'Small',
                           style: TextStyle(
-                            fontWeight: FontWeight.w600,
+                            fontWeight: FontWeight.w500,
                           ),
                         ),
                         Text(
@@ -405,7 +409,7 @@ class _SchedulePageState extends State<SchedulePage> {
               const Text(
                 'Choose the type of washing',
                 style: TextStyle(
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
               Column(
@@ -523,7 +527,7 @@ class _SchedulePageState extends State<SchedulePage> {
               const Text(
                 'Add our additional services',
                 style: TextStyle(
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
               const SizedBox(height: 10),
@@ -596,6 +600,7 @@ class _SchedulePageState extends State<SchedulePage> {
                   ),
                 ),
               ),
+              const SizedBox(height: 10),
             ],
           ),
         ),
@@ -670,7 +675,7 @@ class _SchedulePageState extends State<SchedulePage> {
                 'Choose the day and time',
                 style: TextStyle(
                   fontSize: 18,
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
               const SizedBox(height: 10),
@@ -698,7 +703,7 @@ class _SchedulePageState extends State<SchedulePage> {
                 'Enter the address',
                 style: TextStyle(
                   fontSize: 18,
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
               const SizedBox(height: 10),
@@ -731,7 +736,7 @@ class _SchedulePageState extends State<SchedulePage> {
                 'Confirm your booking',
                 style: TextStyle(
                   fontSize: 18,
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
               const SizedBox(height: 10),
@@ -765,7 +770,7 @@ class _SchedulePageState extends State<SchedulePage> {
                       Text(
                         'Vehicle',
                         style: TextStyle(
-                          fontWeight: FontWeight.w600,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
                       SizedBox(height: 5),
@@ -810,7 +815,7 @@ class _SchedulePageState extends State<SchedulePage> {
                       Text(
                         'Type of washing',
                         style: TextStyle(
-                          fontWeight: FontWeight.w600,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
                       SizedBox(height: 5),
@@ -840,7 +845,7 @@ class _SchedulePageState extends State<SchedulePage> {
                       Text(
                         'Addicional Service',
                         style: TextStyle(
-                          fontWeight: FontWeight.w600,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
                       SizedBox(height: 5),
@@ -882,7 +887,7 @@ class _SchedulePageState extends State<SchedulePage> {
                   Text(
                     '15 September 23',
                     style: TextStyle(
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
                   SizedBox(height: 5),
@@ -929,6 +934,7 @@ class _SchedulePageState extends State<SchedulePage> {
                   ),
                 ),
               ),
+              const SizedBox(height: 10),
             ],
           ),
         ),
@@ -940,24 +946,30 @@ class _SchedulePageState extends State<SchedulePage> {
     return Column(
       children: [
         SizedBox(
+          height: MediaQuery.of(context).size.height * 0.675,
           width: MediaQuery.of(context).size.width * 0.85,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'Do you have a coupon?',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
-                ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Do you have a coupon?',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  geralTextInput(
+                    context: context,
+                    text: 'Type the code',
+                    textController: couponController,
+                  ),
+                ],
               ),
-              const SizedBox(height: 10),
-              geralTextInput(
-                context: context,
-                text: 'Type the code',
-                textController: couponController,
-              ),
-              const SizedBox(height: 10),
+              const Spacer(),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -975,84 +987,27 @@ class _SchedulePageState extends State<SchedulePage> {
                         child: Text(
                           '\$ 125.00',
                           style: TextStyle(
-                            fontSize: 30,
+                            fontSize: 24,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
                     ],
                   ),
-                  OutlinedButton(
-                    style: OutlinedButton.styleFrom(
-                      side: const BorderSide(width: 2, color: Colors.blue),
-                      fixedSize: Size(
-                          MediaQuery.of(context).size.width * 0.85, 50),
-                      backgroundColor: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        n++;
-                      });
-                    },
-                    child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Pay credit card **** 1234',
-                          style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            color: Colors.blue,
-                          ),
-                        ),
-                        Image(
-                          height: 30,
-                          image: AssetImage('images/mastercard-logo.png'),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  OutlinedButton(
-                    style: OutlinedButton.styleFrom(
-                      side: const BorderSide(width: 2, color: Colors.blue),
-                      fixedSize: Size(
-                          MediaQuery.of(context).size.width * 0.85, 50),
-                      backgroundColor: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        n++;
-                      });
-                    },
-                    child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Pay credit card **** 4321',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.blue,
-                          ),
-                        ),
-                        Image(
-                          height: 30,
-                          image: AssetImage('images/visa-logo.png'),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 10),
+                  creditCardButton(context),
                   Center(
                     child: TextButton(
+                      style: ButtonStyle(
+                          padding:
+                              MaterialStateProperty.all(EdgeInsets.zero)),
                       onPressed: () {
-                        Navigator.of(context)
-                            .pushNamed(AppRoutes.WALLET_EDIT);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                const WalletPage(),
+                          ),
+                        );
                       },
                       child: const Text(
                         'Pay with another credit card',
@@ -1072,37 +1027,73 @@ class _SchedulePageState extends State<SchedulePage> {
     );
   }
 
-  Widget sixthPart(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 120),
-      child: Column(
-        children: [
-          SizedBox(
-            width: MediaQuery.of(context).size.width * 0.85,
-            child: const Center(
-              child: Column(
-                children: [
-                  Icon(
-                    Icons.check_circle,
-                    color: Colors.green,
-                    size: 50,
-                  ),
-                  Padding(
-                    padding: EdgeInsets.all(20),
-                    child: Text(
-                      'Booking requested',
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                  Text(
-                    'You will be informed when confirmed',
-                  ),
-                ],
-              ),
+  Widget creditCardButton(BuildContext context) {
+    return Column(
+      children: [
+        OutlinedButton(
+          style: OutlinedButton.styleFrom(
+            side: const BorderSide(width: 2, color: Colors.blue),
+            fixedSize: Size(MediaQuery.of(context).size.width * 0.85, 50),
+            backgroundColor: Colors.white,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
             ),
+          ),
+          onPressed: () {
+            setState(() {
+              n++;
+            });
+          },
+          child: const Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Pay credit card **** 4321',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.blue,
+                ),
+              ),
+              Image(
+                height: 30,
+                image: AssetImage('images/visa-logo.png'),
+              )
+            ],
+          ),
+        ),
+        const SizedBox(height: 10),
+      ],
+    );
+  }
+
+  Widget sixthPart(BuildContext context) {
+    return SizedBox(
+      height: MediaQuery.of(context).size.height * 0.6,
+      width: MediaQuery.of(context).size.width * 0.85,
+      child: const Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Column(
+            children: [
+              Icon(
+                Icons.check_circle,
+                color: Colors.green,
+                size: 50,
+              ),
+              Padding(
+                padding: EdgeInsets.all(20),
+                child: Text(
+                  'Booking requested',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+              Text(
+                'You will be informed when confirmed',
+              ),
+            ],
           ),
         ],
       ),

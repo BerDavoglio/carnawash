@@ -25,7 +25,6 @@ class MyApp extends StatelessWidget {
         AppRoutes.PERFIL: (_) => const PerfilPage(),
         AppRoutes.ACCOUNT: (_) => const AccountPage(),
         AppRoutes.WALLET: (_) => const WalletPage(),
-        AppRoutes.WALLET_EDIT: (_) => const WalletEditPage(),
         AppRoutes.LANGUAGE: (_) => const LanguagePage(),
         AppRoutes.NOTIFICATION_CONFIG: (_) => const NotificationConfigPage(),
         AppRoutes.NOTIFICATION: (_) => const NotificationPage(),

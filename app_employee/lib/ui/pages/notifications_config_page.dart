@@ -37,7 +37,7 @@ class _NotificationConfigPageState extends State<NotificationConfigPage> {
                             'Notification Settings',
                             style: TextStyle(
                               fontSize: 18,
-                              fontWeight: FontWeight.w600,
+                              fontWeight: FontWeight.w500,
                             ),
                           )
                         ],
@@ -60,7 +60,7 @@ class _NotificationConfigPageState extends State<NotificationConfigPage> {
                       const Text(
                         'Push Notifications',
                         style: TextStyle(
-                          fontWeight: FontWeight.w600,
+                          fontWeight: FontWeight.w400,
                           fontSize: 18,
                         ),
                       ),

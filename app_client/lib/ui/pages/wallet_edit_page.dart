@@ -1,12 +1,20 @@
+// ignore_for_file: no_logic_in_create_state, must_be_immutable
+
 import 'package:flutter/material.dart';
 
 import '../ui.dart';
 
 class WalletEditPage extends StatefulWidget {
-  const WalletEditPage({super.key});
+  bool? initial;
+  WalletEditPage({
+    super.key,
+    required this.initial,
+  });
 
   @override
-  State<WalletEditPage> createState() => _WalletEditPageState();
+  State<WalletEditPage> createState() => _WalletEditPageState(
+        initial: initial,
+      );
 }
 
 class _WalletEditPageState extends State<WalletEditPage> {
@@ -14,7 +22,17 @@ class _WalletEditPageState extends State<WalletEditPage> {
   TextEditingController holderController = TextEditingController();
   TextEditingController expiresController = TextEditingController();
   TextEditingController cvvController = TextEditingController();
-  bool edit = false;
+  bool? initial;
+  late bool edit;
+
+  _WalletEditPageState({required this.initial});
+
+  @override
+  void initState() {
+    super.initState();
+
+    edit = initial!;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,10 +57,10 @@ class _WalletEditPageState extends State<WalletEditPage> {
                         children: [
                           backButtonComponent(context),
                           Text(
-                            edit ? 'Edit Card' : 'Create Card',
+                            edit ? 'Edit Credit Card' : 'Register Credit Card',
                             style: const TextStyle(
                               fontSize: 18,
-                              fontWeight: FontWeight.w600,
+                              fontWeight: FontWeight.w500,
                             ),
                           )
                         ],
@@ -105,7 +123,8 @@ class _WalletEditPageState extends State<WalletEditPage> {
                           backgroundColor: MaterialStateProperty.all<Color>(
                             Colors.amber,
                           ),
-                          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(5),
                             ),

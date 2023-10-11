@@ -123,9 +123,9 @@ class _HomePageState extends State<HomePage> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Image(
-                            width: 175,
-                            image: AssetImage('images/car.png'),
+                          Image(
+                            width: MediaQuery.of(context).size.width * 0.45,
+                            image: const AssetImage('images/car.png'),
                           ),
                           Padding(
                             padding: const EdgeInsets.only(right: 5),
@@ -133,15 +133,17 @@ class _HomePageState extends State<HomePage> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 SizedBox(
-                                  width: 125,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.385,
                                   child: Column(
                                     children: [
                                       const Text(
+                                        textAlign: TextAlign.center,
                                         'Get 10% off your next wash with the coupon.',
                                         style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 12,
-                                          fontWeight: FontWeight.w600,
+                                          fontWeight: FontWeight.w500,
                                         ),
                                       ),
                                       const SizedBox(
@@ -249,7 +251,7 @@ class _HomePageState extends State<HomePage> {
                     child: const Text(
                       'Make a new Booking',
                       style: TextStyle(
-                        fontWeight: FontWeight.w600,
+                        fontWeight: FontWeight.w500,
                         color: Colors.white,
                       ),
                     ),
@@ -272,7 +274,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     onPressed: () {},
                     child: const Text(
-                      'Subscribe Weekly',
+                      'Subscribe',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
@@ -479,15 +481,20 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pushNamed(AppRoutes.RATING);
-              },
-              child: const Text(
-                'Rate',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.blue,
+            Center(
+              child: TextButton.icon(
+                onPressed: () {
+                  Navigator.of(context).pushNamed(AppRoutes.RATING);
+                },
+                icon: const Icon(
+                  Icons.star_outline,
+                  size: 20,
+                ),
+                label: const Text(
+                  'Rate our service!',
+                  style: TextStyle(
+                    color: Colors.blue,
+                  ),
                 ),
               ),
             ),
@@ -556,7 +563,7 @@ class _HomePageState extends State<HomePage> {
                         '${obj.car.brand} ${obj.car.model} - ${obj.car.size}',
                         style: const TextStyle(
                           color: Colors.grey,
-                          fontWeight: FontWeight.w600,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
                     ),
@@ -566,7 +573,7 @@ class _HomePageState extends State<HomePage> {
                         obj.car.licence,
                         style: const TextStyle(
                           color: Colors.grey,
-                          fontWeight: FontWeight.w600,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
                     ),

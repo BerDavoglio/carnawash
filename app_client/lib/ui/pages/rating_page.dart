@@ -40,7 +40,7 @@ class _RatingPageState extends State<RatingPage> {
                             'Rate us',
                             style: TextStyle(
                               fontSize: 18,
-                              fontWeight: FontWeight.w600,
+                              fontWeight: FontWeight.w500,
                             ),
                           )
                         ],
@@ -58,71 +58,109 @@ class _RatingPageState extends State<RatingPage> {
     );
   }
 
-  Column ratePart(BuildContext context) {
-    return Column(
-      children: [
-        const SizedBox(height: 60),
-        const Text(
-          'Rate Us!',
-          style: TextStyle(
-            fontWeight: FontWeight.w600,
-            fontSize: 24,
+  Widget ratePart(BuildContext context) {
+    return SizedBox(
+      // height: MediaQuery.of(context).size.height * 0.6,
+      width: MediaQuery.of(context).size.width * 0.85,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Column(
+            children: [
+              const SizedBox(height: 60),
+              const Text(
+                'Rate Us!',
+                style: TextStyle(),
+              ),
+              const SizedBox(height: 10),
+              const Text(
+                "Dont forget to rate our services!\nThis is how we can improve to always serve you well.",
+                textAlign: TextAlign.center,
+                style: TextStyle(color: Colors.grey),
+              ),
+              const SizedBox(height: 10),
+              RatingBar.builder(
+                minRating: 1,
+                direction: Axis.horizontal,
+                allowHalfRating: true,
+                itemCount: 5,
+                itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+                itemBuilder: (context, _) => const Icon(
+                  Icons.star,
+                  color: Colors.amber,
+                ),
+                itemSize: 30,
+                onRatingUpdate: (rating) {
+
+                },
+              ),
+              const SizedBox(height: 10),
+              const Text('Let us know your feedback:'),
+              const SizedBox(height: 10),
+              geralMultilineTextInput(
+                context: context,
+                text: '',
+                textController: rateController,
+              ),
+            ],
           ),
-        ),
-        const SizedBox(height: 10),
-        const Text(
-          "Dont forget to rate our services! This is how we can improve to always serve you well.",
-          textAlign: TextAlign.center,
-          style: TextStyle(color: Colors.grey),
-        ),
-        const SizedBox(height: 10),
-        RatingBar.builder(
-          minRating: 1,
-          direction: Axis.horizontal,
-          allowHalfRating: true,
-          itemCount: 5,
-          itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
-          itemBuilder: (context, _) => const Icon(
-            Icons.star,
-            color: Colors.amber,
+          TextButton(
+            style: ButtonStyle(
+              elevation: MaterialStateProperty.all(5),
+              fixedSize: MaterialStateProperty.all<Size>(
+                Size(MediaQuery.of(context).size.width * 0.85, 50),
+              ),
+              backgroundColor: MaterialStateProperty.all<Color>(
+                Colors.amber,
+              ),
+              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5),
+                ),
+              ),
+            ),
+            onPressed: () {
+              setState(() {
+                    wasRated = true;
+                  });
+            },
+            child: const Text(
+              'Sent',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
           ),
-          onRatingUpdate: (rating) {
-            setState(() {
-              wasRated = true;
-            });
-          },
-        ),
-        const SizedBox(height: 10),
-        const Text('Let us know your feedback:'),
-        const SizedBox(height: 10),
-        geralMultilineTextInput(
-          context: context,
-          text: '',
-          textController: rateController,
-        )
-      ],
+        ],
+      ),
     );
   }
 
   Widget confirmPart(BuildContext context) {
-    return Center(
-      child: Column(
+    return SizedBox(
+      height: MediaQuery.of(context).size.height * 0.7,
+      width: MediaQuery.of(context).size.width * 0.85,
+      child: const Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.3,
+          Column(
+            children: [
+              Text(
+                'Thank you for your rating!',
+                style: TextStyle(
+                  fontWeight: FontWeight.w500,
+                  fontSize: 20,
+                ),
+              ),
+              SizedBox(height: 20),
+              Icon(
+                Icons.star,
+                color: Colors.amber,
+                size: 30,
+              )
+            ],
           ),
-          const Text(
-            'Thank you for your rating!',
-            style: TextStyle(
-              fontWeight: FontWeight.w600,
-              fontSize: 20,
-            ),
-          ),
-          const SizedBox(height: 10),
-          const Icon(
-            Icons.star,
-            color: Colors.amber,
-          )
         ],
       ),
     );

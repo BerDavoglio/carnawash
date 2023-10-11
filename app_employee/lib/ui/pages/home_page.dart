@@ -31,6 +31,7 @@ class _HomePageState extends State<HomePage> {
             ),
       body: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
               decoration: const BoxDecoration(color: Colors.white),
@@ -89,7 +90,7 @@ class _HomePageState extends State<HomePage> {
           const Text(
             'Your rate',
             style: TextStyle(
-              fontWeight: FontWeight.w600,
+              fontWeight: FontWeight.w500,
             ),
           ),
           RatingBarIndicator(
@@ -103,31 +104,33 @@ class _HomePageState extends State<HomePage> {
             direction: Axis.horizontal,
           ),
           const SizedBox(height: 20),
-          Container(
-            width: MediaQuery.of(context).size.width * 0.85,
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.all(
-                Radius.circular(10),
-              ),
-              color: Colors.white,
-            ),
-            child: const Padding(
-              padding: EdgeInsets.symmetric(vertical: 10),
-              child: Column(children: [
-                Text('Number of Washes'),
-                Text(
-                  '15',
-                  style: TextStyle(
-                    color: Colors.grey,
-                    fontSize: 18,
-                  ),
+          Center(
+            child: Container(
+              width: MediaQuery.of(context).size.width * 0.85,
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(10),
                 ),
-              ]),
+                color: Colors.white,
+              ),
+              child: const Padding(
+                padding: EdgeInsets.symmetric(vertical: 20),
+                child: Column(children: [
+                  Text('Number of Washes'),
+                  Text(
+                    '15',
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 18,
+                    ),
+                  ),
+                ]),
+              ),
             ),
           ),
           const SizedBox(height: 5),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Container(
                 decoration: const BoxDecoration(
@@ -136,9 +139,9 @@ class _HomePageState extends State<HomePage> {
                   ),
                   color: Colors.white,
                 ),
-                width: MediaQuery.of(context).size.width * 0.4,
+                width: MediaQuery.of(context).size.width * 0.42,
                 child: const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10),
+                  padding: EdgeInsets.symmetric(vertical: 20),
                   child: Column(children: [
                     Text('Next scheduled'),
                     Text(
@@ -158,9 +161,9 @@ class _HomePageState extends State<HomePage> {
                   ),
                   color: Colors.white,
                 ),
-                width: MediaQuery.of(context).size.width * 0.4,
+                width: MediaQuery.of(context).size.width * 0.42,
                 child: const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10),
+                  padding: EdgeInsets.symmetric(vertical: 20),
                   child: Column(children: [
                     Text('Canceled washes'),
                     Text(
@@ -185,7 +188,7 @@ class _HomePageState extends State<HomePage> {
                   'Washing Process:',
                   style: TextStyle(
                     fontSize: 18,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
                 const SizedBox(height: 5),
@@ -203,14 +206,14 @@ class _HomePageState extends State<HomePage> {
                         const Text(
                           'September 10, 2023 - 10PM',
                           style: TextStyle(
-                            fontWeight: FontWeight.w600,
+                            fontWeight: FontWeight.w500,
                             fontSize: 16,
                           ),
                         ),
                         const Text(
                           'Costumer: Jorge',
                           style: TextStyle(
-                            fontWeight: FontWeight.w600,
+                            fontWeight: FontWeight.w500,
                             fontSize: 16,
                           ),
                         ),
@@ -223,7 +226,7 @@ class _HomePageState extends State<HomePage> {
                                 'Nissan March - Small',
                                 style: TextStyle(
                                   color: Colors.grey,
-                                  fontWeight: FontWeight.w600,
+                                  fontWeight: FontWeight.w500,
                                 ),
                               ),
                             ),
@@ -233,7 +236,7 @@ class _HomePageState extends State<HomePage> {
                                 '3SAM123',
                                 style: TextStyle(
                                   color: Colors.grey,
-                                  fontWeight: FontWeight.w600,
+                                  fontWeight: FontWeight.w500,
                                 ),
                               ),
                             ),
@@ -341,7 +344,7 @@ class _HomePageState extends State<HomePage> {
                 const SizedBox(width: 10),
                 const Text('Your information is processing',
                     style:
-                        TextStyle(fontWeight: FontWeight.w600, fontSize: 16)),
+                        TextStyle(fontWeight: FontWeight.w500, fontSize: 16)),
               ],
             ),
           ),

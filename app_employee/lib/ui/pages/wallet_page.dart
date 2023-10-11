@@ -36,7 +36,7 @@ class _WalletPageState extends State<WalletPage> {
                             'Wallet',
                             style: TextStyle(
                               fontSize: 18,
-                              fontWeight: FontWeight.w600,
+                              fontWeight: FontWeight.w500,
                             ),
                           )
                         ],
@@ -55,12 +55,20 @@ class _WalletPageState extends State<WalletPage> {
                         padding: const EdgeInsets.symmetric(vertical: 10),
                         child: TextButton(
                           onPressed: () {
-                            Navigator.of(context).pushNamed(AppRoutes.WALLET_EDIT);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    WalletEditPage(initial: false),
+                              ),
+                            );
                           },
                           child: const Text(
                             'Register another credit card',
                             style: TextStyle(
-                                color: Colors.amber, fontWeight: FontWeight.bold,),
+                              color: Colors.amber,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ),
@@ -100,15 +108,23 @@ class _WalletPageState extends State<WalletPage> {
                     Row(
                       children: [
                         IconButton(
-                            padding: const EdgeInsets.all(0),
-                            splashRadius: 20,
-                            iconSize: 18.0,
+                            padding: const EdgeInsets.only(top: 10),
+                            visualDensity: const VisualDensity(
+                              horizontal: VisualDensity.minimumDensity,
+                              vertical: VisualDensity.minimumDensity,
+                            ),
+                            splashRadius: 26,
+                            iconSize: 26,
                             onPressed: () {},
                             icon: const Icon(Icons.edit_outlined)),
                         IconButton(
-                            padding: const EdgeInsets.all(0),
-                            splashRadius: 20,
-                            iconSize: 18.0,
+                            padding: const EdgeInsets.only(top: 10),
+                            visualDensity: const VisualDensity(
+                              horizontal: VisualDensity.minimumDensity,
+                              vertical: VisualDensity.minimumDensity,
+                            ),
+                            splashRadius: 26,
+                            iconSize: 26,
                             onPressed: () {},
                             icon: const Icon(Icons.delete_outline)),
                       ],
@@ -118,7 +134,7 @@ class _WalletPageState extends State<WalletPage> {
                 const Text(
                   '**** **** **** 1234',
                   style: TextStyle(
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.w500,
                     fontSize: 18,
                   ),
                 ),

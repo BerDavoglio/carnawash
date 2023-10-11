@@ -41,7 +41,7 @@ class _HistoryPageState extends State<HistoryPage> {
                               'History',
                               style: TextStyle(
                                 fontSize: 18,
-                                fontWeight: FontWeight.w600,
+                                fontWeight: FontWeight.w500,
                               ),
                             )
                           ],
@@ -57,7 +57,7 @@ class _HistoryPageState extends State<HistoryPage> {
                           'Filter the date',
                           style: TextStyle(
                             fontSize: 18,
-                            fontWeight: FontWeight.w600,
+                            fontWeight: FontWeight.w400,
                           ),
                         ),
                         const SizedBox(height: 10),
@@ -79,10 +79,7 @@ class _HistoryPageState extends State<HistoryPage> {
                               child: IconButton(
                                 padding: const EdgeInsets.all(0),
                                 color: Colors.blue,
-
-                                iconSize:
-                                    MediaQuery.of(context).size.width *
-                                        0.12,
+                                iconSize: 55,
                                 onPressed: () {},
                                 icon: const Icon(Icons.check_box),
                               ),
@@ -190,7 +187,7 @@ class _HistoryPageState extends State<HistoryPage> {
                       '\$ 94.00',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 24,
+                        fontSize: 20,
                       ),
                     ),
                   ],

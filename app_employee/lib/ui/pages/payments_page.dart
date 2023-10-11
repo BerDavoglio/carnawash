@@ -40,7 +40,7 @@ class _PaymentsPageState extends State<PaymentsPage> {
                             'History',
                             style: TextStyle(
                               fontSize: 18,
-                              fontWeight: FontWeight.w600,
+                              fontWeight: FontWeight.w500,
                             ),
                           )
                         ],
@@ -56,7 +56,7 @@ class _PaymentsPageState extends State<PaymentsPage> {
                         'Filter the date',
                         style: TextStyle(
                           fontSize: 18,
-                          fontWeight: FontWeight.w600,
+                          fontWeight: FontWeight.w400,
                         ),
                       ),
                       const SizedBox(height: 10),
@@ -91,7 +91,8 @@ class _PaymentsPageState extends State<PaymentsPage> {
                                       MediaQuery.of(context).size.width * 0.12),
                                 ),
                               ),
-                              iconSize: MediaQuery.of(context).size.width * 0.12,
+                              iconSize:
+                                  MediaQuery.of(context).size.width * 0.12,
                               onPressed: () {},
                               icon: const Icon(Icons.check_box),
                             ),
@@ -135,7 +136,6 @@ class _PaymentsPageState extends State<PaymentsPage> {
                     Text(
                       'Washer: John',
                       style: TextStyle(
-                        fontWeight: FontWeight.w600,
                         fontSize: 14,
                       ),
                     ),
@@ -145,14 +145,12 @@ class _PaymentsPageState extends State<PaymentsPage> {
                         Text(
                           'September 10, 2023',
                           style: TextStyle(
-                            fontWeight: FontWeight.w600,
                             fontSize: 14,
                           ),
                         ),
                         Text(
                           '10:00 am',
                           style: TextStyle(
-                            fontWeight: FontWeight.w600,
                             fontSize: 14,
                           ),
                         ),
@@ -227,8 +225,8 @@ class _PaymentsPageState extends State<PaymentsPage> {
                       Text(
                         '\$ 94.00',
                         style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 24,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 20,
                         ),
                       ),
                       Text(

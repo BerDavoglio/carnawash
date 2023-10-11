@@ -42,7 +42,7 @@ class _AccountPageState extends State<AccountPage> {
                             'My Account Information',
                             style: TextStyle(
                               fontSize: 18,
-                              fontWeight: FontWeight.w600,
+                              fontWeight: FontWeight.w500,
                             ),
                           )
                         ],
