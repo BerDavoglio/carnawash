@@ -11,7 +11,7 @@
         </div>
       </div>
       <div className="m-auto w-auto"
-           v-show="false">
+           v-show="true">
         <div className="text-white mb-9 text-[22px]">
           Sign In
         </div>
@@ -56,7 +56,7 @@
         </div>
       </div>
       <div className="m-auto w-auto"
-           v-show="true">
+           v-show="false">
         <div className="text-white mb-10 text-[22px]">
           Change your password
         </div>

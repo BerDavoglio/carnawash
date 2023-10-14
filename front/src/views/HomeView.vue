@@ -1,6 +1,6 @@
 <template>
   <div className="home font-mono">
-    Home
+    Dashboard
   </div>
 </template>
 
