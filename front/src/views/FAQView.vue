@@ -107,7 +107,7 @@ export default {
     return {
       isCell: false,
       windowWidth: window.innerWidth,
-      isFaq: false,
+      isFaq: true,
     };
   },
   methods: {
