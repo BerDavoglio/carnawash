@@ -15,6 +15,11 @@ import { OhVueIcon, addIcons } from 'oh-vue-icons';
 import {
   MdArrowback,
   MdLogout,
+  BiSearch,
+  RiMoneyDollarCircleLine,
+  BiStarFill,
+  BiStar,
+  CoDollar,
 } from 'oh-vue-icons/icons';
 
 import TextClamp from 'vue3-text-clamp';
@@ -34,6 +39,11 @@ pinia.use(piniaPluginPersistedState);
 addIcons(
   MdArrowback,
   MdLogout,
+  BiSearch,
+  RiMoneyDollarCircleLine,
+  BiStarFill,
+  BiStar,
+  CoDollar,
 );
 
 createApp(App)
