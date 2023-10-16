@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import '../ui.dart';
@@ -17,6 +18,7 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
   bool oneTrue = true;
   bool twoTrue = false;
   bool threeTrue = false;
+  TextEditingController insuranceController = TextEditingController();
 
   List questionList = [
     [
@@ -187,102 +189,122 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[100],
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            n == 1
-                ? partOne(context)
-                : n == 2
-                    ? partTwo(context)
-                    : n == 3
-                        ? partThree(context)
-                        : n == 4
-                            ? partFour(context)
-                            : n == 5
-                                ? partFive(context)
+      body: (n == 2 ||
+              n == 4 ||
+              n == 6 ||
+              n == 10 ||
+              (n == 3 && !(questionValue + 1 < questionList.length / 4)))
+          ? Center(
+              child: geralComponent(context),
+            )
+          : SingleChildScrollView(
+              child: geralComponent(context),
+            ),
+    );
+  }
+
+  Column geralComponent(BuildContext context) {
+    return Column(
+      children: [
+        n == 1
+            ? partOne(context)
+            : n == 2
+                ? partTwo(context)
+                : n == 3
+                    ? partThree(context)
+                    : n == 4
+                        ? partFour(context)
+                        : n == 5
+                            ? partFive(context)
+                            : n == 10
+                                ? partFourHalf(context)
                                 : partSix(context),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 5, left: 5, right: 5),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.amber,
-                    fixedSize:
-                        Size(MediaQuery.of(context).size.width * 0.85, 50)),
-                onPressed: () {
-                  if (n == 1) {
-                    setState(() {
-                      n = 2;
-                    });
-                  } else if (n == 2) {
-                    setState(() {
-                      n = 3;
-                      oneTrue = false;
-                      twoTrue = true;
-                      threeTrue = false;
-                    });
-                  } else if (n == 3) {
-                    setState(() {
-                      if (questionValue + 1 < questionList.length / 4) {
-                        questionValue++;
-                      } else {
-                        n = 4;
-                        oneTrue = false;
-                        twoTrue = false;
-                        threeTrue = true;
-                      }
-                    });
-                  } else if (n == 4) {
-                    setState(() {
-                      n = 5;
-                      oneTrue = false;
-                      twoTrue = false;
-                      threeTrue = true;
-                    });
-                  } else if (n == 5) {
-                    setState(() {
-                      n = 6;
-                    });
-                  } else if (n == 6) {
-                    setState(() {
-                      Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const HomePage(validate: false),
-              ),
-            );
-                    });
+        if (n == 2 ||
+            n == 4 ||
+            n == 6 ||
+            n == 10 ||
+            n == 3 && !(questionValue + 1 < questionList.length / 4))
+          Spacer(),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 5, left: 5, right: 5),
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.amber,
+                fixedSize: Size(MediaQuery.of(context).size.width * 0.85, 50)),
+            onPressed: () {
+              if (n == 1) {
+                setState(() {
+                  n = 2;
+                });
+              } else if (n == 2) {
+                setState(() {
+                  n = 3;
+                });
+              } else if (n == 3) {
+                setState(() {
+                  if (questionValue + 1 < questionList.length / 4) {
+                    questionValue++;
+                  } else {
+                    n = 4;
                   }
-                },
-                child: Text(n == 6
-                    ? 'Go to Home'
-                    : n == 5
-                        ? 'Confirm'
-                        : n == 4
-                            ? 'Next Step'
-                            : n == 1
-                                ? 'Next'
-                                : n == 2
-                                    ? 'Go to Quiz'
-                                    : (questionValue + 1 <
-                                                questionList.length / 4 &&
-                                            n == 3)
-                                        ? 'Next'
-                                        : 'Send your Answers'),
-              ),
-            ),
-            TextButton(
-              onPressed: () {},
-              child: const Text(
-                "Logout",
-                style: TextStyle(
-                  color: Colors.amber,
-                ),
-              ),
-            ),
-            const SizedBox(height: 10),
-          ],
+                });
+              } else if (n == 4) {
+                setState(() {
+                  n = 10;
+                  oneTrue = false;
+                  twoTrue = true;
+                  threeTrue = false;
+                });
+              } else if (n == 10) {
+                setState(() {
+                  n = 5;
+                  oneTrue = false;
+                  twoTrue = false;
+                  threeTrue = true;
+                });
+              } else if (n == 5) {
+                setState(() {
+                  n = 6;
+                });
+              } else if (n == 6) {
+                setState(() {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const HomePage(validate: false),
+                    ),
+                  );
+                });
+              }
+            },
+            child: Text(n == 6
+                ? 'Go to Home'
+                : n == 5
+                    ? 'Confirm'
+                    : (n == 4 || n == 10)
+                        ? 'Next Step'
+                        : n == 1
+                            ? 'Next'
+                            : n == 2
+                                ? 'Go to Quiz'
+                                : (questionValue + 1 <
+                                            questionList.length / 4 &&
+                                        n == 3)
+                                    ? 'Next'
+                                    : 'Send your Answers'),
+          ),
         ),
-      ),
+        TextButton(
+          onPressed: () {},
+          child: const Text(
+            "Logout",
+            style: TextStyle(
+              color: Colors.amber,
+            ),
+          ),
+        ),
+        const SizedBox(height: 10),
+      ],
     );
   }
 
@@ -328,7 +350,7 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
         const SizedBox(height: 25),
         SizedBox(
           width: MediaQuery.of(context).size.width * 0.85,
-          child: const Column(
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
@@ -366,10 +388,32 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
                 ),
               ),
               SizedBox(height: 15),
-              Text(
-                '4. You must also complete our CONTRACTOR INSURANCE APPLICATION FORM (Word format link here). *Once you complete it, please send it to admin@carnawashapp.com.',
-                style: TextStyle(
-                  fontSize: 16,
+              RichText(
+                textAlign: TextAlign.left,
+                text: TextSpan(
+                  children: [
+                    const TextSpan(
+                      text: '4. You must also complete our ',
+                      style: TextStyle(fontSize: 16, color: Colors.black),
+                    ),
+                    TextSpan(
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () =>
+                            Navigator.of(context).pushNamed(AppRoutes.TERMS),
+                      text: 'Terms of Service',
+                      style: const TextStyle(
+                        color: Colors.blue,
+                        decoration: TextDecoration.underline,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    const TextSpan(
+                      text:
+                          ' (Word format link here). *Once you complete it, please send it to admin@carnawashapp.com.',
+                      style: TextStyle(fontSize: 16, color: Colors.black),
+                    ),
+                  ],
                 ),
               ),
               SizedBox(height: 15),
@@ -490,7 +534,6 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
                   ),
                 ),
               ),
-              SizedBox(height: MediaQuery.of(context).size.height * 0.4),
             ],
           ),
         ),
@@ -734,8 +777,8 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
                             onPressed: () {
                               setState(() {
                                 n = 3;
-                                oneTrue = false;
-                                twoTrue = true;
+                                oneTrue = true;
+                                twoTrue = false;
                                 threeTrue = false;
                               });
                             },
@@ -769,7 +812,86 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
               ),
               const SizedBox(height: 15),
               const Text('Congratulations!\nYou got 80% of the quiz right.'),
-              SizedBox(height: MediaQuery.of(context).size.height * 0.45),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget partFourHalf(BuildContext context) {
+    return Center(
+      child: SizedBox(
+        width: MediaQuery.of(context).size.width * 0.85,
+        child: Padding(
+          padding: const EdgeInsets.only(
+            top: 50,
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right: 10),
+                        child: CircleAvatar(
+                          radius: 20,
+                          backgroundColor: Colors.amber,
+                          child: IconButton(
+                            iconSize: 24,
+                            color: Colors.white,
+                            icon: const Icon(
+                              Icons.arrow_back,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                n = 4;
+                                oneTrue = true;
+                                twoTrue = false;
+                                threeTrue = false;
+                              });
+                            },
+                          ),
+                        ),
+                      ),
+                      const Text(
+                        'First Steps',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      )
+                    ],
+                  ),
+                  notificationGeralButtonComponent(context),
+                ],
+              ),
+              const SizedBox(height: 15),
+              Row(
+                children: [
+                  circularIndex('1', oneTrue),
+                  circularIndex('2', twoTrue),
+                  circularIndex('3', threeTrue),
+                ],
+              ),
+              const SizedBox(height: 15),
+              const Text(
+                'Contractor Insurance',
+                style: TextStyle(fontWeight: FontWeight.w500),
+              ),
+              const SizedBox(height: 15),
+              const Text('Attach your insurance contract here'),
+              const SizedBox(height: 15),
+              geralIconTextInput(
+                context: context,
+                text: "Insurance Contract",
+                textController: insuranceController,
+                icon: Icons.file_download_outlined,
+              ),
             ],
           ),
         ),
@@ -807,7 +929,7 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
                             ),
                             onPressed: () {
                               setState(() {
-                                n = 4;
+                                n = 10;
                                 oneTrue = false;
                                 twoTrue = true;
                                 threeTrue = false;
@@ -826,6 +948,14 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
                     ],
                   ),
                   notificationGeralButtonComponent(context),
+                ],
+              ),
+              const SizedBox(height: 15),
+              Row(
+                children: [
+                  circularIndex('1', oneTrue),
+                  circularIndex('2', twoTrue),
+                  circularIndex('3', threeTrue),
                 ],
               ),
               const SizedBox(height: 15),
@@ -1075,10 +1205,10 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
                             ),
                             onPressed: () {
                               setState(() {
-                                n = 4;
+                                n = 5;
                                 oneTrue = false;
-                                twoTrue = true;
-                                threeTrue = false;
+                                twoTrue = false;
+                                threeTrue = true;
                               });
                             },
                           ),
@@ -1100,32 +1230,27 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
               Center(
                 child: Column(
                   children: [
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.2,
-                    ),
-                    const Icon(
+                    SizedBox(height: MediaQuery.of(context).size.height * 0.18),
+                    Icon(
                       Icons.verified,
                       color: Colors.green,
                       size: 40,
                     ),
-                    const SizedBox(height: 20),
-                    const Text(
+                    SizedBox(height: 20),
+                    Text(
                       'Information Sent!',
                       style: TextStyle(
                         fontWeight: FontWeight.w500,
                         fontSize: 20,
                       ),
                     ),
-                    const SizedBox(height: 20),
-                    const Text(
+                    SizedBox(height: 20),
+                    Text(
                       'Our team will update your details and will contact you shortly',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: Colors.grey,
                       ),
-                    ),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.2,
                     ),
                   ],
                 ),
