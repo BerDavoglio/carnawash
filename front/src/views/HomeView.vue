@@ -3,7 +3,7 @@
     <div class="header">
       <div className="grid grid-cols-2 justify-between
          mb-4">
-        <div className="text-[30px] text-left">
+        <div className="text-[30px] text-left font-semibold">
           Dashboard
         </div>
         <div className="ml-auto">

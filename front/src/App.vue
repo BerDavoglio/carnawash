@@ -2,7 +2,8 @@
   <div class="app">
     <sidebar-menu theme="white-theme"
                   :menu="menu"
-                  @update:collapsed="onToggleCollapse">
+                  @update:collapsed="onToggleCollapse"
+                  v-if="currentRouteName != 'login'">
       <template v-slot:toggle-icon>
         <div className="w-9 h-9 rounded-full bg-amber-400 flex">
           <div className="m-auto">
@@ -21,7 +22,8 @@
       </template>
       <template v-slot:footer>
         <div className="h-[0.5px] w-[90%] mx-auto bg-[#C9C9C9]" />
-        <div v-show="!isClosed"
+        <!-- eslint-disable-next-line vuejs-accessibility/click-events-have-key-events -->
+        <div v-show="!isClosed" @click="goPage('login')"
              className="text-[16px] ml-[40px] my-[28px]
              cursor-pointer">
           <v-icon name="md-logout"
@@ -49,7 +51,7 @@ export default {
           icon: 'fa fa-house',
         },
         {
-          href: '/login/',
+          href: '/orders/',
           title: 'Orders and Appontments',
           icon: 'fa fa-calendar-days',
         },
@@ -110,6 +112,14 @@ export default {
   methods: {
     onToggleCollapse() {
       this.isClosed = !this.isClosed;
+    },
+    goPage(route) {
+      this.$router.push({ name: route });
+    },
+  },
+  computed: {
+    currentRouteName() {
+      return this.$route.name;
     },
   },
 };

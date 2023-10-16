@@ -20,6 +20,11 @@ import {
   BiStarFill,
   BiStar,
   CoDollar,
+  IoAddCircleOutline,
+  BiTrash,
+  BiDownload,
+  MdEditOutlined,
+  MdUploadfile,
 } from 'oh-vue-icons/icons';
 
 import TextClamp from 'vue3-text-clamp';
@@ -44,6 +49,11 @@ addIcons(
   BiStarFill,
   BiStar,
   CoDollar,
+  IoAddCircleOutline,
+  BiTrash,
+  BiDownload,
+  MdEditOutlined,
+  MdUploadfile,
 );
 
 createApp(App)
