@@ -23,9 +23,7 @@ Widget geralTextInput({
           controller: textController,
         ),
       ),
-      const SizedBox(
-        height: 10,
-      ),
+      const SizedBox(height: 16),
     ],
   );
 }
@@ -52,9 +50,7 @@ Widget geralMultilineTextInput({
           controller: textController,
         ),
       ),
-      const SizedBox(
-        height: 10,
-      ),
+      const SizedBox(height: 10),
     ],
   );
 }
@@ -79,9 +75,7 @@ Widget geralInativeTextInput({
           ),
         ),
       ),
-      const SizedBox(
-        height: 10,
-      ),
+      const SizedBox(height: 16),
     ],
   );
 }
@@ -110,9 +104,7 @@ Widget geralIconTextInput({
           controller: textController,
         ),
       ),
-      const SizedBox(
-        height: 10,
-      ),
+      const SizedBox(height: 16),
     ],
   );
 }
@@ -142,9 +134,7 @@ Widget passwordTextInput(
           controller: textController,
         ),
       ),
-      const SizedBox(
-        height: 10,
-      ),
+      const SizedBox(height: 16),
     ],
   );
 }
@@ -169,9 +159,7 @@ Widget passwordConfirmTextInput(
           controller: textController,
         ),
       ),
-      const SizedBox(
-        height: 10,
-      ),
+      const SizedBox(height: 16),
     ],
   );
 }
@@ -206,9 +194,7 @@ Widget geralDateInput({
           inputFormatters: [maskFormatter],
         ),
       ),
-      const SizedBox(
-        height: 10,
-      ),
+      const SizedBox(height: 16),
     ],
   );
 }

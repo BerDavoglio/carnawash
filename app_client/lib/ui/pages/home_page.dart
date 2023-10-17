@@ -59,6 +59,10 @@ class _HomePageState extends State<HomePage> {
   TextEditingController emailOneController = TextEditingController();
   TextEditingController emailTwoController = TextEditingController();
   TextEditingController emailThreeController = TextEditingController();
+  List status = [
+    Colors.grey,
+    'Not Started',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -99,7 +103,7 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                   const SizedBox(
-                    height: 10,
+                    height: 32,
                   ),
                   Center(
                     child: Container(
@@ -185,7 +189,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 32),
                   SizedBox(
                     width: MediaQuery.of(context).size.width * 0.85,
                     child: Column(
@@ -198,7 +202,7 @@ class _HomePageState extends State<HomePage> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        const SizedBox(height: 5),
+                        const SizedBox(height: 16),
                         washingProcessBox(
                           context,
                           WashSelectionModel(
@@ -224,7 +228,7 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 32),
                   TextButton(
                     style: ButtonStyle(
                       elevation: MaterialStateProperty.all(5),
@@ -256,7 +260,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 20),
                   TextButton(
                     style: ButtonStyle(
                       elevation: MaterialStateProperty.all(5),
@@ -281,7 +285,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 32),
                   SizedBox(
                     width: MediaQuery.of(context).size.width * 0.85,
                     child: Column(
@@ -294,7 +298,7 @@ class _HomePageState extends State<HomePage> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        const SizedBox(height: 5),
+                        const SizedBox(height: 16),
                         lastWashBox(
                           context,
                           WashSelectionModel(
@@ -321,7 +325,7 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 32),
                   SizedBox(
                     width: MediaQuery.of(context).size.width * 0.85,
                     child: Column(
@@ -335,7 +339,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                         const SizedBox(
-                          height: 10,
+                          height: 16,
                         ),
                         const Text(
                           'Sharing is caring! Refer 3 friends and you and your friends win a 10% discount on your next wash!',
@@ -344,7 +348,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                         const SizedBox(
-                          height: 10,
+                          height: 16,
                         ),
                         geralTextInput(
                           context: context,
@@ -385,7 +389,7 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 15),
+                  const SizedBox(height: 16),
                 ],
               ),
             ),
@@ -406,7 +410,7 @@ class _HomePageState extends State<HomePage> {
       ),
       width: MediaQuery.of(context).size.width * 0.85,
       child: Padding(
-        padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -439,7 +443,7 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 5),
+              padding: const EdgeInsets.only(top: 4),
               child: Text(
                 'Wash ${obj.side}',
                 style: const TextStyle(color: Colors.grey),
@@ -450,7 +454,7 @@ class _HomePageState extends State<HomePage> {
                 obj.additional.length,
                 (index) {
                   return Padding(
-                    padding: const EdgeInsets.only(top: 5),
+                    padding: const EdgeInsets.only(top: 8),
                     child: Text(
                       '+ ${obj.additional[index]}',
                       style: const TextStyle(color: Colors.grey),
@@ -460,19 +464,20 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 5),
+              padding: const EdgeInsets.only(top: 8),
               child: Text(
                 '\$ ${obj.price}',
                 style: const TextStyle(color: Colors.grey),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 5),
+              padding: const EdgeInsets.only(top: 8),
               child: Row(
                 children: [
                   const Icon(
                     Icons.location_on_outlined,
                     color: Colors.amber,
+                    size: 16,
                   ),
                   Text(
                     obj.address,
@@ -515,7 +520,7 @@ class _HomePageState extends State<HomePage> {
       ),
       width: MediaQuery.of(context).size.width * 0.85,
       child: Padding(
-        padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 8),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -523,6 +528,7 @@ class _HomePageState extends State<HomePage> {
               obj.date,
               style: const TextStyle(
                 fontSize: 16,
+                fontWeight: FontWeight.w500,
               ),
             ),
             Row(
@@ -532,6 +538,7 @@ class _HomePageState extends State<HomePage> {
                   'Washer: ${obj.washer.name}',
                   style: const TextStyle(
                     fontSize: 16,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
                 Row(
@@ -540,6 +547,7 @@ class _HomePageState extends State<HomePage> {
                       obj.washer.rate.toString(),
                       style: const TextStyle(
                         fontSize: 16,
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
                     const Icon(
@@ -560,7 +568,7 @@ class _HomePageState extends State<HomePage> {
                     Padding(
                       padding: const EdgeInsets.only(top: 5),
                       child: Text(
-                        '${obj.car.brand} ${obj.car.model} - ${obj.car.size}',
+                        '${obj.car.brand} - ${obj.car.model} - ${obj.car.size}',
                         style: const TextStyle(
                           color: Colors.grey,
                           fontWeight: FontWeight.w500,
@@ -605,6 +613,7 @@ class _HomePageState extends State<HomePage> {
                           const Icon(
                             Icons.location_on_outlined,
                             color: Colors.amber,
+                            size: 16,
                           ),
                           Text(
                             obj.address,
@@ -615,26 +624,68 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ],
                 ),
-                Container(
-                  width: 100,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(100),
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      if (status[1] == 'Finished') {
+                        status = [
+                          Colors.grey,
+                          'Not Started',
+                        ];
+                      } else if (status[1] == 'Not Started') {
+                        status = [
+                          Colors.blue,
+                          'Started',
+                        ];
+                      } else if (status[1] == 'Started') {
+                        status = [
+                          Colors.green,
+                          'Finished',
+                        ];
+                      }
+                    });
+                  },
+                  child: Container(
+                    width: 100,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(100),
+                      ),
+                      border: Border.all(color: status[0]),
                     ),
-                    border: Border.all(color: Colors.blueAccent),
-                  ),
-                  child: Center(
-                    child: Text(
-                      obj.status,
-                      style: const TextStyle(
-                        color: Colors.blue,
+                    child: Center(
+                      child: Text(
+                        status[1],
+                        style: TextStyle(
+                          color: status[0],
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ),
                   ),
                 ),
               ],
             ),
+            status[1] == 'Finished'
+                ? Center(
+                    child: TextButton.icon(
+                      onPressed: () {
+                        Navigator.of(context).pushNamed(AppRoutes.RATING);
+                      },
+                      icon: const Icon(
+                        Icons.star_outline,
+                        size: 20,
+                      ),
+                      label: const Text(
+                        'Rate our service!',
+                        style: TextStyle(
+                          color: Colors.blue,
+                        ),
+                      ),
+                    ),
+                  )
+                : const Center(),
           ],
         ),
       ),
