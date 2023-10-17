@@ -38,7 +38,7 @@ class _NotificationPageState extends State<NotificationPage> {
                       )
                     ],
                   ),
-                  const SizedBox(height: 15),
+                  const SizedBox(height: 24),
                   notificationBox(
                     context,
                     'Support responded to chat',
@@ -78,7 +78,7 @@ class _NotificationPageState extends State<NotificationPage> {
     );
   }
 
-  SizedBox notificationBox(
+  Widget notificationBox(
     BuildContext context,
     String text,
     String time,
@@ -88,35 +88,39 @@ class _NotificationPageState extends State<NotificationPage> {
       width: MediaQuery.of(context).size.width * 0.85,
       child: Column(
         children: [
-          Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(10),
-                child: Icon(
-                  icon,
-                  size: 30,
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(right: 24),
+                  child: Icon(
+                    icon,
+                    size: 30,
+                  ),
                 ),
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.7,
-                    child: Text(
-                      text,
-                      style: const TextStyle(fontSize: 18),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.6,
+                      child: Text(
+                        text,
+                        style: const TextStyle(fontSize: 18),
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.7,
-                    child: Text(
-                      time,
-                      style: const TextStyle(color: Colors.grey),
+                    const SizedBox(height: 6),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.6,
+                      child: Text(
+                        time,
+                        style: const TextStyle(color: Colors.grey),
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+              ],
+            ),
           ),
           const Divider(),
         ],

@@ -86,13 +86,14 @@ class _HomePageState extends State<HomePage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 20),
+          const SizedBox(height: 32),
           const Text(
             'Your rate',
             style: TextStyle(
               fontWeight: FontWeight.w500,
             ),
           ),
+          const SizedBox(height: 16),
           RatingBarIndicator(
             rating: 2.75,
             itemBuilder: (context, index) => const Icon(
@@ -103,7 +104,7 @@ class _HomePageState extends State<HomePage> {
             itemSize: 40,
             direction: Axis.horizontal,
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 24),
           Center(
             child: Container(
               width: MediaQuery.of(context).size.width * 0.85,
@@ -114,21 +115,24 @@ class _HomePageState extends State<HomePage> {
                 color: Colors.white,
               ),
               child: const Padding(
-                padding: EdgeInsets.symmetric(vertical: 20),
+                padding: EdgeInsets.symmetric(vertical: 16),
                 child: Column(children: [
-                  Text('Number of Washes'),
+                  Text(
+                    'Number of Washes',
+                    style: TextStyle(fontSize: 14),
+                  ),
                   Text(
                     '15',
                     style: TextStyle(
                       color: Colors.grey,
-                      fontSize: 18,
+                      fontSize: 28,
                     ),
                   ),
                 ]),
               ),
             ),
           ),
-          const SizedBox(height: 5),
+          const SizedBox(height: 16),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -141,14 +145,17 @@ class _HomePageState extends State<HomePage> {
                 ),
                 width: MediaQuery.of(context).size.width * 0.42,
                 child: const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 20),
+                  padding: EdgeInsets.symmetric(vertical: 16),
                   child: Column(children: [
-                    Text('Next scheduled'),
+                    Text(
+                      'Next scheduled',
+                      style: TextStyle(fontSize: 14),
+                    ),
                     Text(
                       '3',
                       style: TextStyle(
                         color: Colors.green,
-                        fontSize: 18,
+                        fontSize: 28,
                       ),
                     ),
                   ]),
@@ -163,14 +170,17 @@ class _HomePageState extends State<HomePage> {
                 ),
                 width: MediaQuery.of(context).size.width * 0.42,
                 child: const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 20),
+                  padding: EdgeInsets.symmetric(vertical: 16),
                   child: Column(children: [
-                    Text('Canceled washes'),
+                    Text(
+                      'Canceled washes',
+                      style: TextStyle(fontSize: 14),
+                    ),
                     Text(
                       '2',
                       style: TextStyle(
                         color: Colors.red,
-                        fontSize: 18,
+                        fontSize: 28,
                       ),
                     ),
                   ]),
@@ -178,7 +188,29 @@ class _HomePageState extends State<HomePage> {
               ),
             ],
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 24),
+          Container(
+            padding: const EdgeInsets.all(24),
+            height: 72,
+            width: MediaQuery.of(context).size.width * 0.85,
+            decoration: const BoxDecoration(
+              color: Color.fromRGBO(229, 229, 229, 1),
+              borderRadius: BorderRadius.all(Radius.circular(16)),
+            ),
+            child: const Row(
+              children: [
+                Icon(Icons.report_outlined),
+                Text(
+                  'You have a wash request',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                    fontSize: 16,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 24),
           SizedBox(
             width: MediaQuery.of(context).size.width * 0.85,
             child: Column(
@@ -187,19 +219,19 @@ class _HomePageState extends State<HomePage> {
                 const Text(
                   'Washing Process:',
                   style: TextStyle(
-                    fontSize: 18,
+                    fontSize: 16,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                const SizedBox(height: 5),
+                const SizedBox(height: 16),
                 Container(
                   decoration: const BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.all(Radius.circular(15)),
+                    borderRadius: BorderRadius.all(Radius.circular(16)),
                   ),
                   width: MediaQuery.of(context).size.width * 0.85,
                   child: Padding(
-                    padding: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(16),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -207,21 +239,21 @@ class _HomePageState extends State<HomePage> {
                           'September 10, 2023 - 10PM',
                           style: TextStyle(
                             fontWeight: FontWeight.w500,
-                            fontSize: 16,
+                            fontSize: 14,
                           ),
                         ),
                         const Text(
                           'Costumer: Jorge',
                           style: TextStyle(
                             fontWeight: FontWeight.w500,
-                            fontSize: 16,
+                            fontSize: 14,
                           ),
                         ),
                         const Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Padding(
-                              padding: EdgeInsets.only(top: 5),
+                              padding: EdgeInsets.only(top: 8),
                               child: Text(
                                 'Nissan March - Small',
                                 style: TextStyle(
@@ -271,7 +303,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ],
                         ),
-                        const SizedBox(height: 10),
+                        const SizedBox(height: 16),
                         TextButton(
                           style: ButtonStyle(
                             elevation: MaterialStateProperty.all(5),

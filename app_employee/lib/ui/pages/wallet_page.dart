@@ -13,6 +13,7 @@ class _WalletPageState extends State<WalletPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[100]!,
       bottomNavigationBar: navigationBarComponent(context),
       body: SingleChildScrollView(
         child: Center(
@@ -87,14 +88,14 @@ class _WalletPageState extends State<WalletPage> {
     return Column(
       children: [
         Container(
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey),
-            borderRadius: const BorderRadius.all(
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.all(
               Radius.circular(10),
             ),
           ),
           child: Padding(
-            padding: const EdgeInsets.all(10),
+            padding: const EdgeInsets.all(16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -109,28 +110,37 @@ class _WalletPageState extends State<WalletPage> {
                       children: [
                         IconButton(
                             padding: const EdgeInsets.only(top: 10),
+                            splashRadius: 26,
+                            iconSize: 26,
                             visualDensity: const VisualDensity(
                               horizontal: VisualDensity.minimumDensity,
                               vertical: VisualDensity.minimumDensity,
                             ),
-                            splashRadius: 26,
-                            iconSize: 26,
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      WalletEditPage(initial: true),
+                                ),
+                              );
+                            },
                             icon: const Icon(Icons.edit_outlined)),
                         IconButton(
                             padding: const EdgeInsets.only(top: 10),
+                            splashRadius: 26,
+                            iconSize: 26,
                             visualDensity: const VisualDensity(
                               horizontal: VisualDensity.minimumDensity,
                               vertical: VisualDensity.minimumDensity,
                             ),
-                            splashRadius: 26,
-                            iconSize: 26,
                             onPressed: () {},
                             icon: const Icon(Icons.delete_outline)),
                       ],
                     ),
                   ],
                 ),
+                const SizedBox(height: 11),
                 const Text(
                   '**** **** **** 1234',
                   style: TextStyle(
@@ -138,17 +148,30 @@ class _WalletPageState extends State<WalletPage> {
                     fontSize: 18,
                   ),
                 ),
+                const SizedBox(height: 8),
                 const Text(
                   'Jorge Williams',
                   style: TextStyle(
                     color: Colors.grey,
                   ),
                 ),
-                const Text(
-                  '12/31 - ***',
-                  style: TextStyle(
-                    color: Colors.grey,
-                  ),
+                const SizedBox(height: 8),
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      '12/31',
+                      style: TextStyle(
+                        color: Colors.grey,
+                      ),
+                    ),
+                    Text(
+                      '***',
+                      style: TextStyle(
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),

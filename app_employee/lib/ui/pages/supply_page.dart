@@ -38,14 +38,15 @@ class _SupplyPageState extends State<SupplyPage> {
                       )
                     ],
                   ),
-                  const SizedBox(height: 25),
+                  const SizedBox(height: 32),
                   const Text(
                     'Find your main suppliers here',
                     style: TextStyle(
                       color: Colors.grey,
+                      fontSize: 16,
                     ),
                   ),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 32),
                   supplyBox(
                     context,
                     'Work Manual',
@@ -82,7 +83,10 @@ class _SupplyPageState extends State<SupplyPage> {
           Row(
             children: [
               const Padding(
-                padding: EdgeInsets.all(10),
+                padding: EdgeInsets.symmetric(
+                  vertical: 14,
+                  horizontal: 8,
+                ),
                 child: Icon(
                   Icons.file_download_outlined,
                   size: 30,

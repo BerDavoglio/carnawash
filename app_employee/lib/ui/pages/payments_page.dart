@@ -137,6 +137,7 @@ class _PaymentsPageState extends State<PaymentsPage> {
                       'Washer: John',
                       style: TextStyle(
                         fontSize: 14,
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
                     Column(
@@ -146,12 +147,14 @@ class _PaymentsPageState extends State<PaymentsPage> {
                           'September 10, 2023',
                           style: TextStyle(
                             fontSize: 14,
+                            fontWeight: FontWeight.w500,
                           ),
                         ),
                         Text(
                           '10:00 am',
                           style: TextStyle(
                             fontSize: 14,
+                            fontWeight: FontWeight.w500,
                           ),
                         ),
                       ],
@@ -159,7 +162,7 @@ class _PaymentsPageState extends State<PaymentsPage> {
                   ],
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  padding: const EdgeInsets.symmetric(vertical: 16),
                   child: Row(
                     children: [
                       SizedBox(
@@ -176,7 +179,7 @@ class _PaymentsPageState extends State<PaymentsPage> {
                         decoration: const BoxDecoration(
                           color: Colors.grey,
                         ),
-                        width: MediaQuery.of(context).size.width * 0.6,
+                        width: MediaQuery.of(context).size.width * 0.57,
                         height: 1,
                       ),
                     ],
@@ -225,10 +228,11 @@ class _PaymentsPageState extends State<PaymentsPage> {
                       Text(
                         '\$ 94.00',
                         style: TextStyle(
-                          fontWeight: FontWeight.w500,
+                          fontWeight: FontWeight.w600,
                           fontSize: 20,
                         ),
                       ),
+                      SizedBox(height: 8),
                       Text(
                         'Recivied in: September 16, 2023',
                         style: TextStyle(color: Colors.grey),
@@ -240,7 +244,37 @@ class _PaymentsPageState extends State<PaymentsPage> {
             ),
           ),
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height: 16),
+        Container(
+          padding: const EdgeInsets.all(16),
+          height: 93,
+          width: MediaQuery.of(context).size.width * 0.85,
+          decoration: const BoxDecoration(
+            color: Color.fromRGBO(229, 229, 229, 1),
+            borderRadius: BorderRadius.all(Radius.circular(16)),
+          ),
+          child: const Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Total:',
+                style: TextStyle(
+                  fontWeight: FontWeight.w500,
+                  fontSize: 18,
+                ),
+              ),
+              SizedBox(height: 10),
+              Text(
+                '\$ 180.00',
+                style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 24,
+                ),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 16),
       ],
     );
   }

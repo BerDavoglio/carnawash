@@ -12,6 +12,7 @@ class SchedulesPage extends StatefulWidget {
 
 class _SchedulesPageState extends State<SchedulesPage> {
   DateTime today = DateTime.now();
+  List status = ['Accept', Colors.amber, 'Reject'];
 
   void _onDaySelected(DateTime day, DateTime focusedDay) {
     setState(() {
@@ -93,22 +94,38 @@ class _SchedulesPageState extends State<SchedulesPage> {
         color: Colors.white,
       ),
       child: Padding(
-        padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.only(
+          right: 16,
+          left: 16,
+          bottom: 16,
+          top: 8,
+        ),
         child: Column(
           children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'September 10, 2023 - 10:00 am',
-                  style: TextStyle(fontWeight: FontWeight.w500),
-                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text(
-                      'Costumer: Jorge',
-                      style: TextStyle(fontWeight: FontWeight.w500),
+                    const Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Costumer: Jorge',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 14,
+                          ),
+                        ),
+                        Text(
+                          'September 10, 2023 - 10:00 am',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ],
                     ),
                     TextButton(
                       style: ButtonStyle(
@@ -121,25 +138,44 @@ class _SchedulesPageState extends State<SchedulesPage> {
                         'View',
                         style: TextStyle(
                           color: Colors.black,
+                          decoration: TextDecoration.underline,
+                          fontSize: 16,
                         ),
                       ),
                     ),
                   ],
                 ),
                 const Padding(
-                  padding: EdgeInsets.only(bottom: 10),
+                  padding: EdgeInsets.only(bottom: 16),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Nissan - March',
-                              style: TextStyle(color: Colors.grey)),
-                          Text('3SAM123', style: TextStyle(color: Colors.grey)),
-                          Text('Monaco St., Bundall',
-                              style: TextStyle(color: Colors.grey)),
-                          Text('Small', style: TextStyle(color: Colors.grey)),
+                          Text('Nissan - March - Small',
+                              style: TextStyle(
+                                color: Colors.grey,
+                                fontWeight: FontWeight.w500,
+                              )),
+                          Text('3SAM123',
+                              style: TextStyle(
+                                color: Colors.grey,
+                                fontWeight: FontWeight.w500,
+                              )),
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.location_on_outlined,
+                                size: 16,
+                                color: Colors.amber,
+                              ),
+                              Text(
+                                'Monaco St, Bundall',
+                                style: TextStyle(color: Colors.grey),
+                              ),
+                            ],
+                          ),
                           Text('+ Pet Small',
                               style: TextStyle(color: Colors.grey)),
                         ],
@@ -154,7 +190,7 @@ class _SchedulesPageState extends State<SchedulesPage> {
                       Size(MediaQuery.of(context).size.width * 0.85, 50),
                     ),
                     backgroundColor: MaterialStateProperty.all<Color>(
-                      Colors.amber,
+                      status[1],
                     ),
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
@@ -162,10 +198,38 @@ class _SchedulesPageState extends State<SchedulesPage> {
                       ),
                     ),
                   ),
-                  onPressed: () {},
-                  child: const Text(
-                    'Accept',
-                    style: TextStyle(
+                  onPressed: () {
+                    setState(() {
+                      if (status[0] == 'Accept') {
+                        status = [
+                          'Accepted',
+                          Colors.grey,
+                          'Cancel',
+                        ];
+                      } else if (status[0] == 'Accepted') {
+                        status = [
+                          'Start',
+                          Colors.green,
+                          'Cancel',
+                        ];
+                      } else if (status[0] == 'Start') {
+                        status = [
+                          'Finish',
+                          Colors.blue,
+                          '',
+                        ];
+                      } else if (status[0] == 'Finish') {
+                        status = [
+                          'Accept',
+                          Colors.amber,
+                          'Reject',
+                        ];
+                      }
+                    });
+                  },
+                  child: Text(
+                    status[0],
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                     ),
@@ -173,15 +237,18 @@ class _SchedulesPageState extends State<SchedulesPage> {
                 ),
               ],
             ),
-            const Padding(
-              padding: EdgeInsets.only(top: 10),
-              child: Text(
-                'Reject',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
+            status[2] != ''
+                ? Padding(
+                    padding: const EdgeInsets.only(top: 16),
+                    child: Text(
+                      status[2],
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.red,
+                      ),
+                    ),
+                  )
+                : const SizedBox(),
           ],
         ),
       ),
