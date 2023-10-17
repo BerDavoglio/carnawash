@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
         AppRoutes.SUPPLY: (_) => const SupplyPage(),
         AppRoutes.PAYMENTS: (_) => const PaymentsPage(),
         AppRoutes.HELP: (_) => const HelpPage(),
+        AppRoutes.HELP_CHAT: (_) => const HelpChatPage(),
         AppRoutes.PERFIL: (_) => const PerfilPage(),
         AppRoutes.ACCOUNT: (_) => const AccountPage(),
         AppRoutes.WALLET: (_) => const WalletPage(),

@@ -62,13 +62,16 @@ class HelpPage extends StatelessWidget {
                           backgroundColor: MaterialStateProperty.all<Color>(
                             Colors.amber,
                           ),
-                          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(5),
                             ),
                           ),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).pushNamed(AppRoutes.HELP_CHAT);
+                        },
                         child: const Text(
                           'Chat',
                           style: TextStyle(

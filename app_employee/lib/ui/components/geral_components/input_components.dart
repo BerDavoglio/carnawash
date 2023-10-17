@@ -146,6 +146,33 @@ Widget geralInativeIconTextInput({
   );
 }
 
+Widget chatTextInput({
+  required BuildContext context,
+  required String text,
+  required TextEditingController textController,
+  TextInputType type = TextInputType.text,
+  double larg = 0.7,
+}) {
+  return Column(
+    children: [
+      SizedBox(
+        width: MediaQuery.of(context).size.width * larg,
+        child: TextFormField(
+          decoration: InputDecoration(
+            contentPadding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+            filled: true,
+            fillColor: Colors.white,
+            border: const OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10))),
+            hintText: text,
+          ),
+          controller: textController,
+        ),
+      ),
+    ],
+  );
+}
+
 Widget passwordTextInput(
   BuildContext context,
   TextEditingController textController,

@@ -2,6 +2,7 @@ export './account_page.dart';
 export './availability_page.dart';
 export './first_login_home_page.dart';
 export './help_page.dart';
+export './help_chat_page.dart';
 export './payments_page.dart';
 export './home_page.dart';
 export './language_page.dart';

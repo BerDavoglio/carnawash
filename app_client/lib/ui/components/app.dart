@@ -21,6 +21,7 @@ class MyApp extends StatelessWidget {
         AppRoutes.RATING: (_) => const RatingPage(),
         AppRoutes.HISTORY: (_) => const HistoryPage(),
         AppRoutes.HELP: (_) => const HelpPage(),
+        AppRoutes.HELP_CHAT: (_) => const HelpChatPage(),
         AppRoutes.PERFIL: (_) => const PerfilPage(),
         AppRoutes.ACCOUNT: (_) => const AccountPage(),
         AppRoutes.VEHICLES: (_) => const VehiclesPage(),
