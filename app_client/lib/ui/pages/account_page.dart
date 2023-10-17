@@ -50,7 +50,7 @@ class _AccountPageState extends State<AccountPage> {
                       notificationGeralButtonComponent(context),
                     ],
                   ),
-                  const SizedBox(height: 15),
+                  const SizedBox(height: 16),
                   !edit
                       ? Column(
                           children: [

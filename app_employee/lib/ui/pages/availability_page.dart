@@ -136,7 +136,7 @@ class _AvailabilityPageState extends State<AvailabilityPage> {
                       notificationGeralButtonComponent(context),
                     ],
                   ),
-                  const SizedBox(height: 15),
+                  const SizedBox(height: 16),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -400,7 +400,7 @@ class _AvailabilityPageState extends State<AvailabilityPage> {
                 ),
               )
             : const SizedBox(),
-        const SizedBox(height: 10),
+        const SizedBox(height: 16),
       ],
     );
   }

@@ -48,7 +48,7 @@ class _PaymentsPageState extends State<PaymentsPage> {
                       notificationGeralButtonComponent(context),
                     ],
                   ),
-                  const SizedBox(height: 15),
+                  const SizedBox(height: 16),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -59,7 +59,7 @@ class _PaymentsPageState extends State<PaymentsPage> {
                           fontWeight: FontWeight.w400,
                         ),
                       ),
-                      const SizedBox(height: 10),
+                      const SizedBox(height: 16),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -263,7 +263,7 @@ class _PaymentsPageState extends State<PaymentsPage> {
                   fontSize: 18,
                 ),
               ),
-              SizedBox(height: 10),
+              SizedBox(height: 16),
               Text(
                 '\$ 180.00',
                 style: TextStyle(

@@ -381,7 +381,7 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           const Text('We have recivied you information.'),
-          const SizedBox(height: 10),
+          const SizedBox(height: 16),
           const Text(
               'You will receive a notification via the app once you access is activate'),
         ],

@@ -68,7 +68,7 @@ class _WalletEditPageState extends State<WalletEditPage> {
                       notificationGeralButtonComponent(context),
                     ],
                   ),
-                  const SizedBox(height: 15),
+                  const SizedBox(height: 16),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

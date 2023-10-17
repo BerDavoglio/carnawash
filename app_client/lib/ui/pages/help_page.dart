@@ -47,12 +47,12 @@ class HelpPage extends StatelessWidget {
                         'Talk to us!',
                         style: TextStyle(fontWeight: FontWeight.w400),
                       ),
-                      const SizedBox(height: 10),
+                      const SizedBox(height: 16),
                       const Text(
                         'Do you need any help? Call us via chat, to find out your previous chat, please go to the history dashboard.',
                         style: TextStyle(color: Colors.grey),
                       ),
-                      const SizedBox(height: 10),
+                      const SizedBox(height: 16),
                       TextButton(
                         style: ButtonStyle(
                           elevation: MaterialStateProperty.all(5),

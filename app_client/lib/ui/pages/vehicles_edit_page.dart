@@ -77,7 +77,7 @@ class _VehiclesEditPageState extends State<VehiclesEditPage> {
                       notificationGeralButtonComponent(context),
                     ],
                   ),
-                  const SizedBox(height: 15),
+                  const SizedBox(height: 16),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -119,7 +119,7 @@ class _VehiclesEditPageState extends State<VehiclesEditPage> {
                               }),
                             ),
                           ),
-                          const SizedBox(height: 10),
+                          const SizedBox(height: 16),
                           Container(
                             width: MediaQuery.of(context).size.width * 0.85,
                             decoration: BoxDecoration(

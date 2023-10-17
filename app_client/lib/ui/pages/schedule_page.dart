@@ -131,7 +131,7 @@ class _SchedulePageState extends State<SchedulePage> {
                       notificationGeralButtonComponent(context),
                     ],
                   ),
-                  const SizedBox(height: 15),
+                  const SizedBox(height: 16),
                   n == 1
                       ? firstPart(context)
                       : n == 2
@@ -175,7 +175,7 @@ class _SchedulePageState extends State<SchedulePage> {
                             });
                           },
                         ),
-                  const SizedBox(height: 15),
+                  const SizedBox(height: 16),
                 ],
               ),
             ),
@@ -200,7 +200,7 @@ class _SchedulePageState extends State<SchedulePage> {
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              SizedBox(height: 10),
+              SizedBox(height: 16),
               Text(
                 'Schedule up to 3 cars at once. For schedule more than than 3 cars, contact support through our chat.',
                 style: TextStyle(
@@ -276,7 +276,7 @@ class _SchedulePageState extends State<SchedulePage> {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                SizedBox(height: 10),
+                SizedBox(height: 16),
                 Text(
                   'March',
                   style: TextStyle(
@@ -295,7 +295,7 @@ class _SchedulePageState extends State<SchedulePage> {
                     color: Colors.grey,
                   ),
                 ),
-                SizedBox(height: 10),
+                SizedBox(height: 16),
                 Text(
                   'Small',
                   style: TextStyle(
@@ -344,7 +344,7 @@ class _SchedulePageState extends State<SchedulePage> {
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 16),
               Row(
                 children: [
                   SizedBox(
@@ -365,12 +365,12 @@ class _SchedulePageState extends State<SchedulePage> {
                   ),
                 ],
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 16),
               geralInativeTextInput(context: context, text: 'Nissan'),
               geralInativeTextInput(context: context, text: 'March'),
               geralInativeTextInput(context: context, text: 'Red'),
               geralInativeTextInput(context: context, text: '3SAM123'),
-              const SizedBox(height: 10),
+              const SizedBox(height: 16),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -530,7 +530,7 @@ class _SchedulePageState extends State<SchedulePage> {
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 16),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -543,7 +543,7 @@ class _SchedulePageState extends State<SchedulePage> {
                         icon: Icons.pets_outlined,
                         value: '15.00',
                       ),
-                      const SizedBox(height: 10),
+                      const SizedBox(height: 16),
                       additionalBoxComponent(
                         context: context,
                         text: 'Extra Dirty',
@@ -560,7 +560,7 @@ class _SchedulePageState extends State<SchedulePage> {
                         icon: Icons.airline_seat_recline_normal,
                         value: '15.00',
                       ),
-                      const SizedBox(height: 10),
+                      const SizedBox(height: 16),
                       additionalBoxComponent(
                         context: context,
                         text: 'Heavy Dirty',
@@ -571,7 +571,7 @@ class _SchedulePageState extends State<SchedulePage> {
                   ),
                 ],
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 16),
               Container(
                 width: MediaQuery.of(context).size.width * 0.85,
                 decoration: BoxDecoration(
@@ -600,7 +600,7 @@ class _SchedulePageState extends State<SchedulePage> {
                   ),
                 ),
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 16),
             ],
           ),
         ),
@@ -678,7 +678,7 @@ class _SchedulePageState extends State<SchedulePage> {
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 16),
               TableCalendar(
                 locale: 'pt_BR',
                 headerStyle: const HeaderStyle(
@@ -698,7 +698,7 @@ class _SchedulePageState extends State<SchedulePage> {
                 ),
                 child: const Text('Select Time'),
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 16),
               const Text(
                 'Enter the address',
                 style: TextStyle(
@@ -706,7 +706,7 @@ class _SchedulePageState extends State<SchedulePage> {
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 16),
               geralTextInput(
                 context: context,
                 text: 'Address',
@@ -739,7 +739,7 @@ class _SchedulePageState extends State<SchedulePage> {
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 16),
               Row(
                 children: [
                   SizedBox(
@@ -760,7 +760,7 @@ class _SchedulePageState extends State<SchedulePage> {
                   ),
                 ],
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 16),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -801,9 +801,9 @@ class _SchedulePageState extends State<SchedulePage> {
               ),
               const Column(
                 children: [
-                  SizedBox(height: 10),
+                  SizedBox(height: 16),
                   Divider(),
-                  SizedBox(height: 10),
+                  SizedBox(height: 16),
                 ],
               ),
               const Row(
@@ -831,9 +831,9 @@ class _SchedulePageState extends State<SchedulePage> {
               ),
               const Column(
                 children: [
-                  SizedBox(height: 10),
+                  SizedBox(height: 16),
                   Divider(),
-                  SizedBox(height: 10),
+                  SizedBox(height: 16),
                 ],
               ),
               Row(
@@ -876,9 +876,9 @@ class _SchedulePageState extends State<SchedulePage> {
               ),
               const Column(
                 children: [
-                  SizedBox(height: 10),
+                  SizedBox(height: 16),
                   Divider(),
-                  SizedBox(height: 10),
+                  SizedBox(height: 16),
                 ],
               ),
               const Column(
@@ -901,9 +901,9 @@ class _SchedulePageState extends State<SchedulePage> {
               ),
               const Column(
                 children: [
-                  SizedBox(height: 10),
+                  SizedBox(height: 16),
                   Divider(),
-                  SizedBox(height: 10),
+                  SizedBox(height: 16),
                 ],
               ),
               Container(
@@ -934,7 +934,7 @@ class _SchedulePageState extends State<SchedulePage> {
                   ),
                 ),
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 16),
             ],
           ),
         ),
@@ -961,7 +961,7 @@ class _SchedulePageState extends State<SchedulePage> {
                       fontWeight: FontWeight.w400,
                     ),
                   ),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 16),
                   geralTextInput(
                     context: context,
                     text: 'Type the code',
@@ -1061,7 +1061,7 @@ class _SchedulePageState extends State<SchedulePage> {
             ],
           ),
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height: 16),
       ],
     );
   }

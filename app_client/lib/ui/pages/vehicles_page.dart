@@ -45,7 +45,7 @@ class _VehiclesPageState extends State<VehiclesPage> {
                       notificationGeralButtonComponent(context),
                     ],
                   ),
-                  const SizedBox(height: 15),
+                  const SizedBox(height: 16),
                   Column(
                     children: [
                       vehicleBox(),
@@ -142,7 +142,7 @@ class _VehiclesPageState extends State<VehiclesPage> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 16),
                 const Text(
                   'Mach',
                   style: TextStyle(
@@ -175,7 +175,7 @@ class _VehiclesPageState extends State<VehiclesPage> {
             ),
           ),
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height: 16),
       ],
     );
   }

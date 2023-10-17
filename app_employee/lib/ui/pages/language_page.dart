@@ -54,7 +54,7 @@ class _LanguagePageState extends State<LanguagePage> {
                       notificationGeralButtonComponent(context),
                     ],
                   ),
-                  const SizedBox(height: 15),
+                  const SizedBox(height: 16),
                   const Text(
                     'Select your language',
                     style: TextStyle(

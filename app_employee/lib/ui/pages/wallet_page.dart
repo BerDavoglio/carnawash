@@ -45,7 +45,7 @@ class _WalletPageState extends State<WalletPage> {
                       notificationGeralButtonComponent(context),
                     ],
                   ),
-                  const SizedBox(height: 15),
+                  const SizedBox(height: 16),
                   Column(
                     children: [
                       creditcardBox(),
@@ -177,7 +177,7 @@ class _WalletPageState extends State<WalletPage> {
             ),
           ),
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height: 16),
       ],
     );
   }

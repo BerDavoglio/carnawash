@@ -55,7 +55,7 @@ class _WashRequestPageState extends State<WashRequestPage> {
                           fontWeight: FontWeight.w500,
                         ),
                       ),
-                      const SizedBox(height: 10),
+                      const SizedBox(height: 16),
                       const Text(
                         'Customer: Jorge',
                         style: TextStyle(
@@ -85,7 +85,7 @@ class _WashRequestPageState extends State<WashRequestPage> {
                                 fontSize: 18,
                               ),
                             ),
-                            SizedBox(height: 10),
+                            SizedBox(height: 16),
                             Text(
                               '\$ 180.00',
                               style: TextStyle(
@@ -230,7 +230,7 @@ class _WashRequestPageState extends State<WashRequestPage> {
                 fontWeight: FontWeight.w500,
               ),
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 16),
             const Text(
               '\$ 60.00',
               style: TextStyle(

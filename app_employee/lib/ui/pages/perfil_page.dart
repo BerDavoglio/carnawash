@@ -46,7 +46,7 @@ class _PerfilPageState extends State<PerfilPage> {
                   ),
                   const SizedBox(height: 25),
                   const Divider(),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 16),
                   const Padding(
                     padding: EdgeInsets.symmetric(vertical: 10),
                     child: Column(
@@ -68,7 +68,7 @@ class _PerfilPageState extends State<PerfilPage> {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 16),
                   const Divider(),
                   const SizedBox(height: 25),
                   profileButton(

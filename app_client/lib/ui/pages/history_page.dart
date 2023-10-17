@@ -49,7 +49,7 @@ class _HistoryPageState extends State<HistoryPage> {
                         notificationGeralButtonComponent(context),
                       ],
                     ),
-                    const SizedBox(height: 15),
+                    const SizedBox(height: 16),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -60,7 +60,7 @@ class _HistoryPageState extends State<HistoryPage> {
                             fontWeight: FontWeight.w400,
                           ),
                         ),
-                        const SizedBox(height: 10),
+                        const SizedBox(height: 16),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
@@ -196,7 +196,7 @@ class _HistoryPageState extends State<HistoryPage> {
             ),
           ),
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height: 16),
       ],
     );
   }

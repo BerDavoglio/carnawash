@@ -38,7 +38,7 @@ class _NotificationPageState extends State<NotificationPage> {
                       )
                     ],
                   ),
-                  const SizedBox(height: 15),
+                  const SizedBox(height: 16),
                   notificationBox(
                     context,
                     'Support responded to chat',

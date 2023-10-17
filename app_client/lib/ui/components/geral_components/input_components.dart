@@ -50,7 +50,7 @@ Widget geralMultilineTextInput({
           controller: textController,
         ),
       ),
-      const SizedBox(height: 10),
+      const SizedBox(height: 16),
     ],
   );
 }

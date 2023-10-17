@@ -55,7 +55,7 @@ class _SchedulesPageState extends State<SchedulesPage> {
                       notificationGeralButtonComponent(context),
                     ],
                   ),
-                  const SizedBox(height: 15),
+                  const SizedBox(height: 16),
                   TableCalendar(
                     locale: 'pt_BR',
                     headerStyle: const HeaderStyle(
@@ -68,16 +68,16 @@ class _SchedulesPageState extends State<SchedulesPage> {
                     selectedDayPredicate: (day) => isSameDay(day, today),
                     onDaySelected: _onDaySelected,
                   ),
-                  const SizedBox(height: 15),
+                  const SizedBox(height: 16),
                   const Text(
                     'Booking date:',
                     style: TextStyle(
                       fontWeight: FontWeight.w400,
                     ),
                   ),
-                  const SizedBox(height: 15),
+                  const SizedBox(height: 16),
                   scheduleBox(context),
-                  const SizedBox(height: 15),
+                  const SizedBox(height: 16),
                 ],
               ),
             ),

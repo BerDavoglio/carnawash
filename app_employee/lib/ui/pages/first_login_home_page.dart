@@ -303,7 +303,7 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
             ),
           ),
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height: 16),
       ],
     );
   }
@@ -359,35 +359,35 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
                   fontSize: 16,
                 ),
               ),
-              SizedBox(height: 15),
+              SizedBox(height: 16),
               Text(
                 'Please find some easier and faster the following steps to start working with Carnawash!',
                 style: TextStyle(
                   fontSize: 16,
                 ),
               ),
-              SizedBox(height: 15),
+              SizedBox(height: 16),
               Text(
                 '1. Attended Carnawash Induction Day.',
                 style: TextStyle(
                   fontSize: 16,
                 ),
               ),
-              SizedBox(height: 15),
+              SizedBox(height: 16),
               Text(
                 "2. Watch our short video to complete our quiz assessment required by clicking on the bottom below Let's start.",
                 style: TextStyle(
                   fontSize: 16,
                 ),
               ),
-              SizedBox(height: 15),
+              SizedBox(height: 16),
               Text(
                 '3. Finalize the registration process by providing your information and confirming your availability to work.',
                 style: TextStyle(
                   fontSize: 16,
                 ),
               ),
-              SizedBox(height: 15),
+              SizedBox(height: 16),
               RichText(
                 textAlign: TextAlign.left,
                 text: TextSpan(
@@ -416,28 +416,28 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
                   ],
                 ),
               ),
-              SizedBox(height: 15),
+              SizedBox(height: 16),
               Text(
                 'Carnawash will activate your profile to connect you to customers once you are ready to go to start working with our supervisors.',
                 style: TextStyle(
                   fontSize: 16,
                 ),
               ),
-              SizedBox(height: 15),
+              SizedBox(height: 16),
               Text(
                 'You will be able to access and receive our start-up pack from your app after you are approved by our supervisors to work independently.',
                 style: TextStyle(
                   fontSize: 16,
                 ),
               ),
-              SizedBox(height: 15),
+              SizedBox(height: 16),
               Text(
                 "If you have any queries, please don't hesitate to contact us at admin@carnawashapp.com or call 1300 807 389 (press 3 for Carnawash workers).",
                 style: TextStyle(
                   fontSize: 16,
                 ),
               ),
-              SizedBox(height: 15),
+              SizedBox(height: 16),
               Text(
                 'Good luck!',
                 style: TextStyle(
@@ -455,7 +455,7 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
             ],
           ),
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height: 16),
       ],
     );
   }
@@ -508,7 +508,7 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
                   notificationGeralButtonComponent(context),
                 ],
               ),
-              const SizedBox(height: 15),
+              const SizedBox(height: 16),
               Row(
                 children: [
                   circularIndex('1', oneTrue),
@@ -516,14 +516,14 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
                   circularIndex('3', threeTrue),
                 ],
               ),
-              const SizedBox(height: 15),
+              const SizedBox(height: 16),
               const Text(
                 'Quiz',
                 style: TextStyle(fontWeight: FontWeight.w500),
               ),
-              const SizedBox(height: 15),
+              const SizedBox(height: 16),
               const Text('Watch the video and answer the quiz below'),
-              const SizedBox(height: 15),
+              const SizedBox(height: 16),
               InkWell(
                 onTap: () {},
                 child: const Text(
@@ -620,7 +620,7 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
                   notificationGeralButtonComponent(context),
                 ],
               ),
-              const SizedBox(height: 15),
+              const SizedBox(height: 16),
               Row(
                 children: [
                   circularIndex('1', oneTrue),
@@ -628,14 +628,14 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
                   circularIndex('3', threeTrue),
                 ],
               ),
-              const SizedBox(height: 15),
+              const SizedBox(height: 16),
               const Text(
                 'Questions',
                 style: TextStyle(
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              const SizedBox(height: 15),
+              const SizedBox(height: 16),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -657,7 +657,7 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
                   ),
                 ],
               ),
-              const SizedBox(height: 15),
+              const SizedBox(height: 16),
               Column(
                 children: List.generate(
                   chunk(questionList, 4)[questionValue].length,
@@ -731,7 +731,7 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
             },
           ),
         ),
-        const SizedBox(height: 15),
+        const SizedBox(height: 16),
       ],
     );
   }
@@ -797,7 +797,7 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
                   notificationGeralButtonComponent(context),
                 ],
               ),
-              const SizedBox(height: 15),
+              const SizedBox(height: 16),
               Row(
                 children: [
                   circularIndex('1', oneTrue),
@@ -805,12 +805,12 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
                   circularIndex('3', threeTrue),
                 ],
               ),
-              const SizedBox(height: 15),
+              const SizedBox(height: 16),
               const Text(
                 'Quiz',
                 style: TextStyle(fontWeight: FontWeight.w500),
               ),
-              const SizedBox(height: 15),
+              const SizedBox(height: 16),
               const Text('Congratulations!\nYou got 80% of the quiz right.'),
             ],
           ),
@@ -870,7 +870,7 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
                   notificationGeralButtonComponent(context),
                 ],
               ),
-              const SizedBox(height: 15),
+              const SizedBox(height: 16),
               Row(
                 children: [
                   circularIndex('1', oneTrue),
@@ -878,14 +878,14 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
                   circularIndex('3', threeTrue),
                 ],
               ),
-              const SizedBox(height: 15),
+              const SizedBox(height: 16),
               const Text(
                 'Contractor Insurance',
                 style: TextStyle(fontWeight: FontWeight.w500),
               ),
-              const SizedBox(height: 15),
+              const SizedBox(height: 16),
               const Text('Attach your insurance contract here'),
-              const SizedBox(height: 15),
+              const SizedBox(height: 16),
               geralIconTextInput(
                 context: context,
                 text: "Insurance Contract",
@@ -950,7 +950,7 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
                   notificationGeralButtonComponent(context),
                 ],
               ),
-              const SizedBox(height: 15),
+              const SizedBox(height: 16),
               Row(
                 children: [
                   circularIndex('1', oneTrue),
@@ -958,12 +958,12 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
                   circularIndex('3', threeTrue),
                 ],
               ),
-              const SizedBox(height: 15),
+              const SizedBox(height: 16),
               const Text(
                 'Set your current availability',
                 style: TextStyle(fontWeight: FontWeight.w500),
               ),
-              const SizedBox(height: 15),
+              const SizedBox(height: 16),
               faqBox(context, 0),
               faqBox(context, 1),
               faqBox(context, 2),
@@ -971,7 +971,7 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
               faqBox(context, 4),
               faqBox(context, 5),
               faqBox(context, 6),
-              const SizedBox(height: 15),
+              const SizedBox(height: 16),
             ],
           ),
         ),
@@ -1170,7 +1170,7 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
                 ),
               )
             : const SizedBox(),
-        const SizedBox(height: 10),
+        const SizedBox(height: 16),
       ],
     );
   }
@@ -1226,7 +1226,7 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
                   notificationGeralButtonComponent(context),
                 ],
               ),
-              const SizedBox(height: 15),
+              const SizedBox(height: 16),
               Center(
                 child: Column(
                   children: [

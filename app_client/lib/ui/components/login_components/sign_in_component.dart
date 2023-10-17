@@ -105,7 +105,7 @@ class _SignInComponentState extends State<SignInComponent> {
             ),
           ),
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height: 16),
       ],
     );
   }

@@ -75,7 +75,7 @@ class _FAQPageState extends State<FAQPage> {
                       notificationGeralButtonComponent(context),
                     ],
                   ),
-                  const SizedBox(height: 15),
+                  const SizedBox(height: 16),
                   geralIconTextInput(
                     context: context,
                     text: 'Search',
@@ -168,7 +168,7 @@ class _FAQPageState extends State<FAQPage> {
                 ),
               )
             : const SizedBox(),
-        const SizedBox(height: 10),
+        const SizedBox(height: 16),
       ],
     );
   }
