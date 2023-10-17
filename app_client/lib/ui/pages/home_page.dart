@@ -276,7 +276,9 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).pushNamed(AppRoutes.SUBSCRIPTION);
+                    },
                     child: const Text(
                       'Subscribe',
                       style: TextStyle(

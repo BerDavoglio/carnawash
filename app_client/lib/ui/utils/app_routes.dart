@@ -5,6 +5,7 @@ class AppRoutes {
   static const LOGIN = '/login';
   static const SCHEDULE = '/schedule';
   static const SCHEDULES = '/schedules';
+  static const SUBSCRIPTION = '/subscription';
   static const RATING = '/rating';
   static const HISTORY = '/history';
   static const HELP = '/help';

@@ -18,6 +18,7 @@ class MyApp extends StatelessWidget {
         AppRoutes.HOME: (_) => const HomePage(),
         AppRoutes.LOGIN: (_) => const LoginPage(),
         AppRoutes.SCHEDULES: (_) => const SchedulesPage(),
+        AppRoutes.SUBSCRIPTION: (_) => const SubscriptionPage(),
         AppRoutes.RATING: (_) => const RatingPage(),
         AppRoutes.HISTORY: (_) => const HistoryPage(),
         AppRoutes.HELP: (_) => const HelpPage(),

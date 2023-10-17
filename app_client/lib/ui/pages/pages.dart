@@ -12,6 +12,7 @@ export './perfil_page.dart';
 export './rating_page.dart';
 export './schedule_page.dart';
 export './schedules_page.dart';
+export './subscription_page.dart';
 export './terms_conditions_page.dart';
 export './vehicles_edit_page.dart';
 export './vehicles_page.dart';
