@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:iconify_flutter/iconify_flutter.dart';
+import 'package:iconify_flutter/icons/ri.dart';
 
 import '../ui.dart';
 
@@ -369,21 +371,47 @@ class _HomePageState extends State<HomePage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20),
+            padding: const EdgeInsets.symmetric(vertical: 32),
             child: Row(
               children: [
-                Icon(Icons.circle, color: Colors.blue[600]!, size: 30),
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: const BoxDecoration(
+                    color: Color.fromRGBO(16, 126, 196, 0.2),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(100),
+                    ),
+                  ),
+                  child: const Iconify(
+                    Ri.loader_2_fill,
+                  ),
+                ),
                 const SizedBox(width: 10),
-                const Text('Your information is processing',
-                    style:
-                        TextStyle(fontWeight: FontWeight.w500, fontSize: 16)),
+                const Text(
+                  'Your information is processing',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                    fontSize: 16,
+                  ),
+                ),
               ],
             ),
           ),
-          const Text('We have recivied you information.'),
+          const Text(
+            'We have recivied you information.',
+            style: TextStyle(
+              fontWeight: FontWeight.w300,
+              fontSize: 16,
+            ),
+          ),
           const SizedBox(height: 16),
           const Text(
-              'You will receive a notification via the app once you access is activate'),
+            'You will receive a notification via the app once you access is activate',
+            style: TextStyle(
+              fontWeight: FontWeight.w300,
+              fontSize: 16,
+            ),
+          ),
         ],
       ),
     );

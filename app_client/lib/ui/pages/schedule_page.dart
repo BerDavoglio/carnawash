@@ -946,7 +946,7 @@ class _SchedulePageState extends State<SchedulePage> {
     return Column(
       children: [
         SizedBox(
-          height: MediaQuery.of(context).size.height * 0.675,
+          height: MediaQuery.of(context).size.height - 205,
           width: MediaQuery.of(context).size.width * 0.85,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

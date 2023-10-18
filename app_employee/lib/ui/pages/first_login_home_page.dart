@@ -400,7 +400,7 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
                       recognizer: TapGestureRecognizer()
                         ..onTap = () =>
                             Navigator.of(context).pushNamed(AppRoutes.TERMS),
-                      text: 'Terms of Service',
+                      text: 'CONTRACTOR INSURANCE APPLICATION FORM',
                       style: const TextStyle(
                         color: Colors.blue,
                         decoration: TextDecoration.underline,

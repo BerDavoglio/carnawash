@@ -127,9 +127,9 @@ class _HomePageState extends State<HomePage> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Image(
-                            width: MediaQuery.of(context).size.width * 0.45,
-                            image: const AssetImage('images/car.png'),
+                          const Image(
+                            alignment: Alignment.centerLeft,
+                            image: AssetImage('images/car.png'),
                           ),
                           Padding(
                             padding: const EdgeInsets.only(right: 5),
@@ -138,7 +138,7 @@ class _HomePageState extends State<HomePage> {
                               children: [
                                 SizedBox(
                                   width:
-                                      MediaQuery.of(context).size.width * 0.385,
+                                      MediaQuery.of(context).size.width * 0.35,
                                   child: Column(
                                     children: [
                                       const Text(
@@ -146,7 +146,7 @@ class _HomePageState extends State<HomePage> {
                                         'Get 10% off your next wash with the coupon.',
                                         style: TextStyle(
                                           color: Colors.white,
-                                          fontSize: 12,
+                                          fontSize: 16,
                                           fontWeight: FontWeight.w500,
                                         ),
                                       ),
