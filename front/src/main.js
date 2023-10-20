@@ -25,6 +25,7 @@ import {
   BiDownload,
   MdEditOutlined,
   MdUploadfile,
+  BiEyeSlash,
 } from 'oh-vue-icons/icons';
 
 import TextClamp from 'vue3-text-clamp';
@@ -54,6 +55,7 @@ addIcons(
   BiDownload,
   MdEditOutlined,
   MdUploadfile,
+  BiEyeSlash,
 );
 
 createApp(App)

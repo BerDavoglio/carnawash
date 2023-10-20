@@ -1,6 +1,6 @@
 <template>
   <div class="terms-box-component">
-    <div className="w-[1500px] h-[775px] py-[18px] px-[24px]
+    <div className="max-w-[1500px] w-full h-[775px] py-[18px] px-[24px]
       border-1 rounded-[8px] shadow-[4px_6px_40px_0px_#00000020]
       mb-[19px]">
       <textarea v-model="question"

@@ -1,5 +1,5 @@
 <template>
-  <div className="home ml-[100px] mr-[70px] my-20">
+  <div className="home">
     <div class="header">
       <div className="grid grid-cols-2 justify-between
          mb-4">

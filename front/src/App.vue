@@ -23,7 +23,8 @@
       <template v-slot:footer>
         <div className="h-[0.5px] w-[90%] mx-auto bg-[#C9C9C9]" />
         <!-- eslint-disable-next-line vuejs-accessibility/click-events-have-key-events -->
-        <div v-show="!isClosed" @click="goPage('login')"
+        <div v-show="!isClosed"
+             @click="goPage('login')"
              className="text-[16px] ml-[40px] my-[28px]
              cursor-pointer">
           <v-icon name="md-logout"
@@ -33,7 +34,10 @@
         </div>
       </template>
     </sidebar-menu>
-    <router-view />
+    <router-view :className="['max-w-[1920px] '
+      + (currentRouteName != 'login' ?
+        (!isClosed ? 'ml-[300px] mr-[70px] my-20 ' : 'ml-[100px] mr-[70px] my-20 ') : '')
+    ]" />
   </div>
 </template>
 

@@ -1,5 +1,5 @@
 <template>
-  <div className="home ml-[100px] mr-[70px] my-20">
+  <div className="home">
     <div class="header">
       <div className="grid grid-cols-2 justify-between
          mb-4">
@@ -9,13 +9,20 @@
       </div>
       <div className="h-[0.5px] w-full mr-70 bg-[#C9C9C9]" />
     </div>
+    <div className="grid grid-cols-2 gap-[51px]">
+      <user-data-component />
+      <password-data-component />
+    </div>
   </div>
 </template>
 
 <script>
+import UserDataComponent from '../components/MyAccountComponents/UserDataComponent.vue';
+import PasswordDataComponent from '../components/MyAccountComponents/PasswordDataComponent.vue';
+
 export default {
   name: 'MyAccountView',
-  components: { },
+  components: { UserDataComponent, PasswordDataComponent },
   data() {
     return {
       isCell: false,
