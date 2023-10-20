@@ -29,7 +29,7 @@ class _HomePageState extends State<HomePage> {
                 Navigator.of(context).pushReplacementNamed(AppRoutes.LOGIN);
               },
               child:
-                  const Text('Logout', style: TextStyle(color: Colors.amber)),
+                  const Text('Logout', style: TextStyle(color: Color.fromRGBO(237, 189, 58, 1))),
             ),
       body: SingleChildScrollView(
         child: Column(
@@ -100,7 +100,7 @@ class _HomePageState extends State<HomePage> {
             rating: 2.75,
             itemBuilder: (context, index) => const Icon(
               Icons.star,
-              color: Colors.amber,
+              color: Color.fromRGBO(237, 189, 58, 1),
             ),
             itemCount: 5,
             itemSize: 40,
@@ -294,7 +294,7 @@ class _HomePageState extends State<HomePage> {
                                 children: [
                                   Icon(
                                     Icons.location_on_outlined,
-                                    color: Colors.amber,
+                                    color: Color.fromRGBO(237, 189, 58, 1),
                                   ),
                                   Text(
                                     'Monaco St, Bundall',
@@ -343,7 +343,7 @@ class _HomePageState extends State<HomePage> {
                             child: const Text(
                               'View more information',
                               style: TextStyle(
-                                color: Colors.amber,
+                                color: Color.fromRGBO(237, 189, 58, 1),
                               ),
                             ),
                           ),

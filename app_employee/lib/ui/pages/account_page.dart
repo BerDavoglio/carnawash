@@ -161,7 +161,7 @@ class _AccountPageState extends State<AccountPage> {
                               child: const Text(
                                 'Edit Information',
                                 style: TextStyle(
-                                  color: Colors.amber,
+                                  color: Color.fromRGBO(237, 189, 58, 1),
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -272,7 +272,7 @@ class _AccountPageState extends State<AccountPage> {
                                   Size(MediaQuery.of(context).size.width * 0.85, 50),
                                 ),
                                 backgroundColor: MaterialStateProperty.all<Color>(
-                                  Colors.amber,
+                                  const Color.fromRGBO(237, 189, 58, 1),
                                 ),
                                 shape: MaterialStateProperty.all<
                                     RoundedRectangleBorder>(

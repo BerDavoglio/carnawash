@@ -50,7 +50,7 @@ class _NotificationConfigPageState extends State<NotificationConfigPage> {
                     children: [
                       Switch(
                         value: enable,
-                        activeColor: Colors.amber,
+                        activeColor: const Color.fromRGBO(237, 189, 58, 1),
                         onChanged: (bool value) {
                           setState(() {
                             enable = value;

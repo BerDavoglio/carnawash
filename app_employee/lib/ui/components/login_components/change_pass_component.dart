@@ -62,7 +62,7 @@ class _ChangePassComponentState extends State<ChangePassComponent> {
           padding: const EdgeInsets.all(5),
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.amber,
+                backgroundColor: const Color.fromRGBO(237, 189, 58, 1),
                 fixedSize: Size(MediaQuery.of(context).size.width * 0.85, 50)),
             onPressed: () {},
             child: const Text('Next'),

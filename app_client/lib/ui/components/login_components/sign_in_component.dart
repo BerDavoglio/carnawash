@@ -76,7 +76,7 @@ class _SignInComponentState extends State<SignInComponent> {
           padding: const EdgeInsets.only(bottom: 5, left: 5, right: 5),
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.amber,
+                backgroundColor: const Color.fromRGBO(237, 189, 58, 1),
                 fixedSize: Size(MediaQuery.of(context).size.width * 0.85, 50)),
             onPressed: () {
               Navigator.of(context).pushNamed(AppRoutes.HOME);

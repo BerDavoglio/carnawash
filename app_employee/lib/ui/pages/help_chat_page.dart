@@ -159,7 +159,7 @@ class _HelpChatPageState extends State<HelpChatPage> {
                         },
                         icon: const Icon(
                           Icons.send,
-                          color: Colors.amber,
+                          color: Color.fromRGBO(237, 189, 58, 1),
                         ),
                       ),
                     ],

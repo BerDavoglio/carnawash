@@ -107,7 +107,7 @@ class _WashRequestPageState extends State<WashRequestPage> {
                             ),
                           ),
                           backgroundColor: MaterialStateProperty.all<Color>(
-                            Colors.amber,
+                            const Color.fromRGBO(237, 189, 58, 1),
                           ),
                           shape:
                               MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -213,7 +213,7 @@ class _WashRequestPageState extends State<WashRequestPage> {
               children: [
                 Icon(
                   Icons.place_outlined,
-                  color: Colors.amber,
+                  color: Color.fromRGBO(237, 189, 58, 1),
                 ),
                 Text(
                   'Monaco St, Bundall',

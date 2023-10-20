@@ -86,7 +86,7 @@ class _SchedulePageState extends State<SchedulePage> {
                             padding: const EdgeInsets.only(right: 10),
                             child: CircleAvatar(
                               radius: 20,
-                              backgroundColor: Colors.amber,
+                              backgroundColor: const Color.fromRGBO(237, 189, 58, 1),
                               child: IconButton(
                                 iconSize: 24,
                                 color: Colors.white,
@@ -153,7 +153,7 @@ class _SchedulePageState extends State<SchedulePage> {
                                   MediaQuery.of(context).size.width * 0.85, 50),
                             ),
                             backgroundColor: MaterialStateProperty.all<Color>(
-                              Colors.amber,
+                              const Color.fromRGBO(237, 189, 58, 1),
                             ),
                             shape: MaterialStateProperty.all<
                                 RoundedRectangleBorder>(
@@ -239,7 +239,7 @@ class _SchedulePageState extends State<SchedulePage> {
           },
           child: const Text(
             'Choose another car to be washed',
-            style: TextStyle(color: Colors.amber, fontSize: 18),
+            style: TextStyle(color: Color.fromRGBO(237, 189, 58, 1), fontSize: 18),
           ),
         ),
       ],
@@ -694,7 +694,7 @@ class _SchedulePageState extends State<SchedulePage> {
               ElevatedButton(
                 onPressed: _selectTime,
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Colors.amber),
+                  backgroundColor: MaterialStateProperty.all(const Color.fromRGBO(237, 189, 58, 1)),
                 ),
                 child: const Text('Select Time'),
               ),
@@ -1013,7 +1013,7 @@ class _SchedulePageState extends State<SchedulePage> {
                         'Pay with another credit card',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: Colors.amber,
+                          color: Color.fromRGBO(237, 189, 58, 1),
                         ),
                       ),
                     ),

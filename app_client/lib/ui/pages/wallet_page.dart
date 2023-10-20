@@ -67,7 +67,7 @@ class _WalletPageState extends State<WalletPage> {
                           child: const Text(
                             'Register another credit card',
                             style: TextStyle(
-                              color: Colors.amber,
+                              color: Color.fromRGBO(237, 189, 58, 1),
                               fontWeight: FontWeight.bold,
                             ),
                           ),

@@ -116,7 +116,7 @@ class _PerfilPageState extends State<PerfilPage> {
                       child: const Text(
                         'Terms and Conditions',
                         style: TextStyle(
-                          color: Colors.amber,
+                          color: Color.fromRGBO(237, 189, 58, 1),
                           fontSize: 18,
                         ),
                       ),
@@ -131,7 +131,7 @@ class _PerfilPageState extends State<PerfilPage> {
                       child: const Text(
                         'Logout',
                         style: TextStyle(
-                          color: Colors.amber,
+                          color: Color.fromRGBO(237, 189, 58, 1),
                           fontSize: 18,
                         ),
                       ),

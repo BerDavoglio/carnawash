@@ -105,7 +105,7 @@ class _WalletEditPageState extends State<WalletEditPage> {
                               ? const Text(
                                   'Delete this credit card',
                                   style: TextStyle(
-                                    color: Colors.amber,
+                                    color: Color.fromRGBO(237, 189, 58, 1),
                                   ),
                                 )
                               : const SizedBox(),
@@ -121,7 +121,7 @@ class _WalletEditPageState extends State<WalletEditPage> {
                             Size(MediaQuery.of(context).size.width * 0.85, 50),
                           ),
                           backgroundColor: MaterialStateProperty.all<Color>(
-                            Colors.amber,
+                            const Color.fromRGBO(237, 189, 58, 1),
                           ),
                           shape:
                               MaterialStateProperty.all<RoundedRectangleBorder>(

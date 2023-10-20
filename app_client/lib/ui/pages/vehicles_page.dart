@@ -67,7 +67,7 @@ class _VehiclesPageState extends State<VehiclesPage> {
                         child: const Text(
                           'Register another Vehicle',
                           style: TextStyle(
-                            color: Colors.amber,
+                            color: Color.fromRGBO(237, 189, 58, 1),
                             fontWeight: FontWeight.bold,
                           ),
                         ),

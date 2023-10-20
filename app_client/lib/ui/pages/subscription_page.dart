@@ -71,7 +71,7 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
                             padding: const EdgeInsets.only(right: 10),
                             child: CircleAvatar(
                               radius: 20,
-                              backgroundColor: Colors.amber,
+                              backgroundColor: const Color.fromRGBO(237, 189, 58, 1),
                               child: IconButton(
                                 iconSize: 24,
                                 color: Colors.white,
@@ -241,7 +241,7 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
               Size(MediaQuery.of(context).size.width * 0.85, 50),
             ),
             backgroundColor: MaterialStateProperty.all<Color>(
-              Colors.amber,
+              const Color.fromRGBO(237, 189, 58, 1),
             ),
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
               RoundedRectangleBorder(
@@ -476,7 +476,7 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
                     Size(MediaQuery.of(context).size.width * 0.85, 50),
                   ),
                   backgroundColor: MaterialStateProperty.all<Color>(
-                    Colors.amber,
+                    const Color.fromRGBO(237, 189, 58, 1),
                   ),
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(

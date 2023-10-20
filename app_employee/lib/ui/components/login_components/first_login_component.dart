@@ -153,7 +153,7 @@ class _FirstLoginComponentState extends State<FirstLoginComponent> {
           padding: const EdgeInsets.only(bottom: 5, left: 5, right: 5),
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.amber,
+                backgroundColor: const Color.fromRGBO(237, 189, 58, 1),
                 fixedSize: Size(MediaQuery.of(context).size.width * 0.85, 50)),
             onPressed: () {
               if (n == 1) {
@@ -200,7 +200,7 @@ class _FirstLoginComponentState extends State<FirstLoginComponent> {
                           Navigator.of(context).pushNamed(AppRoutes.TERMS),
                     text: 'Terms of Service',
                     style: const TextStyle(
-                      color: Colors.amber,
+                      color: Color.fromRGBO(237, 189, 58, 1),
                       decoration: TextDecoration.underline,
                     ),
                   ),

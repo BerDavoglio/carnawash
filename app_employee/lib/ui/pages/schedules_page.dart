@@ -12,7 +12,7 @@ class SchedulesPage extends StatefulWidget {
 
 class _SchedulesPageState extends State<SchedulesPage> {
   DateTime today = DateTime.now();
-  List status = ['Accept', Colors.amber, 'Reject'];
+  List status = ['Accept', const Color.fromRGBO(237, 189, 58, 1), 'Reject'];
 
   void _onDaySelected(DateTime day, DateTime focusedDay) {
     setState(() {
@@ -168,7 +168,7 @@ class _SchedulesPageState extends State<SchedulesPage> {
                               Icon(
                                 Icons.location_on_outlined,
                                 size: 16,
-                                color: Colors.amber,
+                                color: Color.fromRGBO(237, 189, 58, 1),
                               ),
                               Text(
                                 'Monaco St, Bundall',
@@ -221,7 +221,7 @@ class _SchedulesPageState extends State<SchedulesPage> {
                       } else if (status[0] == 'Finish') {
                         status = [
                           'Accept',
-                          Colors.amber,
+                          const Color.fromRGBO(237, 189, 58, 1),
                           'Reject',
                         ];
                       }

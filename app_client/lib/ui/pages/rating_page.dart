@@ -58,7 +58,7 @@ class _RatingPageState extends State<RatingPage> {
                             Size(MediaQuery.of(context).size.width * 0.85, 50),
                           ),
                           backgroundColor: MaterialStateProperty.all<Color>(
-                            Colors.amber,
+                            const Color.fromRGBO(237, 189, 58, 1),
                           ),
                           shape:
                               MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -121,7 +121,7 @@ class _RatingPageState extends State<RatingPage> {
             itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
             itemBuilder: (context, _) => const Icon(
               Icons.star,
-              color: Colors.amber,
+              color: Color.fromRGBO(237, 189, 58, 1),
             ),
             itemSize: 32,
             onRatingUpdate: (rating) {},
@@ -157,7 +157,7 @@ class _RatingPageState extends State<RatingPage> {
               SizedBox(height: 20),
               Icon(
                 Icons.star,
-                color: Colors.amber,
+                color: Color.fromRGBO(237, 189, 58, 1),
                 size: 30,
               )
             ],

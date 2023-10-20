@@ -236,7 +236,7 @@ class _HomePageState extends State<HomePage> {
                         Size(MediaQuery.of(context).size.width * 0.85, 50),
                       ),
                       backgroundColor: MaterialStateProperty.all<Color>(
-                        Colors.amber,
+                        const Color.fromRGBO(237, 189, 58, 1),
                       ),
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                         RoundedRectangleBorder(
@@ -268,7 +268,7 @@ class _HomePageState extends State<HomePage> {
                         Size(MediaQuery.of(context).size.width * 0.85, 50),
                       ),
                       backgroundColor: MaterialStateProperty.all<Color>(
-                        Colors.amber,
+                        const Color.fromRGBO(237, 189, 58, 1),
                       ),
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                         RoundedRectangleBorder(
@@ -370,7 +370,7 @@ class _HomePageState extends State<HomePage> {
                         OutlinedButton(
                           style: OutlinedButton.styleFrom(
                             side:
-                                const BorderSide(width: 2, color: Colors.amber),
+                                const BorderSide(width: 2, color: Color.fromRGBO(237, 189, 58, 1)),
                             elevation: 5,
                             fixedSize: Size(
                                 MediaQuery.of(context).size.width * 0.85, 50),
@@ -384,7 +384,7 @@ class _HomePageState extends State<HomePage> {
                             'Send for us',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              color: Colors.amber,
+                              color: Color.fromRGBO(237, 189, 58, 1),
                             ),
                           ),
                         ),
@@ -478,7 +478,7 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   const Icon(
                     Icons.location_on_outlined,
-                    color: Colors.amber,
+                    color: Color.fromRGBO(237, 189, 58, 1),
                     size: 16,
                   ),
                   Text(
@@ -555,7 +555,7 @@ class _HomePageState extends State<HomePage> {
                     const Icon(
                       Icons.star,
                       size: 20,
-                      color: Colors.amber,
+                      color: Color.fromRGBO(237, 189, 58, 1),
                     ),
                   ],
                 )
@@ -614,7 +614,7 @@ class _HomePageState extends State<HomePage> {
                         children: [
                           const Icon(
                             Icons.location_on_outlined,
-                            color: Colors.amber,
+                            color: Color.fromRGBO(237, 189, 58, 1),
                             size: 16,
                           ),
                           Text(

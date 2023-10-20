@@ -339,7 +339,7 @@ class _VehiclesEditPageState extends State<VehiclesEditPage> {
                                     50),
                               ),
                               backgroundColor: MaterialStateProperty.all<Color>(
-                                Colors.amber,
+                                const Color.fromRGBO(237, 189, 58, 1),
                               ),
                               shape: MaterialStateProperty.all<
                                   RoundedRectangleBorder>(

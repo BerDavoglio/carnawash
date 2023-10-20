@@ -229,7 +229,7 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
           padding: const EdgeInsets.only(bottom: 5, left: 5, right: 5),
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.amber,
+                backgroundColor: Color.fromRGBO(237, 189, 58, 1),
                 fixedSize: Size(MediaQuery.of(context).size.width * 0.85, 50)),
             onPressed: () {
               if (n == 1) {
@@ -299,7 +299,7 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
           child: const Text(
             "Logout",
             style: TextStyle(
-              color: Colors.amber,
+              color: Color.fromRGBO(237, 189, 58, 1),
             ),
           ),
         ),
@@ -481,7 +481,7 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
                         padding: const EdgeInsets.only(right: 10),
                         child: CircleAvatar(
                           radius: 20,
-                          backgroundColor: Colors.amber,
+                          backgroundColor: Color.fromRGBO(237, 189, 58, 1),
                           child: IconButton(
                             iconSize: 24,
                             color: Colors.white,
@@ -586,7 +586,7 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
                         padding: const EdgeInsets.only(right: 10),
                         child: CircleAvatar(
                           radius: 20,
-                          backgroundColor: Colors.amber,
+                          backgroundColor: Color.fromRGBO(237, 189, 58, 1),
                           child: IconButton(
                             iconSize: 24,
                             color: Colors.white,
@@ -741,7 +741,7 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
       width: MediaQuery.of(context).size.width * 0.2,
       height: 2,
       decoration: BoxDecoration(
-        color: val ? Colors.amber : Colors.grey,
+        color: val ? Color.fromRGBO(237, 189, 58, 1) : Colors.grey,
       ),
     );
   }
@@ -767,7 +767,7 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
                         padding: const EdgeInsets.only(right: 10),
                         child: CircleAvatar(
                           radius: 20,
-                          backgroundColor: Colors.amber,
+                          backgroundColor: Color.fromRGBO(237, 189, 58, 1),
                           child: IconButton(
                             iconSize: 24,
                             color: Colors.white,
@@ -840,7 +840,7 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
                         padding: const EdgeInsets.only(right: 10),
                         child: CircleAvatar(
                           radius: 20,
-                          backgroundColor: Colors.amber,
+                          backgroundColor: Color.fromRGBO(237, 189, 58, 1),
                           child: IconButton(
                             iconSize: 24,
                             color: Colors.white,
@@ -920,7 +920,7 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
                         padding: const EdgeInsets.only(right: 10),
                         child: CircleAvatar(
                           radius: 20,
-                          backgroundColor: Colors.amber,
+                          backgroundColor: Color.fromRGBO(237, 189, 58, 1),
                           child: IconButton(
                             iconSize: 24,
                             color: Colors.white,
@@ -988,7 +988,7 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
         Container(
           width: MediaQuery.of(context).size.width * 0.85,
           decoration: BoxDecoration(
-            color: Colors.amber[300]!,
+            color: Color.fromRGBO(237, 189, 58, 1),
             borderRadius: const BorderRadius.all(
               Radius.circular(10),
             ),
@@ -1196,7 +1196,7 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
                         padding: const EdgeInsets.only(right: 10),
                         child: CircleAvatar(
                           radius: 20,
-                          backgroundColor: Colors.amber,
+                          backgroundColor: Color.fromRGBO(237, 189, 58, 1),
                           child: IconButton(
                             iconSize: 24,
                             color: Colors.white,

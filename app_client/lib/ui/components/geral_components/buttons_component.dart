@@ -7,7 +7,7 @@ Padding backButtonComponent(BuildContext context) {
     padding: const EdgeInsets.only(right: 10),
     child: CircleAvatar(
       radius: 20,
-      backgroundColor: Colors.amber,
+      backgroundColor: const Color.fromRGBO(237, 189, 58, 1),
       child: IconButton(
         iconSize: 24,
         color: Colors.white,

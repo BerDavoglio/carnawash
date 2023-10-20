@@ -163,7 +163,7 @@ class _AvailabilityPageState extends State<AvailabilityPage> {
                             Size(MediaQuery.of(context).size.width * 0.85, 50),
                           ),
                           backgroundColor: MaterialStateProperty.all<Color>(
-                            Colors.amber,
+                            Color.fromRGBO(237, 189, 58, 1),
                           ),
                           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                             RoundedRectangleBorder(
@@ -190,7 +190,7 @@ class _AvailabilityPageState extends State<AvailabilityPage> {
                           child: Text(
                             'Logout',
                             style: TextStyle(
-                              color: Colors.amber,
+                              color: Color.fromRGBO(237, 189, 58, 1),
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
                             ),
@@ -218,7 +218,7 @@ class _AvailabilityPageState extends State<AvailabilityPage> {
         Container(
           width: MediaQuery.of(context).size.width * 0.85,
           decoration: BoxDecoration(
-            color: Colors.amber[300]!,
+            color: Color.fromRGBO(237, 189, 58, 1),
             borderRadius: const BorderRadius.all(
               Radius.circular(10),
             ),

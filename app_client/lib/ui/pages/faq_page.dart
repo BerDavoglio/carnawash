@@ -119,7 +119,7 @@ class _FAQPageState extends State<FAQPage> {
         Container(
           width: MediaQuery.of(context).size.width * 0.85,
           decoration: BoxDecoration(
-            color: Colors.amber[300]!,
+            color: const Color.fromRGBO(237, 189, 58, 1),
             borderRadius: !obj.isOpen
                 ? const BorderRadius.all(
                     Radius.circular(10),

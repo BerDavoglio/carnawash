@@ -115,7 +115,7 @@ class _SchedulesPageState extends State<SchedulesPage> {
                       rating: 2.75,
                       itemBuilder: (context, index) => const Icon(
                         Icons.star,
-                        color: Colors.amber,
+                        color: Color.fromRGBO(237, 189, 58, 1),
                       ),
                       itemCount: 5,
                       itemSize: 20,
@@ -167,7 +167,7 @@ class _SchedulesPageState extends State<SchedulesPage> {
                       Size(MediaQuery.of(context).size.width * 0.85, 50),
                     ),
                     backgroundColor: MaterialStateProperty.all<Color>(
-                      Colors.amber,
+                      const Color.fromRGBO(237, 189, 58, 1),
                     ),
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
