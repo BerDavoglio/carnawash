@@ -35,8 +35,8 @@
       </template>
     </sidebar-menu>
     <router-view :className="['max-w-[1920px] '
-      + (currentRouteName != 'login' ?
-        (!isClosed ? 'ml-[300px] mr-[70px] my-20 ' : 'ml-[100px] mr-[70px] my-20 ') : '')
+      + (currentRouteName != 'login'
+      ? (!isClosed ? 'ml-[320px] mr-[70px] my-20 ' : 'ml-[100px] mr-[70px] my-20 ') : ''),
     ]" />
   </div>
 </template>

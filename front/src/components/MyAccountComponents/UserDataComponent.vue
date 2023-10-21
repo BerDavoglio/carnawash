@@ -18,18 +18,28 @@
          className="p-6 shadow-[4px_6px_40px_0px_#00000020]
     border-1 border-[#EBF0ED]">
       <div>
-        <input v-model="name"
-               placeholder="Full Name"
-               className="h-[16px] w-full rounded-lg  px-4 py-6 mb-4
-               bg-[#F8F8F8] border-1 border-solid border-[#EBF0ED]">
-        <input v-model="phone"
-               placeholder="Telephone"
-               className="h-[16px] w-full rounded-lg  px-4 py-6 mb-4
-               bg-[#F8F8F8] border-1 border-solid border-[#EBF0ED]">
-        <input v-model="email"
-               placeholder="E-mail"
-               className="h-[16px] w-full rounded-lg  px-4 py-6 mb-4
-               bg-[#F8F8F8] border-1 border-solid border-[#EBF0ED]">
+        <div className="text-left text-[16px] font-normal text-[#3F3F44]">
+          Complete Name
+          <input v-model="name"
+                 className="h-[16px] w-full rounded-lg  px-4 py-6 mb-4
+                              bg-[#F8F8F8] border-1 border-solid border-[#EBF0ED]">
+        </div>
+      </div>
+      <div>
+        <div className="text-left text-[16px] font-normal text-[#3F3F44]">
+          E-mail
+          <input v-model="email"
+                 className="h-[16px] w-full rounded-lg  px-4 py-6 mb-4
+                    bg-[#F8F8F8] border-1 border-solid border-[#EBF0ED]">
+        </div>
+      </div>
+      <div>
+        <div className="text-left text-[16px] font-normal text-[#3F3F44]">
+          Telephone
+          <input v-model="phone"
+                 className="h-[16px] w-full rounded-lg  px-4 py-6 mb-4
+                    bg-[#F8F8F8] border-1 border-solid border-[#EBF0ED]">
+        </div>
       </div>
       <div className="w-[241px] p-[12.5px] bg-[#EDBD3A]
         text-black rounded-[8px] cursor-pointer

@@ -26,14 +26,26 @@ import {
   MdEditOutlined,
   MdUploadfile,
   BiEyeSlash,
+  PrUsers,
+  PrUserPlus,
+  PrUserMinus,
+  BiPlusCircle,
+  RiShieldStarFill,
+  IoRepeatOutline,
 } from 'oh-vue-icons/icons';
 
 import TextClamp from 'vue3-text-clamp';
+
+import { createVuetify } from 'vuetify';
+import * as components from 'vuetify/components';
+import * as directives from 'vuetify/directives';
 
 import router from './router';
 import store from './store/store';
 
 import './assets/tailwind.css';
+// eslint-disable-next-line import/extensions
+import 'vuetify/styles';
 import '@fortawesome/fontawesome-free/css/all.css';
 import '@fortawesome/fontawesome-free/js/all';
 
@@ -56,7 +68,18 @@ addIcons(
   MdEditOutlined,
   MdUploadfile,
   BiEyeSlash,
+  PrUsers,
+  PrUserPlus,
+  PrUserMinus,
+  BiPlusCircle,
+  RiShieldStarFill,
+  IoRepeatOutline,
 );
+
+const vuetify = createVuetify({
+  components,
+  directives,
+});
 
 createApp(App)
   .use(pinia)
@@ -64,6 +87,7 @@ createApp(App)
   .use(VueSidebarMenu)
   .use(store)
   .use(router)
+  .use(vuetify)
   .component('v-icon', OhVueIcon)
   .component('VueDatePicker', VueDatePicker)
   .mount('#app');
