@@ -1,6 +1,7 @@
 <template>
   <div>
-    <div class="sub-page">
+    <div class="geral-sub-page"
+         v-if="!edit">
       <div className="mt-8 flex flex-row justify-between">
         <data-block-component :obj="{
           icon: 'pr-users',
@@ -24,18 +25,25 @@
                               @input="alert(displayToKey($event))" />
       </div>
     </div>
+    <div class="edit-sub-page"
+         v-if="edit">
+      <edit-customers-subpage-component />
+    </div>
   </div>
 </template>
 
 <script>
 import DataBlockComponent from '../../../DataBlockComponent.vue';
 import UserTableComponent from './UserTableComponent.vue';
+import EditCustomersSubpageComponent from '../EditSubpage/EditCustomersSubpageComponent.vue';
 
 export default {
   name: 'GeralCustomerSubpageComponent',
-  components: { DataBlockComponent, UserTableComponent },
+  components: { DataBlockComponent, UserTableComponent, EditCustomersSubpageComponent },
   data() {
-    return { };
+    return {
+      edit: false,
+    };
   },
 };
 </script>

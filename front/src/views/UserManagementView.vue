@@ -39,8 +39,7 @@
     <div class="sub-page">
       <geral-customer-subpage-component v-if="isUser == 'customers'" />
       <geral-washers-subpage-component v-if="isUser == 'washers'" />
-      <edit-customers-subpage-component v-show="false" />
-      <edit-washers-subpage-component v-show="false" />
+      <geral-admins-subpage-component v-if="isUser == 'admins'" />
     </div>
   </div>
 </template>
@@ -48,16 +47,14 @@
 <script>
 import GeralCustomerSubpageComponent from '../components/UserManagementComponents/Subpages/CustomersComponents/GeralSubpage/GeralCustomerSubpageComponent.vue';
 import GeralWashersSubpageComponent from '../components/UserManagementComponents/Subpages/WashersComponents/GeralSubpage/GeralWashersSubpageComponent.vue';
-import EditCustomersSubpageComponent from '../components/UserManagementComponents/Subpages/CustomersComponents/EditSubpage/EditCustomersSubpageComponent.vue';
-import EditWashersSubpageComponent from '../components/UserManagementComponents/Subpages/WashersComponents/EditSubpage/EditWashersSubpageComponent.vue';
+import GeralAdminsSubpageComponent from '../components/UserManagementComponents/Subpages/AdminsComponents/GeralSubpage/GeralAdminsSubpageComponent.vue';
 
 export default {
   name: 'UserManagementView',
   components: {
     GeralCustomerSubpageComponent,
     GeralWashersSubpageComponent,
-    EditCustomersSubpageComponent,
-    EditWashersSubpageComponent,
+    GeralAdminsSubpageComponent,
   },
   data() {
     return {
