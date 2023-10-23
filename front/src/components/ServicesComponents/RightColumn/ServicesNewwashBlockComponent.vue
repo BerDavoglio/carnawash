@@ -53,7 +53,7 @@
       </div>
       <div>
         <div className="w-[272px] h-[44px]
-        px-[26px] py-[8px] font-semibold m-auto
+        px-[16px] py-[8px] font-semibold m-auto
             rounded-[10px] bg-[#EDBD3A] text-black text-[16px]
             cursor-pointer">
           Add new subscription

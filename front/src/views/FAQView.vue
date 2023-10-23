@@ -38,7 +38,7 @@
         <div className="ml-auto">
           <div class="button"
                v-if="this.isFaq">
-            <div className="px-[26px] py-[8px] font-semibold
+            <div className="px-[16px] py-[8px] font-semibold
             rounded-[10px] bg-[#EDBD3A] text-black text-[16px]
             cursor-pointer">
               <v-icon name="io-add-circle-outline"
