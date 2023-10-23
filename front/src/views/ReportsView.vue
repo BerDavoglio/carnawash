@@ -88,7 +88,8 @@
          className="mt-8">
       <report-table-component />
     </div>
-    <div className="w-full">
+    <div class="last-button"
+         className="w-full">
       <div className="mt-[28px] font-medium w-fit ml-auto
             rounded-[10px] text-[#EDBD3A] text-[16px]
             cursor-pointer">
