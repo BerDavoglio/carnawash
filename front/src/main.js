@@ -32,6 +32,8 @@ import {
   BiPlusCircle,
   RiShieldStarFill,
   IoRepeatOutline,
+  MdKeyboardarrowdown,
+  MdKeyboardarrowup,
 } from 'oh-vue-icons/icons';
 
 import TextClamp from 'vue3-text-clamp';
@@ -74,6 +76,8 @@ addIcons(
   BiPlusCircle,
   RiShieldStarFill,
   IoRepeatOutline,
+  MdKeyboardarrowdown,
+  MdKeyboardarrowup,
 );
 
 const vuetify = createVuetify({
