@@ -34,6 +34,7 @@ import {
   IoRepeatOutline,
   MdKeyboardarrowdown,
   MdKeyboardarrowup,
+  HiPrinter,
 } from 'oh-vue-icons/icons';
 
 import TextClamp from 'vue3-text-clamp';
@@ -78,6 +79,7 @@ addIcons(
   IoRepeatOutline,
   MdKeyboardarrowdown,
   MdKeyboardarrowup,
+  HiPrinter,
 );
 
 const vuetify = createVuetify({

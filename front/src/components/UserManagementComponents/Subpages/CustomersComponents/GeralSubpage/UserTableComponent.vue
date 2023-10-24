@@ -6,7 +6,7 @@
       scrollbar scrollbar-thumb-[#EDBD3A]
       scrollbar-track-[#D9D9D9] scrollbar-thumb-rounded">
       <div class="title"
-           className="flex flex-row justify-between">
+           className="flex flex-row justify-between h-[56px] mb-6">
         <div className="flex flex-row">
           <div className="text-[16px] font-semibold text-left mb-[16px] mr-[20px] my-auto">
             Register Costumers
@@ -26,7 +26,7 @@
           </div>
         </div>
         <div className="flex flex-row">
-          <div className="w-[230px] mt-[10px] text-right mb-[16px] mr-[40px]">
+          <div className="w-[230px] text-right mb-[16px] mr-[40px]">
             <v-select label="Filter"
                       :items="this.items"
                       variant="outlined" />

@@ -6,6 +6,7 @@ import MyAccountView from '../views/MyAccountView.vue';
 import UserManagementView from '../views/UserManagementView.vue';
 import ReportsView from '../views/ReportsView.vue';
 import ServicesView from '../views/ServicesView.vue';
+import FinanceView from '../views/FinanceView.vue';
 
 const routes = [
   {
@@ -42,6 +43,11 @@ const routes = [
     path: '/services/',
     name: 'services',
     component: ServicesView,
+  },
+  {
+    path: '/finance/',
+    name: 'finance',
+    component: FinanceView,
   },
 ];
 
