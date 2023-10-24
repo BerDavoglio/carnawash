@@ -3,9 +3,24 @@
        className="h-[311px] w-[750px]
         p-[24px] rounded-[8px]
         shadow-[4px_6px_30px_0px_#00000020]">
-    <div className="w-[320px] h-[170px]">
-      <Bar :data="values"
-           :options="options" />
+    <div className="flex flex-col justify-between">
+      <div className="flex flex-row justify-between">
+        <div className="text-[16px] font-semibold text-[#3F3F44]">
+          Composition
+        </div>
+        <div className="text-[16px] font-normal text-[#3F3F44] flex flex-row">
+          <div>Washes</div>
+          <div>Profit</div>
+        </div>
+        <div className="text-[12px] font-semibold text-[#3F3F44]">
+          Last 12 months
+        </div>
+      </div>
+      <div className="">
+        <Bar :data="values"
+           :options="options"
+           style="height:200px; width: 100%;" />
+      </div>
     </div>
   </div>
 </template>
@@ -63,15 +78,8 @@ export default {
         maintainAspectRatio: false,
         barValueSpacing: 20,
         plugins: {
-          title: {
-            display: true,
-            text: 'Revenue',
-          },
           legend: {
-            labels: {
-              usePointStyle: true,
-              boxHeight: 8,
-            },
+            display: false,
           },
         },
       },
