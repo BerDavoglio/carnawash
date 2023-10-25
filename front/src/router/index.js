@@ -7,6 +7,7 @@ import UserManagementView from '../views/UserManagementView.vue';
 import ReportsView from '../views/ReportsView.vue';
 import ServicesView from '../views/ServicesView.vue';
 import FinanceView from '../views/FinanceView.vue';
+import OrdersView from '../views/OrdersView.vue';
 
 const routes = [
   {
@@ -48,6 +49,11 @@ const routes = [
     path: '/finance/',
     name: 'finance',
     component: FinanceView,
+  },
+  {
+    path: '/orders/',
+    name: 'orders',
+    component: OrdersView,
   },
 ];
 

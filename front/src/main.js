@@ -43,12 +43,15 @@ import { createVuetify } from 'vuetify';
 import * as components from 'vuetify/components';
 import * as directives from 'vuetify/directives';
 
+import VCalendar from 'v-calendar';
+
 import router from './router';
 import store from './store/store';
 
 import './assets/tailwind.css';
 // eslint-disable-next-line import/extensions
 import 'vuetify/styles';
+import 'v-calendar/style.css';
 import '@fortawesome/fontawesome-free/css/all.css';
 import '@fortawesome/fontawesome-free/js/all';
 
@@ -94,6 +97,7 @@ createApp(App)
   .use(store)
   .use(router)
   .use(vuetify)
+  .use(VCalendar, {})
   .component('v-icon', OhVueIcon)
   .component('VueDatePicker', VueDatePicker)
   .mount('#app');
