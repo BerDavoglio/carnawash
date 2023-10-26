@@ -9,6 +9,7 @@ import ServicesView from '../views/ServicesView.vue';
 import FinanceView from '../views/FinanceView.vue';
 import OrdersView from '../views/OrdersView.vue';
 import QuizView from '../views/QuizView.vue';
+import NotificationsView from '../views/NotificationsView.vue';
 
 const routes = [
   {
@@ -60,6 +61,11 @@ const routes = [
     path: '/training/',
     name: 'training',
     component: QuizView,
+  },
+  {
+    path: '/notifications/',
+    name: 'notifications',
+    component: NotificationsView,
   },
 ];
 

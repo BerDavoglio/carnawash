@@ -36,6 +36,7 @@ import {
   MdKeyboardarrowup,
   HiPrinter,
   LaGetPocket,
+  BiSend,
 } from 'oh-vue-icons/icons';
 
 import TextClamp from 'vue3-text-clamp';
@@ -85,6 +86,7 @@ addIcons(
   MdKeyboardarrowup,
   HiPrinter,
   LaGetPocket,
+  BiSend,
 );
 
 const vuetify = createVuetify({

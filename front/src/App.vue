@@ -79,11 +79,11 @@ export default {
           title: 'User Management',
           icon: 'fa fa-users',
         },
-        {
-          href: '/products/',
-          title: 'Products',
-          icon: 'fa fa-cart-shopping',
-        },
+        // {
+        //   href: '/products/',
+        //   title: 'Products',
+        //   icon: 'fa fa-cart-shopping',
+        // },
         {
           href: '/training/',
           title: 'Washers Quiz and Training',
