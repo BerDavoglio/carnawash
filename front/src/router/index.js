@@ -10,6 +10,7 @@ import FinanceView from '../views/FinanceView.vue';
 import OrdersView from '../views/OrdersView.vue';
 import QuizView from '../views/QuizView.vue';
 import NotificationsView from '../views/NotificationsView.vue';
+import CouponsView from '../views/CouponsView.vue';
 
 const routes = [
   {
@@ -66,6 +67,11 @@ const routes = [
     path: '/notifications/',
     name: 'notifications',
     component: NotificationsView,
+  },
+  {
+    path: '/coupons/',
+    name: 'coupons',
+    component: CouponsView,
   },
 ];
 
