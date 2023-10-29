@@ -1,3 +1,4 @@
+<!-- eslint-disable vuejs-accessibility/click-events-have-key-events -->
 <template>
   <div>
     <div className="w-[742px] p-6
@@ -55,23 +56,37 @@
         <div className="w-[272px] h-[44px]
         px-[16px] py-[8px] font-semibold m-auto
             rounded-[10px] bg-[#EDBD3A] text-black text-[16px]
-            cursor-pointer">
+            cursor-pointer"
+             @click="confirmNewwash = true;">
           Add new subscription
         </div>
       </div>
     </div>
+    <v-dialog v-model="confirmNewwash"
+              width="auto">
+      <confirm-new-regular-wash-popup @confirmNewRegularWash="confirmNewRegularWash" />
+    </v-dialog>
   </div>
 </template>
 
 <script>
+import ConfirmNewRegularWashPopup from '../../PopupComponents/ServicesPopups/ConfirmNewRegularWashPopup.vue';
+
 export default {
   name: 'ServicesNewwashBlockComponent',
+  components: { ConfirmNewRegularWashPopup },
   data() {
     return {
       size: '',
       price: '',
       additional: '',
+      confirmNewwash: false,
     };
+  },
+  methods: {
+    confirmNewRegularWash(val) {
+      this.confirmNewwash = val;
+    },
   },
 };
 </script>

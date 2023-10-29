@@ -31,9 +31,11 @@
                       :items="this.items"
                       variant="outlined" />
           </div>
+          <!-- eslint-disable-next-line vuejs-accessibility/click-events-have-key-events -->
           <div className="w-[241px] p-[12.5px] bg-[#EDBD3A]
             text-black rounded-[8px] cursor-pointer
-            m-auto font-semibold">
+            m-auto font-semibold"
+               @click="registerCostumers()">
             <v-icon name="pr-user-plus"
                     scale="1.25"
                     fill="black" />
@@ -56,17 +58,8 @@
           </tr>
         </thead>
         <tbody className="font-light">
-          <user-table-item-component :obj="this.objeto" />
-          <user-table-item-component :obj="this.objeto" />
-          <user-table-item-component :obj="this.objeto" />
-          <user-table-item-component :obj="this.objeto" />
-          <user-table-item-component :obj="this.objeto" />
-          <user-table-item-component :obj="this.objeto" />
-          <user-table-item-component :obj="this.objeto" />
-          <user-table-item-component :obj="this.objeto" />
-          <user-table-item-component :obj="this.objeto" />
-          <user-table-item-component :obj="this.objeto" />
-          <user-table-item-component :obj="this.objeto" />
+          <user-table-item-component :obj="this.objeto"
+                                     @editCs="editCs" />
         </tbody>
       </table>
     </div>
@@ -90,6 +83,14 @@ export default {
       },
       items: ['Alfabetical', 'Date'],
     };
+  },
+  methods: {
+    registerCostumers() {
+      this.$emit('registerCostumers', true);
+    },
+    editCs(val) {
+      this.$emit('editCostumers', val);
+    },
   },
 };
 </script>

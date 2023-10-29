@@ -1,3 +1,4 @@
+<!-- eslint-disable vuejs-accessibility/click-events-have-key-events -->
 <template>
   <div class="table-component">
     <div className="w-full h-[580px] mt-4
@@ -33,7 +34,8 @@
           </div>
           <div className="w-[241px] p-[12.5px] bg-[#EDBD3A]
             text-black rounded-[8px] cursor-pointer
-            m-auto font-semibold">
+            m-auto font-semibold"
+            @click="registerWashers()">
             <v-icon name="pr-user-plus"
                     scale="1.25"
                     fill="black" />
@@ -62,19 +64,8 @@
           </tr>
         </thead>
         <tbody className="font-light">
-          <washers-geral-table-item-component :obj="this.objeto" />
-          <washers-geral-table-item-component :obj="this.objeto" />
-          <washers-geral-table-item-component :obj="this.objeto" />
-          <washers-geral-table-item-component :obj="this.objeto" />
-          <washers-geral-table-item-component :obj="this.objeto" />
-          <washers-geral-table-item-component :obj="this.objeto" />
-          <washers-geral-table-item-component :obj="this.objeto" />
-          <washers-geral-table-item-component :obj="this.objeto" />
-          <washers-geral-table-item-component :obj="this.objeto" />
-          <washers-geral-table-item-component :obj="this.objeto" />
-          <washers-geral-table-item-component :obj="this.objeto" />
-          <washers-geral-table-item-component :obj="this.objeto" />
-          <washers-geral-table-item-component :obj="this.objeto" />
+          <washers-geral-table-item-component :obj="this.objeto"
+                                              @editWs="editWs" />
         </tbody>
       </table>
     </div>
@@ -101,6 +92,14 @@ export default {
       },
       items: ['Alfabetical', 'Date'],
     };
+  },
+  methods: {
+    registerWashers() {
+      this.$emit('registerWashers', true);
+    },
+    editWs(val) {
+      this.$emit('editWashers', val);
+    },
   },
 };
 </script>

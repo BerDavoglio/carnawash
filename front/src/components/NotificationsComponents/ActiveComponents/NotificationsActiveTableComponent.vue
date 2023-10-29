@@ -43,26 +43,44 @@
           </tr>
         </thead>
         <tbody className="font-light">
-          <notifications-active-table-item-component :obj="this.objeto" />
-          <notifications-active-table-item-component :obj="this.objeto" />
-          <notifications-active-table-item-component :obj="this.objeto" />
-          <notifications-active-table-item-component :obj="this.objeto" />
-          <notifications-active-table-item-component :obj="this.objeto" />
-          <notifications-active-table-item-component :obj="this.objeto" />
-          <notifications-active-table-item-component :obj="this.objeto" />
-          <notifications-active-table-item-component :obj="this.objeto" />
+          <notifications-active-table-item-component :obj="this.objeto"
+                                                     @notificationResend="notificationResend"
+                                                     @notificationSend="notificationSend" />
+          <notifications-active-table-item-component :obj="this.objeto"
+                                                     @notificationResend="notificationResend"
+                                                     @notificationSend="notificationSend" />
+          <notifications-active-table-item-component :obj="this.objeto"
+                                                     @notificationResend="notificationResend"
+                                                     @notificationSend="notificationSend" />
+          <notifications-active-table-item-component :obj="this.objeto"
+                                                     @notificationResend="notificationResend"
+                                                     @notificationSend="notificationSend" />
         </tbody>
       </table>
     </div>
+    <v-dialog v-model="send"
+              width="auto">
+      <notification-send-popup @notificationSend="notificationSend" />
+    </v-dialog>
+    <v-dialog v-model="resend"
+              width="auto">
+      <notification-resend-popup @notificationResend="notificationResend" />
+    </v-dialog>
   </div>
 </template>
 
 <script>
 import NotificationsActiveTableItemComponent from './NotificationsActiveTableItemComponent.vue';
+import NotificationSendPopup from '../../PopupComponents/NotificationsPopups/SendNotificationPopup.vue';
+import NotificationResendPopup from '../../PopupComponents/NotificationsPopups/ResendNotificationPopup.vue';
 
 export default {
   name: 'NotificationsActiveTableComponent',
-  components: { NotificationsActiveTableItemComponent },
+  components: {
+    NotificationsActiveTableItemComponent,
+    NotificationSendPopup,
+    NotificationResendPopup,
+  },
   data() {
     return {
       objeto: {
@@ -71,7 +89,19 @@ export default {
         destinated: 'Clients',
         type: 'Congratulations',
       },
+      send: false,
+      resend: false,
     };
+  },
+  methods: {
+    notificationSend(val) {
+      console.log(val);
+      this.send = val;
+    },
+    notificationResend(val) {
+      console.log(val);
+      this.resend = val;
+    },
   },
 };
 </script>

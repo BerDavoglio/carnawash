@@ -1,3 +1,5 @@
+<!-- eslint-disable vuejs-accessibility/click-events-have-key-events -->
+<!-- eslint-disable vue/valid-v-on -->
 <template>
   <tr>
     <td className="text-[#3F3F44] text-[14px] font-light py-[24px] text-center">
@@ -27,7 +29,8 @@
     <td className="text-[#3F3F44] text-[14px] font-light py-[24px] text-center">
       <div className="w-[144px] px-[16px] py-[8px] font-semibold m-auto
             rounded-[10px] bg-[#EDBD3A] text-black text-[16px]
-            cursor-pointer my-auto">
+            cursor-pointer my-auto"
+            @click="this.$emit('confirmPayment', true)">
         Send Payment
       </div>
     </td>

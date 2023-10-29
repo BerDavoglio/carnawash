@@ -37,6 +37,7 @@ import {
   HiPrinter,
   LaGetPocket,
   BiSend,
+  IoClose,
 } from 'oh-vue-icons/icons';
 
 import TextClamp from 'vue3-text-clamp';
@@ -87,6 +88,7 @@ addIcons(
   HiPrinter,
   LaGetPocket,
   BiSend,
+  IoClose,
 );
 
 const vuetify = createVuetify({

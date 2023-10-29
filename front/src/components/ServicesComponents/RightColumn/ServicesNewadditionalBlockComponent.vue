@@ -1,3 +1,4 @@
+<!-- eslint-disable vuejs-accessibility/click-events-have-key-events -->
 <template>
   <div>
     <div className="w-[742px] p-6
@@ -39,22 +40,36 @@
         <div className="w-[272px] h-[44px]
         px-[16px] py-[8px] font-semibold m-auto
             rounded-[10px] bg-[#EDBD3A] text-black text-[16px]
-            cursor-pointer">
+            cursor-pointer"
+             @click="confirmNewAdd = true;">
           Confirm new additional service
         </div>
       </div>
     </div>
+    <v-dialog v-model="confirmNewAdd"
+              width="auto">
+      <confirm-new-additional-popup @confirmNewAdditional="confirmNewAdditional" />
+    </v-dialog>
   </div>
 </template>
 
 <script>
+import ConfirmNewAdditionalPopup from '../../PopupComponents/ServicesPopups/ConfirmNewAdditionalPopup.vue';
+
 export default {
   name: 'ServicesNewadditionalBlockComponent',
+  components: { ConfirmNewAdditionalPopup },
   data() {
     return {
       type: '',
       price: '',
+      confirmNewAdd: false,
     };
+  },
+  methods: {
+    confirmNewAdditional(val) {
+      this.confirmNewAdd = val;
+    },
   },
 };
 </script>

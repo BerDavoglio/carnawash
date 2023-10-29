@@ -1,3 +1,4 @@
+<!-- eslint-disable vuejs-accessibility/click-events-have-key-events -->
 <template>
   <div>
     <div className="w-[742px] p-6
@@ -55,23 +56,37 @@
         <div className="w-[272px] h-[44px]
         px-[16px] py-[8px] font-semibold m-auto
             rounded-[10px] bg-[#EDBD3A] text-black text-[16px]
-            cursor-pointer">
+            cursor-pointer"
+             @click="confirmNewCar = true;">
           Add new vehicle size
         </div>
       </div>
     </div>
+    <v-dialog v-model="confirmNewCar"
+              width="auto">
+      <confirm-new-carsize-popup @confirmNewCarsize="confirmNewCarsize" />
+    </v-dialog>
   </div>
 </template>
 
 <script>
+import ConfirmNewCarsizePopup from '../../PopupComponents/ServicesPopups/ConfirmNewCarsizePopup.vue';
+
 export default {
   name: 'ServicesNewcarBlockComponent',
+  components: { ConfirmNewCarsizePopup },
   data() {
     return {
       size: '',
       price: '',
       additional: '',
+      confirmNewCar: false,
     };
+  },
+  methods: {
+    confirmNewCarsize(val) {
+      this.confirmNewCar = val;
+    },
   },
 };
 </script>

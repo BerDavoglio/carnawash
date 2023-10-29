@@ -1,3 +1,4 @@
+<!-- eslint-disable vuejs-accessibility/click-events-have-key-events -->
 <template>
   <div>
     <div class="header">
@@ -29,14 +30,16 @@
       <div className="w-[267px] h-[44px]
         px-[16px] py-[8px] font-semibold mr-4
             rounded-[10px] bg-[#EDBD3A] text-black text-[16px]
-            cursor-pointer">
+            cursor-pointer"
+           @click="sendNotUser = true;">
         <v-icon name="bi-send"
                 scale="1.25" /> Send notification to user
       </div>
       <div className="w-[237px] h-[44px]
         px-[16px] py-[8px] font-semibold
             rounded-[10px] bg-[#EDBD3A] text-black text-[16px]
-            cursor-pointer">
+            cursor-pointer"
+           @click="newNot = true;">
         <v-icon name="bi-plus-circle"
                 scale="1.25" /> New notification
       </div>
@@ -49,6 +52,14 @@
     <div>
       <notifications-history-table-component />
     </div>
+    <v-dialog v-model="newNot"
+              width="auto">
+      <register-new-notification-popup @registerNewNotification="registerNewNotification" />
+    </v-dialog>
+    <v-dialog v-model="sendNotUser"
+              width="auto">
+      <send-notification-user-popup @sendNotificationUser="sendNotificationUser" />
+    </v-dialog>
   </div>
 </template>
 
@@ -57,12 +68,31 @@ import NotificationsActiveTableComponent from '../components/NotificationsCompon
 import NotificationsProgramBoxComponent from '../components/NotificationsComponents/NotificationsProgramBoxComponent.vue';
 import NotificationsHistoryTableComponent from '../components/NotificationsComponents/HistoryComponents/NotificationsHistoryTableComponent.vue';
 
+import SendNotificationUserPopup from '../components/PopupComponents/NotificationsPopups/SendNotificationUserPopup.vue';
+import RegisterNewNotificationPopup from '../components/PopupComponents/NotificationsPopups/RegisterNewNotificationPopup.vue';
+
 export default {
   name: 'NotificationsView',
   components: {
     NotificationsActiveTableComponent,
     NotificationsProgramBoxComponent,
     NotificationsHistoryTableComponent,
+    SendNotificationUserPopup,
+    RegisterNewNotificationPopup,
+  },
+  data() {
+    return {
+      sendNotUser: false,
+      newNot: false,
+    };
+  },
+  methods: {
+    sendNotificationUser(val) {
+      this.sendNotUser = val;
+    },
+    registerNewNotification(val) {
+      this.newNot = val;
+    },
   },
 };
 </script>

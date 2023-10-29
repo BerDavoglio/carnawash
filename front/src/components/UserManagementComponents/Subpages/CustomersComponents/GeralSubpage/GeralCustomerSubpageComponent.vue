@@ -20,15 +20,23 @@
         }" />
       </div>
       <div className="my-8">
-        <user-table-component :options="['go', 'python', 'rust', 'javascript']"
-                              :default="'go'"
-                              @input="alert(displayToKey($event))" />
+        <user-table-component @input="alert(displayToKey($event))"
+                              @registerCostumers="registerCostumers"
+                              @editCostumers="editCostumers" />
       </div>
     </div>
     <div class="edit-sub-page"
          v-if="edit">
       <edit-customers-subpage-component />
     </div>
+    <v-dialog v-model="registerCostumer"
+              width="auto">
+      <create-client-popup @registerCostumers="registerCostumers" />
+    </v-dialog>
+    <v-dialog v-model="editCostumer"
+              width="auto">
+      <edit-client-popup @editCostumers="editCostumers" />
+    </v-dialog>
   </div>
 </template>
 
@@ -37,13 +45,32 @@ import DataBlockComponent from '../../../DataBlockComponent.vue';
 import UserTableComponent from './UserTableComponent.vue';
 import EditCustomersSubpageComponent from '../EditSubpage/EditCustomersSubpageComponent.vue';
 
+import CreateClientPopup from '../../../../PopupComponents/UserManagementPopups/CreateClientPopup.vue';
+import EditClientPopup from '../../../../PopupComponents/UserManagementPopups/EditClientPopup.vue';
+
 export default {
   name: 'GeralCustomerSubpageComponent',
-  components: { DataBlockComponent, UserTableComponent, EditCustomersSubpageComponent },
+  components: {
+    DataBlockComponent,
+    UserTableComponent,
+    EditCustomersSubpageComponent,
+    CreateClientPopup,
+    EditClientPopup,
+  },
   data() {
     return {
       edit: false,
+      registerCostumer: false,
+      editCostumer: false,
     };
+  },
+  methods: {
+    registerCostumers(val) {
+      this.registerCostumer = val;
+    },
+    editCostumers(val) {
+      this.editCostumer = val;
+    },
   },
 };
 </script>

@@ -47,31 +47,49 @@
           </tr>
         </thead>
         <tbody className="font-light">
-          <finance-table-item-component :obj="this.objeto" />
-          <finance-table-item-component :obj="this.objeto" />
-          <finance-table-item-component :obj="this.objeto" />
-          <finance-table-item-component :obj="this.objeto" />
-          <finance-table-item-component :obj="this.objeto" />
-          <finance-table-item-component :obj="this.objeto" />
-          <finance-table-item-component :obj="this.objeto" />
-          <finance-table-item-component :obj="this.objeto" />
-          <finance-table-item-component :obj="this.objeto" />
-          <finance-table-item-component :obj="this.objeto" />
-          <finance-table-item-component :obj="this.objeto" />
-          <finance-table-item-component :obj="this.objeto" />
-          <finance-table-item-component :obj="this.objeto" />
+          <finance-table-item-component :obj="this.objeto"
+                                        @confirmPayment="confirmPayment" />
+          <finance-table-item-component :obj="this.objeto"
+                                        @confirmPayment="confirmPayment" />
+          <finance-table-item-component :obj="this.objeto"
+                                        @confirmPayment="confirmPayment" />
+          <finance-table-item-component :obj="this.objeto"
+                                        @confirmPayment="confirmPayment" />
+          <finance-table-item-component :obj="this.objeto"
+                                        @confirmPayment="confirmPayment" />
+          <finance-table-item-component :obj="this.objeto"
+                                        @confirmPayment="confirmPayment" />
+          <finance-table-item-component :obj="this.objeto"
+                                        @confirmPayment="confirmPayment" />
+          <finance-table-item-component :obj="this.objeto"
+                                        @confirmPayment="confirmPayment" />
+          <finance-table-item-component :obj="this.objeto"
+                                        @confirmPayment="confirmPayment" />
+          <finance-table-item-component :obj="this.objeto"
+                                        @confirmPayment="confirmPayment" />
+          <finance-table-item-component :obj="this.objeto"
+                                        @confirmPayment="confirmPayment" />
+          <finance-table-item-component :obj="this.objeto"
+                                        @confirmPayment="confirmPayment" />
+          <finance-table-item-component :obj="this.objeto"
+                                        @confirmPayment="confirmPayment" />
         </tbody>
       </table>
     </div>
+    <v-dialog v-model="confirmPay"
+              width="auto">
+      <confirm-payment-popup @confirmPayment="confirmPayment" />
+    </v-dialog>
   </div>
 </template>
 
 <script>
 import FinanceTableItemComponent from './FinanceTableItemComponent.vue';
+import ConfirmPaymentPopup from '../PopupComponents/FinancesPopups/ConfirmPaymentPopup.vue';
 
 export default {
   name: 'FinanceTableComponent',
-  components: { FinanceTableItemComponent },
+  components: { FinanceTableItemComponent, ConfirmPaymentPopup },
   data() {
     return {
       objeto: {
@@ -84,7 +102,13 @@ export default {
         rating: '4.5',
       },
       items: ['Alfabetical', 'Date'],
+      confirmPay: false,
     };
+  },
+  methods: {
+    confirmPayment(val) {
+      this.confirmPay = val;
+    },
   },
 };
 </script>

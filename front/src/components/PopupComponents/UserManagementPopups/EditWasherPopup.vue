@@ -1,0 +1,121 @@
+<!-- eslint-disable vuejs-accessibility/click-events-have-key-events -->
+<template>
+  <div>
+    <div className="w-[766px] h-[868px] bg-white
+      rounded-lg flex flex-col justify-between
+      p-6">
+      <div className="flex flex-row justify-between">
+        <div className="font-semibold text-[16px]">
+          Edit washer
+        </div>
+        <div className="cursor-pointer"
+             @click="this.$emit('editWashers', false)">
+          <v-icon name="io-close" />
+        </div>
+      </div>
+      <div className="text-left text-[16px] font-normal text-[#3F3F44]">
+        Name
+        <div className="ml-auto">
+          <div className="w-[718px] h-fit rounded-lg
+              bg-[#F8F8F8] border-1 border-solid border-[#EBF0ED]">
+            <input v-model="new_client.name"
+                   className="h-[40px] w-full rounded-lg  px-4 py-6
+                      bg-[#F8F8F8] border-1 border-solid border-[#EBF0ED]">
+          </div>
+        </div>
+      </div>
+      <div className="text-left text-[16px] font-normal text-[#3F3F44]">
+        E-mail
+        <div className="ml-auto">
+          <div className="w-[718px] h-fit rounded-lg
+              bg-[#F8F8F8] border-1 border-solid border-[#EBF0ED]">
+            <input v-model="new_client.email"
+                   className="h-[40px] w-full rounded-lg  px-4 py-6
+                      bg-[#F8F8F8] border-1 border-solid border-[#EBF0ED]">
+          </div>
+        </div>
+      </div>
+      <div className="text-left text-[16px] font-normal text-[#3F3F44]">
+        Telephone
+        <div className="ml-auto">
+          <div className="w-[718px] h-fit rounded-lg
+              bg-[#F8F8F8] border-1 border-solid border-[#EBF0ED]">
+            <input v-model="new_client.phone"
+                   className="h-[40px] w-full rounded-lg  px-4 py-6
+                      bg-[#F8F8F8] border-1 border-solid border-[#EBF0ED]">
+          </div>
+        </div>
+      </div>
+      <div className="text-left text-[16px] font-normal text-[#3F3F44]">
+        Address
+        <div className="ml-auto">
+          <div className="w-[718px] h-fit rounded-lg
+              bg-[#F8F8F8] border-1 border-solid border-[#EBF0ED]">
+            <input v-model="new_client.address"
+                   className="h-[40px] w-full rounded-lg  px-4 py-6
+                      bg-[#F8F8F8] border-1 border-solid border-[#EBF0ED]">
+          </div>
+        </div>
+      </div>
+      <div className="text-left text-[16px] font-normal text-[#3F3F44]">
+        User Type
+        <div className="ml-auto">
+          <div className="w-[718px] h-fit rounded-lg
+              bg-[#F8F8F8] border-1 border-solid border-[#EBF0ED]">
+            <input v-model="new_client.type"
+                   className="h-[40px] w-full rounded-lg  px-4 py-6
+                      bg-[#F8F8F8] border-1 border-solid border-[#EBF0ED]">
+          </div>
+        </div>
+      </div>
+      <div className="text-left text-[16px] font-normal text-[#3F3F44]">
+        ABN
+        <div className="ml-auto">
+          <div className="w-[718px] h-fit rounded-lg
+              bg-[#F8F8F8] border-1 border-solid border-[#EBF0ED]">
+            <input v-model="new_client.abn"
+                   className="h-[40px] w-full rounded-lg  px-4 py-6
+                      bg-[#F8F8F8] border-1 border-solid border-[#EBF0ED]">
+          </div>
+        </div>
+      </div>
+      <div className="text-left text-[16px] font-normal text-[#3F3F44]">
+        Driver's license or Passport
+        <div className="ml-auto">
+          <div className="w-[718px] h-fit rounded-lg
+              bg-[#F8F8F8] border-1 border-solid border-[#EBF0ED]">
+            <input v-model="new_client.license"
+                   className="h-[40px] w-full rounded-lg  px-4 py-6
+                      bg-[#F8F8F8] border-1 border-solid border-[#EBF0ED]">
+          </div>
+        </div>
+      </div>
+      <div className="w-[241px] p-[12.5px] bg-[#EDBD3A]
+            text-black rounded-[8px] cursor-pointer
+            mx-auto font-semibold text-center"
+           @click="this.$emit('editWashers', false)">
+        Save Changes
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'EditWasherPopup',
+  data() {
+    return {
+      new_client: {
+        name: '',
+        email: '',
+        phone: '',
+        address: '',
+        type: '',
+        abn: '',
+        license: '',
+      },
+    };
+  },
+  methods: {},
+};
+</script>

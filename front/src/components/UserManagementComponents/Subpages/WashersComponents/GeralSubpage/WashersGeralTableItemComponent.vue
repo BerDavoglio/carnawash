@@ -1,3 +1,4 @@
+<!-- eslint-disable vuejs-accessibility/click-events-have-key-events -->
 <template>
   <tr>
     <td className="text-[#3F3F44] text-[14px] font-light py-[24px] text-center">
@@ -45,7 +46,8 @@
       </span>
     </td>
     <td className="py-[24px] text-center">
-      <span className="cursor-pointer">
+      <span className="cursor-pointer"
+            @click="editWs">
         <v-icon name="md-edit-outlined"
                 scale="1.25" />
       </span>
@@ -69,6 +71,11 @@ export default {
       contract: true,
       enable: true,
     };
+  },
+  methods: {
+    editWs() {
+      this.$emit('editWs', true);
+    },
   },
 };
 </script>

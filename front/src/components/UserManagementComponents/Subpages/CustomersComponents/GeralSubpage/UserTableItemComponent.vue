@@ -1,3 +1,4 @@
+<!-- eslint-disable vuejs-accessibility/click-events-have-key-events -->
 <template>
   <tr>
     <td className="text-[#3F3F44] font-light py-[24px] text-center"> {{ this.obj.name }} </td>
@@ -9,7 +10,8 @@
       View History
     </td>
     <td className="py-[24px] text-center">
-      <span className="cursor-pointer">
+      <span className="cursor-pointer"
+            @click="editCs">
         <v-icon name="md-edit-outlined"
                 scale="1.25" />
       </span>
@@ -25,5 +27,10 @@
 export default {
   name: 'UserTableItemComponent',
   props: ['obj'],
+  methods: {
+    editCs() {
+      this.$emit('editCs', true);
+    },
+  },
 };
 </script>
