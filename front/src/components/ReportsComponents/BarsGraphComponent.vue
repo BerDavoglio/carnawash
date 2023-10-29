@@ -7,8 +7,19 @@
           Composition
         </div>
         <div className="text-[16px] font-normal text-[#3F3F44] flex flex-row">
-          <div>Washes</div>
-          <div>Profit</div>
+          <div className="text-[16px] font-normal text-[#3F3F44] flex flex-row">
+            <div className="flex flex-row">
+              <div className="w-2 h-2 rounded-full bg-[#1486CA] mx-2"
+                   style="margin-top: auto;
+                  margin-bottom: auto;" />
+              Washes
+            </div>
+            <div className="flex flex-row">
+              <div className="w-2 h-2 rounded-full bg-[#79CCFF] mx-2"
+                   style="margin-top: auto;
+                  margin-bottom: auto;" />Profit
+            </div>
+          </div>
         </div>
         <div className="text-[12px] font-semibold text-[#3F3F44]">
           Last 12 months
