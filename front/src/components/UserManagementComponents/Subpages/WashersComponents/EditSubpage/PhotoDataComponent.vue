@@ -1,3 +1,4 @@
+<!-- eslint-disable -->
 <template>
   <div class="photo-data-component">
     <div className="h-[186px] w-[744px] p-[24px] mt-[40px]

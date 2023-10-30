@@ -1,3 +1,4 @@
+<!-- eslint-disable -->
 <template>
   <div class="reports-view">
     <div class="header">

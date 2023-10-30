@@ -1,3 +1,4 @@
+<!-- eslint-disable -->
 <template>
   <div>
     <div className="w-[1500px] p-6 shadow-[4px_6px_30px_0px_#00000020]

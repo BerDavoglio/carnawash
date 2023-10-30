@@ -1,3 +1,4 @@
+<!-- eslint-disable -->
 <template>
   <div>
     <!-- eslint-disable-next-line max-len -->

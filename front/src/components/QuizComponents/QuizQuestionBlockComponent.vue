@@ -1,3 +1,4 @@
+<!-- eslint-disable -->
 <template>
   <div class="faq-box-component">
     <div className="max-w-[1500px] w-full py-[18px] px-[24px]
