@@ -46,7 +46,7 @@
           </div>
           <div className="flex flex-row justify-between items-center mt-4">
             <div className="font-normal text-[16px]">
-              Search Period:
+              Search For:
             </div>
             <div className="w-[241px] h-[44px]">
               <v-select label="Filter"

@@ -1,8 +1,10 @@
+<!-- eslint-disable vuejs-accessibility/click-events-have-key-events -->
 <template>
   <div>
     <div className="flex flex-row mb-[24px]">
       <div className="w-9 h-9 rounded-full bg-amber-400 flex my-auto">
-        <div className="m-auto cursor-pointer">
+        <div className="m-auto cursor-pointer"
+             @click="this.$emit('changeDes', true)">
           <v-icon name="md-arrowback"
                   fill="white" />
         </div>

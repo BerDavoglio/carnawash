@@ -8,7 +8,7 @@
           <div className="flex flex-col justify-between h-full">
             <div className="flex flex-row justify-between">
               <div className="text-[16px] font-semibold text-[#3F3F44]">
-                Composition
+                Washes
               </div>
               <div className="text-[16px] font-normal text-[#3F3F44] flex flex-row">
                 <div className="flex flex-row">

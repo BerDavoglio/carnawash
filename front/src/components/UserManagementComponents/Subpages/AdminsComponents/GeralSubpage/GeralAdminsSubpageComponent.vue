@@ -32,10 +32,10 @@
             <div className="w-[241px] p-[12.5px] bg-[#EDBD3A]
             text-black rounded-[8px] cursor-pointer
             m-auto font-semibold">
-              <v-icon name="pr-user-plus"
+              <v-icon name="bi-plus-square"
                       scale="1.25"
                       fill="black" />
-              Register Costumers
+              Register User Type
             </div>
             <div className="w-[241px] p-[12.5px] bg-[#EDBD3A]
             text-black rounded-[8px] cursor-pointer
@@ -43,7 +43,7 @@
               <v-icon name="pr-user-plus"
                       scale="1.25"
                       fill="black" />
-              Register Costumers
+              Register Admin
             </div>
           </div>
         </div>
@@ -66,6 +66,10 @@ export default {
   data() {
     return {
       isUser: 'registered',
+      items: [
+        'Admin',
+        'SubAdmin',
+      ],
     };
   },
   methods: {

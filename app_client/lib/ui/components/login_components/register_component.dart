@@ -19,7 +19,7 @@ class _RegisterComponentState extends State<RegisterComponent> {
   String? brandSelected;
   String? modelSelected;
   String? colorSelected;
-  int n = 1;
+  int n = 0;
   int sizeSelected = 1;
   bool hidden = true;
 

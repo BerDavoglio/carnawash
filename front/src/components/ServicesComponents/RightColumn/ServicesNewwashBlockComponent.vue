@@ -58,7 +58,7 @@
             rounded-[10px] bg-[#EDBD3A] text-black text-[16px]
             cursor-pointer"
              @click="confirmNewwash = true;">
-          Add new subscription
+          Add new regular wash
         </div>
       </div>
     </div>

@@ -30,11 +30,11 @@
         <finance-filter-component />
         <finance-automatic-component />
       </div>
-      <finance-table-component />
+      <finance-table-component @changeToDescript="changeToDescript" />
     </div>
     <div class="specify-finances"
          v-if="!isGeral">
-      <finance-specific-page-component />
+      <finance-specific-page-component @changeToDescript="changeToDescript" />
     </div>
   </div>
 </template>
@@ -58,6 +58,11 @@ export default {
       search: '',
       isGeral: true,
     };
+  },
+  methods: {
+    changeToDescript(val) {
+      this.isGeral = val;
+    },
   },
 };
 </script>

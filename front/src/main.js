@@ -39,6 +39,7 @@ import {
   LaGetPocket,
   BiSend,
   IoClose,
+  BiPlusSquare,
 } from 'oh-vue-icons/icons';
 
 import TextClamp from 'vue3-text-clamp';
@@ -90,6 +91,7 @@ addIcons(
   LaGetPocket,
   BiSend,
   IoClose,
+  BiPlusSquare,
 );
 
 const vuetify = createVuetify({

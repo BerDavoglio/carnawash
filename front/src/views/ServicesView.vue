@@ -35,7 +35,7 @@
         <services-activescar-block-component />
       </div>
       <div class="col2">
-        <graph-services-geral-component :values="values_1"
+        <graph-services-geral-component :values="values_2"
                                         :title="'Vehicle size data total'" />
         <services-newwash-block-component />
         <services-activeswash-block-component />

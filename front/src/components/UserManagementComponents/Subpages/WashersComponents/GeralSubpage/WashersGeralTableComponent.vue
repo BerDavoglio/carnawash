@@ -10,7 +10,7 @@
            className="flex flex-row justify-between h-[56px] mb-6">
         <div className="flex flex-row">
           <div className="text-[16px] font-semibold text-left mb-[16px] mr-[20px] my-auto">
-            Register Washer
+            Registered Washer
           </div>
           <div className="w-fit h-fit
                rounded-[10px] border-2

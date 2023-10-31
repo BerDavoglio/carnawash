@@ -3,7 +3,7 @@
     <div className="my-[24px] w-full
     shadow-[4px_6px_30px_0px_#00000020] rounded-lg
     p-[36px]">
-      <specific-header-component />
+      <specific-header-component @changeDes="(val) => this.$emit('changeToDescript', val)" />
       <specific-infos-component />
       <specific-wash-component />
       <specific-transaction-component />

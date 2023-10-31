@@ -1,3 +1,4 @@
+<!-- eslint-disable vuejs-accessibility/form-control-has-label -->
 <template>
   <div class="table-component">
     <div className="w-full h-[580px] mt-4
@@ -18,14 +19,6 @@
                       :items="this.items"
                       variant="outlined" />
           </div>
-          <div className="w-[241px] p-[12.5px] bg-[#EDBD3A]
-            text-black rounded-[8px] cursor-pointer
-            m-auto font-semibold">
-            <v-icon name="pr-user-plus"
-                    scale="1.25"
-                    fill="black" />
-            Register Washer
-          </div>
         </div>
       </div>
       <table class="table-auto w-full
@@ -34,7 +27,11 @@
         <thead className="font-normal
           border-b-[1px] border-[#C9C9C9]">
           <tr>
-            <th className="pb-[12px] text-center">Select All</th>
+            <th className="pb-[12px] w-[120px] text-left">
+              <input type="checkbox"
+                     v-model="this.selectAll"
+                     className="mr-2 w-[17px] h-[17px]" />Select All
+            </th>
             <th className="pb-[12px] text-center">Wash ID</th>
             <th className="pb-[12px] text-center">Client</th>
             <th className="pb-[12px] text-center">Washer</th>
@@ -48,31 +45,53 @@
         </thead>
         <tbody className="font-light">
           <finance-table-item-component :obj="this.objeto"
-                                        @confirmPayment="confirmPayment" />
+                                        :isAll="this.selectAll"
+                                        @confirmPayment="confirmPayment"
+                                        @changeDes="(val) => this.$emit('changeToDescript', val)" />
           <finance-table-item-component :obj="this.objeto"
-                                        @confirmPayment="confirmPayment" />
+                                        :isAll="this.selectAll"
+                                        @confirmPayment="confirmPayment"
+                                        @changeDes="(val) => this.$emit('changeToDescript', val)" />
           <finance-table-item-component :obj="this.objeto"
-                                        @confirmPayment="confirmPayment" />
+                                        :isAll="this.selectAll"
+                                        @confirmPayment="confirmPayment"
+                                        @changeDes="(val) => this.$emit('changeToDescript', val)" />
           <finance-table-item-component :obj="this.objeto"
-                                        @confirmPayment="confirmPayment" />
+                                        :isAll="this.selectAll"
+                                        @confirmPayment="confirmPayment"
+                                        @changeDes="(val) => this.$emit('changeToDescript', val)" />
           <finance-table-item-component :obj="this.objeto"
-                                        @confirmPayment="confirmPayment" />
+                                        :isAll="this.selectAll"
+                                        @confirmPayment="confirmPayment"
+                                        @changeDes="(val) => this.$emit('changeToDescript', val)" />
           <finance-table-item-component :obj="this.objeto"
-                                        @confirmPayment="confirmPayment" />
+                                        :isAll="this.selectAll"
+                                        @confirmPayment="confirmPayment"
+                                        @changeDes="(val) => this.$emit('changeToDescript', val)" />
           <finance-table-item-component :obj="this.objeto"
-                                        @confirmPayment="confirmPayment" />
+                                        :isAll="this.selectAll"
+                                        @confirmPayment="confirmPayment"
+                                        @changeDes="(val) => this.$emit('changeToDescript', val)" />
           <finance-table-item-component :obj="this.objeto"
-                                        @confirmPayment="confirmPayment" />
+                                        :isAll="this.selectAll"
+                                        @confirmPayment="confirmPayment"
+                                        @changeDes="(val) => this.$emit('changeToDescript', val)" />
           <finance-table-item-component :obj="this.objeto"
-                                        @confirmPayment="confirmPayment" />
+                                        :isAll="this.selectAll"
+                                        @confirmPayment="confirmPayment"
+                                        @changeDes="(val) => this.$emit('changeToDescript', val)" />
           <finance-table-item-component :obj="this.objeto"
-                                        @confirmPayment="confirmPayment" />
+                                        :isAll="this.selectAll"
+                                        @confirmPayment="confirmPayment"
+                                        @changeDes="(val) => this.$emit('changeToDescript', val)" />
           <finance-table-item-component :obj="this.objeto"
-                                        @confirmPayment="confirmPayment" />
+                                        :isAll="this.selectAll"
+                                        @confirmPayment="confirmPayment"
+                                        @changeDes="(val) => this.$emit('changeToDescript', val)" />
           <finance-table-item-component :obj="this.objeto"
-                                        @confirmPayment="confirmPayment" />
-          <finance-table-item-component :obj="this.objeto"
-                                        @confirmPayment="confirmPayment" />
+                                        :isAll="this.selectAll"
+                                        @confirmPayment="confirmPayment"
+                                        @changeDes="(val) => this.$emit('changeToDescript', val)" />
         </tbody>
       </table>
     </div>
@@ -103,6 +122,7 @@ export default {
       },
       items: ['Alfabetical', 'Date'],
       confirmPay: false,
+      selectAll: false,
     };
   },
   methods: {

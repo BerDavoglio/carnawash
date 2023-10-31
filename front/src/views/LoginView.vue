@@ -11,53 +11,52 @@
         </div>
       </div>
       <div className="m-auto w-auto"
-           v-show="true">
+           v-show="page == 'Login'">
         <div className="text-white mb-9 text-[22px]">
           Sign In
         </div>
         <div className="w-full">
           <input v-model="email"
                  placeholder="E-mail"
-                 className="h-[16px] w-full rounded-lg  px-4 py-6 mb-5">
+                 className="h-[16px] w-full rounded-lg  px-4 py-6 mb-5 bg-white">
           <input v-model="password"
                  :type="isHiddenOne ? 'password' : 'text'"
                  aria-label="Password"
                  placeholder="Password"
-                 className="h-[16px] w-full rounded-lg  px-4 py-6 mb-5">
-          <div className="text-[16px] text-white underline mb-9 cursor-pointer">
+                 className="h-[16px] w-full rounded-lg  px-4 py-6 mb-5 bg-white">
+          <div className="text-[16px] text-white underline mb-9 cursor-pointer"
+               @click="page = 'Reset'">
             I forgot the password
           </div>
         </div>
         <div className="w-full p-[12.5px] bg-[#EDBD3A]
         text-white rounded-[8px] cursor-pointer"
-        @click="this.$router.push({ name: 'home' })">
+             @click="this.$router.push({ name: 'home' })">
           Login
         </div>
       </div>
       <div className="m-auto w-auto max-w-[443px]"
-           v-show="false">
+           v-show="page == 'Reset'">
         <div className="text-white mb-10 text-[22px]">
           Retrieve your account
         </div>
         <div className="w-full mb-10">
           <input v-model="email"
                  placeholder="E-mail or phone number"
-                 className="h-[16px] w-full rounded-lg px-4 py-6 mb-5">
+                 className="h-[16px] w-full rounded-lg px-4 py-6 mb-5
+                 bg-white">
           <div className="text-white text-[16px] w-[90%] m-auto">
             We're gonna sent an e-mail to your inbox with a link to reset your password
           </div>
         </div>
         <div className="w-full p-[10px] bg-[#EDBD3A]
-                text-white rounded-[8px] cursor-pointer">
+                text-white rounded-[8px] cursor-pointer"
+             @click="page = 'Password'">
           Send me the e-mail
-        </div>
-        <div className="my-[20px] text-[16px] text-white">or</div>
-        <div className="text-[16px] text-[#EDBD3A] cursor-pointer">
-          Create an account
         </div>
       </div>
       <div className="m-auto w-auto"
-           v-show="false">
+           v-show="page == 'Password'">
         <div className="text-white mb-10 text-[22px]">
           Change your password
         </div>
@@ -66,19 +65,22 @@
                  :type="isHiddenOne ? 'password' : 'text'"
                  aria-label="Password"
                  placeholder="Password"
-                 className="h-[16px] w-full rounded-lg  px-4 py-6 mb-5">
+                 className="h-[16px] w-full rounded-lg  px-4 py-6 mb-5
+                 bg-white">
           <input v-model="password"
                  :type="isHiddenTwo ? 'password' : 'text'"
                  aria-label="Confirm password"
                  placeholder="Confirm password"
-                 className="h-[16px] w-full rounded-lg  px-4 py-6 mb-5">
+                 className="h-[16px] w-full rounded-lg  px-4 py-6 mb-5
+                 bg-white">
         </div>
         <div className="w-full p-[10px] bg-[#EDBD3A]
                 text-white rounded-[8px] cursor-pointer">
           Confirm new password
         </div>
         <div className="my-[20px] text-[16px] text-white">or</div>
-        <div className="text-[16px] text-[#EDBD3A] cursor-pointer">
+        <div className="text-[16px] text-[#EDBD3A] cursor-pointer"
+             @click="page = 'Login'">
           Log In to my account
         </div>
       </div>
@@ -100,7 +102,7 @@ export default {
       isHiddenOne: true,
       isHiddenTwo: true,
       pwIcon: false,
-      isLogin: true,
+      page: 'Login',
     };
   },
   methods: {
