@@ -7,26 +7,30 @@
           icon: 'pr-users',
           text: 'Total Washers',
           value: 300,
-        }" />
+        }"
+                              :hasFilter="0" />
         <data-block-component :obj="{
           icon: 'pr-user-plus',
           text: 'New Washers',
           value: 15,
-        }" />
+        }"
+                              :hasFilter="1" />
         <data-block-component :obj="{
           icon: 'pr-user-minus',
           text: 'Inactive Washers',
           value: 8,
-        }" />
+        }"
+                              :hasFilter="2" />
       </div>
       <div className="my-8">
         <washers-geral-table-component @registerWashers="registerWashers"
-                                       @editWashers="editWashers" />
+                                       @editWashers="editWashers"
+                                       @showWasher="(val) => this.edit = val" />
       </div>
     </div>
     <div class="edit-sub-page"
          v-if="edit">
-      <edit-washers-subpage-component />
+      <edit-washers-subpage-component @showWasher="(val) => this.edit = val" />
     </div>
     <v-dialog v-model="registerWasher"
               width="auto">

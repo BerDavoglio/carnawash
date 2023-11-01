@@ -1,10 +1,20 @@
+<!-- eslint-disable vuejs-accessibility/click-events-have-key-events -->
 <template>
   <div class="user-data">
     <div class="header"
          className="grid grid-cols-2 justify-between
          mt-[40px] mb-[16px]">
-      <div className="font-semibold text-[16px] text-left">
-        Washer Data
+      <div className="flex flex-row">
+        <div className="w-9 h-9 rounded-full bg-amber-400 flex my-auto">
+          <div className="m-auto cursor-pointer"
+               @click="this.$emit('showW', false)">
+            <v-icon name="md-arrowback"
+                    fill="white" />
+          </div>
+        </div>
+        <div className="font-semibold text-[16px] text-left my-auto ml-4">
+          Washer Data
+        </div>
       </div>
       <div className="text-[#EDBD3A] font-medium text-[16px]
       cursor-pointer text-right">

@@ -17,7 +17,8 @@
       {{ this.obj.licence }}
     </td>
     <td className="text-[#3F3F44] text-[14px] font-light py-[24px] text-center
-    cursor-pointer underline underline-offset-1">
+    cursor-pointer underline underline-offset-1"
+    @click="this.$emit('showW', true);">
       View History
     </td>
     <td className="text-[#3F3F44] text-[14px] font-light py-[24px] text-center">

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div className="grid grid-cols-2 gap-[51px] mb-[36px]">
-      <user-data-component />
+      <user-data-component  @showW="(val) => this.$emit('showWasher', val)" />
       <div>
         <photo-data-component />
         <payment-data-component />

@@ -18,7 +18,7 @@
         <div className="ml-auto">
           <div className="w-[718px] h-fit rounded-lg
               bg-[#F8F8F8] border-1 border-solid border-[#EBF0ED]">
-            <input v-model="new_client.name"
+            <input v-model="new_admin.name"
                    className="h-[40px] w-full rounded-lg  px-4 py-6
                       bg-[#F8F8F8] border-1 border-solid border-[#EBF0ED]">
           </div>
@@ -29,7 +29,7 @@
         <div className="ml-auto">
           <div className="w-[718px] h-fit rounded-lg
               bg-[#F8F8F8] border-1 border-solid border-[#EBF0ED]">
-            <input v-model="new_client.email"
+            <input v-model="new_admin.email"
                    className="h-[40px] w-full rounded-lg  px-4 py-6
                       bg-[#F8F8F8] border-1 border-solid border-[#EBF0ED]">
           </div>
@@ -40,7 +40,7 @@
         <div className="ml-auto">
           <div className="w-[718px] h-fit rounded-lg
               bg-[#F8F8F8] border-1 border-solid border-[#EBF0ED]">
-            <input v-model="new_client.phone"
+            <input v-model="new_admin.phone"
                    className="h-[40px] w-full rounded-lg  px-4 py-6
                       bg-[#F8F8F8] border-1 border-solid border-[#EBF0ED]">
           </div>
@@ -52,7 +52,7 @@
           <div className="ml-auto">
             <div className="w-full h-fit
             bg-[#F8F8F8] border-1 border-solid border-[#EBF0ED]">
-              <input v-model="new_client.password"
+              <input v-model="new_admin.password"
                      :type="isHiddenOne ? 'password' : 'text'"
                      aria-label="Password"
                      className="w-[95%] px-[10px] py-2">

@@ -18,7 +18,7 @@
         <div className="ml-auto">
           <div className="w-[718px] h-fit rounded-lg
               bg-[#F8F8F8] border-1 border-solid border-[#EBF0ED]">
-            <input v-model="new_client.name"
+            <input v-model="new_admin.name"
                    className="h-[40px] w-full rounded-lg  px-4 py-6
                       bg-[#F8F8F8] border-1 border-solid border-[#EBF0ED]">
           </div>
@@ -29,7 +29,7 @@
         <div className="ml-auto">
           <div className="w-[718px] h-fit rounded-lg
               bg-[#F8F8F8] border-1 border-solid border-[#EBF0ED]">
-            <input v-model="new_client.email"
+            <input v-model="new_admin.email"
                    className="h-[40px] w-full rounded-lg  px-4 py-6
                       bg-[#F8F8F8] border-1 border-solid border-[#EBF0ED]">
           </div>
@@ -40,9 +40,27 @@
         <div className="ml-auto">
           <div className="w-[718px] h-fit rounded-lg
               bg-[#F8F8F8] border-1 border-solid border-[#EBF0ED]">
-            <input v-model="new_client.phone"
+            <input v-model="new_admin.phone"
                    className="h-[40px] w-full rounded-lg  px-4 py-6
                       bg-[#F8F8F8] border-1 border-solid border-[#EBF0ED]">
+          </div>
+        </div>
+      </div>
+      <div>
+        <div className="text-left text-[16px] font-normal text-[#3F3F44]">
+          Password
+          <div className="ml-auto">
+            <div className="w-full h-fit
+            bg-[#F8F8F8] border-1 border-solid border-[#EBF0ED]">
+              <input v-model="new_admin.pass"
+                     :type="isHiddenOne ? 'password' : 'text'"
+                     aria-label="Password"
+                     className="w-[95%] px-[10px] py-2">
+              <v-icon name="bi-eye-slash"
+                      scale="1.25"
+                      fill="black"
+                      @click="changePass()" />
+            </div>
           </div>
         </div>
       </div>
@@ -61,13 +79,19 @@ export default {
   name: 'EditAdminPopup',
   data() {
     return {
+      isHiddenOne: true,
       new_admin: {
         name: '',
         email: '',
         phone: '',
+        pass: '',
       },
     };
   },
-  methods: {},
+  methods: {
+    changePass() {
+      this.isHiddenOne = !this.isHiddenOne;
+    },
+  },
 };
 </script>

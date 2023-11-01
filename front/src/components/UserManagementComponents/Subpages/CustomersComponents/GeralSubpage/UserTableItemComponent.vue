@@ -6,7 +6,8 @@
     <td className="text-[#3F3F44] font-light py-[24px] text-center">{{ this.obj.phone }}</td>
     <td className="text-[#3F3F44] font-light py-[24px] text-center">{{ this.obj.address }}</td>
     <td className="text-[#3F3F44] font-light py-[24px] text-center
-    cursor-pointer underline underline-offset-1">
+    cursor-pointer underline underline-offset-1"
+        @click="this.$emit('showC', true);">
       View History
     </td>
     <td className="py-[24px] text-center">

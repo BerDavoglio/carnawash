@@ -65,7 +65,8 @@
         </thead>
         <tbody className="font-light">
           <washers-geral-table-item-component :obj="this.objeto"
-                                              @editWs="editWs" />
+                                              @editWs="editWs"
+                                              @showW="(val) => this.$emit('showWasher', val)" />
         </tbody>
       </table>
     </div>

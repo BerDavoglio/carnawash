@@ -59,7 +59,8 @@
         </thead>
         <tbody className="font-light">
           <user-table-item-component :obj="this.objeto"
-                                     @editCs="editCs" />
+                                     @editCs="(val) => this.$emit('editCostumers', val)"
+                                     @showC="(val) => this.$emit('showCostumer', val)" />
         </tbody>
       </table>
     </div>
@@ -87,9 +88,6 @@ export default {
   methods: {
     registerCostumers() {
       this.$emit('registerCostumers', true);
-    },
-    editCs(val) {
-      this.$emit('editCostumers', val);
     },
   },
 };

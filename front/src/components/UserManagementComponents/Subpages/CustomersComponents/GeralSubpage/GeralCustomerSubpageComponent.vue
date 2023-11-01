@@ -7,27 +7,31 @@
           icon: 'pr-users',
           text: 'Total Clients',
           value: 300,
-        }" />
+        }"
+        :hasFilter="0" />
         <data-block-component :obj="{
           icon: 'pr-user-plus',
           text: 'New Clients',
           value: 15,
-        }" />
+        }"
+        :hasFilter="1" />
         <data-block-component :obj="{
           icon: 'pr-user-minus',
           text: 'Inactive Clients',
           value: 8,
-        }" />
+        }"
+        :hasFilter="2" />
       </div>
       <div className="my-8">
         <user-table-component @input="alert(displayToKey($event))"
                               @registerCostumers="registerCostumers"
-                              @editCostumers="editCostumers" />
+                              @editCostumers="editCostumers"
+                              @showCostumer="(val) => this.edit = val" />
       </div>
     </div>
     <div class="edit-sub-page"
          v-if="edit">
-      <edit-customers-subpage-component />
+      <edit-customers-subpage-component @showCostumer="(val) => this.edit = val" />
     </div>
     <v-dialog v-model="registerCostumer"
               width="auto">
