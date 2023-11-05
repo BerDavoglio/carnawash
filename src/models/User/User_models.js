@@ -28,7 +28,7 @@ export default class User extends Model {
         type: Sequelize.STRING,
         defaultValue: '',
       },
-      cellphone: {
+      phone: {
         type: Sequelize.STRING,
         defaultValue: 0,
       },
@@ -36,17 +36,9 @@ export default class User extends Model {
         type: Sequelize.DATE,
         defaultValue: new Date(),
       },
-      cpf: {
-        type: Sequelize.STRING,
-        defaultValue: 0,
-      },
       role: {
-        type: Sequelize.ENUM('user', 'admin'),
+        type: Sequelize.STRING,
         defaultValue: 'user',
-      },
-      points: {
-        type: Sequelize.BIGINT,
-        defaultValue: 0,
       },
       password_hash: {
         type: Sequelize.STRING,
