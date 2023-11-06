@@ -17,16 +17,21 @@ app.listen(process.env.APP_PORT, async () => {
       name: 'admin',
       email: 'admin@gmail.com',
       address: 'rua admin, 123',
-      cellphone: '41900000000',
-      birth: new Date(),
-      cpf: '00000000000',
+      phone: '41900000000',
       role: 'admin',
-      points: 1000000,
       password: 'admin123',
     });
   } else {
     console.log('Admin already has been created');
   }
+
+  // CREATE COUPONBANNER
+  // CREATE TERMS AND CONDITION
+  // CREATE MARKUP
+  // CREATE REGULAR CAR SIZES
+  // CREATE REGULAR ADDITIONALS
+
+  // UMA VEZ NO DIA, VERIFICA OS REGULAR WASHS
 
   console.log('Started!');
 });

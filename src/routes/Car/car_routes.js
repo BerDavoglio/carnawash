@@ -7,7 +7,7 @@ const router = new Router();
 
 router.post('/', carController.store);
 router.get('/', loginRequired, carController.show);
-router.put('/', loginRequired, carController.update);
-router.delete('/', loginRequired, carController.delete);
+router.put('/:id', loginRequired, carController.update);
+router.delete('/:id', loginRequired, carController.delete);
 
 export default router;

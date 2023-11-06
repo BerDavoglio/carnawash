@@ -11,22 +11,20 @@ const router = new Router();
 
 router.post('/additional/', loginRequired, isAdmin, additionalServicesController.store);
 router.get('/additional/', loginRequired, additionalServicesController.show);
-router.put('/additional/', loginRequired, isAdmin, additionalServicesController.update);
-router.delete('/additional/', loginRequired, isAdmin, additionalServicesController.delete);
+router.put('/additional/:id', loginRequired, isAdmin, additionalServicesController.update);
+router.delete('/additional/:id', loginRequired, isAdmin, additionalServicesController.delete);
 
 router.post('/size/', loginRequired, isAdmin, carSizeController.store);
 router.get('/size/', loginRequired, carSizeController.show);
-router.put('/size/', loginRequired, isAdmin, carSizeController.update);
-router.delete('/size/', loginRequired, isAdmin, carSizeController.delete);
+router.put('/size/:id', loginRequired, isAdmin, carSizeController.update);
+router.delete('/size/:id', loginRequired, isAdmin, carSizeController.delete);
 
-router.post('/markup/', loginRequired, isAdmin, markupController.store);
 router.get('/markup/', loginRequired, isAdmin, markupController.show);
-router.put('/markup/', loginRequired, isAdmin, markupController.update);
-router.delete('/markup/', loginRequired, isAdmin, markupController.delete);
+router.put('/markup/:id', loginRequired, isAdmin, markupController.update);
 
 router.post('/regular/', loginRequired, isAdmin, regularWashController.store);
 router.get('/regular/', loginRequired, regularWashController.show);
-router.put('/regular/', loginRequired, isAdmin, regularWashController.update);
-router.delete('/regular/', loginRequired, isAdmin, regularWashController.delete);
+router.put('/regular/:id', loginRequired, isAdmin, regularWashController.update);
+router.delete('/regular/:id', loginRequired, isAdmin, regularWashController.delete);
 
 export default router;

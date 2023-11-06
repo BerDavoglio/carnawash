@@ -1,21 +1,54 @@
-import User from '../../models/User/User_models';
+import SentNotification from '../../models/Notification/SentNotification_models';
 
 class SentNotificationController {
-  async store(req, res) {
-    try { } catch (err) {
-      return res.status(400).json({ errors: err.message });
+  async send(req, res) {
+    try {
+      const newNotification = await SentNotification.create(req.body);
+
+      const {
+        id,
+        notification_id,
+        user_type_id,
+        user_id,
+      } = newNotification;
+
+      return res.json({
+        id,
+        notification_id,
+        user_type_id,
+        user_id,
+      });
+    } catch (err) {
+      return res.status(400).json({ errors: `Sent Notification / ${err.message}` });
+    }
+  }
+
+  async index(req, res) {
+    try {
+      const id = userId;
+      if (!id) {
+        return res.status(400).json({ errors: ['ID not Found'] });
+      }
+
+      const notifications = await Notification.findAll({
+        where: {
+          user_id: id
+        }
+      });
+
+      return res.json(notifications);
+    } catch (err) {
+      return res.status(400).json({ errors: `Get Sent Notification / ${err.message}` });
     }
   }
 
   async show(req, res) {
-    try { } catch (err) {
-      return res.status(400).json({ errors: err.message });
-    }
-  }
+    try {
+      const notifications = await SentNotification.findAll();
 
-  async update(req, res) {
-    try { } catch (err) {
-      return res.status(400).json({ errors: err.message });
+      return res.json(notifications);
+    } catch (err) {
+      return res.status(400).json({ errors: `Show Sent Notification / ${err.message}` });
     }
   }
 }

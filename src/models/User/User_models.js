@@ -32,13 +32,13 @@ export default class User extends Model {
         type: Sequelize.STRING,
         defaultValue: 0,
       },
-      birth: {
-        type: Sequelize.DATE,
-        defaultValue: new Date(),
-      },
       role: {
         type: Sequelize.STRING,
         defaultValue: 'user',
+      },
+      first_login: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
       },
       password_hash: {
         type: Sequelize.STRING,

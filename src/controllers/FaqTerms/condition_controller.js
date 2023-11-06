@@ -1,27 +1,28 @@
-import User from '../../models/User/User_models';
+import Condition from '../../models/FaqTerms/Condition_models';
 
 class ConditionController {
-  async store(req, res) {
-    try { } catch (err) {
-      return res.status(400).json({ errors: err.message });
-    }
-  }
-
   async show(req, res) {
-    try { } catch (err) {
-      return res.status(400).json({ errors: err.message });
+    try {
+      const condition = await Condition.findAll();
+
+      return res.json(condition);
+    } catch (err) {
+      return res.status(400).json({ errors: `Show Terms and Conditions / ${err.message}` });
     }
   }
 
   async update(req, res) {
-    try { } catch (err) {
-      return res.status(400).json({ errors: err.message });
-    }
-  }
+    try {
+      const condition = await Condition.findByPk(req.params.id);
+      if (!condition) {
+        return res.status(400).json({ errors: ['Terms and Conditions not found'] });
+      }
 
-  async delete(req, res) {
-    try { } catch (err) {
-      return res.status(400).json({ errors: err.message });
+      const updateCondition = await condition.update(req.body);
+
+      return res.json(updateCondition);
+    } catch (err) {
+      return res.status(400).json({ errors: `Update Terms and Conditions / ${err.message}` });
     }
   }
 }

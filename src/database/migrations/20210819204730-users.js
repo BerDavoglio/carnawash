@@ -20,24 +20,16 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      cellphone: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      birth: {
-        type: Sequelize.DATE,
-        allowNull: false,
-      },
-      cpf: {
+      phone: {
         type: Sequelize.STRING,
         allowNull: false,
       },
       role: {
-        type: Sequelize.ENUM('user', 'admin'),
+        type: Sequelize.STRING,
         allowNull: false,
       },
-      points: {
-        type: Sequelize.BIGINT,
+      first_login: {
+        type: Sequelize.BOOLEAN,
         allowNull: false,
       },
       password_hash: {

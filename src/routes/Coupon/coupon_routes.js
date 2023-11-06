@@ -15,6 +15,6 @@ router.delete('/', loginRequired, isAdmin, couponController.delete);
 
 // BANNER CRIA AUTOMATICAMENTE, ASSIM COMO PERFIL ADMIN
 router.get('/banner/', loginRequired, isAdmin, couponBannerController.show);
-router.put('/banner/', loginRequired, isAdmin, couponBannerController.update);
+router.put('/banner/:id', loginRequired, isAdmin, couponBannerController.update);
 
 export default router;

@@ -5,7 +5,7 @@ import User from '../../models/User/User_models';
 class ClientUserController {
   async store(req, res) {
     try {
-      if (req.body.role || req.body.points) {
+      if (req.body.role) {
         return res.status(401)
           .json({ errors: ['Unauthorized'] });
       }
@@ -16,17 +16,17 @@ class ClientUserController {
         name,
         email,
         address,
-        cellphone,
+        phone,
       } = newUser;
 
       return res.json({
         name,
         email,
         address,
-        cellphone,
+        phone,
       });
     } catch (err) {
-      return res.status(400).json({ errors: err.message });
+      return res.status(400).json({ errors: `Create User / ${err.message}` });
     }
   }
 
@@ -44,13 +44,13 @@ class ClientUserController {
 
       return res.json(user);
     } catch (err) {
-      return res.status(400).json({ errors: err.message });
+      return res.status(400).json({ errors: `Index User / ${err.message}` });
     }
   }
 
   async update(req, res) {
     try {
-      if (req.body.role || req.body.points) {
+      if (req.body.role) {
         return res.status(401)
           .json({ errors: ['Unauthorized'] });
       }
@@ -69,7 +69,10 @@ class ClientUserController {
 
       const {
         id,
+        name,
         email,
+        address,
+        phone,
         role,
       } = newUser;
       const token = jwt.sign({
@@ -80,9 +83,14 @@ class ClientUserController {
         expiresIn: process.env.TOKEN_EXPIRATION,
       });
 
-      return res.json([newUser, token]);
+      return res.json([{
+        name,
+        email,
+        address,
+        phone,
+      }, token]);
     } catch (err) {
-      return res.status(400).json({ errors: err.message });
+      return res.status(400).json({ errors: `Update User / ${err.message}` });
     }
   }
 
@@ -101,7 +109,7 @@ class ClientUserController {
       await user.destroy();
       return res.json({ message: 'User has been Deleted' });
     } catch (err) {
-      return res.status(400).json({ errors: err.message });
+      return res.status(400).json({ errors: `Delete User / ${err.message}` });
     }
   }
 }
