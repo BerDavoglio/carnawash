@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import couponController from '../../controllers/Coupon/coupon_controller';
+import couponBannerController from '../../controllers/Coupon/coupon_banner_controller';
 
 import loginRequired from '../../middlewares/login_required';
 import isAdmin from '../../middlewares/is_admin';
@@ -13,7 +14,7 @@ router.put('/', loginRequired, isAdmin, couponController.update);
 router.delete('/', loginRequired, isAdmin, couponController.delete);
 
 // BANNER CRIA AUTOMATICAMENTE, ASSIM COMO PERFIL ADMIN
-router.get('/banner/', loginRequired, isAdmin, couponController.show);
-router.put('/banner/', loginRequired, isAdmin, couponController.update);
+router.get('/banner/', loginRequired, isAdmin, couponBannerController.show);
+router.put('/banner/', loginRequired, isAdmin, couponBannerController.update);
 
 export default router;

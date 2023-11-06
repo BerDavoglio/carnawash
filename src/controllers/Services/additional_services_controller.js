@@ -1,6 +1,6 @@
 import User from '../../models/User/User_models';
 
-class FaqController {
+class AdditionalServicesController {
   async store(req, res) {
     try { } catch (err) {
       return res.status(400).json({ errors: err.message });
@@ -26,4 +26,4 @@ class FaqController {
   }
 }
 
-export default new FaqController();
+export default new AdditionalServicesController();
