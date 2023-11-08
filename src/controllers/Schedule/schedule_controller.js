@@ -1,5 +1,5 @@
 import Schedule from '../../models/Schedules/Schedule_models';
-import CarsObj from '../../models/Schedules/CarsObj_models';
+import CarsObjects from '../../models/Schedules/CarsObjects_models';
 import Car from '../../models/Car/Car_models';
 
 import AdditionalService from '../../models/Services/AdditionalService_models';
@@ -21,12 +21,12 @@ class ScheduleController {
 
       let cars_list_id = '';
       req.body.cars_obj_list.forEach(async (cars_obj) => {
-        const newCarsObj = await CarsObj.create({
+        const newCarsObjects = await CarsObjects.create({
           car_id: cars_obj.car_id,
           wash_type: cars_obj.wash_type,
           additional_list_id: cars_obj.additional_list_id,
         });
-        cars_list_id += newCarsObj.id;
+        cars_list_id += newCarsObjects.id;
         cars_list_id += ';';
       });
 
@@ -100,9 +100,9 @@ class ScheduleController {
       let total = 0;
 
       req.body.cars_list_id.split(';').forEach(async (cars_obj_id) => {
-        const cars_obj = await CarsObj.findByPk(cars_obj_id);
+        const cars_obj = await CarsObjects.findByPk(cars_obj_id);
         if (!cars_obj) {
-          return res.status(400).json({ errors: ['CarsObj not Found'] });
+          return res.status(400).json({ errors: ['CarsObjects not Found'] });
         }
         total += this.calcCarRegularPrice(
           cars_obj.car_id,
