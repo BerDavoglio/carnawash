@@ -43,6 +43,7 @@ router.put('/admin/washers/:id/bank/', loginRequired, isAdmin, adminWasherContro
 
 router.get('/admin/admins/', loginRequired, isAdmin, adminUserController.showAdmins);
 router.get('/admin/admins/role/:id', loginRequired, isAdmin, adminUserController.changeRole);
+router.get('/admin/admins/subrole/:id', loginRequired, isAdmin, adminUserController.changeSubrole);
 router.post('/admin/usertype/', loginRequired, isAdmin, adminUserController.userTypeStore);
 router.get('/admin/usertype/', loginRequired, isAdmin, adminUserController.userTypeShow);
 router.put('/admin/usertype/:id', loginRequired, isAdmin, adminUserController.userTypeUpdate);

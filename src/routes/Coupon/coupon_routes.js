@@ -13,7 +13,6 @@ router.get('/all/', loginRequired, isAdmin, couponController.show);
 router.put('/', loginRequired, isAdmin, couponController.update);
 router.delete('/', loginRequired, isAdmin, couponController.delete);
 
-// BANNER CRIA AUTOMATICAMENTE, ASSIM COMO PERFIL ADMIN
 router.get('/banner/', loginRequired, isAdmin, couponBannerController.show);
 router.put('/banner/:id', loginRequired, isAdmin, couponBannerController.update);
 

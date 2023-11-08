@@ -1,44 +1,313 @@
-import User from '../../models/User/User_models';
+import Schedule from '../../models/Schedules/Schedule_models';
+import CarsObj from '../../models/Schedules/CarsObj_models';
+import Car from '../../models/Car/Car_models';
+
+import AdditionalService from '../../models/Services/AdditionalService_models';
+import CarSize from '../../models/Services/CarSize_models';
+import RegularWash from '../../models/Services/RegularWash_models';
+
+import Coupon from '../../models/Coupon/Coupon_models';
+
+import PaymentCard from '../../models/Payment/PaymentCard_models';
+import PaymentSchedule from '../../models/Payment/PaymentSchedule_models';
 
 class ScheduleController {
   async store(req, res) {
-    try { } catch (err) {
+    try {
+      const idUser = req.userId;
+      if (!idUser) {
+        return res.status(400).json({ errors: ['ID not Found'] });
+      }
+
+      let cars_list_id = '';
+      req.body.cars_obj_list.forEach(async (cars_obj) => {
+        const newCarsObj = await CarsObj.create({
+          car_id: cars_obj.car_id,
+          wash_type: cars_obj.wash_type,
+          additional_list_id: cars_obj.additional_list_id,
+        });
+        cars_list_id += newCarsObj.id;
+        cars_list_id += ';';
+      });
+
+      const newPaymentSchedule = await PaymentSchedule.create({
+        user_id: idUser,
+        card_id: req.body.credit_card_id,
+        three: req.body.three,
+      });
+
+      const newSchedule = await Schedule.create({
+        user_id: idUser,
+        cars_list_id: cars_list_id,
+        selected_date: req.body.selected_date,
+        address: req.body.address,
+        coupon_id: req.body.coupon_id,
+        payment_schedule_id: newPaymentSchedule.id,
+        washer_id: null,
+        status: 'not-assign',
+        rate: null,
+      });
+
+      return res.json(newSchedule);
+    } catch (err) {
       return res.status(400).json({ errors: err.message });
     }
   }
 
-  async index(req, res) {
-    try { } catch (err) {
+  async calcCarRegularPrice(car_id, wash_type, additional_list_id) {
+    total = 0;
+
+    const car = Car.findByPk(car_id);
+    if (!car) {
+      return res.status(400).json({ errors: 'Car not found' });
+    }
+    const car_size = CarSize.findByPk(car.car_size_id);
+    if (!car_size) {
+      return res.status(400).json({ errors: 'CarSize not found' });
+    }
+    total += car_size.price;
+    if (wash_type == 2) {
+      total += 40;
+    }
+
+    additional_list_id.split(';').forEach((add_id) => {
+      const addon = AdditionalService.findByPk(add_id);
+      if (!addon) {
+        return res.status(400).json({ errors: 'Additional Service not found' });
+      }
+      total += addon.price;
+    });
+
+    return total;
+  }
+
+  async calcParcialPrice(req, res) {
+    try {
+      return res.json({
+        price: this.calcCarRegularPrice(
+          req.body.car_id,
+          req.body.wash_type,
+          req.body.additional_list_id,
+        ),
+      });
+    } catch (err) {
+      return res.status(400).json({ errors: err.message });
+    }
+  }
+
+  async calcTotalPrice(req, res) {
+    try {
+      let total = 0;
+
+      req.body.cars_list_id.split(';').forEach(async (cars_obj_id) => {
+        const cars_obj = await CarsObj.findByPk(cars_obj_id);
+        if (!cars_obj) {
+          return res.status(400).json({ errors: ['CarsObj not Found'] });
+        }
+        total += this.calcCarRegularPrice(
+          cars_obj.car_id,
+          cars_obj.wash_type,
+          cars_obj.additional_list_id,
+        );
+      });
+
+      const coupon = Coupon.findByPk(req.body.coupon_id);
+      if (!coupon) {
+        return res.status(400).json({ errors: ['Coupon not Found'] });
+      }
+      if (coupon.is_disabled) {
+        return res.status(401).json({ errors: ['Coupon not Active'] });
+      }
+
+      total = total * coupon.discount / 100;
+      coupon.update({
+        times_used: (coupon.times_used + 1),
+      });
+
+      return res.json({ price: total });
+    } catch (err) {
       return res.status(400).json({ errors: err.message });
     }
   }
 
   async show(req, res) {
-    try { } catch (err) {
+    try {
+      const schedules = await Schedule.findAll();
+
+      return res.json(schedules);
+    } catch (err) {
+      return res.status(400).json({ errors: err.message });
+    }
+  }
+
+  async showNotAssign(req, res) {
+    try {
+      const idUser = req.userId;
+      if (!idUser) {
+        return res.status(400).json({ errors: ['ID not Found'] });
+      }
+
+      const schedule = await Schedule.findOne({
+        where: {
+          washer_id: idUser,
+          status: 'not-assign',
+        },
+      });
+
+      return res.json(schedule);
+    } catch (err) {
+      return res.status(400).json({ errors: err.message });
+    }
+  }
+
+  async indexClient(req, res) {
+    try {
+      const idUser = req.userId;
+      if (!idUser) {
+        return res.status(400).json({ errors: ['ID not Found'] });
+      }
+
+      const schedule = await Schedule.findOne({
+        where: {
+          id: req.params.id,
+          user_id: idUser,
+        },
+      });
+
+      return res.json(schedule);
+    } catch (err) {
+      return res.status(400).json({ errors: err.message });
+    }
+  }
+
+  async indexWasher(req, res) {
+    try {
+      const idUser = req.userId;
+      if (!idUser) {
+        return res.status(400).json({ errors: ['ID not Found'] });
+      }
+
+      const schedule = await Schedule.findOne({
+        where: {
+          id: req.params.id,
+          washer_id: idUser,
+        },
+      });
+
+      return res.json(schedule);
+    } catch (err) {
       return res.status(400).json({ errors: err.message });
     }
   }
 
   async updateWasher(req, res) {
-    try { } catch (err) {
+    try {
+      const schedule = await Schedule.findByPk(req.params.id);
+
+      await schedule.update({
+        washer_id: req.body.washer_id,
+        status: 'not-started',
+      });
+
+      return res.json({ message: ['Washer updated with success'] });
+    } catch (err) {
       return res.status(400).json({ errors: err.message });
     }
   }
 
-  async changeWasher(req, res) {
-    try { } catch (err) {
+  async changeStatus(req, res) {
+    try {
+      const idUser = req.userId;
+      if (!idUser) {
+        return res.status(400).json({ errors: ['ID not Found'] });
+      }
+
+      const schedule = await Schedule.findOne({
+        where: {
+          id: req.params.id,
+          washer_id: idUser,
+        },
+      });
+
+      switch (schedule.status) {
+        case 'not-started':
+          await schedule.update({
+            status: 'started',
+          });
+          break;
+        case 'started':
+          await schedule.update({
+            status: 'finished',
+          });
+          break;
+        default:
+          return res.status(400).json({ errors: ['Some error has occour!'] });
+      }
+    } catch (err) {
       return res.status(400).json({ errors: err.message });
     }
   }
 
   async userCancel(req, res) {
-    try { } catch (err) {
+    try {
+      const idUser = req.userId;
+      if (!idUser) {
+        return res.status(400).json({ errors: ['ID not Found'] });
+      }
+
+      const schedule = await Schedule.findOne({
+        where: {
+          id: req.params.id,
+          client_id: idUser,
+        },
+      });
+
+      if (new Date() - schedule.selected_date > 2 * 60 * 60 * 1000) {
+        const newSchedule = await schedule.update({
+          status: 'cancel',
+        });
+        return res.json(newSchedule);
+      }
+      return res.status(400).json({ errors: ["Can't cancel a wash 2 hours or less before"] });
+    } catch (err) {
       return res.status(400).json({ errors: err.message });
     }
   }
 
   async rate(req, res) {
-    try { } catch (err) {
+    try {
+      const idUser = req.userId;
+      if (!idUser) {
+        return res.status(400).json({ errors: ['ID not Found'] });
+      }
+
+      const schedule = await Schedule.findOne({
+        where: {
+          id: req.params.id,
+          washer_id: idUser,
+          status: 'finished',
+        },
+      });
+
+      schedule.update({
+        rate: req.body.rate,
+      });
+
+      const payment = await PaymentSchedule.findOne({
+        where: {
+          id: schedule.payment_schedule_id,
+          wash_id: schedule.id
+        }
+      });
+      const card = await PaymentCard.findByPk(payment.card_id);
+
+      const card_name = card.name;
+      const card_number = card.getCardNumber();
+      const card_date = card.date;
+      const three = payment.getCardThree();
+
+      // PAY WITH DATA
+    } catch (err) {
       return res.status(400).json({ errors: err.message });
     }
   }

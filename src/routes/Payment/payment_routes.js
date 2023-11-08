@@ -1,15 +1,15 @@
-// import { Router } from 'express';
-// import paymentController from '../../controllers/Payment/payment_controller';
+import { Router } from 'express';
+import paymentController from '../../controllers/Payment/payment_controller';
 
-// import loginRequired from '../../middlewares/login_required';
-// import isAdmin from '../../middlewares/is_admin';
+import loginRequired from '../../middlewares/login_required';
 
-// const router = new Router();
+const router = new Router();
 
-// router.post('/', loginRequired, isAdmin, paymentController.store);
-// router.get('/', loginRequired, paymentController.index);
-// router.put('/', loginRequired, isAdmin, paymentController.update);
-// router.delete('/', loginRequired, isAdmin, paymentController.delete);
+router.post('/', loginRequired, paymentController.store);
+router.get('/all/', loginRequired, paymentController.show);
+router.get('/:id', loginRequired, paymentController.index);
+router.put('/:id', loginRequired, paymentController.update);
+router.delete('/:id', loginRequired, paymentController.delete);
 
 
-// export default router;
+export default router;

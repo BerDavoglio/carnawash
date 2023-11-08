@@ -36,6 +36,9 @@ export default class User extends Model {
         type: Sequelize.STRING,
         defaultValue: 'user',
       },
+      subrole: {
+        type: Sequelize.STRING,
+      },
       first_login: {
         type: Sequelize.BOOLEAN,
         defaultValue: false,

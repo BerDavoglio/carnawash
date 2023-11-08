@@ -7,10 +7,12 @@ import isAdmin from '../../middlewares/is_admin';
 const router = new Router();
 
 router.post('/', loginRequired, scheduleController.store);
-router.get('/', loginRequired, scheduleController.index);
 router.get('/all/', loginRequired, isAdmin, scheduleController.show);
-router.put('/admin/', loginRequired, isAdmin, scheduleController.updateWasher);
-router.put('/washer/:id', loginRequired, scheduleController.changeWasher);
+router.get('/not-assign/', loginRequired, isAdmin, scheduleController.showNotAssign);
+router.get('/client/:id', loginRequired, scheduleController.indexClient);
+router.get('/washer/:id', loginRequired, scheduleController.indexWasher);
+router.put('/admin/:id', loginRequired, isAdmin, scheduleController.updateWasher);
+router.put('/washer/:id', loginRequired, scheduleController.changeStatus);
 router.put('/cancel/', loginRequired, scheduleController.userCancel);
 router.put('/rate/', loginRequired, scheduleController.rate);
 

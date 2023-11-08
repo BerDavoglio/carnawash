@@ -3,13 +3,49 @@ import UserType from '../../../models/User/UserType_models';
 
 class AdminUserController {
   async showAdmins(req, res) {
-    try { } catch (err) {
+    try {
+      const admins = await User.findAll({
+        where: {
+          role: 'admin',
+        },
+      });
+
+      return res.json(admins);
+    } catch (err) {
       return res.status(400).json({ errors: `Show Admin / ${err.message}` });
     }
   }
 
   async changeRole(req, res) {
-    try { } catch (err) {
+    try {
+      const user = await User.findByPk(req.params.id);
+      if (!user) {
+        return res.status(400).json({ errors: ['User not found'] });
+      }
+
+      user.update({
+        role: req.body.role,
+      });
+
+      return res.json({ message: ['Role changed with success'] });
+    } catch (err) {
+      return res.status(400).json({ errors: `Show Admin / ${err.message}` });
+    }
+  }
+
+  async changeSubrole(req, res) {
+    try {
+      const user = await User.findByPk(req.params.id);
+      if (!user) {
+        return res.status(400).json({ errors: ['User not found'] });
+      }
+
+      user.update({
+        subrole: req.body.subrole,
+      });
+
+      return res.json({ message: ['Subrole changed with success'] });
+    } catch (err) {
       return res.status(400).json({ errors: `Show Admin / ${err.message}` });
     }
   }

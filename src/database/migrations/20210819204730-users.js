@@ -28,6 +28,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      subrole: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
       first_login: {
         type: Sequelize.BOOLEAN,
         allowNull: false,

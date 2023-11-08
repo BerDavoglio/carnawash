@@ -19,6 +19,7 @@ app.listen(process.env.APP_PORT, async () => {
       address: 'rua admin, 123',
       phone: '41900000000',
       role: 'admin',
+      subrole: 'admin',
       password: 'admin123',
     });
   } else {

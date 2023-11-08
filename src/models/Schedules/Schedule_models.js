@@ -7,15 +7,7 @@ export default class Schedule extends Model {
         type: Sequelize.INTEGER,
         defaultValue: 0,
       },
-      car_list_id: {
-        type: Sequelize.TEXT,
-        defaultValue: '',
-      },
-      wash_type: {
-        type: Sequelize.INTEGER,
-        defaultValue: 0,
-      },
-      additional_list_id: {
+      cars_list_id: {
         type: Sequelize.TEXT,
         defaultValue: '',
       },
@@ -35,7 +27,7 @@ export default class Schedule extends Model {
         type: Sequelize.INTEGER,
         defaultValue: 0,
       },
-      credit_card_id: {
+      payment_schedule_id: {
         type: Sequelize.INTEGER,
         defaultValue: 0,
       },
@@ -44,8 +36,8 @@ export default class Schedule extends Model {
         defaultValue: 0,
       },
       status: {
-        type: Sequelize.ENUM('not-assign', 'not-started', 'started', 'finished',),
-        defaultValue: 0,
+        type: Sequelize.ENUM('not-assign', 'not-started', 'started', 'finished', 'cancel'),
+        defaultValue: 'not-assign',
       },
       rate: {
         type: Sequelize.FLOAT,
