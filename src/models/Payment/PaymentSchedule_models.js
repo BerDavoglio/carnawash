@@ -15,10 +15,6 @@ export default class PaymentSchedule extends Model {
         type: Sequelize.INTEGER,
         defaultValue: 0,
       },
-      card_id: {
-        type: Sequelize.INTEGER,
-        defaultValue: 0,
-      },
       three: {
         type: Sequelize.STRING,
         defaultValue: '',

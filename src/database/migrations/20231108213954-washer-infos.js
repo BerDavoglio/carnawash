@@ -8,6 +8,42 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
       },
+      user_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      made_quiz: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+      },
+      contract_accept: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+      },
+      enable: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+      },
+      rate: {
+        type: Sequelize.FLOAT,
+        allowNull: false,
+      },
+      abn: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      contract: {
+        type: Sequelize.BLOB('long'),
+        allowNull: false,
+      },
+      driver_licence: {
+        type: Sequelize.BLOB('long'),
+        allowNull: false,
+      },
+      picture: {
+        type: Sequelize.BLOB('long'),
+        allowNull: false,
+      },
       created_at: {
         type: Sequelize.DATE,
         allowNull: false,

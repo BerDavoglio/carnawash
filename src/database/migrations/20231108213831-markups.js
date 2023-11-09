@@ -8,6 +8,14 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
       },
+      washer_porcentage: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      carnawash_porcentage: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
       created_at: {
         type: Sequelize.DATE,
         allowNull: false,

@@ -8,6 +8,18 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
       },
+      title: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      destined_to_list: {
+        type: Sequelize.TEXT,
+        allowNull: false,
+      },
+      type: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
       created_at: {
         type: Sequelize.DATE,
         allowNull: false,

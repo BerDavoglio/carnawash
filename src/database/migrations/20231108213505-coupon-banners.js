@@ -1,12 +1,24 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up (queryInterface, Sequelize) {
+  async up(queryInterface, Sequelize) {
     await queryInterface.createTable('coupon-banners', {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
+      },
+      code: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      discount: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      is_disabled: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
       },
       created_at: {
         type: Sequelize.DATE,
@@ -19,7 +31,7 @@ module.exports = {
     });
   },
 
-  async down (queryInterface, Sequelize) {
+  async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('coupon-banners');
   }
 };

@@ -8,6 +8,22 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
       },
+      user_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      bank_name: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      account_name: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      account_number: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
       created_at: {
         type: Sequelize.DATE,
         allowNull: false,

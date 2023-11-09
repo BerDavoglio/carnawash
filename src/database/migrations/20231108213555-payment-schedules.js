@@ -8,6 +8,18 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
       },
+      wash_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      card_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      three_hash: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
       created_at: {
         type: Sequelize.DATE,
         allowNull: false,

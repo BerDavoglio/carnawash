@@ -8,6 +8,18 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
       },
+      title: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      pages_enable_list: {
+        type: Sequelize.TEXT,
+        allowNull: false,
+      },
+      enable: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+      },
       created_at: {
         type: Sequelize.DATE,
         allowNull: false,

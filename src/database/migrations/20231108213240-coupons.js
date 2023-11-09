@@ -8,6 +8,26 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
       },
+      name: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      code: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      discount: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      times_used: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      is_disabled: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+      },
       created_at: {
         type: Sequelize.DATE,
         allowNull: false,

@@ -8,6 +8,18 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
       },
+      car_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      wash_type: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      additional_list_id: {
+        type: Sequelize.TEXT,
+        allowNull: false,
+      },
       created_at: {
         type: Sequelize.DATE,
         allowNull: false,

@@ -8,6 +8,14 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
       },
+      question: {
+        type: Sequelize.TEXT,
+        allowNull: false,
+      },
+      answer: {
+        type: Sequelize.TEXT,
+        allowNull: false,
+      },
       created_at: {
         type: Sequelize.DATE,
         allowNull: false,
