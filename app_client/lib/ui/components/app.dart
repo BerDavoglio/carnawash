@@ -1,38 +1,46 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../infra/infra.dart';
 import '../ui.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'CarWash',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => UserProvider(),
+        ),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'CarWash',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        routes: {
+          AppRoutes.HOME: (_) => const HomePage(),
+          AppRoutes.LOGIN: (_) => const LoginPage(),
+          AppRoutes.SCHEDULES: (_) => const SchedulesPage(),
+          AppRoutes.SUBSCRIPTION: (_) => const SubscriptionPage(),
+          AppRoutes.RATING: (_) => const RatingPage(),
+          AppRoutes.HISTORY: (_) => const HistoryPage(),
+          AppRoutes.HELP: (_) => const HelpPage(),
+          AppRoutes.HELP_CHAT: (_) => const HelpChatPage(),
+          AppRoutes.PERFIL: (_) => const PerfilPage(),
+          AppRoutes.ACCOUNT: (_) => const AccountPage(),
+          AppRoutes.VEHICLES: (_) => const VehiclesPage(),
+          AppRoutes.WALLET: (_) => const WalletPage(),
+          AppRoutes.LANGUAGE: (_) => const LanguagePage(),
+          AppRoutes.NOTIFICATION_CONFIG: (_) => const NotificationConfigPage(),
+          AppRoutes.FAQ: (_) => const FAQPage(),
+          AppRoutes.NOTIFICATION: (_) => const NotificationPage(),
+          AppRoutes.TERMS: (_) => const TermsConditionsPage(),
+        },
       ),
-      routes: {
-        AppRoutes.HOME: (_) => const HomePage(),
-        AppRoutes.LOGIN: (_) => const LoginPage(),
-        AppRoutes.SCHEDULES: (_) => const SchedulesPage(),
-        AppRoutes.SUBSCRIPTION: (_) => const SubscriptionPage(),
-        AppRoutes.RATING: (_) => const RatingPage(),
-        AppRoutes.HISTORY: (_) => const HistoryPage(),
-        AppRoutes.HELP: (_) => const HelpPage(),
-        AppRoutes.HELP_CHAT: (_) => const HelpChatPage(),
-        AppRoutes.PERFIL: (_) => const PerfilPage(),
-        AppRoutes.ACCOUNT: (_) => const AccountPage(),
-        AppRoutes.VEHICLES: (_) => const VehiclesPage(),
-        AppRoutes.WALLET: (_) => const WalletPage(),
-        AppRoutes.LANGUAGE: (_) => const LanguagePage(),
-        AppRoutes.NOTIFICATION_CONFIG: (_) => const NotificationConfigPage(),
-        AppRoutes.FAQ: (_) => const FAQPage(),
-        AppRoutes.NOTIFICATION: (_) => const NotificationPage(),
-        AppRoutes.TERMS: (_) => const TermsConditionsPage(),
-      },
     );
   }
 }
