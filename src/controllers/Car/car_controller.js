@@ -41,7 +41,7 @@ class CarController {
     }
   }
 
-  async index(req, res) {
+  async show(req, res) {
     try {
       const id = req.userId;
       if (!id) {

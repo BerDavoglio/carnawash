@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../data/data.dart';
 import '../ui.dart';
 
 class HomePage extends StatefulWidget {
@@ -7,52 +8,6 @@ class HomePage extends StatefulWidget {
 
   @override
   State<HomePage> createState() => _HomePageState();
-}
-
-class WashSelectionModel {
-  WashSelectionModel({
-    required this.date,
-    required this.washer,
-    required this.car,
-    required this.side,
-    required this.additional,
-    required this.address,
-    required this.status,
-    required this.price,
-  });
-
-  String date;
-  WasherModel washer;
-  CarModel car;
-  String side;
-  List additional;
-  String address;
-  String status;
-  double price;
-}
-
-class WasherModel {
-  WasherModel({
-    required this.name,
-    required this.rate,
-  });
-
-  String name;
-  double rate;
-}
-
-class CarModel {
-  CarModel({
-    required this.brand,
-    required this.model,
-    required this.size,
-    required this.licence,
-  });
-
-  String brand;
-  String model;
-  String size;
-  String licence;
 }
 
 class _HomePageState extends State<HomePage> {
@@ -205,25 +160,17 @@ class _HomePageState extends State<HomePage> {
                         const SizedBox(height: 16),
                         washingProcessBox(
                           context,
-                          WashSelectionModel(
-                              date: 'September 10, 2023 - 10:00PM',
-                              washer: WasherModel(
-                                name: 'John',
-                                rate: 4.6,
-                              ),
-                              car: CarModel(
-                                brand: 'Nissan',
-                                model: 'March',
-                                size: 'Small',
-                                licence: '3SAM123',
-                              ),
-                              side: 'Outside Only',
-                              additional: [
-                                'Pet Hair',
-                              ],
-                              address: 'Monaco St, Bundall',
-                              status: 'Started',
-                              price: 95.00),
+                          ScheduleModel(
+                            id: 0,
+                            user_id: 0,
+                            cars_list_id: '',
+                            selected_date: DateTime.now(),
+                            address: '',
+                            observation_address: '',
+                            coupon_id: 0,
+                            payment_schedule_id: 0,
+                            status: '',
+                          ),
                         ),
                       ],
                     ),
@@ -303,25 +250,16 @@ class _HomePageState extends State<HomePage> {
                         const SizedBox(height: 16),
                         lastWashBox(
                           context,
-                          WashSelectionModel(
-                            date: 'September 10, 2023 - 10:00PM',
-                            washer: WasherModel(
-                              name: 'John',
-                              rate: 4.6,
-                            ),
-                            car: CarModel(
-                              brand: 'Nissan',
-                              model: 'March',
-                              size: 'Small',
-                              licence: '3SAM123',
-                            ),
-                            side: 'Outside Only',
-                            additional: [
-                              'Pet Hair',
-                            ],
-                            address: 'Monaco St, Bundall',
-                            status: 'Started',
-                            price: 95.00,
+                          ScheduleModel(
+                            id: 0,
+                            user_id: 0,
+                            cars_list_id: '',
+                            selected_date: DateTime.now(),
+                            address: '',
+                            observation_address: '',
+                            coupon_id: 0,
+                            payment_schedule_id: 0,
+                            status: '',
                           ),
                         ),
                       ],
@@ -369,8 +307,9 @@ class _HomePageState extends State<HomePage> {
                         ),
                         OutlinedButton(
                           style: OutlinedButton.styleFrom(
-                            side:
-                                const BorderSide(width: 2, color: Color.fromRGBO(237, 189, 58, 1)),
+                            side: const BorderSide(
+                                width: 2,
+                                color: Color.fromRGBO(237, 189, 58, 1)),
                             elevation: 5,
                             fixedSize: Size(
                                 MediaQuery.of(context).size.width * 0.85, 50),
@@ -403,7 +342,7 @@ class _HomePageState extends State<HomePage> {
 
   Container lastWashBox(
     BuildContext context,
-    WashSelectionModel obj,
+    ScheduleModel obj,
   ) {
     return Container(
       decoration: const BoxDecoration(
@@ -513,7 +452,7 @@ class _HomePageState extends State<HomePage> {
 
   Container washingProcessBox(
     BuildContext context,
-    WashSelectionModel obj,
+    ScheduleModel obj,
   ) {
     return Container(
       decoration: const BoxDecoration(
@@ -580,7 +519,7 @@ class _HomePageState extends State<HomePage> {
                     Padding(
                       padding: const EdgeInsets.only(top: 5),
                       child: Text(
-                        obj.car.licence,
+                        obj.car.plate,
                         style: const TextStyle(
                           color: Colors.grey,
                           fontWeight: FontWeight.w500,

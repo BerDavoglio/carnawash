@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
+import '../../data/data.dart';
 import '../ui.dart';
 
 class HelpChatPage extends StatefulWidget {
@@ -8,16 +9,6 @@ class HelpChatPage extends StatefulWidget {
 
   @override
   State<HelpChatPage> createState() => _HelpChatPageState();
-}
-
-class MessageModel {
-  MessageModel({
-    required this.text,
-    required this.isMine,
-  });
-
-  String text;
-  bool isMine;
 }
 
 class _HelpChatPageState extends State<HelpChatPage> {

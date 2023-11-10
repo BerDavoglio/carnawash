@@ -160,6 +160,25 @@ class ScheduleController {
     }
   }
 
+  async showClient(req, res) {
+    try {
+      const idUser = req.userId;
+      if (!idUser) {
+        return res.status(400).json({ errors: ['ID not Found'] });
+      }
+
+      const schedules = await Schedule.findAll({
+        where: {
+          user_id: idUser,
+        },
+      });
+
+      return res.json(schedules);
+    } catch (err) {
+      return res.status(400).json({ errors: err.message });
+    }
+  }
+
   async indexClient(req, res) {
     try {
       const idUser = req.userId;
@@ -171,6 +190,25 @@ class ScheduleController {
         where: {
           id: req.params.id,
           user_id: idUser,
+        },
+      });
+
+      return res.json(schedule);
+    } catch (err) {
+      return res.status(400).json({ errors: err.message });
+    }
+  }
+
+  async showWasher(req, res) {
+    try {
+      const idUser = req.userId;
+      if (!idUser) {
+        return res.status(400).json({ errors: ['ID not Found'] });
+      }
+
+      const schedule = await Schedule.findAll({
+        where: {
+          washer_id: idUser,
         },
       });
 

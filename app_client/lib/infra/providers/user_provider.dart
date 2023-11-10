@@ -1,15 +1,21 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:async';
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
+import '../../data/data.dart';
 import '../../ui/ui.dart';
+import '../infra.dart';
 
 class UserProvider with ChangeNotifier {
   String _token = '';
+  late UserCompleteModel _perfil;
 
   String get token => _token;
+  UserCompleteModel get perfil => _perfil;
 
   bool get isAuth {
     return _token != '';
@@ -30,21 +36,14 @@ class UserProvider with ChangeNotifier {
 
       if (response.statusCode == 200) {
         _token = v['token'];
-        Navigator.of(context).pushNamed(AppRoutes.HOME);
+        await loadPerfil(context);
+        Navigator.of(context).pushReplacementNamed(AppRoutes.HOME);
+        notifyListeners();
       } else {
-        // Login Inválido
-        await showDialog<void>(
-          context: context,
-          builder: (ctx) => AlertDialog(
-            title: const Text('Erro!'),
-            content: Text(v['errors'][0]),
-            actions: [
-              TextButton(
-                child: const Text('Ok'),
-                onPressed: () => Navigator.of(context).pop(),
-              ),
-            ],
-          ),
+        await comumDialog(
+          context,
+          'Error',
+          v['errors'],
         );
       }
 
@@ -52,33 +51,24 @@ class UserProvider with ChangeNotifier {
 
       notifyListeners();
     } catch (e) {
-      print(e);
-      await showDialog<void>(
-        context: context,
-        builder: (ctx) => AlertDialog(
-          title: const Text('Provider Error! SubmitLogin'),
-          content: Text(e.toString()),
-          actions: [
-            TextButton(
-              child: const Text('Ok'),
-              onPressed: () => Navigator.of(context).pop(),
-            ),
-          ],
-        ),
+      await comumDialog(
+        context,
+        'Provider Error! SubmitLogin',
+        e.toString(),
       );
     }
   }
 
-  Future<void> submitCreate(BuildContext context, String email, String password,
-      String name, String gender) async {
+  Future<void> signIn(BuildContext context, UserSignModel user) async {
     try {
       final response = await http.post(
         Uri.parse('${Constants.BACKEND_BASE_URL}/users/'),
         body: {
-          "email": email,
-          "password": password,
-          "name": name,
-          "gender": gender,
+          "email": user.email,
+          "password": user.password,
+          "name": user.name,
+          "phone": user.phone,
+          "address": user.address,
         },
       );
 
@@ -95,19 +85,10 @@ class UserProvider with ChangeNotifier {
           ),
         );
       } else if (v['errors'] != '') {
-        // Login Inválido
-        await showDialog<void>(
-          context: context,
-          builder: (ctx) => AlertDialog(
-            title: const Text('Erro!'),
-            content: Text(v['errors']),
-            actions: [
-              TextButton(
-                child: const Text('Ok'),
-                onPressed: () => Navigator.of(context).pop(),
-              ),
-            ],
-          ),
+        await comumDialog(
+          context,
+          'Error',
+          v['errors'],
         );
       }
 
@@ -115,18 +96,80 @@ class UserProvider with ChangeNotifier {
 
       notifyListeners();
     } catch (e) {
-      await showDialog<void>(
-        context: context,
-        builder: (ctx) => AlertDialog(
-          title: const Text('Provider Error! SubmitCreate'),
-          content: Text(e.toString()),
-          actions: [
-            TextButton(
-              child: const Text('Ok'),
-              onPressed: () => Navigator.of(context).pop(),
-            ),
-          ],
-        ),
+      await comumDialog(
+        context,
+        'Provider Error! SignIn',
+        e.toString(),
+      );
+    }
+  }
+
+  Future<void> loadPerfil(BuildContext context) async {
+    try {
+      final response = await http.get(
+        Uri.parse('${Constants.BACKEND_BASE_URL}/user/'),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $_token',
+        },
+      );
+
+      if (response.statusCode == 200) {
+        _perfil = jsonDecode(response.body);
+        notifyListeners();
+      } else if (jsonDecode(response.body)['errors'] != '') {
+        await comumDialog(
+          context,
+          'Erro!',
+          jsonDecode(response.body)['errors'],
+        );
+      }
+    } catch (e) {
+      await comumDialog(
+        context,
+        'Provider Error!',
+        'Ocorreu um erro ao tentar obter os valores de perfil. $e',
+      );
+    }
+  }
+
+  Future<void> updatePerfil(
+      BuildContext context, UserCompleteModel newUser) async {
+    try {
+      final response = await http.put(
+        Uri.parse('${Constants.BACKEND_BASE_URL}/user/'),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $_token',
+        },
+        body: jsonEncode(newUser),
+      );
+
+      var v = jsonDecode(response.body);
+
+      if (response.statusCode == 200) {
+        await comumDialog(
+          context,
+          'Usuário Atualizado',
+          'Usuário atualizado com Sucesso!',
+        );
+        await loadPerfil(context);
+        Navigator.of(context).pop();
+        notifyListeners();
+      } else if (v['errors'] != '') {
+        await comumDialog(
+          context,
+          'Erro!',
+          v['errors'],
+        );
+      }
+    } catch (e) {
+      await comumDialog(
+        context,
+        'Provider Error!',
+        e.toString(),
       );
     }
   }

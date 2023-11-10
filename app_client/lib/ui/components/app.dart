@@ -14,6 +14,21 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => UserProvider(),
         ),
+        ChangeNotifierProvider(
+          create: (_) => FAQProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => NotificationProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => ScheduleProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => VehiclesProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => WalletProvider(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
