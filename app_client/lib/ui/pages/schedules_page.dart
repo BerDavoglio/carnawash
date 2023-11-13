@@ -22,6 +22,8 @@ class _SchedulesPageState extends State<SchedulesPage> {
 
   @override
   Widget build(BuildContext context) {
+    // LOAD SCHEDULES
+
     return Scaffold(
       backgroundColor: Colors.grey[100]!,
       bottomNavigationBar: navigationBarComponent(context),

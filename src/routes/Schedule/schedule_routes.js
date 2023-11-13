@@ -8,6 +8,7 @@ const router = new Router();
 
 router.post('/', loginRequired, scheduleController.store);
 router.get('/all/', loginRequired, isAdmin, scheduleController.show);
+router.get('/value/:id', loginRequired, scheduleController.calcTotalPrice);
 router.get('/not-assign/', loginRequired, isAdmin, scheduleController.showNotAssign);
 router.get('/client/all/', loginRequired, scheduleController.showClient);
 router.get('/client/:id', loginRequired, scheduleController.indexClient);

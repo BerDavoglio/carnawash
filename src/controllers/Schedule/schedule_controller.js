@@ -99,7 +99,12 @@ class ScheduleController {
     try {
       let total = 0;
 
-      req.body.cars_list_id.split(';').forEach(async (cars_obj_id) => {
+      const schedule = await Schedule.findByPk(req.params.id);
+      if (!schedule) {
+        return res.status(400).json({ errors: ['Schedule not Found'] });
+      }
+
+      schedule.cars_list_id.split(';').forEach(async (cars_obj_id) => {
         const cars_obj = await CarsObjects.findByPk(cars_obj_id);
         if (!cars_obj) {
           return res.status(400).json({ errors: ['CarsObjects not Found'] });
@@ -111,7 +116,7 @@ class ScheduleController {
         );
       });
 
-      const coupon = Coupon.findByPk(req.body.coupon_id);
+      const coupon = Coupon.findByPk(schedule.coupon_id);
       if (!coupon) {
         return res.status(400).json({ errors: ['Coupon not Found'] });
       }
@@ -124,7 +129,7 @@ class ScheduleController {
         times_used: (coupon.times_used + 1),
       });
 
-      return res.json({ price: total });
+      return res.json({ price: [total] });
     } catch (err) {
       return res.status(400).json({ errors: err.message });
     }

@@ -1,4 +1,6 @@
 import SentNotification from '../../models/Notification/SentNotification_models';
+import UserType from '../../models/User/UserType_models';
+import User from '../../models/User/User_models';
 
 class SentNotificationController {
   async send(req, res) {
@@ -23,16 +25,32 @@ class SentNotificationController {
     }
   }
 
-  async index(req, res) {
+  async indexUser(req, res) {
     try {
-      const id = userId;
+      const id = req.userId;
       if (!id) {
         return res.status(400).json({ errors: ['ID not Found'] });
       }
+      const user = await User.findByPk(id);
+      if (!user) {
+        return res.status(400).json({ errors: ['User not Found'] });
+      }
+      let type = 2;
+      switch (user.role) {
+        case 'client':
+          type = 0;
+          break;
+        case 'washer':
+          type = 1;
+          break;
+        case 'admin':
+          type = 2;
+          break;
+      }
 
-      const notifications = await Notification.findAll({
+      const notifications = await SentNotification.findAll({
         where: {
-          user_id: id
+          [Op.or]: [{ user_id: id }, { user_type_id: type }]
         }
       });
 

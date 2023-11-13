@@ -1,6 +1,13 @@
+// ignore_for_file: use_build_context_synchronously
+
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 import '../../data/data.dart';
+import '../../infra/infra.dart';
 import '../ui.dart';
 
 class HomePage extends StatefulWidget {
@@ -18,6 +25,43 @@ class _HomePageState extends State<HomePage> {
     Colors.grey,
     'Not Started',
   ];
+  ScheduleModel? scheduleOngoing;
+  ScheduleModel? scheduleRebook;
+  WasherModel? washer;
+  double? priceRebook;
+  List<CarModel?> carsListRebook = [];
+  List addonListRebook = [];
+  List<CarModel?> carsListOngoing = [];
+  List addonListOngoing = [];
+  String sideOngoing = '';
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      ScheduleProvider schedule = Provider.of(context);
+      VehiclesProvider vehiclesProvider = Provider.of(context);
+
+      scheduleRebook = schedule.listSchedules.last;
+      for (var i in scheduleRebook!.cars_list_id.split(';')) {
+        carsListRebook.add(await vehiclesProvider.loadOneCar(
+            context, json.decode(i).car_id as int));
+        addonListRebook = json.decode(i).additional_list_id;
+      }
+      priceRebook =
+          await schedule.loadPrice(context, schedule.listSchedules.last.id!);
+
+      scheduleOngoing = schedule.listSchedules.last;
+      washer = await schedule.loadWasher(context, scheduleOngoing!.washer_id!);
+      for (var i in scheduleOngoing!.cars_list_id.split(';')) {
+        carsListOngoing.add(await vehiclesProvider.loadOneCar(
+            context, json.decode(i).car_id as int));
+        addonListOngoing = json.decode(i).additional_list_id;
+        sideOngoing = json.decode(i).wash_type;
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +119,7 @@ class _HomePageState extends State<HomePage> {
                             spreadRadius: 1,
                             blurRadius: 1,
                             offset: const Offset(
-                                0, 3), // changes position of shadow
+                                0, 3),
                           ),
                         ],
                       ),
@@ -158,19 +202,13 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                         const SizedBox(height: 16),
-                        washingProcessBox(
+                        // GET A TEXT IF THERE IS NO SCHEDULE
+                        ongoingScheduleBox(
                           context,
-                          ScheduleModel(
-                            id: 0,
-                            user_id: 0,
-                            cars_list_id: '',
-                            selected_date: DateTime.now(),
-                            address: '',
-                            observation_address: '',
-                            coupon_id: 0,
-                            payment_schedule_id: 0,
-                            status: '',
-                          ),
+                          scheduleOngoing!,
+                          carsListOngoing,
+                          addonListOngoing,
+                          sideOngoing,
                         ),
                       ],
                     ),
@@ -248,19 +286,13 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                         const SizedBox(height: 16),
-                        lastWashBox(
+                        // GET A TEXT IF THERE IS NO SCHEDULE
+                        rebookScheduleBox(
                           context,
-                          ScheduleModel(
-                            id: 0,
-                            user_id: 0,
-                            cars_list_id: '',
-                            selected_date: DateTime.now(),
-                            address: '',
-                            observation_address: '',
-                            coupon_id: 0,
-                            payment_schedule_id: 0,
-                            status: '',
-                          ),
+                          scheduleRebook!,
+                          carsListRebook,
+                          addonListRebook,
+                          priceRebook!,
                         ),
                       ],
                     ),
@@ -340,9 +372,12 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Container lastWashBox(
+  Container rebookScheduleBox(
     BuildContext context,
-    ScheduleModel obj,
+    ScheduleModel select,
+    List carsList,
+    List addonList,
+    double price,
   ) {
     return Container(
       decoration: const BoxDecoration(
@@ -359,13 +394,14 @@ class _HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  '${obj.car.brand} ${obj.car.model}',
+                  '${carsList[0]!.brand} ${carsList[0]!.model}',
                   style: const TextStyle(
                     fontSize: 16,
                   ),
                 ),
                 TextButton(
                   onPressed: () {
+                    // LOAD PRÉ-DATA FOR SCHEDULE
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -386,18 +422,18 @@ class _HomePageState extends State<HomePage> {
             Padding(
               padding: const EdgeInsets.only(top: 4),
               child: Text(
-                'Wash ${obj.side}',
+                'Wash ${carsList[0]!.car_size_id}',
                 style: const TextStyle(color: Colors.grey),
               ),
             ),
             Column(
               children: List.generate(
-                obj.additional.length,
+                addonList.length,
                 (index) {
                   return Padding(
                     padding: const EdgeInsets.only(top: 8),
                     child: Text(
-                      '+ ${obj.additional[index]}',
+                      '+ ${addonList[index]}',
                       style: const TextStyle(color: Colors.grey),
                     ),
                   );
@@ -407,7 +443,7 @@ class _HomePageState extends State<HomePage> {
             Padding(
               padding: const EdgeInsets.only(top: 8),
               child: Text(
-                '\$ ${obj.price}',
+                '\$ $price',
                 style: const TextStyle(color: Colors.grey),
               ),
             ),
@@ -421,7 +457,7 @@ class _HomePageState extends State<HomePage> {
                     size: 16,
                   ),
                   Text(
-                    obj.address,
+                    select.address,
                     style: const TextStyle(color: Colors.grey),
                   ),
                 ],
@@ -450,9 +486,12 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Container washingProcessBox(
+  Container ongoingScheduleBox(
     BuildContext context,
-    ScheduleModel obj,
+    ScheduleModel select,
+    List carsList,
+    List addonList,
+    String side,
   ) {
     return Container(
       decoration: const BoxDecoration(
@@ -466,7 +505,7 @@ class _HomePageState extends State<HomePage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              obj.date,
+              DateFormat('yMMMMd').format(select.selected_date).toString(),
               style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
@@ -476,7 +515,7 @@ class _HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Washer: ${obj.washer.name}',
+                  'Washer: ${washer!.name}',
                   style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
@@ -485,7 +524,7 @@ class _HomePageState extends State<HomePage> {
                 Row(
                   children: [
                     Text(
-                      obj.washer.rate.toString(),
+                      washer!.rate.toString(),
                       style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
@@ -509,7 +548,7 @@ class _HomePageState extends State<HomePage> {
                     Padding(
                       padding: const EdgeInsets.only(top: 5),
                       child: Text(
-                        '${obj.car.brand} - ${obj.car.model} - ${obj.car.size}',
+                        '${carsList[0]!.brand} - ${carsList[0]!.model} - ${carsList[0]!.car_size_id}',
                         style: const TextStyle(
                           color: Colors.grey,
                           fontWeight: FontWeight.w500,
@@ -519,7 +558,7 @@ class _HomePageState extends State<HomePage> {
                     Padding(
                       padding: const EdgeInsets.only(top: 5),
                       child: Text(
-                        obj.car.plate,
+                        carsList[0]!.plate,
                         style: const TextStyle(
                           color: Colors.grey,
                           fontWeight: FontWeight.w500,
@@ -529,18 +568,18 @@ class _HomePageState extends State<HomePage> {
                     Padding(
                       padding: const EdgeInsets.only(top: 5),
                       child: Text(
-                        'Wash ${obj.side}',
+                        'Wash $side',
                         style: const TextStyle(color: Colors.grey),
                       ),
                     ),
                     Column(
                       children: List.generate(
-                        obj.additional.length,
+                        addonList.length,
                         (index) {
                           return Padding(
                             padding: const EdgeInsets.only(top: 5),
                             child: Text(
-                              '+ ${obj.additional[index]}',
+                              '+ ${addonList[index]}',
                               style: const TextStyle(color: Colors.grey),
                             ),
                           );
@@ -557,7 +596,7 @@ class _HomePageState extends State<HomePage> {
                             size: 16,
                           ),
                           Text(
-                            obj.address,
+                            select.address,
                             style: const TextStyle(color: Colors.grey),
                           ),
                         ],
@@ -568,17 +607,17 @@ class _HomePageState extends State<HomePage> {
                 GestureDetector(
                   onTap: () {
                     setState(() {
-                      if (status[1] == 'Finished') {
+                      if (select.status == 'finished') {
                         status = [
                           Colors.grey,
                           'Not Started',
                         ];
-                      } else if (status[1] == 'Not Started') {
+                      } else if (select.status == 'not-started') {
                         status = [
                           Colors.blue,
                           'Started',
                         ];
-                      } else if (status[1] == 'Started') {
+                      } else if (select.status == 'started') {
                         status = [
                           Colors.green,
                           'Finished',
@@ -612,6 +651,7 @@ class _HomePageState extends State<HomePage> {
                 ? Center(
                     child: TextButton.icon(
                       onPressed: () {
+                        // RATING WITH ID
                         Navigator.of(context).pushNamed(AppRoutes.RATING);
                       },
                       icon: const Icon(

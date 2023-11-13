@@ -1,5 +1,8 @@
+import 'package:app_client/data/data.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../infra/infra.dart';
 import '../ui.dart';
 
 class AccountPage extends StatefulWidget {
@@ -17,7 +20,31 @@ class _AccountPageState extends State<AccountPage> {
   bool edit = false;
 
   @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      UserProvider userProvider = Provider.of(
+        context,
+        listen: false,
+      );
+
+      await userProvider.loadPerfil(context);
+
+      nameController.text = userProvider.perfil.name;
+      emailController.text = userProvider.perfil.email;
+      phoneController.text = userProvider.perfil.phone;
+      addressController.text = userProvider.perfil.address;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    UserProvider userProvider = Provider.of(
+      context,
+      listen: false,
+    );
+
     return Scaffold(
       bottomNavigationBar: navigationBarComponent(context),
       body: SingleChildScrollView(
@@ -55,13 +82,13 @@ class _AccountPageState extends State<AccountPage> {
                       ? Column(
                           children: [
                             geralInativeTextInput(
-                                context: context, text: 'Name'),
+                                context: context, text: nameController.text),
                             geralInativeTextInput(
-                                context: context, text: 'Email'),
+                                context: context, text: emailController.text),
                             geralInativeTextInput(
-                                context: context, text: 'Phone Number'),
+                                context: context, text: phoneController.text),
                             geralInativeTextInput(
-                                context: context, text: 'Address'),
+                                context: context, text: addressController.text),
                             TextButton(
                               onPressed: () {
                                 setState(() {
@@ -118,7 +145,15 @@ class _AccountPageState extends State<AccountPage> {
                                   ),
                                 ),
                               ),
-                              onPressed: () {
+                              onPressed: () async {
+                                await userProvider.updatePerfil(
+                                  context,
+                                  UserCompleteModel(
+                                      name: nameController.text,
+                                      email: emailController.text,
+                                      phone: phoneController.text,
+                                      address: addressController.text),
+                                );
                                 setState(() {
                                   edit = false;
                                 });

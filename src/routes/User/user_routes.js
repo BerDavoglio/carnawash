@@ -22,6 +22,7 @@ router.get('/regular/', loginRequired, signRegularWashController.indexRegular);
 router.post('/washer/', loginRequired, washerUserController.firstLogin);
 router.get('/washer/verify/', loginRequired, washerUserController.verifyFirstLogin);
 router.get('/washer/info/', loginRequired, washerUserController.index);
+router.get('/washer/geralInfo/:id', loginRequired, washerUserController.indexOne);
 router.put('/washer/info/', loginRequired, washerUserController.update);
 router.get('/washer/bank/', loginRequired, washerUserController.bankIndex);
 router.put('/washer/bank/', loginRequired, washerUserController.bankUpdate);

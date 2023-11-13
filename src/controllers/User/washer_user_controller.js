@@ -110,6 +110,37 @@ class WasherUserController {
     }
   }
 
+  async indexOne(req, res) {
+    try {
+      const washer = await WasherInfo.findOne({
+        where: {
+          user_id: req.params.id,
+        }
+      });
+      if (!washer) {
+        return res.status(400).json({ errors: ['Washer not Found'] });
+      }
+      const user = await User.findByPk(washer.user_id);
+      if (!user) {
+        return res.status(400).json({ errors: ['User not Found'] });
+      }
+
+      const {
+        rate,
+      } = washer;
+      const {
+        name,
+      } = user;
+
+      return res.json({
+        name,
+        rate,
+      });
+    } catch (err) {
+      return res.status(400).json({ errors: `Index WasherInfo / ${err.message}` });
+    }
+  }
+
   async update(req, res) {
     try {
       const idReq = req.userId;

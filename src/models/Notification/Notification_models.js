@@ -7,7 +7,7 @@ export default class Notification extends Model {
         type: Sequelize.STRING,
         defaultValue: '',
       },
-      destined_to_list: {
+      destined_to: {
         type: Sequelize.TEXT,
         defaultValue: '',
       },

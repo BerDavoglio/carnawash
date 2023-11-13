@@ -5,6 +5,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../data/data.dart';
 import '../../ui/ui.dart';
@@ -59,8 +60,14 @@ class UserProvider with ChangeNotifier {
     }
   }
 
-  Future<void> signIn(BuildContext context, UserSignModel user) async {
+  Future<void> signIn(
+    BuildContext context,
+    UserSignModel user,
+    CarModel car,
+  ) async {
     try {
+      VehiclesProvider vehiclesProvider = Provider.of(context);
+
       final response = await http.post(
         Uri.parse('${Constants.BACKEND_BASE_URL}/users/'),
         body: {
@@ -75,6 +82,11 @@ class UserProvider with ChangeNotifier {
       var v = jsonDecode(response.body);
 
       if (response.statusCode == 200) {
+        _token = v[1];
+        await vehiclesProvider.createCar(
+          context,
+          car,
+        );
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: const Text('Account Created! Verify your email!'),
@@ -84,6 +96,7 @@ class UserProvider with ChangeNotifier {
             ),
           ),
         );
+        Navigator.of(context).pushReplacementNamed(AppRoutes.LOGIN);
       } else if (v['errors'] != '') {
         await comumDialog(
           context,

@@ -12,10 +12,10 @@ import '../../ui/ui.dart';
 import '../infra.dart';
 
 class FAQProvider with ChangeNotifier {
-  late FAQModel _faq;
+  late List<FAQModel> _faq;
   late ConditionModel _condition;
 
-  FAQModel get faq => _faq;
+  List<FAQModel> get faq => _faq;
   ConditionModel get condition => _condition;
 
   Future<void> loadFAQ(BuildContext context) async {

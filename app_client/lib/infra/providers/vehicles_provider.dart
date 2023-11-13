@@ -53,6 +53,19 @@ class VehiclesProvider with ChangeNotifier {
     }
   }
 
+  Future<CarModel?> loadOneCar(
+    BuildContext context,
+    int id,
+  ) async {
+    for (CarModel element in _cars) {
+      if (element.id == id) {
+        return element;
+      }
+    }
+
+    return null;
+  }
+
   Future<void> createCar(
     BuildContext context,
     CarModel car,
@@ -67,8 +80,8 @@ class VehiclesProvider with ChangeNotifier {
         body: {
           'brand': car.brand,
           'model': car.model,
-          'size': car.size,
           'plate': car.plate,
+          'color': car.color,
           'car_size_id': car.car_size_id,
         },
         headers: {
@@ -126,7 +139,7 @@ class VehiclesProvider with ChangeNotifier {
         body: {
           'brand': car.brand,
           'model': car.model,
-          'size': car.size,
+          'color': car.color,
           'plate': car.plate,
           'car_size_id': car.car_size_id,
         },

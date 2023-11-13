@@ -1,6 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../../data/data.dart';
+import '../../../infra/infra.dart';
 import '../../ui.dart';
 
 class RegisterComponent extends StatefulWidget {
@@ -41,6 +44,10 @@ class _RegisterComponentState extends State<RegisterComponent> {
     TextEditingController registrationController = TextEditingController();
     TextEditingController passwordController = TextEditingController();
     TextEditingController passConfirmController = TextEditingController();
+    UserProvider userProvider = Provider.of(
+      context,
+      listen: false,
+    );
 
     return Column(
       children: [
@@ -69,11 +76,27 @@ class _RegisterComponentState extends State<RegisterComponent> {
                 backgroundColor: const Color.fromRGBO(237, 189, 58, 1),
                 fixedSize: Size(MediaQuery.of(context).size.width * 0.85, 50)),
             onPressed: () {
-              setState(() {
+              setState(() async {
                 if (n != 2) {
                   n++;
                 } else {
-                  Navigator.of(context).pushReplacementNamed(AppRoutes.HOME);
+                  await userProvider.signIn(
+                    context,
+                    UserSignModel(
+                      email: emailController.text,
+                      password: passwordController.text,
+                      name: nameController.text,
+                      address: addressController.text,
+                      phone: phoneController.text,
+                    ),
+                    CarModel(
+                      brand: brandSelected!,
+                      model: modelSelected!,
+                      color: colorSelected!,
+                      plate: registrationController.text,
+                      car_size_id: sizeSelected,
+                    ),
+                  );
                 }
               });
             },

@@ -13,18 +13,27 @@ class ClientUserController {
       const newUser = await User.create(req.body);
 
       const {
+        id,
         name,
         email,
         address,
         phone,
+        role,
       } = newUser;
+      const token = jwt.sign({
+        id,
+        email,
+        role,
+      }, process.env.TOKEN_SECRET, {
+        expiresIn: process.env.TOKEN_EXPIRATION,
+      });
 
-      return res.json({
+      return res.json([{
         name,
         email,
         address,
         phone,
-      });
+      }, token]);
     } catch (err) {
       return res.status(400).json({ errors: `Create User / ${err.message}` });
     }

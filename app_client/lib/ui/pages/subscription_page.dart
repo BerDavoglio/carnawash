@@ -485,6 +485,7 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
                   ),
                 ),
                 onPressed: () {
+                  // SEND REQUEST FOR REGULAR WASH
                   setState(() {
                     n = 3;
                   });

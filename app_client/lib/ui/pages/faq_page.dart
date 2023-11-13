@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../data/data.dart';
+import '../../infra/infra.dart';
 import '../ui.dart';
 
 class FAQPage extends StatefulWidget {
@@ -9,38 +12,37 @@ class FAQPage extends StatefulWidget {
   State<FAQPage> createState() => _FAQPageState();
 }
 
-class Item {
-  Item({
-    required this.title,
-    required this.subtitle,
-    this.isOpen = false,
-  });
-
-  String title;
-  String subtitle;
-  bool isOpen;
-}
-
 class _FAQPageState extends State<FAQPage> {
-  List<Item> list = [
-    Item(
-      title: 'Do I need to be present before, during, or after the service?',
-      subtitle:
-          "Not necessarily. The app will notify you once the washer arrives. You can also add specific instructions for the washer to follow on arrival within the booking notes, any questions and details can be communicating by the app message or call. If you choose not to be present for the arrival of the washer, please ensure the washer can easily find your car among by indicating the plate or the exact colour and model when placing the booking. Also be sure that the car is accessible, and unlocked if requiring an interior cleaning, please note the washer is not allowed to drive your car for parking or any circumstances. We strongly recommend checking the vehicle after the washer has completed the service to ensure you're thoroughly satisfied with the result!",
-      isOpen: false,
-    ),
-    Item(
-      title:
-          'What condition should my car be to have a waterless carwash (outside wash)?',
-      subtitle:
-          "Any condition except excessive amounts of dirt, such as dried mud or other debris.",
-      isOpen: false,
-    ),
-  ];
+  late List<bool> listOpens;
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      FAQProvider faqProvider = Provider.of(
+        context,
+        listen: false,
+      );
+
+      await faqProvider.loadFAQ(context);
+
+      listOpens = List.generate(
+        faqProvider.faq.length,
+        (index) {
+          return false;
+        },
+      );
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     TextEditingController searchController = TextEditingController();
+    FAQProvider faqProvider = Provider.of(
+      context,
+      listen: false,
+    );
 
     return Scaffold(
       backgroundColor: Colors.grey[100]!,
@@ -83,22 +85,20 @@ class _FAQPageState extends State<FAQPage> {
                     icon: Icons.search,
                   ),
                   Column(
-                    children: [
-                      faqBox(
-                        context,
-                        list[0],
-                        () => setState(() {
-                          list[0].isOpen = !list[0].isOpen;
-                        }),
-                      ),
-                      faqBox(
-                        context,
-                        list[1],
-                        () => setState(() {
-                          list[1].isOpen = !list[1].isOpen;
-                        }),
-                      ),
-                    ],
+                    children: List.generate(
+                      faqProvider.faq.length,
+                      (index) {
+                        return faqBox(
+                          context,
+                          faqProvider.faq[index],
+                          () => setState(() {
+                            listOpens[index] =
+                                !listOpens[index];
+                          }),
+                          index,
+                        );
+                      },
+                    ),
                   ),
                 ],
               ),
@@ -111,8 +111,9 @@ class _FAQPageState extends State<FAQPage> {
 
   Widget faqBox(
     BuildContext context,
-    Item obj,
+    FAQModel obj,
     Function funct,
+    int index,
   ) {
     return Column(
       children: [
@@ -120,7 +121,7 @@ class _FAQPageState extends State<FAQPage> {
           width: MediaQuery.of(context).size.width * 0.85,
           decoration: BoxDecoration(
             color: const Color.fromRGBO(237, 189, 58, 1),
-            borderRadius: !obj.isOpen
+            borderRadius: !listOpens[index]
                 ? const BorderRadius.all(
                     Radius.circular(10),
                   )
@@ -137,13 +138,13 @@ class _FAQPageState extends State<FAQPage> {
                 SizedBox(
                   width: MediaQuery.of(context).size.width * 0.65,
                   child: Text(
-                    obj.title,
+                    obj.question,
                   ),
                 ),
                 IconButton(
                   splashColor: Colors.white,
                   splashRadius: 10,
-                  icon: Icon(!obj.isOpen
+                  icon: Icon(!listOpens[index]
                       ? Icons.keyboard_arrow_down
                       : Icons.keyboard_arrow_down),
                   onPressed: () {
@@ -154,7 +155,7 @@ class _FAQPageState extends State<FAQPage> {
             ),
           ),
         ),
-        obj.isOpen
+        listOpens[index]
             ? Container(
                 decoration: const BoxDecoration(
                     color: Colors.white,
@@ -164,7 +165,7 @@ class _FAQPageState extends State<FAQPage> {
                     )),
                 child: Padding(
                   padding: const EdgeInsets.all(10),
-                  child: Text(obj.subtitle),
+                  child: Text(obj.answer),
                 ),
               )
             : const SizedBox(),

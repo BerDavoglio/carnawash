@@ -70,6 +70,7 @@ class _RatingPageState extends State<RatingPage> {
                         onPressed: () {
                           setState(() {
                             wasRated = true;
+                            // RATE
                           });
                         },
                         child: const Text(

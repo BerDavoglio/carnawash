@@ -50,7 +50,7 @@ class CarController {
 
       const cars = await Car.findAll({
         where: {
-          user_id: userId
+          user_id: id
         }
       });
       if (!cars) {

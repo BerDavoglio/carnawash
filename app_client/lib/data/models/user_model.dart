@@ -16,14 +16,14 @@ class UserSignModel {
 
 class UserCompleteModel {
   UserCompleteModel({
+    required this.name,
     required this.email,
-    required this.password,
     required this.phone,
     required this.address,
   });
 
+  String name;
   String email;
-  String password;
   String phone;
   String address;
 }

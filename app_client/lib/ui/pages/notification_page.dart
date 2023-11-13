@@ -10,6 +10,8 @@ class NotificationPage extends StatefulWidget {
 }
 
 class _NotificationPageState extends State<NotificationPage> {
+// LOAD NOTIFICATIONS
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -118,7 +120,9 @@ class _NotificationPageState extends State<NotificationPage> {
               ),
             ],
           ),
-          const Divider(thickness: 1,),
+          const Divider(
+            thickness: 1,
+          ),
         ],
       ),
     );

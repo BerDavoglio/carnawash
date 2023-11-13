@@ -12,7 +12,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      destined_to_list: {
+      destined_to: {
         type: Sequelize.TEXT,
         allowNull: false,
       },

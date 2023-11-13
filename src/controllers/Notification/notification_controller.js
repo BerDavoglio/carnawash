@@ -1,3 +1,4 @@
+import User from '../../models/User/User_models';
 import Notification from '../../models/Notification/Notification_models';
 
 class NotificationController {
@@ -8,14 +9,14 @@ class NotificationController {
       const {
         id,
         title,
-        destined_to_list,
+        destined_to,
         type,
       } = newNotification;
 
       return res.json({
         id,
         title,
-        destined_to_list,
+        destined_to,
         type,
       });
     } catch (err) {
@@ -26,6 +27,29 @@ class NotificationController {
   async show(req, res) {
     try {
       const notifications = await Notification.findAll();
+
+      return res.json(notifications);
+    } catch (err) {
+      return res.status(400).json({ errors: `Show Notification / ${err.message}` });
+    }
+  }
+
+  async showUser(req, res) {
+    try {
+      const id = req.userId;
+      if (!id) {
+        return res.status(400).json({ errors: ['ID not Found'] });
+      }
+      const user = await User.findByPk(id);
+      if (!user) {
+        return res.status(400).json({ errors: ['User not Found'] });
+      }
+
+      const notifications = await Notification.findAll({
+        where: {
+          destined_to: user.role
+        }
+      });
 
       return res.json(notifications);
     } catch (err) {
@@ -45,14 +69,14 @@ class NotificationController {
       const {
         id,
         title,
-        destined_to_list,
+        destined_to,
         type,
       } = updateNotification;
 
       return res.json({
         id,
         title,
-        destined_to_list,
+        destined_to,
         type,
       });
     } catch (err) {

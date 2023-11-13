@@ -5,15 +5,15 @@ class CarModel {
     this.id,
     required this.brand,
     required this.model,
-    required this.size,
     required this.plate,
+    required this.color,
     required this.car_size_id,
   });
 
   int? id;
   String brand;
   String model;
-  String size;
   String plate;
+  String color;
   int car_size_id;
 }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../../infra/infra.dart';
 import '../../ui.dart';
 
 class SignInComponent extends StatefulWidget {
@@ -21,6 +23,8 @@ class _SignInComponentState extends State<SignInComponent> {
 
   @override
   Widget build(BuildContext context) {
+    UserProvider userProvider = Provider.of(context, listen: false);
+
     return Column(
       children: [
         Padding(
@@ -56,11 +60,11 @@ class _SignInComponentState extends State<SignInComponent> {
               TextButton(
                 onPressed: () {
                   Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const LoginPage(index: 3),
-              ),
-            );
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const LoginPage(index: 3),
+                    ),
+                  );
                 },
                 child: const Text(
                   'I forgot the password',
@@ -78,8 +82,12 @@ class _SignInComponentState extends State<SignInComponent> {
             style: ElevatedButton.styleFrom(
                 backgroundColor: const Color.fromRGBO(237, 189, 58, 1),
                 fixedSize: Size(MediaQuery.of(context).size.width * 0.85, 50)),
-            onPressed: () {
-              Navigator.of(context).pushNamed(AppRoutes.HOME);
+            onPressed: () async {
+              await userProvider.submitLogin(
+                context,
+                widget.emailController.text,
+                widget.passwordController.text,
+              );
             },
             child: const Text(
               'Login',

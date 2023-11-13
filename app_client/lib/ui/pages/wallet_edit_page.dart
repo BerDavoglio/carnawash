@@ -131,6 +131,7 @@ class _WalletEditPageState extends State<WalletEditPage> {
                           ),
                         ),
                         onPressed: () {
+                          // CREATE/EDIT WALLET
                           Navigator.of(context).pop();
                         },
                         child: const Text(

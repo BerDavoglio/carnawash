@@ -1,5 +1,13 @@
-import 'package:flutter/material.dart';
+// ignore_for_file: use_build_context_synchronously
 
+import 'dart:convert';
+
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+
+import '../../data/data.dart';
+import '../../infra/infra.dart';
 import '../ui.dart';
 
 class HistoryPage extends StatefulWidget {
@@ -15,6 +23,8 @@ class _HistoryPageState extends State<HistoryPage> {
 
   @override
   Widget build(BuildContext context) {
+    ScheduleProvider scheduleProvider = Provider.of(context);
+
     return Scaffold(
       backgroundColor: Colors.grey[100],
       bottomNavigationBar: navigationBarComponent(context),
@@ -87,13 +97,16 @@ class _HistoryPageState extends State<HistoryPage> {
                           ],
                         ),
                         Column(
-                          children: [
-                            historyBoxComponent(),
-                            historyBoxComponent(),
-                            historyBoxComponent(),
-                            historyBoxComponent(),
-                            historyBoxComponent(),
-                          ],
+                          children: List.generate(
+                            scheduleProvider.listSchedules.length,
+                            (index) async {
+                              return await historyBoxComponent(
+                                context,
+                                scheduleProvider,
+                                index,
+                              );
+                            } as Widget Function(int index),
+                          ),
                         ),
                       ],
                     ),
@@ -107,7 +120,24 @@ class _HistoryPageState extends State<HistoryPage> {
     );
   }
 
-  Widget historyBoxComponent() {
+  Future<Widget> historyBoxComponent(
+    BuildContext context,
+    ScheduleProvider schedule,
+    int index,
+  ) async {
+    List<CarModel?> carsList = [];
+    List addonList = [];
+    VehiclesProvider vehiclesProvider = Provider.of(context);
+
+    WasherModel? washer = await schedule.loadWasher(context, index);
+    for (var i in schedule.listSchedules[index].cars_list_id.split(';')) {
+      carsList.add(await vehiclesProvider.loadOneCar(context, json.decode(i).car_id as int));
+      addonList = json.decode(i).additional_list_id;
+    }
+    double? price = await schedule.loadPrice(context, index);
+
+    // LOAD ADDONS LIST TO GET WHAT IS THE NAME
+
     return Column(
       children: [
         Container(
@@ -117,8 +147,8 @@ class _HistoryPageState extends State<HistoryPage> {
               Radius.circular(10),
             ),
           ),
-          child: const Padding(
-            padding: EdgeInsets.all(10),
+          child: Padding(
+            padding: const EdgeInsets.all(10),
             child: Column(
               children: [
                 Row(
@@ -126,8 +156,8 @@ class _HistoryPageState extends State<HistoryPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Washer: John',
-                      style: TextStyle(
+                      'Washer: ${washer?.name}',
+                      style: const TextStyle(
                         fontSize: 18,
                       ),
                     ),
@@ -135,14 +165,20 @@ class _HistoryPageState extends State<HistoryPage> {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         Text(
-                          'September 10, 2023',
-                          style: TextStyle(
+                          DateFormat('yMMMMd')
+                              .format(
+                                  schedule.listSchedules[index].selected_date)
+                              .toString(),
+                          style: const TextStyle(
                             fontSize: 16,
                           ),
                         ),
                         Text(
-                          '10:00 am',
-                          style: TextStyle(
+                          DateFormat('jm')
+                              .format(
+                                  schedule.listSchedules[index].selected_date)
+                              .toString(),
+                          style: const TextStyle(
                             fontSize: 16,
                           ),
                         ),
@@ -158,34 +194,34 @@ class _HistoryPageState extends State<HistoryPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Nissan - March',
-                          style: TextStyle(
+                          '${carsList[0]!.brand} - ${carsList[0]!.model}',
+                          style: const TextStyle(
                             color: Colors.grey,
                           ),
                         ),
                         Text(
-                          '3SAM123',
-                          style: TextStyle(
+                          carsList[0]!.plate,
+                          style: const TextStyle(
                             color: Colors.grey,
                           ),
                         ),
                         Text(
-                          'Small',
-                          style: TextStyle(
+                          carsList[0]!.car_size_id.toString(),
+                          style: const TextStyle(
                             color: Colors.grey,
                           ),
                         ),
                         Text(
-                          '+ Pet Hair',
-                          style: TextStyle(
+                          addonList[0].toString(),
+                          style: const TextStyle(
                             color: Colors.grey,
                           ),
                         ),
                       ],
                     ),
                     Text(
-                      '\$ 94.00',
-                      style: TextStyle(
+                      '\$ ${price?.toStringAsFixed(2)}',
+                      style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
                       ),
