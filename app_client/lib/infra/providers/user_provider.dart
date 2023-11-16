@@ -1,4 +1,4 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, non_constant_identifier_names
 
 import 'dart:async';
 import 'dart:convert';
@@ -182,6 +182,58 @@ class UserProvider with ChangeNotifier {
       await comumDialog(
         context,
         'Provider Error!',
+        e.toString(),
+      );
+    }
+  }
+
+  Future<void> regularWash(
+    BuildContext context,
+    DateTime init_date,
+    int date_to_date,
+  ) async {
+    try {
+      final response = await http.post(
+        Uri.parse('${Constants.BACKEND_BASE_URL}/users/regular/'),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $_token',
+        },
+        body: {
+          'init_date': init_date,
+          'date_to_date': date_to_date,
+        },
+      );
+
+      var v = jsonDecode(response.body);
+
+      if (response.statusCode == 200) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: const Text('Regular wash created with success!'),
+            action: SnackBarAction(
+              label: 'Okay',
+              onPressed: () {},
+            ),
+          ),
+        );
+        notifyListeners();
+      } else {
+        await comumDialog(
+          context,
+          'Error',
+          v['errors'],
+        );
+      }
+
+      Navigator.of(context).pushNamed(AppRoutes.HOME);
+
+      notifyListeners();
+    } catch (e) {
+      await comumDialog(
+        context,
+        'Provider Error! SubmitLogin',
         e.toString(),
       );
     }

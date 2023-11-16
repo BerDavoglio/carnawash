@@ -65,6 +65,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    UserProvider userProvider = Provider.of(context);
+
     return Scaffold(
       backgroundColor: Colors.grey[100]!,
       bottomNavigationBar: navigationBarComponent(context),
@@ -86,9 +88,9 @@ class _HomePageState extends State<HomePage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           notificationHomeButtonComponent(context),
-                          const Text(
-                            'Welcome, Jorge!',
-                            style: TextStyle(
+                          Text(
+                            'Welcome, ${userProvider.perfil.name}!',
+                            style: const TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
                             ),
@@ -118,8 +120,7 @@ class _HomePageState extends State<HomePage> {
                             color: Colors.grey[100]!,
                             spreadRadius: 1,
                             blurRadius: 1,
-                            offset: const Offset(
-                                0, 3),
+                            offset: const Offset(0, 3),
                           ),
                         ],
                       ),
@@ -202,14 +203,15 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                         const SizedBox(height: 16),
-                        // GET A TEXT IF THERE IS NO SCHEDULE
-                        ongoingScheduleBox(
-                          context,
-                          scheduleOngoing!,
-                          carsListOngoing,
-                          addonListOngoing,
-                          sideOngoing,
-                        ),
+                        scheduleOngoing != null
+                            ? ongoingScheduleBox(
+                                context,
+                                scheduleOngoing!,
+                                carsListOngoing,
+                                addonListOngoing,
+                                sideOngoing,
+                              )
+                            : Container(),
                       ],
                     ),
                   ),
@@ -286,14 +288,15 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                         const SizedBox(height: 16),
-                        // GET A TEXT IF THERE IS NO SCHEDULE
-                        rebookScheduleBox(
-                          context,
-                          scheduleRebook!,
-                          carsListRebook,
-                          addonListRebook,
-                          priceRebook!,
-                        ),
+                        scheduleRebook != null
+                            ? rebookScheduleBox(
+                                context,
+                                scheduleRebook!,
+                                carsListRebook,
+                                addonListRebook,
+                                priceRebook!,
+                              )
+                            : Container(),
                       ],
                     ),
                   ),
@@ -350,7 +353,9 @@ class _HomePageState extends State<HomePage> {
                               borderRadius: BorderRadius.circular(10),
                             ),
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            // REFER TO FRIENDS
+                          },
                           child: const Text(
                             'Send for us',
                             style: TextStyle(
@@ -466,7 +471,12 @@ class _HomePageState extends State<HomePage> {
             Center(
               child: TextButton.icon(
                 onPressed: () {
-                  Navigator.of(context).pushNamed(AppRoutes.RATING);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => RatingPage(id: select.id!),
+                    ),
+                  );
                 },
                 icon: const Icon(
                   Icons.star_outline,
@@ -651,8 +661,9 @@ class _HomePageState extends State<HomePage> {
                 ? Center(
                     child: TextButton.icon(
                       onPressed: () {
-                        // RATING WITH ID
-                        Navigator.of(context).pushNamed(AppRoutes.RATING);
+                        MaterialPageRoute(
+                          builder: (context) => RatingPage(id: select.id!),
+                        );
                       },
                       icon: const Icon(
                         Icons.star_outline,

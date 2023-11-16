@@ -8,3 +8,4 @@ export './card_model.dart';
 export './faq_model.dart';
 export './conditions_model.dart';
 export './notification_model.dart';
+export './subscription_box_model.dart';

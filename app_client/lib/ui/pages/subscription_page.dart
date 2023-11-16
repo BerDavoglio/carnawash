@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 
+import '../../data/data.dart';
+import '../../infra/infra.dart';
 import '../ui.dart';
 
 class SubscriptionPage extends StatefulWidget {
@@ -8,22 +11,6 @@ class SubscriptionPage extends StatefulWidget {
 
   @override
   State<SubscriptionPage> createState() => _SubscriptionPageState();
-}
-
-class SubscriptionBoxModel {
-  SubscriptionBoxModel({
-    required this.type,
-    required this.price,
-    required this.pet,
-    required this.dirt,
-    required this.heavy,
-  });
-
-  String type;
-  String price;
-  String pet;
-  String dirt;
-  String heavy;
 }
 
 class _SubscriptionPageState extends State<SubscriptionPage> {
@@ -38,6 +25,12 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
     super.initState();
 
     delaySelected = listDelay[0];
+
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      RegularWashProvider regularWashProvider = Provider.of(context);
+
+      regularWashProvider.loadRegular(context);
+    });
   }
 
   void _onDaySelected(DateTime day, DateTime focusedDay) {
@@ -71,7 +64,8 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
                             padding: const EdgeInsets.only(right: 10),
                             child: CircleAvatar(
                               radius: 20,
-                              backgroundColor: const Color.fromRGBO(237, 189, 58, 1),
+                              backgroundColor:
+                                  const Color.fromRGBO(237, 189, 58, 1),
                               child: IconButton(
                                 iconSize: 24,
                                 color: Colors.white,
@@ -121,6 +115,8 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
   }
 
   Column partOne(BuildContext context) {
+    RegularWashProvider regularWashProvider = Provider.of(context);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -189,40 +185,17 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
           ),
         ),
         const SizedBox(height: 20),
-        subscriptionBox(
-          SubscriptionBoxModel(
-            type: 'Small Car',
-            price: '\$79,00',
-            pet: '\$15,00',
-            dirt: '\$20,00',
-            heavy: '\$40,00',
-          ),
-        ),
-        subscriptionBox(
-          SubscriptionBoxModel(
-            type: 'SUVs',
-            price: '\$89,00',
-            pet: '\$15,00',
-            dirt: '\$20,00',
-            heavy: '\$40,00',
-          ),
-        ),
-        subscriptionBox(
-          SubscriptionBoxModel(
-            type: '4WD SUVs',
-            price: '\$99,00',
-            pet: '\$15,00',
-            dirt: '\$20,00',
-            heavy: '\$40,00',
-          ),
-        ),
-        subscriptionBox(
-          SubscriptionBoxModel(
-            type: 'Extra Large 4WD SUVs',
-            price: '\$99,00',
-            pet: '\$15,00',
-            dirt: '\$20,00',
-            heavy: '\$40,00',
+        Column(
+          children: List.generate(
+            regularWashProvider.regularWashList.length,
+            (index) => subscriptionBox(
+              SubscriptionBoxModel(
+                car_size: regularWashProvider.regularWashList[index].car_size,
+                price: regularWashProvider.regularWashList[index].price,
+                additional_services: regularWashProvider
+                    .regularWashList[index].additional_services,
+              ),
+            ),
           ),
         ),
         const SizedBox(height: 13),
@@ -294,7 +267,7 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    obj.type,
+                    obj.car_size,
                     style: const TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 16,
@@ -321,10 +294,10 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
                 ),
               ),
               const SizedBox(height: 14),
-              Row(
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
+                  Text(
                     'Pet Hair',
                     style: TextStyle(
                       fontWeight: FontWeight.w400,
@@ -333,8 +306,8 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
                     ),
                   ),
                   Text(
-                    obj.pet,
-                    style: const TextStyle(
+                    '\$15,00',
+                    style: TextStyle(
                       fontWeight: FontWeight.w600,
                       fontSize: 14,
                       color: Colors.white,
@@ -343,10 +316,10 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
                 ],
               ),
               const SizedBox(height: 5),
-              Row(
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
+                  Text(
                     'Extra Dirt',
                     style: TextStyle(
                       fontWeight: FontWeight.w400,
@@ -355,8 +328,8 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
                     ),
                   ),
                   Text(
-                    obj.dirt,
-                    style: const TextStyle(
+                    '\$20,00',
+                    style: TextStyle(
                       fontWeight: FontWeight.w600,
                       fontSize: 14,
                       color: Colors.white,
@@ -365,10 +338,10 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
                 ],
               ),
               const SizedBox(height: 5),
-              Row(
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
+                  Text(
                     'Extra Heavy Dirt',
                     style: TextStyle(
                       fontWeight: FontWeight.w400,
@@ -377,8 +350,8 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
                     ),
                   ),
                   Text(
-                    obj.heavy,
-                    style: const TextStyle(
+                    '\$40,00',
+                    style: TextStyle(
                       fontWeight: FontWeight.w600,
                       fontSize: 14,
                       color: Colors.white,
@@ -395,6 +368,8 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
   }
 
   Column secondPart(BuildContext context) {
+    UserProvider userProvider = Provider.of(context, listen: false);
+
     return Column(
       children: [
         SizedBox(
@@ -485,9 +460,17 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
                   ),
                 ),
                 onPressed: () {
-                  // SEND REQUEST FOR REGULAR WASH
                   setState(() {
                     n = 3;
+                    userProvider.regularWash(
+                      context,
+                      today,
+                      delaySelected == '7 days'
+                          ? 1
+                          : delaySelected == '15 days'
+                              ? 2
+                              : 3,
+                    );
                   });
                 },
                 child: const Text(

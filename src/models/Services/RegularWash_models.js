@@ -3,8 +3,8 @@ import Sequelize, { Model } from 'sequelize';
 export default class RegularWash extends Model {
   static init(sequelize) {
     super.init({
-      car_size_id: {
-        type: Sequelize.INTEGER,
+      car_size: {
+        type: Sequelize.STRING,
         defaultValue: 0,
       },
       price: {

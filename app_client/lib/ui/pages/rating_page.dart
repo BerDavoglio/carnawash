@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:provider/provider.dart';
 
+import '../../infra/infra.dart';
 import '../ui.dart';
 
 class RatingPage extends StatefulWidget {
-  const RatingPage({super.key});
+  const RatingPage({
+    Key? key,
+    this.id = 1,
+  }) : super(key: key);
+
+  final int id;
 
   @override
   State<RatingPage> createState() => _RatingPageState();
@@ -12,10 +19,13 @@ class RatingPage extends StatefulWidget {
 
 class _RatingPageState extends State<RatingPage> {
   TextEditingController rateController = TextEditingController();
+  double rate = 0;
   bool wasRated = false;
 
   @override
   Widget build(BuildContext context) {
+    ScheduleProvider scheduleProvider = Provider.of(context);
+
     return Scaffold(
       bottomNavigationBar: navigationBarComponent(context),
       body: Center(
@@ -68,9 +78,13 @@ class _RatingPageState extends State<RatingPage> {
                           ),
                         ),
                         onPressed: () {
-                          setState(() {
+                          setState(() async {
                             wasRated = true;
-                            // RATE
+                            await scheduleProvider.rateSchedule(
+                              context,
+                              widget.id,
+                              rate,
+                            );
                           });
                         },
                         child: const Text(
@@ -125,7 +139,9 @@ class _RatingPageState extends State<RatingPage> {
               color: Color.fromRGBO(237, 189, 58, 1),
             ),
             itemSize: 32,
-            onRatingUpdate: (rating) {},
+            onRatingUpdate: (rating) {
+              rate = rating;
+            },
           ),
           const SizedBox(height: 32),
           const Text('Let us know your feedback:'),

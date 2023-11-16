@@ -8,8 +8,8 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
       },
-      car_size_id: {
-        type: Sequelize.INTEGER,
+      car_size: {
+        type: Sequelize.STRING,
         allowNull: false,
       },
       price: {

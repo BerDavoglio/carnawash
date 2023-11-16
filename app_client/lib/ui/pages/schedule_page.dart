@@ -35,6 +35,9 @@ class _SchedulePageState extends State<SchedulePage> {
     super.initState();
 
     n = initial ?? 1;
+
+    // LOAD PRÉ SELECTED VALUES
+    // LOAD VALUES FROM SERVICES
   }
 
   TimeOfDay _time = TimeOfDay(

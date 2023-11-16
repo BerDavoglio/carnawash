@@ -7,14 +7,14 @@ class RegularWashController {
 
       const {
         id,
-        car_size_id,
+        car_size,
         price,
         additional_services,
       } = newRegular;
 
       return res.json({
         id,
-        car_size_id,
+        car_size,
         price,
         additional_services,
       });
@@ -44,14 +44,14 @@ class RegularWashController {
 
       const {
         id,
-        car_size_id,
+        car_size,
         price,
         additional_services,
       } = updateRegular;
 
       return res.json({
         id,
-        car_size_id,
+        car_size,
         price,
         additional_services,
       });
