@@ -2,6 +2,8 @@
 
 import 'dart:ffi';
 
+import '../data.dart';
+
 class ScheduleModel {
   ScheduleModel({
     this.id,
@@ -32,4 +34,24 @@ class ScheduleModel {
   Float? rate;
   String? credit_card_id;
   String? three;
+}
+
+class CreateScheduleModel {
+  CreateScheduleModel({
+    required this.cars_obj_list,
+    required this.selected_date,
+    required this.address,
+    required this.observation_address,
+    required this.coupon_id,
+    required this.credit_card_id,
+    required this.three,
+  });
+
+  List<CarObjectModel> cars_obj_list;
+  DateTime selected_date;
+  String address;
+  String observation_address;
+  int coupon_id;
+  int credit_card_id;
+  int three;
 }

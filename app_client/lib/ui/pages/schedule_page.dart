@@ -1,16 +1,21 @@
 // ignore_for_file: must_be_immutable, no_logic_in_create_state
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 
+import '../../data/data.dart';
+import '../../infra/infra.dart';
 import '../ui.dart';
 
 class SchedulePage extends StatefulWidget {
   int? initial;
+  List<CarObjectModel>? preData;
 
   SchedulePage({
     super.key,
     required this.initial,
+    this.preData,
   });
 
   @override
@@ -20,13 +25,17 @@ class SchedulePage extends StatefulWidget {
 }
 
 class _SchedulePageState extends State<SchedulePage> {
-  DateTime today = DateTime.now();
   TextEditingController addressController = TextEditingController();
+  TextEditingController observationController = TextEditingController();
   TextEditingController couponController = TextEditingController();
+  DateTime today = DateTime.now();
   int carSelected = 1;
   int washSelected = 1;
   int? initial;
+  List<CarObjectModel> listCars = [];
+  List<int> listAddon = [];
   late int n;
+  late CarModel carSelectedModel;
 
   _SchedulePageState({required this.initial});
 
@@ -36,8 +45,18 @@ class _SchedulePageState extends State<SchedulePage> {
 
     n = initial ?? 1;
 
-    // LOAD PRÉ SELECTED VALUES
-    // LOAD VALUES FROM SERVICES
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      ServicesProvider servicesProvider = Provider.of(
+        context,
+        listen: false,
+      );
+
+      await servicesProvider.loadAdditional(context).then(
+            (value) async => {
+              await servicesProvider.loadCarSize(context),
+            },
+          );
+    });
   }
 
   TimeOfDay _time = TimeOfDay(
@@ -62,6 +81,11 @@ class _SchedulePageState extends State<SchedulePage> {
     setState(() {
       today = day;
     });
+  }
+
+  Future<void> _loadCarSelected(BuildContext context) async {
+    VehiclesProvider vehiclesProvider = Provider.of(context);
+    await vehiclesProvider.loadOneCar(context, carSelected);
   }
 
   @override
@@ -89,7 +113,8 @@ class _SchedulePageState extends State<SchedulePage> {
                             padding: const EdgeInsets.only(right: 10),
                             child: CircleAvatar(
                               radius: 20,
-                              backgroundColor: const Color.fromRGBO(237, 189, 58, 1),
+                              backgroundColor:
+                                  const Color.fromRGBO(237, 189, 58, 1),
                               child: IconButton(
                                 iconSize: 24,
                                 color: Colors.white,
@@ -138,7 +163,10 @@ class _SchedulePageState extends State<SchedulePage> {
                   n == 1
                       ? firstPart(context)
                       : n == 2
-                          ? secondPart(context)
+                          ? secondPart(
+                              context,
+                              carSelectedModel,
+                            )
                           : n == 3
                               ? thirdPart(context)
                               : n == 4
@@ -173,7 +201,19 @@ class _SchedulePageState extends State<SchedulePage> {
                             ),
                           ),
                           onPressed: () {
-                            setState(() {
+                            setState(() async {
+                              if (n == 1) {
+                                await _loadCarSelected(context);
+                              }
+                              if (n == 2) {
+                                listCars.add(
+                                  CarObjectModel(
+                                    car_id: carSelectedModel.id!,
+                                    wash_type: washSelected,
+                                    additional_list_id: listAddon,
+                                  ),
+                                );
+                              }
                               n++;
                             });
                           },
@@ -189,6 +229,8 @@ class _SchedulePageState extends State<SchedulePage> {
   }
 
   Column firstPart(BuildContext context) {
+    VehiclesProvider vehiclesProvider = Provider.of(context);
+
     return Column(
       children: [
         SizedBox(
@@ -220,11 +262,12 @@ class _SchedulePageState extends State<SchedulePage> {
             padding: const EdgeInsets.symmetric(vertical: 10),
             child: Column(
               children: List.generate(
-                6,
+                vehiclesProvider.carsList.length,
                 (index) {
                   return selectCarBox(
                     context,
                     index,
+                    vehiclesProvider.carsList[index],
                   );
                 },
               ),
@@ -242,7 +285,8 @@ class _SchedulePageState extends State<SchedulePage> {
           },
           child: const Text(
             'Choose another car to be washed',
-            style: TextStyle(color: Color.fromRGBO(237, 189, 58, 1), fontSize: 18),
+            style:
+                TextStyle(color: Color.fromRGBO(237, 189, 58, 1), fontSize: 18),
           ),
         ),
       ],
@@ -252,6 +296,7 @@ class _SchedulePageState extends State<SchedulePage> {
   Widget selectCarBox(
     BuildContext context,
     int index,
+    CarModel car,
   ) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10),
@@ -267,41 +312,41 @@ class _SchedulePageState extends State<SchedulePage> {
               Radius.circular(10),
             ),
           ),
-          child: const Padding(
-            padding: EdgeInsets.all(10),
+          child: Padding(
+            padding: const EdgeInsets.all(10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Nissan',
-                  style: TextStyle(
+                  car.brand,
+                  style: const TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 Text(
-                  'March',
-                  style: TextStyle(
+                  car.model,
+                  style: const TextStyle(
                     color: Colors.grey,
                   ),
                 ),
                 Text(
-                  'Red',
-                  style: TextStyle(
+                  car.color,
+                  style: const TextStyle(
                     color: Colors.grey,
                   ),
                 ),
                 Text(
-                  '3SAM123',
-                  style: TextStyle(
+                  car.plate,
+                  style: const TextStyle(
                     color: Colors.grey,
                   ),
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 Text(
-                  'Small',
-                  style: TextStyle(
+                  car.car_size_id.toString(),
+                  style: const TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.w500,
                   ),
@@ -332,7 +377,12 @@ class _SchedulePageState extends State<SchedulePage> {
     );
   }
 
-  Column secondPart(BuildContext context) {
+  Column secondPart(
+    BuildContext context,
+    CarModel carSelec,
+  ) {
+    ServicesProvider servicesProvider = Provider.of(context);
+
     return Column(
       children: [
         SizedBox(
@@ -369,37 +419,41 @@ class _SchedulePageState extends State<SchedulePage> {
                 ],
               ),
               const SizedBox(height: 16),
-              geralInativeTextInput(context: context, text: 'Nissan'),
-              geralInativeTextInput(context: context, text: 'March'),
-              geralInativeTextInput(context: context, text: 'Red'),
-              geralInativeTextInput(context: context, text: '3SAM123'),
+              geralInativeTextInput(context: context, text: carSelec.brand),
+              geralInativeTextInput(context: context, text: carSelec.model),
+              geralInativeTextInput(context: context, text: carSelec.color),
+              geralInativeTextInput(context: context, text: carSelec.plate),
               const SizedBox(height: 16),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   SizedBox(
                     width: MediaQuery.of(context).size.width * 0.7,
-                    child: const Column(
+                    child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Small',
-                          style: TextStyle(
+                          servicesProvider
+                              .getCarSizeComplete(carSelec.car_size_id)
+                              .title,
+                          style: const TextStyle(
                             fontWeight: FontWeight.w500,
                           ),
                         ),
                         Text(
-                          'Compact, subcompact cars: sedan, hatchback, wagon, sports, coupe.',
-                          style: TextStyle(
+                          servicesProvider
+                              .getCarSizeComplete(carSelec.car_size_id)
+                              .additional_information,
+                          style: const TextStyle(
                             color: Colors.grey,
                           ),
                         ),
                       ],
                     ),
                   ),
-                  const Text(
-                    '\$ 45',
-                    style: TextStyle(
+                  Text(
+                    '\$ ${servicesProvider.getCarSizeComplete(carSelec.car_size_id).price}',
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -534,45 +588,19 @@ class _SchedulePageState extends State<SchedulePage> {
                 ),
               ),
               const SizedBox(height: 16),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      additionalBoxComponent(
+              GridView.count(
+                crossAxisCount: 2,
+                children: List.generate(
+                  servicesProvider.additionalList.length,
+                  (index) {
+                    return Center(
+                      child: additionalBoxComponent(
                         context: context,
-                        text: 'Pet Hair',
-                        icon: Icons.pets_outlined,
-                        value: '15.00',
+                        add: servicesProvider.additionalList[index],
                       ),
-                      const SizedBox(height: 16),
-                      additionalBoxComponent(
-                        context: context,
-                        text: 'Extra Dirty',
-                        icon: Icons.clean_hands,
-                        value: '20.00',
-                      ),
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      additionalBoxComponent(
-                        context: context,
-                        text: 'Seats wiped',
-                        icon: Icons.airline_seat_recline_normal,
-                        value: '15.00',
-                      ),
-                      const SizedBox(height: 16),
-                      additionalBoxComponent(
-                        context: context,
-                        text: 'Heavy Dirty',
-                        icon: Icons.local_car_wash,
-                        value: '40.00',
-                      ),
-                    ],
-                  ),
-                ],
+                    );
+                  },
+                ),
               ),
               const SizedBox(height: 16),
               Container(
@@ -592,6 +620,7 @@ class _SchedulePageState extends State<SchedulePage> {
                           fontSize: 18,
                         ),
                       ),
+                      // CALCULAR PREÇO
                       Text(
                         '\$ 65.00',
                         style: TextStyle(
@@ -613,10 +642,20 @@ class _SchedulePageState extends State<SchedulePage> {
 
   Widget additionalBoxComponent({
     required BuildContext context,
-    required String text,
-    required IconData icon,
-    required String value,
+    required AdditionalModel add,
   }) {
+    late IconData icon;
+    if (add.title == 'Pet Hair') {
+      icon = Icons.pets_outlined;
+    } else if (add.title == 'Extra Dirty') {
+      icon = Icons.clean_hands;
+    } else if (add.title == 'Seats wiped') {
+      icon = Icons.airline_seat_recline_normal;
+    } else if (add.title == 'Heavy Dirty') {
+      icon = Icons.local_car_wash;
+    } else {
+      icon = Icons.add;
+    }
     return Container(
       width: MediaQuery.of(context).size.width * 0.42,
       height: MediaQuery.of(context).size.width * 0.42,
@@ -633,7 +672,7 @@ class _SchedulePageState extends State<SchedulePage> {
               color: Colors.grey,
             ),
             Text(
-              text,
+              add.title,
               style: const TextStyle(
                 color: Colors.grey,
               ),
@@ -654,7 +693,7 @@ class _SchedulePageState extends State<SchedulePage> {
               ),
               onPressed: () {},
               child: Text(
-                '+ \$ $value',
+                '+ \$ ${add.price}',
                 style: const TextStyle(
                   color: Colors.white,
                 ),
@@ -697,7 +736,8 @@ class _SchedulePageState extends State<SchedulePage> {
               ElevatedButton(
                 onPressed: _selectTime,
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(const Color.fromRGBO(237, 189, 58, 1)),
+                  backgroundColor: MaterialStateProperty.all(
+                      const Color.fromRGBO(237, 189, 58, 1)),
                 ),
                 child: const Text('Select Time'),
               ),
@@ -718,7 +758,7 @@ class _SchedulePageState extends State<SchedulePage> {
               geralMultilineTextInput(
                 context: context,
                 text: 'Observation about the place',
-                textController: addressController,
+                textController: observationController,
               ),
             ],
           ),
@@ -946,6 +986,8 @@ class _SchedulePageState extends State<SchedulePage> {
   }
 
   Widget fifthPart(BuildContext context) {
+    UserProvider userProvider = Provider.of(context);
+
     return Column(
       children: [
         SizedBox(
@@ -997,18 +1039,24 @@ class _SchedulePageState extends State<SchedulePage> {
                       ),
                     ],
                   ),
-                  creditCardButton(context),
+                  creditCardButton(
+                    context,
+                    CardModel(
+                      user_id: userProvider.perfil.id!,
+                      name: userProvider.perfil.name,
+                      last_digits: '4321',
+                      date: '03/27',
+                    ),
+                  ),
                   Center(
                     child: TextButton(
                       style: ButtonStyle(
-                          padding:
-                              MaterialStateProperty.all(EdgeInsets.zero)),
+                          padding: MaterialStateProperty.all(EdgeInsets.zero)),
                       onPressed: () {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) =>
-                                const WalletPage(),
+                            builder: (context) => const WalletPage(),
                           ),
                         );
                       },
@@ -1030,7 +1078,13 @@ class _SchedulePageState extends State<SchedulePage> {
     );
   }
 
-  Widget creditCardButton(BuildContext context) {
+  Widget creditCardButton(
+    BuildContext context,
+    CardModel card,
+  ) {
+    ScheduleProvider scheduleProvider = Provider.of(context);
+    TextEditingController threeController = TextEditingController();
+
     return Column(
       children: [
         OutlinedButton(
@@ -1043,22 +1097,63 @@ class _SchedulePageState extends State<SchedulePage> {
             ),
           ),
           onPressed: () {
-            // CREATE SCHEDULE
+            showDialog<void>(
+              context: context,
+              builder: (ctx) => AlertDialog(
+                title: const Text('title'),
+                content: TextField(
+                  onChanged: (value) {},
+                  controller: threeController,
+                  decoration: const InputDecoration(hintText: "CVV"),
+                ),
+                actions: [
+                  TextButton(
+                    child: const Text('Ok'),
+                    onPressed: () => Navigator.of(context).pop(),
+                  ),
+                ],
+              ),
+            );
+            if (widget.preData != null) {
+              scheduleProvider.createSchedule(
+                  context,
+                  CreateScheduleModel(
+                    cars_obj_list: widget.preData!,
+                    selected_date: today,
+                    address: addressController.text,
+                    observation_address: observationController.text,
+                    coupon_id: int.parse(couponController.text),
+                    credit_card_id: card.id!,
+                    three: int.parse(threeController.text),
+                  ));
+            } else {
+              scheduleProvider.createSchedule(
+                  context,
+                  CreateScheduleModel(
+                    cars_obj_list: listCars,
+                    selected_date: today,
+                    address: addressController.text,
+                    observation_address: observationController.text,
+                    coupon_id: int.parse(couponController.text),
+                    credit_card_id: card.id!,
+                    three: int.parse(threeController.text),
+                  ));
+            }
             setState(() {
               n++;
             });
           },
-          child: const Row(
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Pay credit card **** 4321',
-                style: TextStyle(
+                'Pay credit card **** ${card.last_digits}',
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Colors.blue,
                 ),
               ),
-              Image(
+              const Image(
                 height: 30,
                 image: AssetImage('images/visa-logo.png'),
               )

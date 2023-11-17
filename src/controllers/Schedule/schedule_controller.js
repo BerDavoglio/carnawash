@@ -54,6 +54,23 @@ class ScheduleController {
     }
   }
 
+  async indexObjects(req, res) {
+    try {
+      const idUser = req.userId;
+      if (!idUser) {
+        return res.status(400).json({ errors: ['ID not Found'] });
+      }
+
+      const newCarsObjects = await CarsObjects.findByPk(req.params.id);
+
+      return res.json(newCarsObjects);
+    } catch (err) {
+      return res.status(400).json({ errors: err.message });
+    }
+  }
+
+
+
   async calcCarRegularPrice(car_id, wash_type, additional_list_id) {
     total = 0;
 

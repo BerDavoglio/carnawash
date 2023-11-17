@@ -96,7 +96,7 @@ class ScheduleProvider with ChangeNotifier {
 
   Future<void> createSchedule(
     BuildContext context,
-    ScheduleModel schedule,
+    CreateScheduleModel schedule,
   ) async {
     UserProvider userProvider = Provider.of(
       context,
@@ -111,7 +111,7 @@ class ScheduleProvider with ChangeNotifier {
           'Authorization': 'Bearer ${userProvider.token}',
         },
         body: jsonEncode({
-          'cars_list_id': schedule.cars_list_id,
+          'cars_obj_list': schedule.cars_obj_list,
           'selected_date': schedule.selected_date,
           'address': schedule.address,
           'observation_address': schedule.observation_address,
@@ -124,6 +124,15 @@ class ScheduleProvider with ChangeNotifier {
       var v = jsonDecode(response.body);
 
       if (response.statusCode == 200) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: const Text('Schedule Created!'),
+            action: SnackBarAction(
+              label: 'Okay',
+              onPressed: () {},
+            ),
+          ),
+        );
         notifyListeners();
       } else if (v['errors'] != '') {
         await comumDialog(
@@ -306,6 +315,47 @@ class ScheduleProvider with ChangeNotifier {
       await comumDialog(
         context,
         'Provider Error! rateSchedule',
+        e.toString(),
+      );
+      return null;
+    }
+    return null;
+  }
+
+  Future<CarObjectModel?> loadObjectCar(
+    BuildContext context,
+    int id,
+  ) async {
+    UserProvider userProvider = Provider.of(
+      context,
+      listen: false,
+    );
+    try {
+      final response = await http.get(
+        Uri.parse('${Constants.BACKEND_BASE_URL}/schedule/carobject/$id'),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer ${userProvider.token}',
+        },
+      );
+
+      var v = jsonDecode(response.body);
+
+      if (response.statusCode == 200) {
+        return v['price'];
+      } else if (v['errors'] != '') {
+        await comumDialog(
+          context,
+          'Erro!',
+          v['errors'],
+        );
+        return null;
+      }
+    } catch (e) {
+      await comumDialog(
+        context,
+        'Provider Error! loadCarObject',
         e.toString(),
       );
       return null;

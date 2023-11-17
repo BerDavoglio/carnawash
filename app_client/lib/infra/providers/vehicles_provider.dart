@@ -12,9 +12,9 @@ import '../../ui/ui.dart';
 import '../infra.dart';
 
 class VehiclesProvider with ChangeNotifier {
-  List<CarModel> _cars = [];
+  List<CarModel> _carsList = [];
 
-  List<CarModel> get cars => _cars;
+  List<CarModel> get carsList => _carsList;
 
   Future<void> loadCars(BuildContext context) async {
     final UserProvider userProvider = Provider.of(
@@ -34,7 +34,7 @@ class VehiclesProvider with ChangeNotifier {
       var v = jsonDecode(response.body);
 
       if (response.statusCode == 200) {
-        _cars = v;
+        _carsList = v;
       } else if (v['errors'] != '') {
         await comumDialog(
           context,
@@ -57,7 +57,7 @@ class VehiclesProvider with ChangeNotifier {
     BuildContext context,
     int id,
   ) async {
-    for (CarModel element in _cars) {
+    for (CarModel element in _carsList) {
       if (element.id == id) {
         return element;
       }

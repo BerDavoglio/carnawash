@@ -9,7 +9,7 @@ class CarObjectModel {
   });
 
   int? id;
-  String car_id;
-  String wash_type;
-  String additional_list_id;
+  int car_id;
+  int wash_type;
+  List<int> additional_list_id;
 }

@@ -29,10 +29,12 @@ class _HomePageState extends State<HomePage> {
   ScheduleModel? scheduleRebook;
   WasherModel? washer;
   double? priceRebook;
-  List<CarModel?> carsListRebook = [];
-  List addonListRebook = [];
-  List<CarModel?> carsListOngoing = [];
-  List addonListOngoing = [];
+  List<CarModel> carsListRebook = [];
+  List<CarObjectModel> carsObjectListRebook = [];
+  List<AdditionalModel> addonListRebook = [];
+  List<CarModel> carsListOngoing = [];
+  List<CarObjectModel> carsObjectListOngoing = [];
+  List<AdditionalModel> addonListOngoing = [];
   String sideOngoing = '';
 
   @override
@@ -42,23 +44,54 @@ class _HomePageState extends State<HomePage> {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
       ScheduleProvider schedule = Provider.of(context);
       VehiclesProvider vehiclesProvider = Provider.of(context);
+      ScheduleProvider scheduleProvider = Provider.of(context);
 
+      // LOAD REBOOK
       scheduleRebook = schedule.listSchedules.last;
       for (var i in scheduleRebook!.cars_list_id.split(';')) {
-        carsListRebook.add(await vehiclesProvider.loadOneCar(
-            context, json.decode(i).car_id as int));
+        CarObjectModel? car = await scheduleProvider.loadObjectCar(
+          context,
+          json.decode(i).id as int,
+        );
+        if (car != null) {
+          carsObjectListRebook.add(car);
+        }
         addonListRebook = json.decode(i).additional_list_id;
+      }
+      for (var i in carsObjectListRebook) {
+        CarModel? car = await vehiclesProvider.loadOneCar(
+          context,
+          i.car_id,
+        );
+        if (car != null) {
+          carsListRebook.add(car);
+        }
       }
       priceRebook =
           await schedule.loadPrice(context, schedule.listSchedules.last.id!);
 
+      // LOAD ONGOING
       scheduleOngoing = schedule.listSchedules.last;
       washer = await schedule.loadWasher(context, scheduleOngoing!.washer_id!);
       for (var i in scheduleOngoing!.cars_list_id.split(';')) {
-        carsListOngoing.add(await vehiclesProvider.loadOneCar(
-            context, json.decode(i).car_id as int));
+        CarObjectModel? car = await scheduleProvider.loadObjectCar(
+          context,
+          json.decode(i).id as int,
+        );
+        if (car != null) {
+          carsObjectListOngoing.add(car);
+        }
         addonListOngoing = json.decode(i).additional_list_id;
         sideOngoing = json.decode(i).wash_type;
+      }
+      for (var i in carsObjectListOngoing) {
+        CarModel? car = await vehiclesProvider.loadOneCar(
+          context,
+          i.car_id,
+        );
+        if (car != null) {
+          carsListOngoing.add(car);
+        }
       }
     });
   }
@@ -293,6 +326,7 @@ class _HomePageState extends State<HomePage> {
                                 context,
                                 scheduleRebook!,
                                 carsListRebook,
+                                carsObjectListRebook,
                                 addonListRebook,
                                 priceRebook!,
                               )
@@ -380,7 +414,8 @@ class _HomePageState extends State<HomePage> {
   Container rebookScheduleBox(
     BuildContext context,
     ScheduleModel select,
-    List carsList,
+    List<CarModel> carsList,
+    List<CarObjectModel> carsObjectList,
     List addonList,
     double price,
   ) {
@@ -399,18 +434,20 @@ class _HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  '${carsList[0]!.brand} ${carsList[0]!.model}',
+                  '${carsList[0].brand} ${carsList[0].model}',
                   style: const TextStyle(
                     fontSize: 16,
                   ),
                 ),
                 TextButton(
                   onPressed: () {
-                    // LOAD PRÉ-DATA FOR SCHEDULE
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => SchedulePage(initial: 3),
+                        builder: (context) => SchedulePage(
+                          initial: 3,
+                          preData: carsObjectList,
+                        ),
                       ),
                     );
                   },
@@ -427,7 +464,7 @@ class _HomePageState extends State<HomePage> {
             Padding(
               padding: const EdgeInsets.only(top: 4),
               child: Text(
-                'Wash ${carsList[0]!.car_size_id}',
+                'Wash ${carsList[0].car_size_id}',
                 style: const TextStyle(color: Colors.grey),
               ),
             ),

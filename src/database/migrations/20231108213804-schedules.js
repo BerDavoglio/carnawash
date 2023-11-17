@@ -13,7 +13,7 @@ module.exports = {
         allowNull: false,
       },
       cars_list_id: {
-        type: Sequelize.TEXT,
+        type: Sequelize.INTEGER,
         allowNull: false,
       },
       selected_date: {

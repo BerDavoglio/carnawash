@@ -17,3 +17,17 @@ class CarModel {
   String color;
   int car_size_id;
 }
+
+class CarSizeModel {
+  CarSizeModel({
+    this.id,
+    required this.title,
+    required this.price,
+    required this.additional_information,
+  });
+
+  int? id;
+  String title;
+  String price;
+  String additional_information;
+}

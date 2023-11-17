@@ -8,8 +8,8 @@ export default class Schedule extends Model {
         defaultValue: 0,
       },
       cars_list_id: {
-        type: Sequelize.TEXT,
-        defaultValue: '',
+        type: Sequelize.INTEGER,
+        defaultValue: 0,
       },
       selected_date: {
         type: Sequelize.DATE,
