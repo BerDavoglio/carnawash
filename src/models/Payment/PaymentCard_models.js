@@ -20,7 +20,7 @@ export default class Paymentcard extends Model {
         defaultValue: '',
       },
       card: {
-        type: Sequelize.STRING,
+        type: Sequelize.VIRTUAL,
         defaultValue: '',
       },
       card_hash: {

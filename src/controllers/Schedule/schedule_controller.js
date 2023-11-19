@@ -10,6 +10,8 @@ import Coupon from '../../models/Coupon/Coupon_models';
 
 import Paymentcard from '../../models/Payment/PaymentCard_models';
 import Paymentschedule from '../../models/Payment/Paymentschedule_models';
+const { Op } = require("sequelize");
+const { format } = require('date-fns');
 
 class ScheduleController {
   async store(req, res) {
@@ -47,6 +49,11 @@ class ScheduleController {
         status: 'not-assign',
         rate: null,
       });
+
+      const paymentUpdate = await Paymentschedule.findByPk(newPaymentschedule.id);
+      await paymentUpdate.update({
+        wash_id: newSchedule.id,
+      })
 
       return res.json(newSchedule);
     } catch (err) {
@@ -125,12 +132,16 @@ class ScheduleController {
         );
       });
 
-      const coupon = Coupon.findByPk(schedule.coupon_id);
+      if (schedule.coupon_id != 0) {
+        const coupon = Coupon.findByPk(schedule.coupon_id);
+        total = total * coupon.discount / 100;
+        coupon.update({
+          times_used: (coupon.times_used + 1),
+        });
+      } else {
+        total = total;
+      }
 
-      total = total * coupon.discount / 100;
-      coupon.update({
-        times_used: (coupon.times_used + 1),
-      });
 
       return total;
     } catch (err) {
@@ -159,20 +170,25 @@ class ScheduleController {
         );
       });
 
-      const coupon = Coupon.findByPk(schedule.coupon_id);
-      if (!coupon) {
-        return res.status(400).json({ errors: ['Coupon not Found'] });
-      }
-      if (coupon.is_disabled) {
-        return res.status(401).json({ errors: ['Coupon not Active'] });
+      if (schedule.coupon_id != 0) {
+        const coupon = Coupon.findByPk(schedule.coupon_id);
+        if (!coupon) {
+          return res.status(400).json({ errors: ['Coupon not Found'] });
+        }
+        if (coupon.is_disabled) {
+          return res.status(401).json({ errors: ['Coupon not Active'] });
+        }
+
+        total = total * coupon.discount / 100;
+        coupon.update({
+          times_used: (coupon.times_used + 1),
+        });
+      } else {
+        total = total;
       }
 
-      total = total * coupon.discount / 100;
-      coupon.update({
-        times_used: (coupon.times_used + 1),
-      });
 
-      return res.json({ price: [total] });
+      return res.json({ price: total });
     } catch (err) {
       return res.status(400).json({ errors: err.message });
     }
@@ -254,16 +270,18 @@ class ScheduleController {
         return res.status(400).json({ errors: ['ID not Found'] });
       }
 
-      const schedule = await Schedule.findOne({
+      const schedules = await Schedule.findAll({
         where: {
-          id: req.params.id,
           selected_date: {
-            $between: [req.params.date.setUTCHours(0, 0, 0, 0), req.params.endDate.setUTCHours(23, 59, 59, 999)]
+            [Op.between]: [
+              new Date(req.params.date + 'T00:00:00.000Z'),
+              new Date(req.params.date + 'T23:59:59.999Z')
+            ],
           },
         },
       });
 
-      return res.json(schedule);
+      return res.json(schedules);
     } catch (err) {
       return res.status(400).json({ errors: err.message });
     }
@@ -276,11 +294,13 @@ class ScheduleController {
         return res.status(400).json({ errors: ['ID not Found'] });
       }
 
-      const schedule = await Schedule.findOne({
+      const schedule = await Schedule.findAll({
         where: {
-          id: req.params.id,
           selected_date: {
-            $between: [req.params.initDate, req.params.endDate]
+            [Op.between]: [
+              new Date(req.params.initDate + 'T00:00:00.000Z'),
+              new Date(req.params.endDate + 'T23:59:59.999Z')
+            ]
           },
         },
       });
@@ -300,11 +320,13 @@ class ScheduleController {
 
       const schedule = await Schedule.findOne({
         where: {
-          id: req.params.id,
           status: 'finished',
         },
-        order: [['updatedAt', 'DESC']],
+        order: [['updated_at', 'DESC']],
       });
+      if (!schedule) {
+        return res.status(400).json({ errors: ['Schedule not finded'] });
+      }
 
       return res.json(schedule);
     } catch (err) {
@@ -321,12 +343,21 @@ class ScheduleController {
 
       const schedule = await Schedule.findOne({
         where: {
-          id: req.params.id,
           status: {
-            [sequelize.Op.not]: 'not-assign'
+            [Op.and]: [
+              {
+                [Op.not]: 'not-assign',
+              },
+              {
+                [Op.not]: 'cancel',
+              },
+            ],
           },
         },
       });
+      if (!schedule) {
+        return res.status(400).json({ errors: ['Schedule not finded'] });
+      }
 
       return res.json(schedule);
     } catch (err) {
@@ -431,11 +462,11 @@ class ScheduleController {
       const schedule = await Schedule.findOne({
         where: {
           id: req.params.id,
-          client_id: idUser,
+          user_id: idUser,
         },
       });
 
-      if (new Date() - schedule.selected_date > 2 * 60 * 60 * 1000) {
+      if (schedule.selected_date - new Date() > 2 * 60 * 60 * 1000) {
         const newSchedule = await schedule.update({
           status: 'cancel',
         });
@@ -457,21 +488,22 @@ class ScheduleController {
       const schedule = await Schedule.findOne({
         where: {
           id: req.params.id,
-          washer_id: idUser,
-          status: 'finished',
+          user_id: idUser,
+          // status: 'finished',
         },
       });
 
-      schedule.update({
+      const newSchedule = await schedule.update({
         rate: req.body.rate,
       });
 
       const payment = await Paymentschedule.findOne({
         where: {
-          id: schedule.payment_schedule_id,
-          wash_id: schedule.id
+          id: newSchedule.payment_schedule_id,
+          wash_id: newSchedule.id
         }
       });
+
       const card = await Paymentcard.findByPk(payment.card_id);
 
       const card_number = card.getCardNumber();
@@ -490,7 +522,7 @@ class ScheduleController {
       });
 
       const charge = await stripe.charges.create({
-        amount: this.calcTotalPriceInternal(schedule.id),
+        amount: this.calcTotalPriceInternal(schedule.id).price,
         currency: 'aud',
         source: token,
         description: 'Payment - ' + schedule.id,

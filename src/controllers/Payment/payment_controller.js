@@ -46,27 +46,17 @@ class PaymentController {
       const cards = await Paymentcard.findAll({
         where: {
           user_id: idReq,
-        }
+        },
+        attributes: [
+          'id',
+          'user_id',
+          'name',
+          'last_digits',
+          'date',
+        ],
       });
-      if (!cards) {
-        return res.status(400).json({ errors: ['PaymentCards not Found'] });
-      }
 
-      const {
-        id,
-        user_id,
-        name,
-        last_digits,
-        date,
-      } = cards;
-
-      return res.json({
-        id,
-        user_id,
-        name,
-        last_digits,
-        date,
-      });
+      return res.json(cards);
     } catch (err) {
       return res.status(400).json({ errors: `Show Paymentcard / ${err.message}` });
     }
@@ -74,6 +64,12 @@ class PaymentController {
 
   async index(req, res) {
     try {
+      const cardsActive = await Paymentschedule.findAll({
+        where: {
+          card_id: req.params.id
+        }
+      })
+
       const idReq = req.userId;
       if (!idReq) {
         return res.status(400).json({ errors: ['ID not Found'] });
@@ -131,8 +127,8 @@ class PaymentController {
           card_id: card.id
         }
       })
-      if (cardsActive != []) {
-        return res.status(400).json({ errors: `Can't update Card: It's been used!` });
+      if (cardsActive == []) {
+        return res.status(400).json({ errors: `Can't update Card: It's been used!` + cardsActive });
       }
 
       const updatePaymentCard = await card.update(req.body);
@@ -177,11 +173,11 @@ class PaymentController {
           card_id: card.id
         }
       })
-      if (cardsActive != []) {
+      if (cardsActive == []) {
         return res.status(400).json({ errors: `Can't delete Card: It's been used!` });
       }
 
-      await card.delete();
+      await card.destroy();
 
       return res.json({ message: 'Paymentcard deleted with success' });
     } catch (err) {

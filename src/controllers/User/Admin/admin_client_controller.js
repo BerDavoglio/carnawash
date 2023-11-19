@@ -55,7 +55,7 @@ class AdminClientController {
         return res.status(401).json({ errors: ["Can't delete Client because have Cars in it's name"] });
       }
 
-      await user.delete();
+      await user.destroy();
 
       return res.json({ message: ['User deleted with success'] });
     } catch (err) {
@@ -161,7 +161,7 @@ class AdminClientController {
         return res.status(400).json({ errors: ['Car not Found'] });
       }
 
-      await car.delete();
+      await car.destroy();
 
       return res.json({ message: ['Car deleted with success'] });
     } catch (err) {

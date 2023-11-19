@@ -9,7 +9,7 @@ const router = new Router();
 
 router.post('/', loginRequired, isAdmin, notificationController.store);
 router.get('/', loginRequired, isAdmin, notificationController.show);
-router.get('/user/', loginRequired, isAdmin, notificationController.showUser);
+router.get('/user/', loginRequired, notificationController.showUser);
 router.put('/', loginRequired, isAdmin, notificationController.update);
 router.delete('/', loginRequired, isAdmin, notificationController.delete);
 

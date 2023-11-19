@@ -16,7 +16,7 @@ export default class Paymentschedule extends Model {
         defaultValue: 0,
       },
       three: {
-        type: Sequelize.STRING,
+        type: Sequelize.VIRTUAL,
         defaultValue: '',
       },
       three_hash: {

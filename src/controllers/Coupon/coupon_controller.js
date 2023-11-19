@@ -100,7 +100,7 @@ class CouponController {
         return res.status(400).json({ errors: ['Coupon not found'] });
       }
 
-      await coupon.delete();
+      await coupon.destroy();
 
       return res.json({ message: 'Coupon deleted with success' });
     } catch (err) {

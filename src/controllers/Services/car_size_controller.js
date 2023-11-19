@@ -67,7 +67,7 @@ class CarsizeController {
         return res.status(400).json({ errors: ['Car Size not found'] });
       }
 
-      await carSize.delete();
+      await carSize.destroy();
 
       return res.json({ message: 'Car Size deleted with success' });
     } catch (err) {

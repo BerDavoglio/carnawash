@@ -34,7 +34,7 @@ export default class User extends Model {
       },
       role: {
         type: Sequelize.STRING,
-        defaultValue: 'user',
+        defaultValue: 'client',
       },
       subrole: {
         type: Sequelize.STRING,

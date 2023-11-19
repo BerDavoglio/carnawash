@@ -8,7 +8,7 @@ export default class Schedule extends Model {
         defaultValue: 0,
       },
       cars_list_id: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         defaultValue: 0,
       },
       selected_date: {
@@ -42,6 +42,10 @@ export default class Schedule extends Model {
       rate: {
         type: Sequelize.FLOAT,
         defaultValue: 0,
+        validate: {
+          min: 0,
+          max: 5,
+        },
       },
     }, {
       sequelize,

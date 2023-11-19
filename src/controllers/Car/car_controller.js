@@ -123,7 +123,7 @@ class CarController {
         return res.status(401).json({ errors: ['Unauthorized'] });
       }
 
-      await car.delete();
+      await car.destroy();
 
       return res.json({ message: 'Car deleted with success' });
     } catch (err) {

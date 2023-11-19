@@ -63,7 +63,7 @@ class AdditionalservicesController {
         return res.status(400).json({ errors: ['Additional Service not found'] });
       }
 
-      await additional.delete();
+      await additional.destroy();
 
       return res.json({ message: 'Additional Service deleted with success' });
     } catch (err) {

@@ -67,7 +67,7 @@ class RegularwashController {
         return res.status(400).json({ errors: ['Regular Wash not found'] });
       }
 
-      await regular.delete();
+      await regular.destroy();
 
       return res.json({ message: 'Regular Wash deleted with success' });
     } catch (err) {

@@ -63,7 +63,7 @@ class FaqController {
         return res.status(400).json({ errors: ['FAQ not found'] });
       }
 
-      await faq.delete();
+      await faq.destroy();
 
       return res.json({ message: 'FAQ deleted with success' });
     } catch (err) {

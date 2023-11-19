@@ -91,7 +91,7 @@ class NotificationController {
         return res.status(400).json({ errors: ['Notification not found'] });
       }
 
-      await notification.delete();
+      await notification.destroy();
 
       return res.json({ message: 'Notification deleted with success' });
     } catch (err) {

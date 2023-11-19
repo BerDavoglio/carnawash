@@ -129,7 +129,7 @@ class AdminUserController {
         return res.status(400).json({ errors: ["Can't delete this Usertype, there is some Users using"] });
       }
 
-      await type.delete();
+      await type.destroy();
 
       return res.json({ message: 'User Type deleted with success' });
     } catch (err) {

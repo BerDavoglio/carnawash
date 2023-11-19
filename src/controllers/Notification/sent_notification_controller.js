@@ -1,6 +1,7 @@
 import Sentnotification from '../../models/Notification/SentNotification_models';
 import Usertype from '../../models/User/UserType_models';
 import User from '../../models/User/User_models';
+const { Op } = require("sequelize");
 
 class SentNotificationController {
   async send(req, res) {

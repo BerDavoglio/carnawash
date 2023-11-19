@@ -67,7 +67,7 @@ class QuizController {
         return res.status(400).json({ errors: ['Quiz not found'] });
       }
 
-      await quiz.delete();
+      await quiz.destroy();
 
       return res.json({ message: 'Quiz deleted with success' });
     } catch (err) {

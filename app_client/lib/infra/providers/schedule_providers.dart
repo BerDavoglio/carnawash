@@ -142,7 +142,7 @@ class ScheduleProvider with ChangeNotifier {
     );
     try {
       final response = await http.get(
-        Uri.parse('${Constants.BACKEND_BASE_URL}/schedule/client/$id'),
+        Uri.parse('${Constants.BACKEND_BASE_URL}/schedule/client/by-id/$id'),
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
@@ -446,7 +446,7 @@ class ScheduleProvider with ChangeNotifier {
     );
     try {
       final response = await http.get(
-        Uri.parse('${Constants.BACKEND_BASE_URL}/washer/geralInfo/$id'),
+        Uri.parse('${Constants.BACKEND_BASE_URL}/users/washer/geralInfo/$id'),
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
