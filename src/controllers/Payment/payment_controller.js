@@ -1,4 +1,5 @@
 import PaymentCard from '../../models/Payment/PaymentCard_models';
+import PaymentSchedule from '../../models/Payment/PaymentSchedule_models';
 
 class PaymentController {
   async store(req, res) {
@@ -7,8 +8,6 @@ class PaymentController {
       if (!idUser) {
         return res.status(400).json({ errors: ['ID not Found'] });
       }
-
-      // VERIFICAR CARTÃO COM STRIPE
 
       const newCard = await PaymentCard.create({
         user_id: idUser,
@@ -127,8 +126,14 @@ class PaymentController {
         return res.status(400).json({ errors: ['PaymentCard not Found'] });
       }
 
-      // VERIFICAR CARTÃO COM STRIPE
-      // VERIFICAR SE EXISTE PAYMENTSCHEDULE COM ESSE CARTÃO, E SE O BOOKING TA ATIVO OU N
+      const cardsActive = await PaymentSchedule.findAll({
+        where: {
+          card_id: card.id
+        }
+      })
+      if (cardsActive != []) {
+        return res.status(400).json({ errors: `Can't update Card: It's been used!` });
+      }
 
       const updatePaymentCard = await card.update(req.body);
 
@@ -167,7 +172,14 @@ class PaymentController {
         return res.status(400).json({ errors: ['PaymentCard not Found'] });
       }
 
-      // VERIFICAR SE EXISTE PAYMENTSCHEDULE COM ESSE CARTÃO, E SE O BOOKING TA ATIVO OU N
+      const cardsActive = await PaymentSchedule.findAll({
+        where: {
+          card_id: card.id
+        }
+      })
+      if (cardsActive != []) {
+        return res.status(400).json({ errors: `Can't delete Card: It's been used!` });
+      }
 
       await card.delete();
 

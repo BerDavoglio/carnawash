@@ -110,6 +110,34 @@ class ScheduleController {
     }
   }
 
+  async calcTotalPriceInternal(id) {
+    try {
+      let total = 0;
+
+      const schedule = await Schedule.findByPk(id);
+
+      schedule.cars_list_id.split(';').forEach(async (cars_obj_id) => {
+        const cars_obj = await CarsObjects.findByPk(cars_obj_id);
+        total += this.calcCarRegularPrice(
+          cars_obj.car_id,
+          cars_obj.wash_type,
+          cars_obj.additional_list_id,
+        );
+      });
+
+      const coupon = Coupon.findByPk(schedule.coupon_id);
+
+      total = total * coupon.discount / 100;
+      coupon.update({
+        times_used: (coupon.times_used + 1),
+      });
+
+      return total;
+    } catch (err) {
+      return -1;
+    }
+  }
+
   async calcTotalPrice(req, res) {
     try {
       let total = 0;
@@ -446,12 +474,29 @@ class ScheduleController {
       });
       const card = await PaymentCard.findByPk(payment.card_id);
 
-      const card_name = card.name;
       const card_number = card.getCardNumber();
       const card_date = card.date;
       const three = payment.getCardThree();
 
-      // PAY WITH DATA
+      const stripe = require('stripe')(process.env.STRIPE_TOKEN);
+
+      const token = await stripe.tokens.create({
+        card: {
+          number: card_number,
+          exp_month: card_date.getMonth(),
+          exp_year: card_date.getYear(),
+          three,
+        },
+      });
+
+      const charge = await stripe.charges.create({
+        amount: this.calcTotalPriceInternal(schedule.id),
+        currency: 'aud',
+        source: token,
+        description: 'Payment - ' + schedule.id,
+      });
+
+      return res.json(charge);
     } catch (err) {
       return res.status(400).json({ errors: err.message });
     }
