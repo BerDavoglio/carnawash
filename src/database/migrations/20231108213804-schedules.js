@@ -1,4 +1,4 @@
-/** @type {import('sequelize-cli').Migration} */
+
 module.exports = {
   async up (queryInterface, Sequelize) {
     await queryInterface.createTable('schedules', {
@@ -13,7 +13,7 @@ module.exports = {
         allowNull: false,
       },
       cars_list_id: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: false,
       },
       selected_date: {
