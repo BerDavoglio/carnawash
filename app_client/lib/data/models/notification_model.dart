@@ -9,9 +9,9 @@ class UserNotificationModel {
   });
 
   int? id;
-  String notification_id;
-  String user_type_id;
-  String user_id;
+  int notification_id;
+  int user_type_id;
+  int user_id;
 }
 
 class GeralNotificationModel {
@@ -25,5 +25,5 @@ class GeralNotificationModel {
   int? id;
   String title;
   String destined_to;
-  String type;
+  int type;
 }

@@ -11,8 +11,14 @@ router.get('/all/', loginRequired, isAdmin, scheduleController.show);
 router.get('/carobject/:id', loginRequired, scheduleController.indexObjects);
 router.get('/value/:id', loginRequired, scheduleController.calcTotalPrice);
 router.get('/not-assign/', loginRequired, isAdmin, scheduleController.showNotAssign);
+
 router.get('/client/all/', loginRequired, scheduleController.showClient);
 router.get('/client/:id', loginRequired, scheduleController.indexClient);
+router.get('/client/by-date/:date', loginRequired, scheduleController.indexByDate);
+router.get('/client/history/:initDate/:endDate', loginRequired, scheduleController.indexHistory);
+router.get('/client/rebook/', loginRequired, scheduleController.indexClientRebook);
+router.get('/client/ongoing/', loginRequired, scheduleController.indexClientOngoing);
+
 router.get('/washer/all/', loginRequired, scheduleController.showWasher);
 router.get('/washer/:id', loginRequired, scheduleController.indexWasher);
 router.put('/admin/:id', loginRequired, isAdmin, scheduleController.updateWasher);

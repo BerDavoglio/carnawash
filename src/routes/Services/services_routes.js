@@ -15,7 +15,7 @@ router.put('/additional/:id', loginRequired, isAdmin, additionalServicesControll
 router.delete('/additional/:id', loginRequired, isAdmin, additionalServicesController.delete);
 
 router.post('/size/', loginRequired, isAdmin, carSizeController.store);
-router.get('/size/', loginRequired, carSizeController.show);
+router.get('/size/', carSizeController.show);
 router.put('/size/:id', loginRequired, isAdmin, carSizeController.update);
 router.delete('/size/:id', loginRequired, isAdmin, carSizeController.delete);
 

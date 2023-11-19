@@ -3,6 +3,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:collection/collection.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -92,6 +93,10 @@ class ServicesProvider with ChangeNotifier {
         e.toString(),
       );
     }
+  }
+
+  AdditionalModel? getAdditionalComplete(int id) {
+    return _additionalList.firstWhereOrNull((e) => e.id == id);
   }
 
   CarSizeModel getCarSizeComplete(int id) {

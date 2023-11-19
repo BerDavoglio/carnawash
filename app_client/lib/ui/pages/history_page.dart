@@ -90,7 +90,13 @@ class _HistoryPageState extends State<HistoryPage> {
                                 padding: const EdgeInsets.all(0),
                                 color: Colors.blue,
                                 iconSize: 55,
-                                onPressed: () {},
+                                onPressed: () async {
+                                  await scheduleProvider.loadHistory(
+                                    context,
+                                    DateTime.parse(initialDateController.text),
+                                    DateTime.parse(finalDateController.text),
+                                  );
+                                },
                                 icon: const Icon(Icons.check_box),
                               ),
                             ),
@@ -125,18 +131,40 @@ class _HistoryPageState extends State<HistoryPage> {
     ScheduleProvider schedule,
     int index,
   ) async {
-    List<CarModel?> carsList = [];
-    List addonList = [];
     VehiclesProvider vehiclesProvider = Provider.of(context);
+    ServicesProvider servicesProvider = Provider.of(context);
 
-    WasherModel? washer = await schedule.loadWasher(context, index);
-    for (var i in schedule.listSchedules[index].cars_list_id.split(';')) {
-      carsList.add(await vehiclesProvider.loadOneCar(context, json.decode(i).car_id as int));
+    List<CarModel?> carsList = [];
+    List<CarObjectModel?> carsObjectList = [];
+    List addonList = [];
+
+    await servicesProvider.loadCarSize(context);
+
+    WasherModel? washer = await schedule.loadWasher(
+      context,
+      schedule.listHistorySchedules[index].id!,
+    );
+    for (var i
+        in schedule.listHistorySchedules[index].cars_list_id.split(';')) {
+      CarObjectModel? car = await schedule.loadObjectCar(
+        context,
+        json.decode(i).id as int,
+      );
+      if (car != null) {
+        carsObjectList.add(car);
+      }
       addonList = json.decode(i).additional_list_id;
     }
+    for (var i in carsObjectList) {
+      CarModel? car = await vehiclesProvider.loadOneCar(
+        context,
+        i!.car_id,
+      );
+      if (car != null) {
+        carsList.add(car);
+      }
+    }
     double? price = await schedule.loadPrice(context, index);
-
-    // LOAD ADDONS LIST TO GET WHAT IS THE NAME
 
     return Column(
       children: [
@@ -155,12 +183,17 @@ class _HistoryPageState extends State<HistoryPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      'Washer: ${washer?.name}',
-                      style: const TextStyle(
-                        fontSize: 18,
-                      ),
-                    ),
+                    washer != null
+                        ? Text(
+                            'Washer: ${washer.name}',
+                            style: const TextStyle(
+                              fontSize: 18,
+                            ),
+                          )
+                        : const Text(
+                            'Washer: Not Assigned!',
+                            style: TextStyle(fontWeight: FontWeight.w500),
+                          ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
@@ -206,15 +239,25 @@ class _HistoryPageState extends State<HistoryPage> {
                           ),
                         ),
                         Text(
-                          carsList[0]!.car_size_id.toString(),
+                          servicesProvider
+                              .getCarSizeComplete(carsList[0]!.car_size_id)
+                              .title,
                           style: const TextStyle(
                             color: Colors.grey,
                           ),
                         ),
-                        Text(
-                          addonList[0].toString(),
-                          style: const TextStyle(
-                            color: Colors.grey,
+                        Row(
+                          children: List.generate(
+                            addonList.length,
+                            (index) {
+                              return Padding(
+                                padding: const EdgeInsets.only(top: 8),
+                                child: Text(
+                                  '${addonList[index]}; ',
+                                  style: const TextStyle(color: Colors.grey),
+                                ),
+                              );
+                            },
                           ),
                         ),
                       ],

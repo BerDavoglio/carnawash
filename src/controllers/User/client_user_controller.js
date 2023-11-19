@@ -1,6 +1,7 @@
 /* eslint-disable class-methods-use-this */
 import jwt from 'jsonwebtoken';
 import User from '../../models/User/User_models';
+import ReferedFriends from '../../models/User/ReferedFriends_models';
 
 class ClientUserController {
   async store(req, res) {
@@ -36,6 +37,29 @@ class ClientUserController {
       }, token]);
     } catch (err) {
       return res.status(400).json({ errors: `Create User / ${err.message}` });
+    }
+  }
+
+  async referFriends(req, res) {
+    try {
+      const id = req.userId;
+      if (!id) {
+        return res.status(400).json({ errors: ['ID not Found'] });
+      }
+
+      const user = await User.findByPk(id);
+      if (!user) {
+        return res.status(400).json({ errors: ['User not Found'] });
+      }
+
+      await ReferedFriends.create({
+        user_id: id,
+        emails: req.body.emails,
+      });
+
+      return res.json({ message: ['Refer with success!'] })
+    } catch (err) {
+      return res.status(400).json({ errors: `Refer Friends / ${err.message}` });
     }
   }
 

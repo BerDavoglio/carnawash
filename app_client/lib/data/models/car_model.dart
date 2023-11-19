@@ -31,3 +31,23 @@ class CarSizeModel {
   String price;
   String additional_information;
 }
+
+class BrandModel {
+  BrandModel({
+    required this.id,
+    required this.name,
+  });
+
+  int id;
+  String name;
+}
+
+class ModelModel {
+  ModelModel({
+    required this.id,
+    required this.name,
+  });
+
+  int id;
+  String name;
+}

@@ -3,7 +3,19 @@ import PaymentCard from '../../models/Payment/PaymentCard_models';
 class PaymentController {
   async store(req, res) {
     try {
-      const newCard = await PaymentCard.create(req.body);
+      const idUser = req.userId;
+      if (!idUser) {
+        return res.status(400).json({ errors: ['ID not Found'] });
+      }
+
+      // VERIFICAR CARTÃO COM STRIPE
+
+      const newCard = await PaymentCard.create({
+        user_id: idUser,
+        name: req.body.name,
+        card: req.body.card,
+        date: req.body.date,
+      });
 
       const {
         id,
@@ -115,8 +127,9 @@ class PaymentController {
         return res.status(400).json({ errors: ['PaymentCard not Found'] });
       }
 
+      // VERIFICAR CARTÃO COM STRIPE
       // VERIFICAR SE EXISTE PAYMENTSCHEDULE COM ESSE CARTÃO, E SE O BOOKING TA ATIVO OU N
-      
+
       const updatePaymentCard = await card.update(req.body);
 
       const {

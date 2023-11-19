@@ -239,6 +239,54 @@ class UserProvider with ChangeNotifier {
     }
   }
 
+  Future<void> referFriends(
+    BuildContext context,
+    String listFriends,
+  ) async {
+    try {
+      final response = await http.post(
+        Uri.parse('${Constants.BACKEND_BASE_URL}/users/refer/'),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $_token',
+        },
+        body: {
+          "emails": listFriends,
+        },
+      );
+
+      var v = jsonDecode(response.body);
+
+      if (response.statusCode == 200) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: const Text(
+                'Refer to friends work with success! Check your e-mail!'),
+            action: SnackBarAction(
+              label: 'Okay',
+              onPressed: () {},
+            ),
+          ),
+        );
+      } else if (v['errors'] != '') {
+        await comumDialog(
+          context,
+          'Error',
+          v['errors'],
+        );
+      }
+
+      notifyListeners();
+    } catch (e) {
+      await comumDialog(
+        context,
+        'Provider Error! Refer to Friends',
+        e.toString(),
+      );
+    }
+  }
+
   void logout() {
     _token = '';
     notifyListeners();

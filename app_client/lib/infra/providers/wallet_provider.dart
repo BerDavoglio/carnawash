@@ -65,7 +65,6 @@ class WalletProvider with ChangeNotifier {
       final response = await http.post(
         Uri.parse('${Constants.BACKEND_BASE_URL}/payment/'),
         body: {
-          'user_id': card.user_id,
           'name': card.name,
           'card': card.card,
           'date': card.date,
@@ -123,7 +122,6 @@ class WalletProvider with ChangeNotifier {
       final response = await http.post(
         Uri.parse('${Constants.BACKEND_BASE_URL}/payment/${card.id}'),
         body: {
-          'user_id': card.user_id,
           'name': card.name,
           'card': card.card,
           'date': card.date,

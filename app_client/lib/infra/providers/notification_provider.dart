@@ -92,4 +92,14 @@ class NotificationProvider with ChangeNotifier {
       );
     }
   }
+
+  GeralNotificationModel? getNotificationID(BuildContext context, int id) {
+    for (GeralNotificationModel element in _geralNotifications) {
+      if (element.id == id) {
+        return element;
+      }
+    }
+
+    return null;
+  }
 }

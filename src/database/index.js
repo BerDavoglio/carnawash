@@ -25,6 +25,7 @@ import SignRegularWash from '../models/User/SignRegularWash_models';
 import TimeAvailable from '../models/User/TimeAvailable_models';
 import UserType from '../models/User/UserType_models';
 import WasherInfo from '../models/User/WasherInfo_models';
+import ReferedFriends from '../models/User/ReferedFriends_models';
 
 const models = [
   User,
@@ -50,6 +51,7 @@ const models = [
   TimeAvailable,
   UserType,
   WasherInfo,
+  ReferedFriends,
 ];
 const connection = new Sequelize(databaseConfig);
 

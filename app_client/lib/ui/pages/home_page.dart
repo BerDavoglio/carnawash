@@ -21,10 +21,6 @@ class _HomePageState extends State<HomePage> {
   TextEditingController emailOneController = TextEditingController();
   TextEditingController emailTwoController = TextEditingController();
   TextEditingController emailThreeController = TextEditingController();
-  List status = [
-    Colors.grey,
-    'Not Started',
-  ];
   ScheduleModel? scheduleOngoing;
   ScheduleModel? scheduleRebook;
   WasherModel? washer;
@@ -42,12 +38,11 @@ class _HomePageState extends State<HomePage> {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-      ScheduleProvider schedule = Provider.of(context);
       VehiclesProvider vehiclesProvider = Provider.of(context);
       ScheduleProvider scheduleProvider = Provider.of(context);
+      ServicesProvider servicesProvider = Provider.of(context);
 
-      // LOAD REBOOK
-      scheduleRebook = schedule.listSchedules.last;
+      scheduleRebook = await scheduleProvider.loadRebookSchedule(context);
       for (var i in scheduleRebook!.cars_list_id.split(';')) {
         CarObjectModel? car = await scheduleProvider.loadObjectCar(
           context,
@@ -56,7 +51,12 @@ class _HomePageState extends State<HomePage> {
         if (car != null) {
           carsObjectListRebook.add(car);
         }
-        addonListRebook = json.decode(i).additional_list_id;
+        for (var j in json.decode(i).additional_list_id.split(';')) {
+          AdditionalModel? addon = servicesProvider.getAdditionalComplete(j);
+          if (addon != null) {
+            addonListRebook.add(addon);
+          }
+        }
       }
       for (var i in carsObjectListRebook) {
         CarModel? car = await vehiclesProvider.loadOneCar(
@@ -68,11 +68,11 @@ class _HomePageState extends State<HomePage> {
         }
       }
       priceRebook =
-          await schedule.loadPrice(context, schedule.listSchedules.last.id!);
+          await scheduleProvider.loadPrice(context, scheduleRebook!.id!);
 
-      // LOAD ONGOING
-      scheduleOngoing = schedule.listSchedules.last;
-      washer = await schedule.loadWasher(context, scheduleOngoing!.washer_id!);
+      scheduleOngoing = await scheduleProvider.loadOngoingSchedule(context);
+      washer = await scheduleProvider.loadWasher(context, scheduleOngoing!.id!);
+
       for (var i in scheduleOngoing!.cars_list_id.split(';')) {
         CarObjectModel? car = await scheduleProvider.loadObjectCar(
           context,
@@ -81,7 +81,12 @@ class _HomePageState extends State<HomePage> {
         if (car != null) {
           carsObjectListOngoing.add(car);
         }
-        addonListOngoing = json.decode(i).additional_list_id;
+        for (var j in json.decode(i).additional_list_id.split(';')) {
+          AdditionalModel? addon = servicesProvider.getAdditionalComplete(j);
+          if (addon != null) {
+            addonListOngoing.add(addon);
+          }
+        }
         sideOngoing = json.decode(i).wash_type;
       }
       for (var i in carsObjectListOngoing) {
@@ -387,8 +392,11 @@ class _HomePageState extends State<HomePage> {
                               borderRadius: BorderRadius.circular(10),
                             ),
                           ),
-                          onPressed: () {
-                            // REFER TO FRIENDS
+                          onPressed: () async {
+                            await userProvider.referFriends(
+                              context,
+                              '${emailOneController.text};${emailTwoController.text};${emailThreeController.text};',
+                            );
                           },
                           child: const Text(
                             'Send for us',
@@ -419,6 +427,8 @@ class _HomePageState extends State<HomePage> {
     List addonList,
     double price,
   ) {
+    ServicesProvider servicesProvider = Provider.of(context);
+
     return Container(
       decoration: const BoxDecoration(
         color: Colors.white,
@@ -464,7 +474,7 @@ class _HomePageState extends State<HomePage> {
             Padding(
               padding: const EdgeInsets.only(top: 4),
               child: Text(
-                'Wash ${carsList[0].car_size_id}',
+                'Wash ${servicesProvider.getCarSizeComplete(carsList[0].car_size_id).title}',
                 style: const TextStyle(color: Colors.grey),
               ),
             ),
@@ -540,6 +550,30 @@ class _HomePageState extends State<HomePage> {
     List addonList,
     String side,
   ) {
+    ServicesProvider servicesProvider = Provider.of(context);
+
+    List status = [
+      Colors.grey,
+      'Not Started',
+    ];
+
+    if (select.status == 'finished') {
+      status = [
+        Colors.grey,
+        'Not Started',
+      ];
+    } else if (select.status == 'not-started') {
+      status = [
+        Colors.blue,
+        'Started',
+      ];
+    } else if (select.status == 'started') {
+      status = [
+        Colors.green,
+        'Finished',
+      ];
+    }
+
     return Container(
       decoration: const BoxDecoration(
         color: Colors.white,
@@ -595,7 +629,7 @@ class _HomePageState extends State<HomePage> {
                     Padding(
                       padding: const EdgeInsets.only(top: 5),
                       child: Text(
-                        '${carsList[0]!.brand} - ${carsList[0]!.model} - ${carsList[0]!.car_size_id}',
+                        '${carsList[0]!.brand} - ${carsList[0]!.model} - ${servicesProvider.getCarSizeComplete(carsList[0].car_size_id).title}',
                         style: const TextStyle(
                           color: Colors.grey,
                           fontWeight: FontWeight.w500,
@@ -651,43 +685,21 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ],
                 ),
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      if (select.status == 'finished') {
-                        status = [
-                          Colors.grey,
-                          'Not Started',
-                        ];
-                      } else if (select.status == 'not-started') {
-                        status = [
-                          Colors.blue,
-                          'Started',
-                        ];
-                      } else if (select.status == 'started') {
-                        status = [
-                          Colors.green,
-                          'Finished',
-                        ];
-                      }
-                    });
-                  },
-                  child: Container(
-                    width: 100,
-                    height: 40,
-                    decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.all(
-                        Radius.circular(100),
-                      ),
-                      border: Border.all(color: status[0]),
+                Container(
+                  width: 100,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(100),
                     ),
-                    child: Center(
-                      child: Text(
-                        status[1],
-                        style: TextStyle(
-                          color: status[0],
-                          fontWeight: FontWeight.w600,
-                        ),
+                    border: Border.all(color: status[0]),
+                  ),
+                  child: Center(
+                    child: Text(
+                      status[1],
+                      style: TextStyle(
+                        color: status[0],
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
                   ),

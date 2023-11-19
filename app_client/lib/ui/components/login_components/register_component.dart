@@ -16,9 +16,18 @@ class RegisterComponent extends StatefulWidget {
 }
 
 class _RegisterComponentState extends State<RegisterComponent> {
-  List<String> listBrand = ['Brand 1', 'Brand 2', 'Brand 3'];
-  List<String> listModel = ['Model 1', 'Model 2', 'Model 3'];
-  List<String> listColor = ['Color 1', 'Color 2', 'Color 3'];
+  List<BrandModel> listBrand = [];
+  List<ModelModel> listModel = [];
+  List<String> listColor = [
+    'Black',
+    'White',
+    'Grey',
+    'Red',
+    'Blue',
+    'Yellow',
+    'Green',
+    'Purple'
+  ];
   String? brandSelected;
   String? modelSelected;
   String? colorSelected;
@@ -30,8 +39,13 @@ class _RegisterComponentState extends State<RegisterComponent> {
   void initState() {
     super.initState();
 
-    brandSelected = listBrand[0];
-    modelSelected = listModel[0];
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      VehiclesProvider vehiclesProvider = Provider.of(context);
+
+      await vehiclesProvider.loadBrands(context);
+      listBrand = vehiclesProvider.brandList;
+      brandSelected = listBrand[0].name;
+    });
     colorSelected = listColor[0];
   }
 
@@ -216,6 +230,8 @@ class _RegisterComponentState extends State<RegisterComponent> {
     BuildContext context,
     TextEditingController registrationController,
   ) {
+    ServicesProvider servicesProvider = Provider.of(context);
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 20),
       child: Column(
@@ -244,12 +260,14 @@ class _RegisterComponentState extends State<RegisterComponent> {
                   value: brandSelected,
                   items: listBrand
                       .map((item) => DropdownMenuItem<String>(
-                            value: item,
-                            child: Text(item),
+                            value: item.name,
+                            child: Text(item.name),
                           ))
                       .toList(),
-                  onChanged: (item) => setState(() {
+                  onChanged: (item) => setState(() async {
                     brandSelected = item!;
+                    VehiclesProvider vehiclesProvider = Provider.of(context);
+                    await vehiclesProvider.loadModels(context, item).then((value) => {listModel = vehiclesProvider.modelList},);
                   }),
                 ),
               ),
@@ -271,8 +289,8 @@ class _RegisterComponentState extends State<RegisterComponent> {
                   value: modelSelected,
                   items: listModel
                       .map((item) => DropdownMenuItem<String>(
-                            value: item,
-                            child: Text(item),
+                            value: item.name,
+                            child: Text(item.name),
                           ))
                       .toList(),
                   onChanged: (item) => setState(() {
@@ -341,128 +359,42 @@ class _RegisterComponentState extends State<RegisterComponent> {
               ),
               Column(
                 mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  SizedBox(
+                children: List.generate(
+                  servicesProvider.carSizeList.length,
+                  (index) => SizedBox(
                     width: MediaQuery.of(context).size.width,
                     child: ListTile(
-                      title: const Text(
-                        'Small',
-                        style: TextStyle(
-                          color: Colors.white,
+                      title: Text(
+                        servicesProvider.carSizeList[index].title,
+                        style: const TextStyle(
+                          color: Colors.black,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
-                      subtitle: const Text(
-                        'Compact, subcompact cars: sedan, hatchback, wagon, sports, coupe.',
-                        style: TextStyle(
-                          color: Colors.white,
+                      subtitle: Text(
+                        servicesProvider
+                            .carSizeList[index].additional_information,
+                        style: const TextStyle(
+                          color: Colors.black,
                         ),
                       ),
                       leading: Radio(
-                        value: 1,
+                        value: servicesProvider.carSizeList[index].id,
                         groupValue: sizeSelected,
                         fillColor: MaterialStateColor.resolveWith(
-                          (states) => Colors.white,
+                          (states) => Colors.black,
                         ),
                         onChanged: (value) {
-                          setState(() {
-                            sizeSelected = value!;
-                          });
+                          setState(
+                            () {
+                              sizeSelected = value!;
+                            },
+                          );
                         },
                       ),
                     ),
                   ),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    child: ListTile(
-                      title: const Text(
-                        'SUVs',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      subtitle: const Text(
-                        '2WDs, UTE 2WDs, Medium-size cars, customers.',
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                      ),
-                      leading: Radio(
-                        value: 2,
-                        groupValue: sizeSelected,
-                        fillColor: MaterialStateColor.resolveWith(
-                          (states) => Colors.white,
-                        ),
-                        onChanged: (value) {
-                          setState(() {
-                            sizeSelected = value!;
-                          });
-                        },
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    child: ListTile(
-                      title: const Text(
-                        '4WD SUVs',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      subtitle: const Text(
-                        'UTE 4WD, 4WD SUVs 5-7 seaters.',
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                      ),
-                      leading: Radio(
-                        value: 3,
-                        groupValue: sizeSelected,
-                        fillColor: MaterialStateColor.resolveWith(
-                          (states) => Colors.white,
-                        ),
-                        onChanged: (value) {
-                          setState(() {
-                            sizeSelected = value!;
-                          });
-                        },
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    child: ListTile(
-                      title: const Text(
-                        'Extra Large 4WD SUVs',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      subtitle: const Text(
-                        'UTE 4WD extra-large models 5 – 7 seaters, people movers, Mini Vans.',
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                      ),
-                      leading: Radio(
-                        value: 4,
-                        groupValue: sizeSelected,
-                        fillColor: MaterialStateColor.resolveWith(
-                          (states) => Colors.white,
-                        ),
-                        onChanged: (value) {
-                          setState(() {
-                            sizeSelected = value!;
-                          });
-                        },
-                      ),
-                    ),
-                  ),
-                ],
+                ),
               ),
             ],
           ),

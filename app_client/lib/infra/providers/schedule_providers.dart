@@ -14,9 +14,13 @@ import '../infra.dart';
 class ScheduleProvider with ChangeNotifier {
   late ScheduleModel _selectedSchedule;
   late List<ScheduleModel> _listSchedules;
+  late List<ScheduleModel> _listHistorySchedules;
+  late List<ScheduleModel> _listByDate;
 
   ScheduleModel get selectedSchedule => _selectedSchedule;
   List<ScheduleModel> get listSchedules => _listSchedules;
+  List<ScheduleModel> get listHistorySchedules => _listHistorySchedules;
+  List<ScheduleModel> get listByDate => _listByDate;
 
   Future<void> loadSchedules(
     BuildContext context,
@@ -56,6 +60,81 @@ class ScheduleProvider with ChangeNotifier {
     }
   }
 
+  Future<void> loadDate(BuildContext context, DateTime date) async {
+    UserProvider userProvider = Provider.of(
+      context,
+      listen: false,
+    );
+    try {
+      final response = await http.get(
+        Uri.parse(
+            '${Constants.BACKEND_BASE_URL}/schedule/client/by-date/$date'),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer ${userProvider.token}',
+        },
+      );
+
+      var v = jsonDecode(response.body);
+
+      if (response.statusCode == 200) {
+        _listByDate = v;
+        notifyListeners();
+      } else if (v['errors'] != '') {
+        await comumDialog(
+          context,
+          'Erro!',
+          v['errors'],
+        );
+      }
+    } catch (e) {
+      await comumDialog(
+        context,
+        'Provider Error! loadSchedules',
+        e.toString(),
+      );
+    }
+  }
+
+  Future<void> loadHistory(
+      BuildContext context, DateTime initialDate, DateTime endDate) async {
+    UserProvider userProvider = Provider.of(
+      context,
+      listen: false,
+    );
+    try {
+      final response = await http.get(
+        Uri.parse(
+            '${Constants.BACKEND_BASE_URL}/schedule/client/history/$initialDate/$endDate/'),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer ${userProvider.token}',
+        },
+      );
+
+      var v = jsonDecode(response.body);
+
+      if (response.statusCode == 200) {
+        _listHistorySchedules = v;
+        notifyListeners();
+      } else if (v['errors'] != '') {
+        await comumDialog(
+          context,
+          'Erro!',
+          v['errors'],
+        );
+      }
+    } catch (e) {
+      await comumDialog(
+        context,
+        'Provider Error! loadHistory',
+        e.toString(),
+      );
+    }
+  }
+
   Future<ScheduleModel?> loadOneSchedules(BuildContext context, int id) async {
     UserProvider userProvider = Provider.of(
       context,
@@ -64,6 +143,82 @@ class ScheduleProvider with ChangeNotifier {
     try {
       final response = await http.get(
         Uri.parse('${Constants.BACKEND_BASE_URL}/schedule/client/$id'),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer ${userProvider.token}',
+        },
+      );
+
+      var v = jsonDecode(response.body);
+
+      if (response.statusCode == 200) {
+        return v;
+      } else if (v['errors'] != '') {
+        await comumDialog(
+          context,
+          'Erro!',
+          v['errors'],
+        );
+        return null;
+      }
+    } catch (e) {
+      await comumDialog(
+        context,
+        'Provider Error! loadOneSchedule',
+        e.toString(),
+      );
+      return null;
+    }
+    return null;
+  }
+
+  Future<ScheduleModel?> loadRebookSchedule(BuildContext context) async {
+    UserProvider userProvider = Provider.of(
+      context,
+      listen: false,
+    );
+    try {
+      final response = await http.get(
+        Uri.parse('${Constants.BACKEND_BASE_URL}/schedule/client/rebook/'),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer ${userProvider.token}',
+        },
+      );
+
+      var v = jsonDecode(response.body);
+
+      if (response.statusCode == 200) {
+        return v;
+      } else if (v['errors'] != '') {
+        await comumDialog(
+          context,
+          'Erro!',
+          v['errors'],
+        );
+        return null;
+      }
+    } catch (e) {
+      await comumDialog(
+        context,
+        'Provider Error! loadOneSchedule',
+        e.toString(),
+      );
+      return null;
+    }
+    return null;
+  }
+
+  Future<ScheduleModel?> loadOngoingSchedule(BuildContext context) async {
+    UserProvider userProvider = Provider.of(
+      context,
+      listen: false,
+    );
+    try {
+      final response = await http.get(
+        Uri.parse('${Constants.BACKEND_BASE_URL}/schedule/client/ongoing/'),
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',

@@ -11,21 +11,21 @@ class SignRegularWashController {
         return res.status(400).json({ errors: ['User not Client'] });
       }
 
-      const regular = await SignRegularWash.findOne({
-        where: {
-          user_id: idUser,
-        }
-      });
-      if (regular) {
-        if (!regular.is_broken) {
-          // VER OQ FAZ
-          return res.status(400).json({ errors: ['This client already has a Regular Wash active'] });
-        }
-        if (regular.is_broken) {
-          // VER OQ FAZ
-          return res.status(400).json({ errors: ['This client have broken a Regular Wash'] });
-        }
-      }
+      // const regular = await SignRegularWash.findOne({
+      //   where: {
+      //     user_id: idUser,
+      //   }
+      // });
+      // if (regular) {
+      //   if (!regular.is_broken) {
+      //     // VER OQ FAZ
+      //     return res.status(400).json({ errors: ['This client already has a Regular Wash active'] });
+      //   }
+      //   if (regular.is_broken) {
+      //     // VER OQ FAZ
+      //     return res.status(400).json({ errors: ['This client have broken a Regular Wash'] });
+      //   }
+      // }
 
       const newRegular = await SignRegularWash.create({
         user_id: idUser,

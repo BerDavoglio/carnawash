@@ -19,14 +19,12 @@ class CardModel {
 class CardCreateUpdateModel {
   CardCreateUpdateModel({
     this.id,
-    required this.user_id,
     required this.name,
     required this.card,
     required this.date,
   });
 
   int? id;
-  int user_id;
   String name;
   String card;
   String date;

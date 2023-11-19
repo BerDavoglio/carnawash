@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../data/data.dart';
+import '../../infra/infra.dart';
 import '../ui.dart';
 
 class VehiclesPage extends StatefulWidget {
@@ -11,7 +14,20 @@ class VehiclesPage extends StatefulWidget {
 
 class _VehiclesPageState extends State<VehiclesPage> {
   @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      VehiclesProvider vehiclesProvider = Provider.of(context, listen: false);
+
+      await vehiclesProvider.loadCars(context);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    VehiclesProvider vehiclesProvider = Provider.of(context);
+
     return Scaffold(
       backgroundColor: Colors.grey[100]!,
       bottomNavigationBar: navigationBarComponent(context),
@@ -48,19 +64,23 @@ class _VehiclesPageState extends State<VehiclesPage> {
                   const SizedBox(height: 16),
                   Column(
                     children: [
-                      vehicleBox(),
-                      vehicleBox(),
-                      vehicleBox(),
-                      vehicleBox(),
-                      vehicleBox(),
-                      vehicleBox(),
+                      Column(
+                        children: List.generate(
+                          vehiclesProvider.carsList.length,
+                          (index) async {
+                            return await vehicleBox(
+                              context,
+                              vehiclesProvider.carsList[index],
+                            );
+                          } as Widget Function(int index),
+                        ),
+                      ),
                       TextButton(
                         onPressed: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) =>
-                                  VehiclesEditPage(initial: false),
+                              builder: (context) => VehiclesEditPage(),
                             ),
                           );
                         },
@@ -83,7 +103,14 @@ class _VehiclesPageState extends State<VehiclesPage> {
     );
   }
 
-  Widget vehicleBox() {
+  Future<Widget> vehicleBox(
+    BuildContext context,
+    CarModel car,
+  ) async {
+    ServicesProvider servicesProvider = Provider.of(context);
+
+    await servicesProvider.loadCarSize(context);
+
     return Column(
       children: [
         Container(
@@ -101,9 +128,9 @@ class _VehiclesPageState extends State<VehiclesPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text(
-                      'Nissan',
-                      style: TextStyle(
+                    Text(
+                      car.brand,
+                      style: const TextStyle(
                         fontWeight: FontWeight.w500,
                         fontSize: 16,
                       ),
@@ -123,7 +150,7 @@ class _VehiclesPageState extends State<VehiclesPage> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) =>
-                                      VehiclesEditPage(initial: true),
+                                      VehiclesEditPage(preData: car),
                                 ),
                               );
                             },
@@ -143,30 +170,30 @@ class _VehiclesPageState extends State<VehiclesPage> {
                   ],
                 ),
                 const SizedBox(height: 16),
-                const Text(
-                  'Mach',
-                  style: TextStyle(
+                Text(
+                  car.model,
+                  style: const TextStyle(
                     color: Colors.grey,
                   ),
                 ),
                 const SizedBox(height: 5),
-                const Text(
-                  'Red',
-                  style: TextStyle(
+                Text(
+                  car.color,
+                  style: const TextStyle(
                     color: Colors.grey,
                   ),
                 ),
                 const SizedBox(height: 5),
-                const Text(
-                  '3SAM123',
-                  style: TextStyle(
+                Text(
+                  car.plate,
+                  style: const TextStyle(
                     color: Colors.grey,
                   ),
                 ),
                 const SizedBox(height: 20),
-                const Text(
-                  'Small',
-                  style: TextStyle(
+                Text(
+                  servicesProvider.getCarSizeComplete(car.car_size_id).title,
+                  style: const TextStyle(
                     fontWeight: FontWeight.w500,
                     fontSize: 16,
                   ),

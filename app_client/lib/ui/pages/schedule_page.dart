@@ -32,6 +32,7 @@ class _SchedulePageState extends State<SchedulePage> {
   int carSelected = 1;
   int washSelected = 1;
   int? initial;
+  double additionalPrice = 0;
   List<CarObjectModel> listCars = [];
   List<int> listAddon = [];
   late int n;
@@ -86,6 +87,16 @@ class _SchedulePageState extends State<SchedulePage> {
   Future<void> _loadCarSelected(BuildContext context) async {
     VehiclesProvider vehiclesProvider = Provider.of(context);
     await vehiclesProvider.loadOneCar(context, carSelected);
+  }
+
+  double priceCalculate(BuildContext context, CarModel car, int washSelect) {
+    ServicesProvider servicesProvider = Provider.of(context);
+    double carValue =
+        double.parse(servicesProvider.getCarSizeComplete(car.id!).price);
+
+    double select = washSelect == 1 ? 0 : 40;
+
+    return (carValue + select + additionalPrice);
   }
 
   @override
@@ -279,7 +290,7 @@ class _SchedulePageState extends State<SchedulePage> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => VehiclesEditPage(initial: false),
+                builder: (context) => VehiclesEditPage(),
               ),
             );
           },
@@ -298,6 +309,8 @@ class _SchedulePageState extends State<SchedulePage> {
     int index,
     CarModel car,
   ) {
+    ServicesProvider servicesProvider = Provider.of(context);
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: ListTile(
@@ -345,7 +358,7 @@ class _SchedulePageState extends State<SchedulePage> {
                 ),
                 const SizedBox(height: 16),
                 Text(
-                  car.car_size_id.toString(),
+                  servicesProvider.getCarSizeComplete(car.car_size_id).title,
                   style: const TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.w500,
@@ -609,21 +622,20 @@ class _SchedulePageState extends State<SchedulePage> {
                   borderRadius: const BorderRadius.all(Radius.circular(10)),
                   color: Colors.grey.withOpacity(0.1),
                 ),
-                child: const Padding(
-                  padding: EdgeInsets.all(20),
+                child: Padding(
+                  padding: const EdgeInsets.all(20),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
+                      const Text(
                         'Your vehicle price',
                         style: TextStyle(
                           fontSize: 18,
                         ),
                       ),
-                      // CALCULAR PREÇO
                       Text(
-                        '\$ 65.00',
-                        style: TextStyle(
+                        '\$ ${priceCalculate(context, carSelec, washSelected)}',
+                        style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 30,
                         ),
@@ -656,12 +668,21 @@ class _SchedulePageState extends State<SchedulePage> {
     } else {
       icon = Icons.add;
     }
+
+    bool selected = false;
+
+    void changeSelected() {
+      setState(() {
+        selected = !selected;
+      });
+    }
+
     return Container(
       width: MediaQuery.of(context).size.width * 0.42,
       height: MediaQuery.of(context).size.width * 0.42,
       decoration: BoxDecoration(
           borderRadius: const BorderRadius.all(Radius.circular(10)),
-          border: Border.all(color: Colors.grey)),
+          border: Border.all(color: (selected ? Colors.blue : Colors.grey))),
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -669,12 +690,12 @@ class _SchedulePageState extends State<SchedulePage> {
             Icon(
               icon,
               size: 60,
-              color: Colors.grey,
+              color: (selected ? Colors.blue : Colors.grey),
             ),
             Text(
               add.title,
-              style: const TextStyle(
-                color: Colors.grey,
+              style: TextStyle(
+                color: (selected ? Colors.blue : Colors.grey),
               ),
             ),
             TextButton(
@@ -683,7 +704,7 @@ class _SchedulePageState extends State<SchedulePage> {
                   const Size(100, 30),
                 ),
                 backgroundColor: MaterialStateProperty.all<Color>(
-                  Colors.grey,
+                  (selected ? Colors.blue : Colors.grey),
                 ),
                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                   RoundedRectangleBorder(
@@ -691,7 +712,19 @@ class _SchedulePageState extends State<SchedulePage> {
                   ),
                 ),
               ),
-              onPressed: () {},
+              onPressed: () {
+                if (selected) {
+                  setState(() {
+                    changeSelected();
+                    additionalPrice += double.parse(add.price);
+                  });
+                } else {
+                  setState(() {
+                    changeSelected();
+                    additionalPrice -= double.parse(add.price);
+                  });
+                }
+              },
               child: Text(
                 '+ \$ ${add.price}',
                 style: const TextStyle(

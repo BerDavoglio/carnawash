@@ -1,28 +1,38 @@
-// ignore_for_file: no_logic_in_create_state, must_be_immutable
+// ignore_for_file: no_logic_in_create_state, must_be_immutable, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../data/data.dart';
+import '../../infra/infra.dart';
 import '../ui.dart';
 
 class VehiclesEditPage extends StatefulWidget {
-  bool? initial;
+  CarModel? preData;
 
   VehiclesEditPage({
     super.key,
-    required this.initial,
+    this.preData,
   });
 
   @override
-  State<VehiclesEditPage> createState() => _VehiclesEditPageState(
-        initial: initial,
-      );
+  State<VehiclesEditPage> createState() => _VehiclesEditPageState();
 }
 
 class _VehiclesEditPageState extends State<VehiclesEditPage> {
   TextEditingController registrationController = TextEditingController();
-  List<String> listBrand = ['Brand 1', 'Brand 2', 'Brand 3'];
-  List<String> listModel = ['Model 1', 'Model 2', 'Model 3'];
-  List<String> listColor = ['Color 1', 'Color 2', 'Color 3'];
+  List<BrandModel> listBrand = [];
+  List<ModelModel> listModel = [];
+  List<String> listColor = [
+    'Black',
+    'White',
+    'Grey',
+    'Red',
+    'Blue',
+    'Yellow',
+    'Green',
+    'Purple'
+  ];
   String? brandSelected;
   String? modelSelected;
   String? colorSelected;
@@ -30,21 +40,36 @@ class _VehiclesEditPageState extends State<VehiclesEditPage> {
   bool? initial;
   late bool edit;
 
-  _VehiclesEditPageState({required this.initial});
-
   @override
   void initState() {
     super.initState();
 
-    edit = initial!;
+    if (widget.preData != null) {
+      edit = true;
+      brandSelected = widget.preData!.brand;
+      modelSelected = widget.preData!.model;
+      colorSelected = widget.preData!.color;
+      registrationController.text = widget.preData!.plate;
+      sizeSelected = widget.preData!.car_size_id;
+    } else {
+      edit = false;
 
-    brandSelected = listBrand[0];
-    modelSelected = listModel[0];
-    colorSelected = listColor[0];
+      WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+        VehiclesProvider vehiclesProvider = Provider.of(context);
+
+        await vehiclesProvider.loadBrands(context);
+        listBrand = vehiclesProvider.brandList;
+        brandSelected = listBrand[0].name;
+      });
+      colorSelected = listColor[0];
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    VehiclesProvider vehicleProvider = Provider.of(context);
+    ServicesProvider servicesProvider = Provider.of(context);
+
     return Scaffold(
       bottomNavigationBar: navigationBarComponent(context),
       body: SingleChildScrollView(
@@ -110,12 +135,21 @@ class _VehiclesEditPageState extends State<VehiclesEditPage> {
                               value: brandSelected,
                               items: listBrand
                                   .map((item) => DropdownMenuItem<String>(
-                                        value: item,
-                                        child: Text(item),
+                                        value: item.name,
+                                        child: Text(item.name),
                                       ))
                                   .toList(),
-                              onChanged: (item) => setState(() {
+                              onChanged: (item) => setState(() async {
                                 brandSelected = item!;
+                                VehiclesProvider vehiclesProvider =
+                                    Provider.of(context);
+                                await vehiclesProvider
+                                    .loadModels(context, item)
+                                    .then(
+                                      (value) => {
+                                        listModel = vehiclesProvider.modelList
+                                      },
+                                    );
                               }),
                             ),
                           ),
@@ -136,8 +170,8 @@ class _VehiclesEditPageState extends State<VehiclesEditPage> {
                               value: modelSelected,
                               items: listModel
                                   .map((item) => DropdownMenuItem<String>(
-                                        value: item,
-                                        child: Text(item),
+                                        value: item.name,
+                                        child: Text(item.name),
                                       ))
                                   .toList(),
                               onChanged: (item) => setState(() {
@@ -207,128 +241,43 @@ class _VehiclesEditPageState extends State<VehiclesEditPage> {
                           ),
                           Column(
                             mainAxisAlignment: MainAxisAlignment.start,
-                            children: <Widget>[
-                              SizedBox(
+                            children: List.generate(
+                              servicesProvider.carSizeList.length,
+                              (index) => SizedBox(
                                 width: MediaQuery.of(context).size.width,
                                 child: ListTile(
-                                  title: const Text(
-                                    'Small',
-                                    style: TextStyle(
+                                  title: Text(
+                                    servicesProvider.carSizeList[index].title,
+                                    style: const TextStyle(
                                       color: Colors.black,
                                       fontWeight: FontWeight.w500,
                                     ),
                                   ),
-                                  subtitle: const Text(
-                                    'Compact, subcompact cars: sedan, hatchback, wagon, sports, coupe.',
-                                    style: TextStyle(
+                                  subtitle: Text(
+                                    servicesProvider.carSizeList[index]
+                                        .additional_information,
+                                    style: const TextStyle(
                                       color: Colors.black,
                                     ),
                                   ),
                                   leading: Radio(
-                                    value: 1,
+                                    value:
+                                        servicesProvider.carSizeList[index].id,
                                     groupValue: sizeSelected,
                                     fillColor: MaterialStateColor.resolveWith(
                                       (states) => Colors.black,
                                     ),
                                     onChanged: (value) {
-                                      setState(() {
-                                        sizeSelected = value!;
-                                      });
+                                      setState(
+                                        () {
+                                          sizeSelected = value!;
+                                        },
+                                      );
                                     },
                                   ),
                                 ),
                               ),
-                              SizedBox(
-                                width: MediaQuery.of(context).size.width,
-                                child: ListTile(
-                                  title: const Text(
-                                    'SUVs',
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                  subtitle: const Text(
-                                    '2WDs, UTE 2WDs, Medium-size cars, customers.',
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                  leading: Radio(
-                                    value: 2,
-                                    groupValue: sizeSelected,
-                                    fillColor: MaterialStateColor.resolveWith(
-                                      (states) => Colors.black,
-                                    ),
-                                    onChanged: (value) {
-                                      setState(() {
-                                        sizeSelected = value!;
-                                      });
-                                    },
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                width: MediaQuery.of(context).size.width,
-                                child: ListTile(
-                                  title: const Text(
-                                    '4WD SUVs',
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                  subtitle: const Text(
-                                    'UTE 4WD, 4WD SUVs 5-7 seaters.',
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                  leading: Radio(
-                                    value: 3,
-                                    groupValue: sizeSelected,
-                                    fillColor: MaterialStateColor.resolveWith(
-                                      (states) => Colors.black,
-                                    ),
-                                    onChanged: (value) {
-                                      setState(() {
-                                        sizeSelected = value!;
-                                      });
-                                    },
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                width: MediaQuery.of(context).size.width,
-                                child: ListTile(
-                                  title: const Text(
-                                    'Extra Large 4WD SUVs',
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                  subtitle: const Text(
-                                    'UTE 4WD extra-large models 5 – 7 seaters, people movers, Mini Vans.',
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                  leading: Radio(
-                                    value: 4,
-                                    groupValue: sizeSelected,
-                                    fillColor: MaterialStateColor.resolveWith(
-                                      (states) => Colors.black,
-                                    ),
-                                    onChanged: (value) {
-                                      setState(() {
-                                        sizeSelected = value!;
-                                      });
-                                    },
-                                  ),
-                                ),
-                              ),
-                            ],
+                            ),
                           ),
                           const SizedBox(height: 20),
                           TextButton(
@@ -348,9 +297,45 @@ class _VehiclesEditPageState extends State<VehiclesEditPage> {
                                 ),
                               ),
                             ),
-                            onPressed: () {
-                              // CREATE/EDIT VEHICLE
-                              Navigator.of(context).pop();
+                            onPressed: () async {
+                              if (brandSelected != '' &&
+                                  modelSelected != '' &&
+                                  registrationController.text != '' &&
+                                  colorSelected != '') {
+                                edit
+                                    ? await vehicleProvider.updateCar(
+                                        context,
+                                        CarModel(
+                                          brand: brandSelected!,
+                                          model: modelSelected!,
+                                          plate: registrationController.text,
+                                          color: colorSelected!,
+                                          car_size_id: sizeSelected,
+                                        ),
+                                      )
+                                    : await vehicleProvider.createCar(
+                                        context,
+                                        CarModel(
+                                          brand: brandSelected!,
+                                          model: modelSelected!,
+                                          plate: registrationController.text,
+                                          color: colorSelected!,
+                                          car_size_id: sizeSelected,
+                                        ),
+                                      );
+                                Navigator.of(context).pop();
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: const Text(
+                                        'All fields need to be filled!'),
+                                    action: SnackBarAction(
+                                      label: 'Okay',
+                                      onPressed: () {},
+                                    ),
+                                  ),
+                                );
+                              }
                             },
                             child: const Text(
                               'Save',

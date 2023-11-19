@@ -1,41 +1,46 @@
-// ignore_for_file: no_logic_in_create_state, must_be_immutable
+// ignore_for_file: no_logic_in_create_state, must_be_immutable, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../data/data.dart';
+import '../../infra/infra.dart';
 import '../ui.dart';
 
 class WalletEditPage extends StatefulWidget {
-  bool? initial;
+  CardModel? preData;
   WalletEditPage({
     super.key,
-    required this.initial,
+    this.preData,
   });
 
   @override
-  State<WalletEditPage> createState() => _WalletEditPageState(
-        initial: initial,
-      );
+  State<WalletEditPage> createState() => _WalletEditPageState();
 }
 
 class _WalletEditPageState extends State<WalletEditPage> {
   TextEditingController numberController = TextEditingController();
   TextEditingController holderController = TextEditingController();
   TextEditingController expiresController = TextEditingController();
-  TextEditingController cvvController = TextEditingController();
-  bool? initial;
   late bool edit;
-
-  _WalletEditPageState({required this.initial});
 
   @override
   void initState() {
     super.initState();
 
-    edit = initial!;
+    if (widget.preData != null) {
+      edit = true;
+      holderController.text = widget.preData!.name;
+      expiresController.text = widget.preData!.date;
+    } else {
+      edit = false;
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    WalletProvider walletProvider = Provider.of(context);
+
     return Scaffold(
       bottomNavigationBar: navigationBarComponent(context),
       body: SingleChildScrollView(
@@ -91,21 +96,20 @@ class _WalletEditPageState extends State<WalletEditPage> {
                                 context: context,
                                 text: 'Expires',
                                 textController: expiresController,
-                                larg: 0.4,
-                              ),
-                              geralTextInput(
-                                context: context,
-                                text: 'CVV',
-                                textController: cvvController,
-                                larg: 0.4,
                               ),
                             ],
                           ),
                           edit
-                              ? const Text(
-                                  'Delete this credit card',
-                                  style: TextStyle(
-                                    color: Color.fromRGBO(237, 189, 58, 1),
+                              ? GestureDetector(
+                                  onTap: () async {
+                                    await walletProvider.deleteCard(
+                                        context, widget.preData!.id!);
+                                  },
+                                  child: const Text(
+                                    'Delete this credit card',
+                                    style: TextStyle(
+                                      color: Color.fromRGBO(237, 189, 58, 1),
+                                    ),
                                   ),
                                 )
                               : const SizedBox(),
@@ -130,9 +134,40 @@ class _WalletEditPageState extends State<WalletEditPage> {
                             ),
                           ),
                         ),
-                        onPressed: () {
-                          // CREATE/EDIT WALLET
-                          Navigator.of(context).pop();
+                        onPressed: () async {
+                          if (holderController.text != '' &&
+                              numberController.text != '' &&
+                              expiresController.text != '') {
+                            edit
+                                ? await walletProvider.updateCard(
+                                    context,
+                                    CardCreateUpdateModel(
+                                      name: holderController.text,
+                                      card: numberController.text,
+                                      date: expiresController.text,
+                                    ),
+                                  )
+                                : await walletProvider.createCard(
+                                    context,
+                                    CardCreateUpdateModel(
+                                      name: holderController.text,
+                                      card: numberController.text,
+                                      date: expiresController.text,
+                                    ),
+                                  );
+                            Navigator.of(context).pop();
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content:
+                                    const Text('All fields need to be filled!'),
+                                action: SnackBarAction(
+                                  label: 'Okay',
+                                  onPressed: () {},
+                                ),
+                              ),
+                            );
+                          }
                         },
                         child: const Text(
                           'Save',

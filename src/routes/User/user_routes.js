@@ -16,6 +16,8 @@ router.get('/', loginRequired, clientUserController.index);
 router.put('/', loginRequired, clientUserController.update);
 router.delete('/', loginRequired, clientUserController.delete);
 
+router.post('/refer/', loginRequired, clientUserController.referFriends);
+
 router.post('/regular/', loginRequired, signRegularWashController.newRegular);
 router.get('/regular/', loginRequired, signRegularWashController.indexRegular);
 

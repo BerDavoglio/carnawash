@@ -69,8 +69,6 @@ class ScheduleController {
     }
   }
 
-
-
   async calcCarRegularPrice(car_id, wash_type, additional_list_id) {
     total = 0;
 
@@ -212,6 +210,93 @@ class ScheduleController {
         where: {
           id: req.params.id,
           user_id: idUser,
+        },
+      });
+
+      return res.json(schedule);
+    } catch (err) {
+      return res.status(400).json({ errors: err.message });
+    }
+  }
+
+  async indexByDate(req, res) {
+    try {
+      const idUser = req.userId;
+      if (!idUser) {
+        return res.status(400).json({ errors: ['ID not Found'] });
+      }
+
+      const schedule = await Schedule.findOne({
+        where: {
+          id: req.params.id,
+          selected_date: {
+            $between: [req.params.date.setUTCHours(0, 0, 0, 0), req.params.endDate.setUTCHours(23, 59, 59, 999)]
+          },
+        },
+      });
+
+      return res.json(schedule);
+    } catch (err) {
+      return res.status(400).json({ errors: err.message });
+    }
+  }
+
+  async indexHistory(req, res) {
+    try {
+      const idUser = req.userId;
+      if (!idUser) {
+        return res.status(400).json({ errors: ['ID not Found'] });
+      }
+
+      const schedule = await Schedule.findOne({
+        where: {
+          id: req.params.id,
+          selected_date: {
+            $between: [req.params.initDate, req.params.endDate]
+          },
+        },
+      });
+
+      return res.json(schedule);
+    } catch (err) {
+      return res.status(400).json({ errors: err.message });
+    }
+  }
+
+  async indexClientRebook(req, res) {
+    try {
+      const idUser = req.userId;
+      if (!idUser) {
+        return res.status(400).json({ errors: ['ID not Found'] });
+      }
+
+      const schedule = await Schedule.findOne({
+        where: {
+          id: req.params.id,
+          status: 'finished',
+        },
+        order: [['updatedAt', 'DESC']],
+      });
+
+      return res.json(schedule);
+    } catch (err) {
+      return res.status(400).json({ errors: err.message });
+    }
+  }
+
+  async indexClientOngoing(req, res) {
+    try {
+      const idUser = req.userId;
+      if (!idUser) {
+        return res.status(400).json({ errors: ['ID not Found'] });
+      }
+
+      const schedule = await Schedule.findOne({
+        where: {
+          id: req.params.id,
+          status: {
+            [sequelize.Op.not]: 'not-assign'
+          },
         },
       });
 
