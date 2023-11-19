@@ -38,12 +38,12 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'CarWash',
+        title: 'CarnaWash',
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
         routes: {
-          AppRoutes.HOME: (_) => const HomePage(),
+          AppRoutes.HOME: (_) => const AuthOrHomeScreen(),
           AppRoutes.LOGIN: (_) => const LoginPage(),
           AppRoutes.SCHEDULES: (_) => const SchedulesPage(),
           AppRoutes.SUBSCRIPTION: (_) => const SubscriptionPage(),

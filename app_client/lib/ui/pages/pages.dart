@@ -1,3 +1,4 @@
+export './auth_home_page.dart';
 export './account_page.dart';
 export './help_chat_page.dart';
 export './faq_page.dart';
