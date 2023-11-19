@@ -1,6 +1,6 @@
 import Sequelize, { Model } from 'sequelize';
 
-export default class UserType extends Model {
+export default class Usertype extends Model {
   static init(sequelize) {
     super.init({
       title: {

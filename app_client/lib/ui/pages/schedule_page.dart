@@ -54,7 +54,7 @@ class _SchedulePageState extends State<SchedulePage> {
 
       await servicesProvider.loadAdditional(context).then(
             (value) async => {
-              await servicesProvider.loadCarSize(context),
+              await servicesProvider.loadCarsize(context),
             },
           );
     });
@@ -92,7 +92,7 @@ class _SchedulePageState extends State<SchedulePage> {
   double priceCalculate(BuildContext context, CarModel car, int washSelect) {
     ServicesProvider servicesProvider = Provider.of(context);
     double carValue =
-        double.parse(servicesProvider.getCarSizeComplete(car.id!).price);
+        double.parse(servicesProvider.getCarsizeComplete(car.id!).price);
 
     double select = washSelect == 1 ? 0 : 40;
 
@@ -358,7 +358,7 @@ class _SchedulePageState extends State<SchedulePage> {
                 ),
                 const SizedBox(height: 16),
                 Text(
-                  servicesProvider.getCarSizeComplete(car.car_size_id).title,
+                  servicesProvider.getCarsizeComplete(car.car_size_id).title,
                   style: const TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.w500,
@@ -447,7 +447,7 @@ class _SchedulePageState extends State<SchedulePage> {
                       children: [
                         Text(
                           servicesProvider
-                              .getCarSizeComplete(carSelec.car_size_id)
+                              .getCarsizeComplete(carSelec.car_size_id)
                               .title,
                           style: const TextStyle(
                             fontWeight: FontWeight.w500,
@@ -455,7 +455,7 @@ class _SchedulePageState extends State<SchedulePage> {
                         ),
                         Text(
                           servicesProvider
-                              .getCarSizeComplete(carSelec.car_size_id)
+                              .getCarsizeComplete(carSelec.car_size_id)
                               .additional_information,
                           style: const TextStyle(
                             color: Colors.grey,
@@ -465,7 +465,7 @@ class _SchedulePageState extends State<SchedulePage> {
                     ),
                   ),
                   Text(
-                    '\$ ${servicesProvider.getCarSizeComplete(carSelec.car_size_id).price}',
+                    '\$ ${servicesProvider.getCarsizeComplete(carSelec.car_size_id).price}',
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
                     ),

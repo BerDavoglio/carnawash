@@ -4,7 +4,7 @@ import Cryptr from 'cryptr';
 
 const cryptr = new Cryptr(process.env.STRIPE_CRYPT_THREE);
 
-export default class PaymentSchedule extends Model {
+export default class Paymentschedule extends Model {
   static init(sequelize) {
     super.init({
       wash_id: {

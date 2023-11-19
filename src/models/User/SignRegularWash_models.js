@@ -1,6 +1,6 @@
 import Sequelize, { Model } from 'sequelize';
 
-export default class SignRegularWash extends Model {
+export default class Signregularwash extends Model {
   static init(sequelize) {
     super.init({
       user_id: {

@@ -1,6 +1,6 @@
 import Sequelize, { Model } from 'sequelize';
 
-export default class TimeAvailable extends Model {
+export default class Timeavailable extends Model {
   static init(sequelize) {
     super.init({
       user_id: {

@@ -1,6 +1,6 @@
 import Sequelize, { Model } from 'sequelize';
 
-export default class CouponBanner extends Model {
+export default class Couponbanner extends Model {
   static init(sequelize) {
     super.init({
       code: {

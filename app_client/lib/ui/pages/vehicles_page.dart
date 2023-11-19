@@ -109,7 +109,7 @@ class _VehiclesPageState extends State<VehiclesPage> {
   ) async {
     ServicesProvider servicesProvider = Provider.of(context);
 
-    await servicesProvider.loadCarSize(context);
+    await servicesProvider.loadCarsize(context);
 
     return Column(
       children: [
@@ -192,7 +192,7 @@ class _VehiclesPageState extends State<VehiclesPage> {
                 ),
                 const SizedBox(height: 20),
                 Text(
-                  servicesProvider.getCarSizeComplete(car.car_size_id).title,
+                  servicesProvider.getCarsizeComplete(car.car_size_id).title,
                   style: const TextStyle(
                     fontWeight: FontWeight.w500,
                     fontSize: 16,

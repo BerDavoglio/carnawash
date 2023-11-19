@@ -1,6 +1,11 @@
 /* eslint-disable no-console */
 import app from './app';
 import User from './models/User/User_models';
+import Couponbanner from './models/Coupon/CouponBanner_models';
+import Condition from './models/FaqTerms/Condition_models';
+import Markup from './models/Services/Markup_models';
+import Carsize from './models/Services/CarSize_models';
+import Additionalservice from './models/Services/AdditionalService_models';
 
 const { execSync } = require('child_process');
 

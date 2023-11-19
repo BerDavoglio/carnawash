@@ -1,6 +1,6 @@
 import Sequelize, { Model } from 'sequelize';
 
-export default class SentNotification extends Model {
+export default class Sentnotification extends Model {
   static init(sequelize) {
     super.init({
       notification_id: {

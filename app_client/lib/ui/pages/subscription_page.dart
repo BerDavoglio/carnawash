@@ -27,7 +27,7 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
     delaySelected = listDelay[0];
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-      RegularWashProvider regularWashProvider = Provider.of(context);
+      RegularwashProvider regularWashProvider = Provider.of(context);
 
       regularWashProvider.loadRegular(context);
     });
@@ -115,7 +115,7 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
   }
 
   Column partOne(BuildContext context) {
-    RegularWashProvider regularWashProvider = Provider.of(context);
+    RegularwashProvider regularWashProvider = Provider.of(context);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

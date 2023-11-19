@@ -1,5 +1,5 @@
 import User from '../../../models/User/User_models';
-import UserType from '../../../models/User/UserType_models';
+import Usertype from '../../../models/User/UserType_models';
 
 class AdminUserController {
   async showAdmins(req, res) {
@@ -52,7 +52,7 @@ class AdminUserController {
 
   async userTypeStore(req, res) {
     try {
-      const newType = await UserType.create({
+      const newType = await Usertype.create({
         name: req.body.name,
         pages_enable_list: '',
         enable: false,
@@ -72,23 +72,23 @@ class AdminUserController {
         enable,
       });
     } catch (err) {
-      return res.status(400).json({ errors: `Create UserType Admin / ${err.message}` });
+      return res.status(400).json({ errors: `Create Usertype Admin / ${err.message}` });
     }
   }
 
   async userTypeShow(req, res) {
     try {
-      const types = await UserType.findAll();
+      const types = await Usertype.findAll();
 
       return res.json(types);
     } catch (err) {
-      return res.status(400).json({ errors: `Show UserType Admin / ${err.message}` });
+      return res.status(400).json({ errors: `Show Usertype Admin / ${err.message}` });
     }
   }
 
   async userTypeUpdate(req, res) {
     try {
-      const type = await UserType.findByPk(req.params.id);
+      const type = await Usertype.findByPk(req.params.id);
       if (!type) {
         return res.status(400).json({ errors: ['User Type not found'] });
       }
@@ -109,13 +109,13 @@ class AdminUserController {
         enable,
       });
     } catch (err) {
-      return res.status(400).json({ errors: `Update UserType Admin / ${err.message}` });
+      return res.status(400).json({ errors: `Update Usertype Admin / ${err.message}` });
     }
   }
 
   async userTypeDelete(req, res) {
     try {
-      const type = await UserType.findByPk(req.params.id);
+      const type = await Usertype.findByPk(req.params.id);
       if (!type) {
         return res.status(400).json({ errors: ['User Type not found'] });
       }
@@ -126,14 +126,14 @@ class AdminUserController {
         }
       })
       if (users) {
-        return res.status(400).json({ errors: ["Can't delete this UserType, there is some Users using"] });
+        return res.status(400).json({ errors: ["Can't delete this Usertype, there is some Users using"] });
       }
 
       await type.delete();
 
       return res.json({ message: 'User Type deleted with success' });
     } catch (err) {
-      return res.status(400).json({ errors: `Delete UserType Admin / ${err.message}` });
+      return res.status(400).json({ errors: `Delete Usertype Admin / ${err.message}` });
     }
   }
 }

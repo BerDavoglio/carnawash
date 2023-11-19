@@ -1,7 +1,7 @@
 import User from '../../models/User/User_models';
-import WasherInfo from '../../models/User/WasherInfo_models';
-import BankInfo from '../../models/User/BankInfo_models';
-import TimeAvailable from '../../models/User/TimeAvailable_models';
+import Washerinfo from '../../models/User/WasherInfo_models';
+import Bankinfo from '../../models/User/BankInfo_models';
+import Timeavailable from '../../models/User/TimeAvailable_models';
 
 class WasherUserController {
   async firstLogin(req, res) {
@@ -15,7 +15,7 @@ class WasherUserController {
         return res.status(400).json({ errors: ['User not Found'] });
       }
 
-      await WasherInfo.create({
+      await Washerinfo.create({
         user_id: idUser,
         rate: 0,
         made_quiz: false,
@@ -27,14 +27,14 @@ class WasherUserController {
         picture: req.body.washer_info.picture,
       });
 
-      await BankInfo.create({
+      await Bankinfo.create({
         user_id: idUser,
         bank_name: req.body.bank_info.bank_name,
         account_name: req.body.bank_info.account_name,
         account_number: req.body.bank_info.account_number,
       });
 
-      await TimeAvailable.create({
+      await Timeavailable.create({
         user_id: idUser,
         sunday_list: '',
         monday_list: '',
@@ -66,7 +66,7 @@ class WasherUserController {
         return res.status(400).json({ errors: ['User not Found'] });
       }
       if (user.first_login) {
-        const washer = await WasherInfo.findOne({
+        const washer = await Washerinfo.findOne({
           where: {
             user_id: idUser,
           }
@@ -95,7 +95,7 @@ class WasherUserController {
         return res.status(400).json({ errors: ['ID not Found'] });
       }
 
-      const washer = await WasherInfo.findOne({
+      const washer = await Washerinfo.findOne({
         where: {
           user_id: id,
         }
@@ -106,13 +106,13 @@ class WasherUserController {
 
       return res.json(washer);
     } catch (err) {
-      return res.status(400).json({ errors: `Index WasherInfo / ${err.message}` });
+      return res.status(400).json({ errors: `Index Washerinfo / ${err.message}` });
     }
   }
 
   async indexOne(req, res) {
     try {
-      const washer = await WasherInfo.findOne({
+      const washer = await Washerinfo.findOne({
         where: {
           user_id: req.params.id,
         }
@@ -137,7 +137,7 @@ class WasherUserController {
         rate,
       });
     } catch (err) {
-      return res.status(400).json({ errors: `Index WasherInfo / ${err.message}` });
+      return res.status(400).json({ errors: `Index Washerinfo / ${err.message}` });
     }
   }
 
@@ -148,7 +148,7 @@ class WasherUserController {
         return res.status(400).json({ errors: ['ID not Found'] });
       }
 
-      const washer = await WasherInfo.findOne({
+      const washer = await Washerinfo.findOne({
         where: {
           user_id: idReq,
         }
@@ -161,7 +161,7 @@ class WasherUserController {
 
       return res.json(updateWasher);
     } catch (err) {
-      return res.status(400).json({ errors: `Update WasherInfo / ${err.message}` });
+      return res.status(400).json({ errors: `Update Washerinfo / ${err.message}` });
     }
   }
 
@@ -172,7 +172,7 @@ class WasherUserController {
         return res.status(400).json({ errors: ['ID not Found'] });
       }
 
-      const bank = await BankInfo.findOne({
+      const bank = await Bankinfo.findOne({
         where: {
           user_id: idReq,
         }
@@ -197,7 +197,7 @@ class WasherUserController {
         account_number,
       });
     } catch (err) {
-      return res.status(400).json({ errors: `Index BankInfo / ${err.message}` });
+      return res.status(400).json({ errors: `Index Bankinfo / ${err.message}` });
     }
   }
 
@@ -208,7 +208,7 @@ class WasherUserController {
         return res.status(400).json({ errors: ['ID not Found'] });
       }
 
-      const bank = await BankInfo.findOne({
+      const bank = await Bankinfo.findOne({
         where: {
           user_id: idReq,
         }
@@ -235,7 +235,7 @@ class WasherUserController {
         account_number,
       });
     } catch (err) {
-      return res.status(400).json({ errors: `Update BankInfo / ${err.message}` });
+      return res.status(400).json({ errors: `Update Bankinfo / ${err.message}` });
     }
   }
 
@@ -246,7 +246,7 @@ class WasherUserController {
         return res.status(400).json({ errors: ['ID not Found'] });
       }
 
-      const time = await TimeAvailable.findOne({
+      const time = await Timeavailable.findOne({
         where: {
           user_id: idReq,
         }
@@ -279,7 +279,7 @@ class WasherUserController {
         saturday_list,
       });
     } catch (err) {
-      return res.status(400).json({ errors: `Index TimeAvailable / ${err.message}` });
+      return res.status(400).json({ errors: `Index Timeavailable / ${err.message}` });
     }
   }
 
@@ -290,7 +290,7 @@ class WasherUserController {
         return res.status(400).json({ errors: ['ID not Found'] });
       }
 
-      const time = await TimeAvailable.findOne({
+      const time = await Timeavailable.findOne({
         where: {
           user_id: idReq,
         }
@@ -325,7 +325,7 @@ class WasherUserController {
         saturday_list,
       });
     } catch (err) {
-      return res.status(400).json({ errors: `Update TimeAvailable / ${err.message}` });
+      return res.status(400).json({ errors: `Update Timeavailable / ${err.message}` });
     }
   }
 }

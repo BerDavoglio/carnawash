@@ -18,8 +18,8 @@ class CarModel {
   int car_size_id;
 }
 
-class CarSizeModel {
-  CarSizeModel({
+class CarsizeModel {
+  CarsizeModel({
     this.id,
     required this.title,
     required this.price,

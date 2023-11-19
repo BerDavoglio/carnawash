@@ -1,6 +1,6 @@
 import User from '../../../models/User/User_models';
-import WasherInfo from '../../../models/User/WasherInfo_models';
-import BankInfo from '../../../models/User/BankInfo_models';
+import Washerinfo from '../../../models/User/WasherInfo_models';
+import Bankinfo from '../../../models/User/BankInfo_models';
 
 class AdminWasherController {
   async showWashers(req, res) {
@@ -11,7 +11,7 @@ class AdminWasherController {
         }
       });
 
-      const info = WasherInfo.findAll()
+      const info = Washerinfo.findAll()
 
       return res.json([washers, info]);
     } catch (err) {
@@ -26,13 +26,13 @@ class AdminWasherController {
         return res.status(400).json({ errors: ['Washer not Found'] });
       };
 
-      const info = WasherInfo.findOne({
+      const info = Washerinfo.findOne({
         where: {
           user_id: req.params.id
         }
       });
       if (!info) {
-        return res.status(400).json({ errors: ['WasherInfo not Found'] });
+        return res.status(400).json({ errors: ['Washerinfo not Found'] });
       };
 
       washer.update(req.body.washer);
@@ -46,7 +46,7 @@ class AdminWasherController {
 
   async showBank(req, res) {
     try {
-      const bank = BankInfo.findOne({
+      const bank = Bankinfo.findOne({
         where: {
           user_id: req.params.id
         }
@@ -63,7 +63,7 @@ class AdminWasherController {
 
   async updateBank(req, res) {
     try {
-      const bank = BankInfo.findOne({
+      const bank = Bankinfo.findOne({
         where: {
           user_id: req.params.id
         }

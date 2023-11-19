@@ -1,9 +1,9 @@
-import RegularWash from '../../models/Services/RegularWash_models';
+import Regularwash from '../../models/Services/RegularWash_models';
 
-class RegularWashController {
+class RegularwashController {
   async store(req, res) {
     try {
-      const newRegular = await RegularWash.create(req.body);
+      const newRegular = await Regularwash.create(req.body);
 
       const {
         id,
@@ -25,7 +25,7 @@ class RegularWashController {
 
   async show(req, res) {
     try {
-      const regulars = await RegularWash.findAll();
+      const regulars = await Regularwash.findAll();
 
       return res.json(regulars);
     } catch (err) {
@@ -35,7 +35,7 @@ class RegularWashController {
 
   async update(req, res) {
     try {
-      const regular = await RegularWash.findByPk(req.params.id);
+      const regular = await Regularwash.findByPk(req.params.id);
       if (!regular) {
         return res.status(400).json({ errors: ['Regular Wash not found'] });
       }
@@ -62,7 +62,7 @@ class RegularWashController {
 
   async delete(req, res) {
     try {
-      const regular = await RegularWash.findByPk(req.params.id);
+      const regular = await Regularwash.findByPk(req.params.id);
       if (!regular) {
         return res.status(400).json({ errors: ['Regular Wash not found'] });
       }
@@ -76,4 +76,4 @@ class RegularWashController {
   }
 }
 
-export default new RegularWashController();
+export default new RegularwashController();

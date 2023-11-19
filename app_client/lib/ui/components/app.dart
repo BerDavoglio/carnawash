@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
           create: (_) => WalletProvider(),
         ),
         ChangeNotifierProvider(
-          create: (_) => RegularWashProvider(),
+          create: (_) => RegularwashProvider(),
         ),
         ChangeNotifierProvider(
           create: (_) => ServicesProvider(),

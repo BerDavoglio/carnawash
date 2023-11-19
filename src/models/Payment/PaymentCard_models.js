@@ -4,7 +4,7 @@ import Cryptr from 'cryptr';
 
 const cryptr = new Cryptr(process.env.STRIPE_CRYPT);
 
-export default class PaymentCard extends Model {
+export default class Paymentcard extends Model {
   static init(sequelize) {
     super.init({
       user_id: {

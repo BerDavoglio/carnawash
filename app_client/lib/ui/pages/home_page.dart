@@ -474,7 +474,7 @@ class _HomePageState extends State<HomePage> {
             Padding(
               padding: const EdgeInsets.only(top: 4),
               child: Text(
-                'Wash ${servicesProvider.getCarSizeComplete(carsList[0].car_size_id).title}',
+                'Wash ${servicesProvider.getCarsizeComplete(carsList[0].car_size_id).title}',
                 style: const TextStyle(color: Colors.grey),
               ),
             ),
@@ -629,7 +629,7 @@ class _HomePageState extends State<HomePage> {
                     Padding(
                       padding: const EdgeInsets.only(top: 5),
                       child: Text(
-                        '${carsList[0]!.brand} - ${carsList[0]!.model} - ${servicesProvider.getCarSizeComplete(carsList[0].car_size_id).title}',
+                        '${carsList[0]!.brand} - ${carsList[0]!.model} - ${servicesProvider.getCarsizeComplete(carsList[0].car_size_id).title}',
                         style: const TextStyle(
                           color: Colors.grey,
                           fontWeight: FontWeight.w500,

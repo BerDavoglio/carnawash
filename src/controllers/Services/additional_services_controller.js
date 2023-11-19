@@ -1,9 +1,9 @@
-import AdditionalService from '../../models/Services/AdditionalService_models';
+import Additionalservice from '../../models/Services/AdditionalService_models';
 
-class AdditionalServicesController {
+class AdditionalservicesController {
   async store(req, res) {
     try {
-      const newAdd = await AdditionalService.create(req.body);
+      const newAdd = await Additionalservice.create(req.body);
 
       const {
         id,
@@ -23,7 +23,7 @@ class AdditionalServicesController {
 
   async show(req, res) {
     try {
-      const additionals = await AdditionalService.findAll();
+      const additionals = await Additionalservice.findAll();
 
       return res.json(additionals);
     } catch (err) {
@@ -33,7 +33,7 @@ class AdditionalServicesController {
 
   async update(req, res) {
     try {
-      const additional = await AdditionalService.findByPk(req.params.id);
+      const additional = await Additionalservice.findByPk(req.params.id);
       if (!additional) {
         return res.status(400).json({ errors: ['Additional Service not found'] });
       }
@@ -58,7 +58,7 @@ class AdditionalServicesController {
 
   async delete(req, res) {
     try {
-      const additional = await AdditionalService.findByPk(req.params.id);
+      const additional = await Additionalservice.findByPk(req.params.id);
       if (!additional) {
         return res.status(400).json({ errors: ['Additional Service not found'] });
       }
@@ -72,4 +72,4 @@ class AdditionalServicesController {
   }
 }
 
-export default new AdditionalServicesController();
+export default new AdditionalservicesController();

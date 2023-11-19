@@ -1,7 +1,7 @@
 /* eslint-disable class-methods-use-this */
 import jwt from 'jsonwebtoken';
 import User from '../../models/User/User_models';
-import ReferedFriend from '../../models/User/ReferedFriend_models';
+import Referedfriend from '../../models/User/ReferedFriend_models';
 
 class ClientUserController {
   async store(req, res) {
@@ -52,7 +52,7 @@ class ClientUserController {
         return res.status(400).json({ errors: ['User not Found'] });
       }
 
-      await ReferedFriend.create({
+      await Referedfriend.create({
         user_id: id,
         emails: req.body.emails,
       });

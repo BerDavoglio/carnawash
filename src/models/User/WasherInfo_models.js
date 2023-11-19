@@ -1,6 +1,6 @@
 import Sequelize, { Model } from 'sequelize';
 
-export default class WasherInfo extends Model {
+export default class Washerinfo extends Model {
   static init(sequelize) {
     super.init({
       user_id: {

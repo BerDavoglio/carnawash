@@ -1,6 +1,6 @@
 import Sequelize, { Model } from 'sequelize';
 
-export default class CarSize extends Model {
+export default class Carsize extends Model {
   static init(sequelize) {
     super.init({
       title: {

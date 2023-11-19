@@ -1,6 +1,6 @@
-import QuizResponse from '../../models/Quiz/QuizResponse_models';
+import Quizresponse from '../../models/Quiz/QuizResponse_models';
 
-class QuizResponseController {
+class QuizresponseController {
   async makeResponse(req, res) {
     try {
       const idUser = req.userId;
@@ -12,7 +12,7 @@ class QuizResponseController {
         return res.status(400).json({ errors: ['User not Washer'] });
       }
 
-      const newQuizResponse = await QuizResponse.create({
+      const newQuizresponse = await Quizresponse.create({
         user_id: idUser,
         question_id: req.body.question_id,
         responses_list: req.body.responses_list,
@@ -23,7 +23,7 @@ class QuizResponseController {
         user_id,
         question_id,
         responses_list,
-      } = newQuizResponse;
+      } = newQuizresponse;
 
       return res.json({
         id,
@@ -43,7 +43,7 @@ class QuizResponseController {
         return res.status(400).json({ errors: ['ID not Found'] });
       }
 
-      const quizResponses = await QuizResponse.findAll({
+      const quizResponses = await Quizresponse.findAll({
         where: {
           user_id: idUser
         }
@@ -65,4 +65,4 @@ class QuizResponseController {
   }
 }
 
-export default new QuizResponseController();
+export default new QuizresponseController();

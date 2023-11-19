@@ -1,6 +1,6 @@
-import SignRegularWash from '../../models/User/SignRegularWash_models';
+import Signregularwash from '../../models/User/SignRegularWash_models';
 
-class SignRegularWashController {
+class SignregularwashController {
   async newRegular(req, res) {
     try {
       const idUser = req.userId;
@@ -11,7 +11,7 @@ class SignRegularWashController {
         return res.status(400).json({ errors: ['User not Client'] });
       }
 
-      // const regular = await SignRegularWash.findOne({
+      // const regular = await Signregularwash.findOne({
       //   where: {
       //     user_id: idUser,
       //   }
@@ -27,7 +27,7 @@ class SignRegularWashController {
       //   }
       // }
 
-      const newRegular = await SignRegularWash.create({
+      const newRegular = await Signregularwash.create({
         user_id: idUser,
         init_date: req.body.init_date,
         date_to_date: req.body.date_to_date,
@@ -61,7 +61,7 @@ class SignRegularWashController {
         return res.status(400).json({ errors: ['ID not Found'] });
       }
 
-      const regular = await SignRegularWash.findOne({
+      const regular = await Signregularwash.findOne({
         where: {
           user_id: idUser,
         }
@@ -77,4 +77,4 @@ class SignRegularWashController {
   }
 }
 
-export default new SignRegularWashController();
+export default new SignregularwashController();

@@ -1,16 +1,16 @@
-import CarSize from '../../models/Services/CarSize_models';
+import Carsize from '../../models/Services/CarSize_models';
 
-class CarSizeController {
+class CarsizeController {
   async store(req, res) {
     try {
-      const newCarSize = await CarSize.create(req.body);
+      const newCarsize = await Carsize.create(req.body);
 
       const {
         id,
         title,
         price,
         additional_information,
-      } = newCarSize;
+      } = newCarsize;
 
       return res.json({
         id,
@@ -25,7 +25,7 @@ class CarSizeController {
 
   async show(req, res) {
     try {
-      const carSizes = await CarSize.findAll();
+      const carSizes = await Carsize.findAll();
 
       return res.json(carSizes);
     } catch (err) {
@@ -35,7 +35,7 @@ class CarSizeController {
 
   async update(req, res) {
     try {
-      const carSize = await CarSize.findByPk(req.params.id);
+      const carSize = await Carsize.findByPk(req.params.id);
       if (!carSize) {
         return res.status(400).json({ errors: ['Car Size not found'] });
       }
@@ -62,7 +62,7 @@ class CarSizeController {
 
   async delete(req, res) {
     try {
-      const carSize = await CarSize.findByPk(req.params.id);
+      const carSize = await Carsize.findByPk(req.params.id);
       if (!carSize) {
         return res.status(400).json({ errors: ['Car Size not found'] });
       }
@@ -76,4 +76,4 @@ class CarSizeController {
   }
 }
 
-export default new CarSizeController();
+export default new CarsizeController();

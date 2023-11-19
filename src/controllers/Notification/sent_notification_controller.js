@@ -1,11 +1,11 @@
-import SentNotification from '../../models/Notification/SentNotification_models';
-import UserType from '../../models/User/UserType_models';
+import Sentnotification from '../../models/Notification/SentNotification_models';
+import Usertype from '../../models/User/UserType_models';
 import User from '../../models/User/User_models';
 
 class SentNotificationController {
   async send(req, res) {
     try {
-      const newNotification = await SentNotification.create(req.body);
+      const newNotification = await Sentnotification.create(req.body);
 
       const {
         id,
@@ -48,7 +48,7 @@ class SentNotificationController {
           break;
       }
 
-      const notifications = await SentNotification.findAll({
+      const notifications = await Sentnotification.findAll({
         where: {
           [Op.or]: [{ user_id: id }, { user_type_id: type }]
         }
@@ -62,7 +62,7 @@ class SentNotificationController {
 
   async show(req, res) {
     try {
-      const notifications = await SentNotification.findAll();
+      const notifications = await Sentnotification.findAll();
 
       return res.json(notifications);
     } catch (err) {

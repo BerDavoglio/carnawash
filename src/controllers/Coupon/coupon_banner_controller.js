@@ -1,19 +1,19 @@
-import CouponBanner from '../../models/Coupon/CouponBanner_models';
+import Couponbanner from '../../models/Coupon/CouponBanner_models';
 
 class CouponBannerController {
   async show(req, res) {
     try {
-      const coupon = await CouponBanner.findAll();
+      const coupon = await Couponbanner.findAll();
 
       return res.json(coupon);
     } catch (err) {
-      return res.status(400).json({ errors: `Show CouponBanner / ${err.message}` });
+      return res.status(400).json({ errors: `Show Couponbanner / ${err.message}` });
     }
   }
 
   async update(req, res) {
     try {
-      const coupon = await CouponBanner.findByPk(req.params.id);
+      const coupon = await Couponbanner.findByPk(req.params.id);
       if (!coupon) {
         return res.status(400).json({ errors: ['Coupon Banner not found'] });
       }
@@ -22,7 +22,7 @@ class CouponBannerController {
 
       return res.json(updateCoupon);
     } catch (err) {
-      return res.status(400).json({ errors: `Update CouponBanner / ${err.message}` });
+      return res.status(400).json({ errors: `Update Couponbanner / ${err.message}` });
     }
   }
 }

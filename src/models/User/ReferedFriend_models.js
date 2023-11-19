@@ -1,6 +1,6 @@
 import Sequelize, { Model } from 'sequelize';
 
-export default class ReferedFriend extends Model {
+export default class Referedfriend extends Model {
   static init(sequelize) {
     super.init({
       user_id: {

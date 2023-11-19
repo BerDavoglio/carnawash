@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import clientUserController from '../../controllers/User/client_user_controller';
-import signRegularWashController from '../../controllers/User/sign_regular_wash_controller';
+import signRegularwashController from '../../controllers/User/sign_regular_wash_controller';
 import washerUserController from '../../controllers/User/washer_user_controller';
 import adminUserController from '../../controllers/User/Admin/admin_user_controller';
 import adminClientController from '../../controllers/User/Admin/admin_client_controller';
@@ -18,8 +18,8 @@ router.delete('/', loginRequired, clientUserController.delete);
 
 router.post('/refer/', loginRequired, clientUserController.referFriends);
 
-router.post('/regular/', loginRequired, signRegularWashController.newRegular);
-router.get('/regular/', loginRequired, signRegularWashController.indexRegular);
+router.post('/regular/', loginRequired, signRegularwashController.newRegular);
+router.get('/regular/', loginRequired, signRegularwashController.indexRegular);
 
 router.post('/washer/', loginRequired, washerUserController.firstLogin);
 router.get('/washer/verify/', loginRequired, washerUserController.verifyFirstLogin);

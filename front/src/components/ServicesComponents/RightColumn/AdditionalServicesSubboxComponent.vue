@@ -42,7 +42,7 @@
 
 <script>
 export default {
-  name: 'AdditionalServicesSubboxComponent',
+  name: 'AdditionalservicesSubboxComponent',
   data() {
     return {
       type: '',

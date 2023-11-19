@@ -11,7 +11,7 @@ import '../../data/data.dart';
 import '../../ui/ui.dart';
 import '../infra.dart';
 
-class RegularWashProvider with ChangeNotifier {
+class RegularwashProvider with ChangeNotifier {
   late List<SubscriptionBoxModel> _regularWashList;
 
   List<SubscriptionBoxModel> get regularWashList => _regularWashList;
@@ -48,7 +48,7 @@ class RegularWashProvider with ChangeNotifier {
     } catch (e) {
       await comumDialog(
         context,
-        'Provider Error! loadRegularWash',
+        'Provider Error! loadRegularwash',
         e.toString(),
       );
     }

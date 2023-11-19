@@ -138,7 +138,7 @@ class _HistoryPageState extends State<HistoryPage> {
     List<CarObjectModel?> carsObjectList = [];
     List addonList = [];
 
-    await servicesProvider.loadCarSize(context);
+    await servicesProvider.loadCarsize(context);
 
     WasherModel? washer = await schedule.loadWasher(
       context,
@@ -240,7 +240,7 @@ class _HistoryPageState extends State<HistoryPage> {
                         ),
                         Text(
                           servicesProvider
-                              .getCarSizeComplete(carsList[0]!.car_size_id)
+                              .getCarsizeComplete(carsList[0]!.car_size_id)
                               .title,
                           style: const TextStyle(
                             color: Colors.grey,

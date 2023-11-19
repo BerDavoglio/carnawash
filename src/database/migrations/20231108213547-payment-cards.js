@@ -1,7 +1,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.createTable('payment-cards', {
+    await queryInterface.createTable('paymentcards', {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -40,6 +40,6 @@ module.exports = {
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.dropTable('payment-cards');
+    await queryInterface.dropTable('paymentcards');
   }
 };

@@ -14,9 +14,9 @@ import '../infra.dart';
 
 class ServicesProvider with ChangeNotifier {
   late List<AdditionalModel> _additionalList;
-  late List<CarSizeModel> _carSizeList;
+  late List<CarsizeModel> _carSizeList;
 
-  List<CarSizeModel> get carSizeList => _carSizeList;
+  List<CarsizeModel> get carSizeList => _carSizeList;
   List<AdditionalModel> get additionalList => _additionalList;
 
   Future<void> loadAdditional(BuildContext context) async {
@@ -57,7 +57,7 @@ class ServicesProvider with ChangeNotifier {
     }
   }
 
-  Future<void> loadCarSize(BuildContext context) async {
+  Future<void> loadCarsize(BuildContext context) async {
     final UserProvider userProvider = Provider.of(
       context,
       listen: false,
@@ -89,7 +89,7 @@ class ServicesProvider with ChangeNotifier {
     } catch (e) {
       await comumDialog(
         context,
-        'Provider Error! loadCarSize',
+        'Provider Error! loadCarsize',
         e.toString(),
       );
     }
@@ -99,7 +99,7 @@ class ServicesProvider with ChangeNotifier {
     return _additionalList.firstWhereOrNull((e) => e.id == id);
   }
 
-  CarSizeModel getCarSizeComplete(int id) {
+  CarsizeModel getCarsizeComplete(int id) {
     return _carSizeList.where((e) => e.id == id).first;
   }
 }

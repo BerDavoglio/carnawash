@@ -64,17 +64,17 @@
     </div>
     <v-dialog v-model="confirmNewwash"
               width="auto">
-      <confirm-new-regular-wash-popup @confirmNewRegularWash="confirmNewRegularWash" />
+      <confirm-new-regular-wash-popup @confirmNewRegularwash="confirmNewRegularwash" />
     </v-dialog>
   </div>
 </template>
 
 <script>
-import ConfirmNewRegularWashPopup from '../../PopupComponents/ServicesPopups/ConfirmNewRegularWashPopup.vue';
+import ConfirmNewRegularwashPopup from '../../PopupComponents/ServicesPopups/ConfirmNewRegularwashPopup.vue';
 
 export default {
   name: 'ServicesNewwashBlockComponent',
-  components: { ConfirmNewRegularWashPopup },
+  components: { ConfirmNewRegularwashPopup },
   data() {
     return {
       size: '',
@@ -84,7 +84,7 @@ export default {
     };
   },
   methods: {
-    confirmNewRegularWash(val) {
+    confirmNewRegularwash(val) {
       this.confirmNewwash = val;
     },
   },

@@ -1,5 +1,5 @@
-import PaymentCard from '../../models/Payment/PaymentCard_models';
-import PaymentSchedule from '../../models/Payment/PaymentSchedule_models';
+import Paymentcard from '../../models/Payment/PaymentCard_models';
+import Paymentschedule from '../../models/Payment/Paymentschedule_models';
 
 class PaymentController {
   async store(req, res) {
@@ -9,7 +9,7 @@ class PaymentController {
         return res.status(400).json({ errors: ['ID not Found'] });
       }
 
-      const newCard = await PaymentCard.create({
+      const newCard = await Paymentcard.create({
         user_id: idUser,
         name: req.body.name,
         card: req.body.card,
@@ -32,7 +32,7 @@ class PaymentController {
         date,
       });
     } catch (err) {
-      return res.status(400).json({ errors: `Create PaymentCard / ${err.message}` });
+      return res.status(400).json({ errors: `Create Paymentcard / ${err.message}` });
     }
   }
 
@@ -43,7 +43,7 @@ class PaymentController {
         return res.status(400).json({ errors: ['ID not Found'] });
       }
 
-      const cards = await PaymentCard.findAll({
+      const cards = await Paymentcard.findAll({
         where: {
           user_id: idReq,
         }
@@ -68,7 +68,7 @@ class PaymentController {
         date,
       });
     } catch (err) {
-      return res.status(400).json({ errors: `Show PaymentCard / ${err.message}` });
+      return res.status(400).json({ errors: `Show Paymentcard / ${err.message}` });
     }
   }
 
@@ -79,14 +79,14 @@ class PaymentController {
         return res.status(400).json({ errors: ['ID not Found'] });
       }
 
-      const card = await PaymentCard.findOne({
+      const card = await Paymentcard.findOne({
         where: {
           id: req.params.id,
           user_id: idReq,
         }
       });
       if (!card) {
-        return res.status(400).json({ errors: ['PaymentCard not Found'] });
+        return res.status(400).json({ errors: ['Paymentcard not Found'] });
       }
 
       const {
@@ -105,7 +105,7 @@ class PaymentController {
         date,
       });
     } catch (err) {
-      return res.status(400).json({ errors: `Show PaymentCard / ${err.message}` });
+      return res.status(400).json({ errors: `Show Paymentcard / ${err.message}` });
     }
   }
 
@@ -116,17 +116,17 @@ class PaymentController {
         return res.status(400).json({ errors: ['ID not Found'] });
       }
 
-      const card = await PaymentCard.findOne({
+      const card = await Paymentcard.findOne({
         where: {
           id: req.params.id,
           user_id: idReq,
         }
       });
       if (!card) {
-        return res.status(400).json({ errors: ['PaymentCard not Found'] });
+        return res.status(400).json({ errors: ['Paymentcard not Found'] });
       }
 
-      const cardsActive = await PaymentSchedule.findAll({
+      const cardsActive = await Paymentschedule.findAll({
         where: {
           card_id: card.id
         }
@@ -151,7 +151,7 @@ class PaymentController {
         alternatives_list,
       });
     } catch (err) {
-      return res.status(400).json({ errors: `Update PaymentCard / ${err.message}` });
+      return res.status(400).json({ errors: `Update Paymentcard / ${err.message}` });
     }
   }
 
@@ -162,17 +162,17 @@ class PaymentController {
         return res.status(400).json({ errors: ['ID not Found'] });
       }
 
-      const card = await PaymentCard.findOne({
+      const card = await Paymentcard.findOne({
         where: {
           id: req.params.id,
           user_id: idReq,
         }
       });
       if (!card) {
-        return res.status(400).json({ errors: ['PaymentCard not Found'] });
+        return res.status(400).json({ errors: ['Paymentcard not Found'] });
       }
 
-      const cardsActive = await PaymentSchedule.findAll({
+      const cardsActive = await Paymentschedule.findAll({
         where: {
           card_id: card.id
         }
@@ -183,9 +183,9 @@ class PaymentController {
 
       await card.delete();
 
-      return res.json({ message: 'PaymentCard deleted with success' });
+      return res.json({ message: 'Paymentcard deleted with success' });
     } catch (err) {
-      return res.status(400).json({ errors: `Delete PaymentCard / ${err.message}` });
+      return res.status(400).json({ errors: `Delete Paymentcard / ${err.message}` });
     }
   }
 }

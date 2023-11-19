@@ -237,7 +237,7 @@ class _SchedulesPageState extends State<SchedulesPage> {
                               style: const TextStyle(color: Colors.grey)),
                           Text(
                               servicesProvider
-                                  .getCarSizeComplete(carsList[0].car_size_id)
+                                  .getCarsizeComplete(carsList[0].car_size_id)
                                   .title,
                               style: const TextStyle(color: Colors.grey)),
                           Row(

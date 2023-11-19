@@ -35,7 +35,7 @@
             <div className="w-[241px] p-[12.5px] bg-[#EDBD3A]
             text-black rounded-[8px] cursor-pointer
             m-auto font-semibold"
-                 @click="changeGeral('NewUserType')">
+                 @click="changeGeral('NewUsertype')">
               <v-icon name="bi-plus-square"
                       scale="1.25"
                       fill="black" />
@@ -72,8 +72,8 @@
                                      @changeGeral="changeGeral" />
       </div>
     </div>
-    <div v-if="isGeral == 'NewUserType'"></div>
-    <div v-if="isGeral == 'EditUserType'"></div>
+    <div v-if="isGeral == 'NewUsertype'"></div>
+    <div v-if="isGeral == 'EditUsertype'"></div>
     <v-dialog v-model="newAdminVal"
               width="auto">
       <create-admin-popup @registerAdmin="(val) => this.newAdminVal = val" />

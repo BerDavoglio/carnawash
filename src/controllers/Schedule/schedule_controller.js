@@ -1,15 +1,15 @@
 import Schedule from '../../models/Schedules/Schedule_models';
-import CarsObjects from '../../models/Schedules/CarsObjects_models';
+import Carsobjects from '../../models/Schedules/CarsObject_models';
 import Car from '../../models/Car/Car_models';
 
-import AdditionalService from '../../models/Services/AdditionalService_models';
-import CarSize from '../../models/Services/CarSize_models';
-import RegularWash from '../../models/Services/RegularWash_models';
+import Additionalservice from '../../models/Services/AdditionalService_models';
+import Carsize from '../../models/Services/CarSize_models';
+import Regularwash from '../../models/Services/RegularWash_models';
 
 import Coupon from '../../models/Coupon/Coupon_models';
 
-import PaymentCard from '../../models/Payment/PaymentCard_models';
-import PaymentSchedule from '../../models/Payment/PaymentSchedule_models';
+import Paymentcard from '../../models/Payment/PaymentCard_models';
+import Paymentschedule from '../../models/Payment/Paymentschedule_models';
 
 class ScheduleController {
   async store(req, res) {
@@ -21,16 +21,16 @@ class ScheduleController {
 
       let cars_list_id = '';
       req.body.cars_obj_list.forEach(async (cars_obj) => {
-        const newCarsObjects = await CarsObjects.create({
+        const newCarsobjects = await Carsobjects.create({
           car_id: cars_obj.car_id,
           wash_type: cars_obj.wash_type,
           additional_list_id: cars_obj.additional_list_id,
         });
-        cars_list_id += newCarsObjects.id;
+        cars_list_id += newCarsobjects.id;
         cars_list_id += ';';
       });
 
-      const newPaymentSchedule = await PaymentSchedule.create({
+      const newPaymentschedule = await Paymentschedule.create({
         user_id: idUser,
         card_id: req.body.credit_card_id,
         three: req.body.three,
@@ -42,7 +42,7 @@ class ScheduleController {
         selected_date: req.body.selected_date,
         address: req.body.address,
         coupon_id: req.body.coupon_id,
-        payment_schedule_id: newPaymentSchedule.id,
+        payment_schedule_id: newPaymentschedule.id,
         washer_id: null,
         status: 'not-assign',
         rate: null,
@@ -61,9 +61,9 @@ class ScheduleController {
         return res.status(400).json({ errors: ['ID not Found'] });
       }
 
-      const newCarsObjects = await CarsObjects.findByPk(req.params.id);
+      const newCarsobjects = await Carsobjects.findByPk(req.params.id);
 
-      return res.json(newCarsObjects);
+      return res.json(newCarsobjects);
     } catch (err) {
       return res.status(400).json({ errors: err.message });
     }
@@ -76,9 +76,9 @@ class ScheduleController {
     if (!car) {
       return res.status(400).json({ errors: 'Car not found' });
     }
-    const car_size = CarSize.findByPk(car.car_size_id);
+    const car_size = Carsize.findByPk(car.car_size_id);
     if (!car_size) {
-      return res.status(400).json({ errors: 'CarSize not found' });
+      return res.status(400).json({ errors: 'Carsize not found' });
     }
     total += car_size.price;
     if (wash_type == 2) {
@@ -86,7 +86,7 @@ class ScheduleController {
     }
 
     additional_list_id.split(';').forEach((add_id) => {
-      const addon = AdditionalService.findByPk(add_id);
+      const addon = Additionalservice.findByPk(add_id);
       if (!addon) {
         return res.status(400).json({ errors: 'Additional Service not found' });
       }
@@ -117,7 +117,7 @@ class ScheduleController {
       const schedule = await Schedule.findByPk(id);
 
       schedule.cars_list_id.split(';').forEach(async (cars_obj_id) => {
-        const cars_obj = await CarsObjects.findByPk(cars_obj_id);
+        const cars_obj = await Carsobjects.findByPk(cars_obj_id);
         total += this.calcCarRegularPrice(
           cars_obj.car_id,
           cars_obj.wash_type,
@@ -148,9 +148,9 @@ class ScheduleController {
       }
 
       schedule.cars_list_id.split(';').forEach(async (cars_obj_id) => {
-        const cars_obj = await CarsObjects.findByPk(cars_obj_id);
+        const cars_obj = await Carsobjects.findByPk(cars_obj_id);
         if (!cars_obj) {
-          return res.status(400).json({ errors: ['CarsObjects not Found'] });
+          return res.status(400).json({ errors: ['Carsobjects not Found'] });
         }
         total += this.calcCarRegularPrice(
           cars_obj.car_id,
@@ -466,13 +466,13 @@ class ScheduleController {
         rate: req.body.rate,
       });
 
-      const payment = await PaymentSchedule.findOne({
+      const payment = await Paymentschedule.findOne({
         where: {
           id: schedule.payment_schedule_id,
           wash_id: schedule.id
         }
       });
-      const card = await PaymentCard.findByPk(payment.card_id);
+      const card = await Paymentcard.findByPk(payment.card_id);
 
       const card_number = card.getCardNumber();
       const card_date = card.date;
