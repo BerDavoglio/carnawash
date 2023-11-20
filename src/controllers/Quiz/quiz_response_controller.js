@@ -1,5 +1,5 @@
 import Quizresponse from '../../models/Quiz/QuizResponse_models';
-import Washerinfo from '../../models/User/Washerinfo_models';
+import Washerinfo from '../../models/User/WasherInfo_models';
 
 class QuizresponseController {
   async makeResponse(req, res) {
