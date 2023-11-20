@@ -645,23 +645,23 @@ class ScheduleController {
       const card_date = card.date;
       const three = payment.getCardThree();
 
-      const stripe = require('stripe')(process.env.STRIPE_TOKEN);
+      // const stripe = require('stripe')(process.env.STRIPE_TOKEN);
 
-      const token = await stripe.tokens.create({
-        card: {
-          number: card_number,
-          exp_month: card_date.getMonth(),
-          exp_year: card_date.getYear(),
-          three,
-        },
-      });
+      // const token = await stripe.tokens.create({
+      //   card: {
+      //     number: card_number,
+      //     exp_month: card_date.getMonth(),
+      //     exp_year: card_date.getYear(),
+      //     three,
+      //   },
+      // });
 
-      const charge = await stripe.charges.create({
-        amount: this.calcTotalPriceInternal(schedule.id).price,
-        currency: 'aud',
-        source: token,
-        description: 'Payment - ' + schedule.id,
-      });
+      // const charge = await stripe.charges.create({
+      //   amount: this.calcTotalPriceInternal(schedule.id).price,
+      //   currency: 'aud',
+      //   source: token,
+      //   description: 'Payment - ' + schedule.id,
+      // });
 
       await Paymentwasher.create({
         washer_id: schedule.washer_id,
@@ -670,7 +670,7 @@ class ScheduleController {
         pay_data: null,
       })
 
-      return res.json(charge);
+      return res.json(newSchedule);
     } catch (err) {
       return res.status(400).json({ errors: err.message });
     }
