@@ -30,6 +30,34 @@ app.listen(process.env.APP_PORT, async () => {
   } else {
     console.log('Admin already has been created');
   }
+  const client = await User.findByPk(2);
+  if (!client) {
+    await User.create({
+      name: 'client',
+      email: 'client@gmail.com',
+      address: 'av client, 123',
+      phone: '41900000000',
+      role: 'client',
+      subrole: null,
+      password: 'client123',
+    });
+  } else {
+    console.log('Client already has been created');
+  }
+  const washer = await User.findByPk(3);
+  if (!washer) {
+    await User.create({
+      name: 'washer',
+      email: 'washer@gmail.com',
+      address: 'av washer, 123',
+      phone: '41900000000',
+      role: 'washer',
+      subrole: null,
+      password: 'washer123',
+    });
+  } else {
+    console.log('Washer already has been created');
+  }
 
   const banner = await Couponbanner.findByPk(1);
   if (!banner) {
