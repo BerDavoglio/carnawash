@@ -55,6 +55,15 @@ class ScheduleProvider with ChangeNotifier {
     }
   }
 
+  bool verifyUnaccepted() {
+    for (ScheduleModel element in _listSchedules) {
+      if (element.status == 'not-accepted') {
+        return true;
+      }
+    }
+    return false;
+  }
+
   // Future<void> loadSchedulesHistory(BuildContext context, DateTime initialDate, DateTime finishDate) async {
   //   final UserProvider userProvider = Provider.of(
   //     context,
@@ -373,5 +382,119 @@ class ScheduleProvider with ChangeNotifier {
       return null;
     }
     return null;
+  }
+
+  Future<int> countAll(BuildContext context) async {
+    UserProvider userProvider = Provider.of(
+      context,
+      listen: false,
+    );
+    try {
+      final response = await http.get(
+        Uri.parse('${Constants.BACKEND_BASE_URL}/schedule/washer/number-all'),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer ${userProvider.token}',
+        },
+      );
+
+      var v = jsonDecode(response.body);
+
+      if (response.statusCode == 200) {
+        return v;
+      } else if (v['errors'] != '') {
+        await comumDialog(
+          context,
+          'Erro!',
+          v['errors'],
+        );
+        return 0;
+      }
+    } catch (e) {
+      await comumDialog(
+        context,
+        'Provider Error! countAll',
+        e.toString(),
+      );
+      return 0;
+    }
+    return 0;
+  }
+  
+  Future<int> countNext(BuildContext context) async {
+    UserProvider userProvider = Provider.of(
+      context,
+      listen: false,
+    );
+    try {
+      final response = await http.get(
+        Uri.parse('${Constants.BACKEND_BASE_URL}/schedule/washer/number-next'),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer ${userProvider.token}',
+        },
+      );
+
+      var v = jsonDecode(response.body);
+
+      if (response.statusCode == 200) {
+        return v;
+      } else if (v['errors'] != '') {
+        await comumDialog(
+          context,
+          'Erro!',
+          v['errors'],
+        );
+        return 0;
+      }
+    } catch (e) {
+      await comumDialog(
+        context,
+        'Provider Error! countNext',
+        e.toString(),
+      );
+      return 0;
+    }
+    return 0;
+  }
+
+  Future<int> countCancel(BuildContext context) async {
+    UserProvider userProvider = Provider.of(
+      context,
+      listen: false,
+    );
+    try {
+      final response = await http.get(
+        Uri.parse('${Constants.BACKEND_BASE_URL}/schedule/washer/number-cancel'),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer ${userProvider.token}',
+        },
+      );
+
+      var v = jsonDecode(response.body);
+
+      if (response.statusCode == 200) {
+        return v;
+      } else if (v['errors'] != '') {
+        await comumDialog(
+          context,
+          'Erro!',
+          v['errors'],
+        );
+        return 0;
+      }
+    } catch (e) {
+      await comumDialog(
+        context,
+        'Provider Error! countCancel',
+        e.toString(),
+      );
+      return 0;
+    }
+    return 0;
   }
 }

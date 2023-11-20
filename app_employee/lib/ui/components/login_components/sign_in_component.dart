@@ -25,6 +25,7 @@ class _SignInComponentState extends State<SignInComponent> {
 
   @override
   Widget build(BuildContext context) {
+    UserProvider userProvider = Provider.of(context, listen: false);
     WasherProvider washerProvider = Provider.of(context, listen: false);
 
     return Column(
@@ -69,8 +70,14 @@ class _SignInComponentState extends State<SignInComponent> {
                 backgroundColor: const Color.fromRGBO(237, 189, 58, 1),
                 fixedSize: Size(MediaQuery.of(context).size.width * 0.85, 50)),
             onPressed: () async {
-              // REALIZAR LOGIN
+              await userProvider.submitLogin(
+                context,
+                widget.emailController.text,
+                widget.passwordController.text,
+              );
+
               int i = await washerProvider.verifyFistLogin(context);
+
               if (i == 10) {
                 Navigator.push(
                   context,
@@ -92,7 +99,6 @@ class _SignInComponentState extends State<SignInComponent> {
                     builder: (context) => FirstLoginHomePage(verify: i),
                   ),
                 );
-
               }
             },
             child: const Text('Login'),

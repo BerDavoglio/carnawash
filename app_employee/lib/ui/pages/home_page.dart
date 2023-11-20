@@ -26,6 +26,26 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  late int allWashes;
+  late int nextWashes;
+  late int cancelWashes;
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      ScheduleProvider scheduleProvider = Provider.of(
+        context,
+        listen: false,
+      );
+      await scheduleProvider.loadSchedules(context, DateTime.now());
+      allWashes = await scheduleProvider.countAll(context);
+      nextWashes = await scheduleProvider.countNext(context);
+      cancelWashes = await scheduleProvider.countCancel(context);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     UserProvider userProvider = Provider.of(context);
@@ -139,17 +159,16 @@ class _HomePageState extends State<HomePage> {
                 ),
                 color: Colors.white,
               ),
-              child: const Padding(
-                padding: EdgeInsets.symmetric(vertical: 16),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 16),
                 child: Column(children: [
-                  Text(
+                  const Text(
                     'Number of Washes',
                     style: TextStyle(fontSize: 14),
                   ),
                   Text(
-                    '15',
-                    // GET FROM SCHEDULESHISTORY ALLTIME
-                    style: TextStyle(
+                    allWashes.toString(),
+                    style: const TextStyle(
                       color: Colors.grey,
                       fontSize: 28,
                     ),
@@ -170,17 +189,16 @@ class _HomePageState extends State<HomePage> {
                   color: Colors.white,
                 ),
                 width: MediaQuery.of(context).size.width * 0.42,
-                child: const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 16),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 16),
                   child: Column(children: [
-                    Text(
+                    const Text(
                       'Next scheduled',
                       style: TextStyle(fontSize: 14),
                     ),
                     Text(
-                      '3',
-                      // GET FROM SCHEDULESHISTORY ALLTIME
-                      style: TextStyle(
+                      nextWashes.toString(),
+                      style: const TextStyle(
                         color: Colors.green,
                         fontSize: 28,
                       ),
@@ -196,17 +214,16 @@ class _HomePageState extends State<HomePage> {
                   color: Colors.white,
                 ),
                 width: MediaQuery.of(context).size.width * 0.42,
-                child: const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 16),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 16),
                   child: Column(children: [
-                    Text(
+                    const Text(
                       'Canceled washes',
                       style: TextStyle(fontSize: 14),
                     ),
                     Text(
-                      '2',
-                      // GET FROM SCHEDULESHISTORY ALLTIME
-                      style: TextStyle(
+                      cancelWashes.toString(),
+                      style: const TextStyle(
                         color: Colors.red,
                         fontSize: 28,
                       ),
@@ -217,28 +234,29 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
           const SizedBox(height: 24),
-          // VERIFY IF THERE IS ANY NOT-ACCEPTED WASH
-          Container(
-            padding: const EdgeInsets.all(24),
-            height: 72,
-            width: MediaQuery.of(context).size.width * 0.85,
-            decoration: const BoxDecoration(
-              color: Color.fromRGBO(229, 229, 229, 1),
-              borderRadius: BorderRadius.all(Radius.circular(16)),
-            ),
-            child: const Row(
-              children: [
-                Icon(Icons.report_outlined),
-                Text(
-                  'You have a wash request',
-                  style: TextStyle(
-                    fontWeight: FontWeight.w500,
-                    fontSize: 16,
+          scheduleProvider.verifyUnaccepted()
+              ? Container(
+                  padding: const EdgeInsets.all(24),
+                  height: 72,
+                  width: MediaQuery.of(context).size.width * 0.85,
+                  decoration: const BoxDecoration(
+                    color: Color.fromRGBO(229, 229, 229, 1),
+                    borderRadius: BorderRadius.all(Radius.circular(16)),
                   ),
-                ),
-              ],
-            ),
-          ),
+                  child: const Row(
+                    children: [
+                      Icon(Icons.report_outlined),
+                      Text(
+                        'You have a wash request',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              : Container(),
           const SizedBox(height: 24),
           Column(
             children: List.generate(
@@ -422,7 +440,11 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                       backgroundColor: MaterialStateProperty.all<Color>(
-                        schedule.status == 'not-started' ? Colors.green : Colors.blue,
+                        schedule.status == 'not-started'
+                            ? Colors.green
+                            : schedule.status == 'not-accepted'
+                                ? Colors.yellow
+                                : Colors.blue,
                       ),
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                         RoundedRectangleBorder(
@@ -433,11 +455,17 @@ class _HomePageState extends State<HomePage> {
                     onPressed: () {
                       setState(() async {
                         await scheduleProvider.changeStatusSchedule(
-                            context, schedule.id!);
+                          context,
+                          schedule.id!,
+                        );
                       });
                     },
                     child: Text(
-                      schedule.status == 'not-started' ? 'Start' : 'Finished',
+                      schedule.status == 'not-started'
+                          ? 'Start'
+                          : schedule.status == 'not-accepted'
+                              ? 'Accept'
+                              : 'Finished',
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Colors.white,

@@ -358,6 +358,65 @@ class ScheduleController {
     }
   }
 
+  async countAll(req, res) {
+    try {
+      const idUser = req.userId;
+      if (!idUser) {
+        return res.status(400).json({ errors: ['ID not Found'] });
+      }
+
+      const schedule = await Schedule.findAll({
+        where: {
+          washer_id: idUser,
+        },
+      });
+
+      return res.json(schedule.length);
+    } catch (err) {
+      return res.status(400).json({ errors: err.message });
+    }
+  }
+
+  async countNext(req, res) {
+    try {
+      const idUser = req.userId;
+      if (!idUser) {
+        return res.status(400).json({ errors: ['ID not Found'] });
+      }
+
+      const schedule = await Schedule.findAll({
+        where: {
+          washer_id: idUser,
+          status: 'not-started',
+        },
+      });
+
+      return res.json(schedule.length);
+    } catch (err) {
+      return res.status(400).json({ errors: err.message });
+    }
+  }
+
+  async countCancel(req, res) {
+    try {
+      const idUser = req.userId;
+      if (!idUser) {
+        return res.status(400).json({ errors: ['ID not Found'] });
+      }
+
+      const schedule = await Schedule.findAll({
+        where: {
+          washer_id: idUser,
+          status: 'cancel',
+        },
+      });
+
+      return res.json(schedule.length);
+    } catch (err) {
+      return res.status(400).json({ errors: err.message });
+    }
+  }
+
   async indexClientRebook(req, res) {
     try {
       const idUser = req.userId;
@@ -475,15 +534,16 @@ class ScheduleController {
   async declineWasher(req, res) {
     try {
       const schedule = await Schedule.findByPk(req.params.id);
-      if (schedule.status != 'not-started') {
+      if (schedule.status == 'not-accepted') {
+        await schedule.update({
+          washer_id: 0,
+          status: 'not-assign'
+        });
+
+        return res.json({ message: ['Washer updated with success'] });
+      } else {
         return res.status(400).json({ message: 'You cant decline a wash that you already accepted' });
       }
-
-      await schedule.update({
-        washer_id: 0,
-      });
-
-      return res.json({ message: ['Washer updated with success'] });
     } catch (err) {
       return res.status(400).json({ errors: err.message });
     }
@@ -504,6 +564,11 @@ class ScheduleController {
       });
 
       switch (schedule.status) {
+        case 'not-accepted':
+          await schedule.update({
+            status: 'not-started',
+          });
+          break;
         case 'not-started':
           await schedule.update({
             status: 'started',

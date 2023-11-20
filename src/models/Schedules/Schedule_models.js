@@ -36,7 +36,7 @@ export default class Schedule extends Model {
         defaultValue: 0,
       },
       status: {
-        type: Sequelize.ENUM('not-assign', 'not-started', 'started', 'finished', 'cancel'),
+        type: Sequelize.ENUM('not-assign', 'not-accepted', 'not-started', 'started', 'finished', 'cancel'),
         defaultValue: 'not-assign',
       },
       rate: {

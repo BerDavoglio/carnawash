@@ -26,6 +26,9 @@ router.get('/washer/by-date/:date', loginRequired, scheduleController.showWasher
 router.put('/washer/change/:id', loginRequired, scheduleController.changeStatus);
 router.put('/washer/decline/:id', loginRequired, scheduleController.declineWasher);
 router.get('/washer/history/:initDate/:endDate', loginRequired, scheduleController.indexWasherHistory);
+router.get('/washer/number-all', loginRequired, scheduleController.countAll);
+router.get('/washer/number-next', loginRequired, scheduleController.countNext);
+router.get('/washer/number-cancel', loginRequired, scheduleController.countCancel);
 
 router.put('/admin/:id', loginRequired, isAdmin, scheduleController.updateWasher);
 

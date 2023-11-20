@@ -1,6 +1,6 @@
 
 module.exports = {
-  async up (queryInterface, Sequelize) {
+  async up(queryInterface, Sequelize) {
     await queryInterface.createTable('schedules', {
       id: {
         type: Sequelize.INTEGER,
@@ -41,7 +41,7 @@ module.exports = {
         allowNull: true,
       },
       status: {
-        type: Sequelize.ENUM('not-assign', 'not-started', 'started', 'finished', 'cancel'),
+        type: Sequelize.ENUM('not-assign', 'not-accepted', 'not-started', 'started', 'finished', 'cancel'),
         allowNull: false,
       },
       rate: {
@@ -59,7 +59,7 @@ module.exports = {
     });
   },
 
-  async down (queryInterface, Sequelize) {
+  async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('schedules');
   }
 };
