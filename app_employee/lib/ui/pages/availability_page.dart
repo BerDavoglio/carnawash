@@ -1,7 +1,10 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../data/data.dart';
+import '../../infra/infra.dart';
 import '../ui.dart';
 
 class AvailabilityPage extends StatefulWidget {
@@ -11,27 +14,7 @@ class AvailabilityPage extends StatefulWidget {
   State<AvailabilityPage> createState() => _AvailabilityPageState();
 }
 
-class Item {
-  Item({
-    required this.day,
-    required this.start,
-    required this.finish,
-    required this.breakpoint,
-    required this.pause,
-    this.isOpen = false,
-  });
-
-  String day;
-  TimeOfDay start;
-  TimeOfDay finish;
-  TimeOfDay breakpoint;
-  TimeOfDay pause;
-  bool isOpen;
-}
-
 class _AvailabilityPageState extends State<AvailabilityPage> {
-  // GET VALUE FROM WASHERPROVIDER
-  // POST VALUES FROM WASHERPROVIDER
   void _selectTime(oldTime) async {
     final TimeOfDay? newTime = await showTimePicker(
       context: context,
@@ -45,67 +28,33 @@ class _AvailabilityPageState extends State<AvailabilityPage> {
     }
   }
 
-  List<Item> list = [
-    Item(
-      day: 'Monday',
-      start: TimeOfDay(hour: 9, minute: 30),
-      finish: TimeOfDay(hour: 16, minute: 30),
-      pause: TimeOfDay(hour: 10, minute: 00),
-      breakpoint: TimeOfDay(hour: 11, minute: 00),
-      isOpen: false,
-    ),
-    Item(
-      day: 'Tuesday',
-      start: TimeOfDay(hour: 10, minute: 30),
-      finish: TimeOfDay(hour: 16, minute: 30),
-      pause: TimeOfDay(hour: 10, minute: 00),
-      breakpoint: TimeOfDay(hour: 11, minute: 00),
-      isOpen: false,
-    ),
-    Item(
-      day: 'Wednesday',
-      start: TimeOfDay(hour: 9, minute: 30),
-      finish: TimeOfDay(hour: 16, minute: 30),
-      pause: TimeOfDay(hour: 10, minute: 00),
-      breakpoint: TimeOfDay(hour: 11, minute: 00),
-      isOpen: false,
-    ),
-    Item(
-      day: 'Thursday',
-      start: TimeOfDay(hour: 9, minute: 30),
-      finish: TimeOfDay(hour: 16, minute: 30),
-      pause: TimeOfDay(hour: 10, minute: 00),
-      breakpoint: TimeOfDay(hour: 11, minute: 00),
-      isOpen: false,
-    ),
-    Item(
-      day: 'Friday',
-      start: TimeOfDay(hour: 9, minute: 30),
-      finish: TimeOfDay(hour: 16, minute: 30),
-      pause: TimeOfDay(hour: 10, minute: 00),
-      breakpoint: TimeOfDay(hour: 11, minute: 00),
-      isOpen: false,
-    ),
-    Item(
-      day: 'Saturday',
-      start: TimeOfDay(hour: 9, minute: 30),
-      finish: TimeOfDay(hour: 16, minute: 30),
-      pause: TimeOfDay(hour: 10, minute: 00),
-      breakpoint: TimeOfDay(hour: 11, minute: 00),
-      isOpen: false,
-    ),
-    Item(
-      day: 'Sunday',
-      start: TimeOfDay(hour: 9, minute: 30),
-      finish: TimeOfDay(hour: 16, minute: 30),
-      pause: TimeOfDay(hour: 10, minute: 00),
-      breakpoint: TimeOfDay(hour: 11, minute: 00),
-      isOpen: false,
-    ),
+  List isOpen = [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
   ];
+
+  late TimeAvailableModel timeAvailable;
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      WasherProvider washerProvider = Provider.of(context);
+
+      timeAvailable = washerProvider.getAllTimeAvailable();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    WasherProvider washerProvider = Provider.of(context);
+
     return Scaffold(
       bottomNavigationBar: navigationBarComponent(context),
       body: SingleChildScrollView(
@@ -150,13 +99,14 @@ class _AvailabilityPageState extends State<AvailabilityPage> {
                         ),
                       ),
                       SizedBox(height: 5),
-                      faqBox(context, 0),
-                      faqBox(context, 1),
-                      faqBox(context, 2),
-                      faqBox(context, 3),
-                      faqBox(context, 4),
-                      faqBox(context, 5),
-                      faqBox(context, 6),
+                      timeAvailableBox(context, timeAvailable.sunday_list, 0),
+                      timeAvailableBox(context, timeAvailable.monday_list, 1),
+                      timeAvailableBox(context, timeAvailable.tuesday_list, 2),
+                      timeAvailableBox(
+                          context, timeAvailable.wednesday_list, 3),
+                      timeAvailableBox(context, timeAvailable.thursday_list, 4),
+                      timeAvailableBox(context, timeAvailable.friday_list, 5),
+                      timeAvailableBox(context, timeAvailable.saturday_list, 6),
                       SizedBox(height: 20),
                       TextButton(
                         style: ButtonStyle(
@@ -167,7 +117,8 @@ class _AvailabilityPageState extends State<AvailabilityPage> {
                           backgroundColor: MaterialStateProperty.all<Color>(
                             Color.fromRGBO(237, 189, 58, 1),
                           ),
-                          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(5),
                             ),
@@ -180,7 +131,20 @@ class _AvailabilityPageState extends State<AvailabilityPage> {
                             color: Colors.white,
                           ),
                         ),
-                        onPressed: () {},
+                        onPressed: () async {
+                          await washerProvider.updateTimeAvailable(
+                            context,
+                            TimeAvailableProviderModel(
+                              sunday_list: '${timeAvailable.sunday_list.start.hour}:${timeAvailable.sunday_list.start.minute};${timeAvailable.sunday_list.finish.hour}:${timeAvailable.sunday_list.finish.minute};${timeAvailable.sunday_list.breakpoint.hour}:${timeAvailable.sunday_list.breakpoint.minute};${timeAvailable.sunday_list.pause.hour}:${timeAvailable.sunday_list.pause.minute};',
+                              monday_list: '${timeAvailable.monday_list.start.hour}:${timeAvailable.monday_list.start.minute};${timeAvailable.monday_list.finish.hour}:${timeAvailable.monday_list.finish.minute};${timeAvailable.monday_list.breakpoint.hour}:${timeAvailable.monday_list.breakpoint.minute};${timeAvailable.monday_list.pause.hour}:${timeAvailable.monday_list.pause.minute};',
+                              tuesday_list: '${timeAvailable.tuesday_list.start.hour}:${timeAvailable.tuesday_list.start.minute};${timeAvailable.tuesday_list.finish.hour}:${timeAvailable.tuesday_list.finish.minute};${timeAvailable.tuesday_list.breakpoint.hour}:${timeAvailable.tuesday_list.breakpoint.minute};${timeAvailable.tuesday_list.pause.hour}:${timeAvailable.tuesday_list.pause.minute};',
+                              wednesday_list: '${timeAvailable.wednesday_list.start.hour}:${timeAvailable.wednesday_list.start.minute};${timeAvailable.wednesday_list.finish.hour}:${timeAvailable.wednesday_list.finish.minute};${timeAvailable.wednesday_list.breakpoint.hour}:${timeAvailable.wednesday_list.breakpoint.minute};${timeAvailable.wednesday_list.pause.hour}:${timeAvailable.wednesday_list.pause.minute};',
+                              thursday_list: '${timeAvailable.thursday_list.start.hour}:${timeAvailable.thursday_list.start.minute};${timeAvailable.thursday_list.finish.hour}:${timeAvailable.thursday_list.finish.minute};${timeAvailable.thursday_list.breakpoint.hour}:${timeAvailable.thursday_list.breakpoint.minute};${timeAvailable.thursday_list.pause.hour}:${timeAvailable.thursday_list.pause.minute};',
+                              friday_list: '${timeAvailable.friday_list.start.hour}:${timeAvailable.friday_list.start.minute};${timeAvailable.friday_list.finish.hour}:${timeAvailable.friday_list.finish.minute};${timeAvailable.friday_list.breakpoint.hour}:${timeAvailable.friday_list.breakpoint.minute};${timeAvailable.friday_list.pause.hour}:${timeAvailable.friday_list.pause.minute};',
+                              saturday_list: '${timeAvailable.saturday_list.start.hour}:${timeAvailable.saturday_list.start.minute};${timeAvailable.saturday_list.finish.hour}:${timeAvailable.saturday_list.finish.minute};${timeAvailable.saturday_list.breakpoint.hour}:${timeAvailable.saturday_list.breakpoint.minute};${timeAvailable.saturday_list.pause.hour}:${timeAvailable.saturday_list.pause.minute};',
+                            ),
+                          );
+                        },
                       ),
                       SizedBox(height: 5),
                       Center(
@@ -211,8 +175,9 @@ class _AvailabilityPageState extends State<AvailabilityPage> {
     );
   }
 
-  Widget faqBox(
+  Widget timeAvailableBox(
     BuildContext context,
+    TimeAvailableChangeModel timeAvailable,
     int index,
   ) {
     return Column(
@@ -241,17 +206,17 @@ class _AvailabilityPageState extends State<AvailabilityPage> {
                       color: Colors.white),
                 ),
                 Text(
-                  list[index].day,
+                  timeAvailable.day,
                 ),
                 IconButton(
                   splashColor: Colors.white,
                   splashRadius: 10,
-                  icon: Icon(!list[index].isOpen
+                  icon: Icon(!isOpen[index].isOpen
                       ? Icons.keyboard_arrow_down
                       : Icons.keyboard_arrow_down),
                   onPressed: () {
                     setState(() {
-                      list[index].isOpen = !list[index].isOpen;
+                      isOpen[index].isOpen = !isOpen[index].isOpen;
                     });
                   },
                 )
@@ -259,7 +224,7 @@ class _AvailabilityPageState extends State<AvailabilityPage> {
             ),
           ),
         ),
-        list[index].isOpen
+        isOpen[index].isOpen
             ? Container(
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -274,7 +239,7 @@ class _AvailabilityPageState extends State<AvailabilityPage> {
                           const Text('Start Time'),
                           GestureDetector(
                             onTap: () {
-                              _selectTime(list[index].start);
+                              _selectTime(timeAvailable.start);
                             },
                             child: Container(
                               width: MediaQuery.of(context).size.width * 0.75,
@@ -289,7 +254,7 @@ class _AvailabilityPageState extends State<AvailabilityPage> {
                               child: Padding(
                                 padding: const EdgeInsets.all(7),
                                 child: Text(
-                                  '${list[index].start.hour}:${list[index].start.minute}',
+                                  '${timeAvailable.start.hour}:${timeAvailable.start.minute}',
                                 ),
                               ),
                             ),
@@ -305,7 +270,7 @@ class _AvailabilityPageState extends State<AvailabilityPage> {
                           const Text('Finish Time'),
                           GestureDetector(
                             onTap: () {
-                              _selectTime(list[index].finish);
+                              _selectTime(timeAvailable.finish);
                             },
                             child: Container(
                               width: MediaQuery.of(context).size.width * 0.75,
@@ -320,7 +285,7 @@ class _AvailabilityPageState extends State<AvailabilityPage> {
                               child: Padding(
                                 padding: const EdgeInsets.all(7),
                                 child: Text(
-                                  '${list[index].finish.hour}:${list[index].finish.minute}',
+                                  '${timeAvailable.finish.hour}:${timeAvailable.finish.minute}',
                                 ),
                               ),
                             ),
@@ -343,7 +308,7 @@ class _AvailabilityPageState extends State<AvailabilityPage> {
                               const Text('Break Time'),
                               GestureDetector(
                                 onTap: () {
-                                  _selectTime(list[index].breakpoint);
+                                  _selectTime(timeAvailable.breakpoint);
                                 },
                                 child: Container(
                                   width:
@@ -359,7 +324,7 @@ class _AvailabilityPageState extends State<AvailabilityPage> {
                                   child: Padding(
                                     padding: const EdgeInsets.all(7),
                                     child: Text(
-                                      '${list[index].breakpoint.hour}:${list[index].breakpoint.minute}',
+                                      '${timeAvailable.breakpoint.hour}:${timeAvailable.breakpoint.minute}',
                                     ),
                                   ),
                                 ),
@@ -372,7 +337,7 @@ class _AvailabilityPageState extends State<AvailabilityPage> {
                               const Text('Pause Time'),
                               GestureDetector(
                                 onTap: () {
-                                  _selectTime(list[index].pause);
+                                  _selectTime(timeAvailable.pause);
                                 },
                                 child: Container(
                                   width:
@@ -388,7 +353,7 @@ class _AvailabilityPageState extends State<AvailabilityPage> {
                                   child: Padding(
                                     padding: const EdgeInsets.all(7),
                                     child: Text(
-                                      '${list[index].pause.hour}:${list[index].pause.minute}',
+                                      '${timeAvailable.pause.hour}:${timeAvailable.pause.minute}',
                                     ),
                                   ),
                                 ),

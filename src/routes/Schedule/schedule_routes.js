@@ -23,8 +23,7 @@ router.put('/rate/:id', loginRequired, scheduleController.rate);
 
 router.get('/washer/by-id/:id', loginRequired, scheduleController.indexWasher);
 router.get('/washer/by-date/:date', loginRequired, scheduleController.showWasher);
-router.get('/washer/:id', loginRequired, scheduleController.indexWasher);
-router.put('/washer/:id', loginRequired, scheduleController.changeStatus);
+router.put('/washer/change/:id', loginRequired, scheduleController.changeStatus);
 router.put('/washer/decline/:id', loginRequired, scheduleController.declineWasher);
 router.get('/washer/history/:initDate/:endDate', loginRequired, scheduleController.indexWasherHistory);
 

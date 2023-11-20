@@ -322,7 +322,24 @@ class _SchedulesPageState extends State<SchedulesPage> {
                     padding: const EdgeInsets.only(top: 10),
                     child: InkWell(
                       onTap: () {
-                        scheduleProvider.cancelSchedule(context, schedule.id!);
+                        showDialog<void>(
+                          context: context,
+                          builder: (ctx) => AlertDialog(
+                            title: const Text('Cancel confirmation'),
+                            content: const Text(
+                                'Are you sure that you want to cancel this wash?'),
+                            actions: [
+                              TextButton(
+                                child: const Text('Yes'),
+                                onPressed: () async {
+                                  await scheduleProvider.cancelSchedule(
+                                      context, schedule.id!);
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                            ],
+                          ),
+                        );
                       },
                       child: const Text(
                         'Cancel',

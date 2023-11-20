@@ -14,14 +14,16 @@ import '../infra.dart';
 
 class WasherProvider with ChangeNotifier {
   late BankInfoModel _bankInfo;
-  late TimeAvailableModel _timeAvailable;
+  late TimeAvailableProviderModel _timeAvailable;
   late WasherInfoModel _washerInfo;
   late List<QuizQuestionModel> _listQuizQuestions;
+  late int _quizGrade;
 
   BankInfoModel get bankInfo => _bankInfo;
-  TimeAvailableModel get timeAvailable => _timeAvailable;
+  TimeAvailableProviderModel get timeAvailable => _timeAvailable;
   WasherInfoModel get washerInfo => _washerInfo;
   List<QuizQuestionModel> get listQuizQuestions => _listQuizQuestions;
+  int get quizGrade => _quizGrade;
 
   Future<void> fistLogin(
     BuildContext context,
@@ -65,7 +67,6 @@ class WasherProvider with ChangeNotifier {
             ),
           ),
         );
-
       } else if (v['errors'] != '') {
         await comumDialog(
           context,
@@ -139,7 +140,6 @@ class WasherProvider with ChangeNotifier {
 
       if (response.statusCode == 200) {
         _listQuizQuestions = v;
-
       } else if (v['errors'] != '') {
         await comumDialog(
           context,
@@ -158,7 +158,6 @@ class WasherProvider with ChangeNotifier {
 
   Future<void> answerQuiz(
     BuildContext context,
-    QuizAnswerModel quizAnswer,
   ) async {
     final UserProvider userProvider = Provider.of(
       context,
@@ -173,7 +172,7 @@ class WasherProvider with ChangeNotifier {
             'Authorization': 'Bearer ${userProvider.token}',
           },
           body: {
-            "response_list": quizAnswer.responses_list,
+            "grade": _quizGrade,
           });
 
       var v = jsonDecode(response.body);
@@ -188,8 +187,6 @@ class WasherProvider with ChangeNotifier {
             ),
           ),
         );
-        await quizGrade(context);
-
       } else if (v['errors'] != '') {
         await comumDialog(
           context,
@@ -206,41 +203,16 @@ class WasherProvider with ChangeNotifier {
     }
   }
 
-  Future<double?> quizGrade(
-    BuildContext context,
-  ) async {
-    final UserProvider userProvider = Provider.of(
-      context,
-      listen: false,
-    );
-    try {
-      final response = await http.get(
-          Uri.parse('${Constants.BACKEND_BASE_URL}/quiz/respon/'),
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-            'Authorization': 'Bearer ${userProvider.token}',
-          },);
+  void loadQuizGrade(List list) {
+    int points = 0;
 
-      var v = jsonDecode(response.body);
-
-      if (response.statusCode == 200) {
-        return v;
-      } else if (v['errors'] != '') {
-        await comumDialog(
-          context,
-          'Erro!',
-          v['errors'],
-        );
+    for (List i in list) {
+      if (i[1] == 1) {
+        points += 1;
       }
-    } catch (e) {
-      await comumDialog(
-        context,
-        'Provider Error!',
-        e.toString(),
-      );
     }
-    return null;
+
+    _quizGrade = ((points / list.length) * 100).toInt();
   }
 
   Future<void> updateContract(BuildContext context, ByteData contract) async {
@@ -272,7 +244,6 @@ class WasherProvider with ChangeNotifier {
             ),
           ),
         );
-
       } else if (v['errors'] != '') {
         await comumDialog(
           context,
@@ -308,7 +279,6 @@ class WasherProvider with ChangeNotifier {
 
       if (response.statusCode == 200) {
         _bankInfo = v;
-
       } else if (v['errors'] != '') {
         await comumDialog(
           context,
@@ -359,7 +329,6 @@ class WasherProvider with ChangeNotifier {
           ),
         );
         await loadBankInfo(context);
-
       } else if (v['errors'] != '') {
         await comumDialog(
           context,
@@ -395,7 +364,6 @@ class WasherProvider with ChangeNotifier {
 
       if (response.statusCode == 200) {
         _timeAvailable = v;
-
       } else if (v['errors'] != '') {
         await comumDialog(
           context,
@@ -413,7 +381,9 @@ class WasherProvider with ChangeNotifier {
   }
 
   Future<void> updateTimeAvailable(
-      BuildContext context, TimeAvailableModel timeAvailable) async {
+    BuildContext context,
+    TimeAvailableProviderModel timeAvailable,
+  ) async {
     final UserProvider userProvider = Provider.of(
       context,
       listen: false,
@@ -450,7 +420,6 @@ class WasherProvider with ChangeNotifier {
           ),
         );
         await loadTimeAvailable(context);
-
       } else if (v['errors'] != '') {
         await comumDialog(
           context,
@@ -465,6 +434,256 @@ class WasherProvider with ChangeNotifier {
         e.toString(),
       );
     }
+  }
+
+  TimeAvailableModel getAllTimeAvailable() {
+    return TimeAvailableModel(
+      sunday_list: TimeAvailableChangeModel(
+        day: 'Sunday',
+        start: TimeOfDay(
+          hour: int.parse(
+            timeAvailable.sunday_list.split(';')[0].split(':')[0],
+          ),
+          minute: int.parse(
+            timeAvailable.sunday_list.split(';')[0].split(':')[1],
+          ),
+        ),
+        finish: TimeOfDay(
+          hour: int.parse(
+            timeAvailable.sunday_list.split(';')[1].split(':')[0],
+          ),
+          minute: int.parse(
+            timeAvailable.sunday_list.split(';')[1].split(':')[1],
+          ),
+        ),
+        breakpoint: TimeOfDay(
+          hour: int.parse(
+            timeAvailable.sunday_list.split(';')[2].split(':')[0],
+          ),
+          minute: int.parse(
+            timeAvailable.sunday_list.split(';')[2].split(':')[1],
+          ),
+        ),
+        pause: TimeOfDay(
+          hour: int.parse(
+            timeAvailable.sunday_list.split(';')[3].split(':')[0],
+          ),
+          minute: int.parse(
+            timeAvailable.sunday_list.split(';')[3].split(':')[1],
+          ),
+        ),
+      ),
+      monday_list: TimeAvailableChangeModel(
+        day: 'Monday',
+        start: TimeOfDay(
+          hour: int.parse(
+            timeAvailable.monday_list.split(';')[0].split(':')[0],
+          ),
+          minute: int.parse(
+            timeAvailable.monday_list.split(';')[0].split(':')[1],
+          ),
+        ),
+        finish: TimeOfDay(
+          hour: int.parse(
+            timeAvailable.monday_list.split(';')[1].split(':')[0],
+          ),
+          minute: int.parse(
+            timeAvailable.monday_list.split(';')[1].split(':')[1],
+          ),
+        ),
+        breakpoint: TimeOfDay(
+          hour: int.parse(
+            timeAvailable.monday_list.split(';')[2].split(':')[0],
+          ),
+          minute: int.parse(
+            timeAvailable.monday_list.split(';')[2].split(':')[1],
+          ),
+        ),
+        pause: TimeOfDay(
+          hour: int.parse(
+            timeAvailable.monday_list.split(';')[3].split(':')[0],
+          ),
+          minute: int.parse(
+            timeAvailable.monday_list.split(';')[3].split(':')[1],
+          ),
+        ),
+      ),
+      tuesday_list: TimeAvailableChangeModel(
+        day: 'Tuesday',
+        start: TimeOfDay(
+          hour: int.parse(
+            timeAvailable.tuesday_list.split(';')[0].split(':')[0],
+          ),
+          minute: int.parse(
+            timeAvailable.tuesday_list.split(';')[0].split(':')[1],
+          ),
+        ),
+        finish: TimeOfDay(
+          hour: int.parse(
+            timeAvailable.tuesday_list.split(';')[1].split(':')[0],
+          ),
+          minute: int.parse(
+            timeAvailable.tuesday_list.split(';')[1].split(':')[1],
+          ),
+        ),
+        breakpoint: TimeOfDay(
+          hour: int.parse(
+            timeAvailable.tuesday_list.split(';')[2].split(':')[0],
+          ),
+          minute: int.parse(
+            timeAvailable.tuesday_list.split(';')[2].split(':')[1],
+          ),
+        ),
+        pause: TimeOfDay(
+          hour: int.parse(
+            timeAvailable.tuesday_list.split(';')[3].split(':')[0],
+          ),
+          minute: int.parse(
+            timeAvailable.tuesday_list.split(';')[3].split(':')[1],
+          ),
+        ),
+      ),
+      wednesday_list: TimeAvailableChangeModel(
+        day: 'Wednesday',
+        start: TimeOfDay(
+          hour: int.parse(
+            timeAvailable.wednesday_list.split(';')[0].split(':')[0],
+          ),
+          minute: int.parse(
+            timeAvailable.wednesday_list.split(';')[0].split(':')[1],
+          ),
+        ),
+        finish: TimeOfDay(
+          hour: int.parse(
+            timeAvailable.wednesday_list.split(';')[1].split(':')[0],
+          ),
+          minute: int.parse(
+            timeAvailable.wednesday_list.split(';')[1].split(':')[1],
+          ),
+        ),
+        breakpoint: TimeOfDay(
+          hour: int.parse(
+            timeAvailable.wednesday_list.split(';')[2].split(':')[0],
+          ),
+          minute: int.parse(
+            timeAvailable.wednesday_list.split(';')[2].split(':')[1],
+          ),
+        ),
+        pause: TimeOfDay(
+          hour: int.parse(
+            timeAvailable.wednesday_list.split(';')[3].split(':')[0],
+          ),
+          minute: int.parse(
+            timeAvailable.wednesday_list.split(';')[3].split(':')[1],
+          ),
+        ),
+      ),
+      thursday_list: TimeAvailableChangeModel(
+        day: 'Thrusday',
+        start: TimeOfDay(
+          hour: int.parse(
+            timeAvailable.thursday_list.split(';')[0].split(':')[0],
+          ),
+          minute: int.parse(
+            timeAvailable.thursday_list.split(';')[0].split(':')[1],
+          ),
+        ),
+        finish: TimeOfDay(
+          hour: int.parse(
+            timeAvailable.thursday_list.split(';')[1].split(':')[0],
+          ),
+          minute: int.parse(
+            timeAvailable.thursday_list.split(';')[1].split(':')[1],
+          ),
+        ),
+        breakpoint: TimeOfDay(
+          hour: int.parse(
+            timeAvailable.thursday_list.split(';')[2].split(':')[0],
+          ),
+          minute: int.parse(
+            timeAvailable.thursday_list.split(';')[2].split(':')[1],
+          ),
+        ),
+        pause: TimeOfDay(
+          hour: int.parse(
+            timeAvailable.thursday_list.split(';')[3].split(':')[0],
+          ),
+          minute: int.parse(
+            timeAvailable.thursday_list.split(';')[3].split(':')[1],
+          ),
+        ),
+      ),
+      friday_list: TimeAvailableChangeModel(
+        day: 'Friday',
+        start: TimeOfDay(
+          hour: int.parse(
+            timeAvailable.friday_list.split(';')[0].split(':')[0],
+          ),
+          minute: int.parse(
+            timeAvailable.friday_list.split(';')[0].split(':')[1],
+          ),
+        ),
+        finish: TimeOfDay(
+          hour: int.parse(
+            timeAvailable.friday_list.split(';')[1].split(':')[0],
+          ),
+          minute: int.parse(
+            timeAvailable.friday_list.split(';')[1].split(':')[1],
+          ),
+        ),
+        breakpoint: TimeOfDay(
+          hour: int.parse(
+            timeAvailable.friday_list.split(';')[2].split(':')[0],
+          ),
+          minute: int.parse(
+            timeAvailable.friday_list.split(';')[2].split(':')[1],
+          ),
+        ),
+        pause: TimeOfDay(
+          hour: int.parse(
+            timeAvailable.friday_list.split(';')[3].split(':')[0],
+          ),
+          minute: int.parse(
+            timeAvailable.friday_list.split(';')[3].split(':')[1],
+          ),
+        ),
+      ),
+      saturday_list: TimeAvailableChangeModel(
+        day: 'Saturday',
+        start: TimeOfDay(
+          hour: int.parse(
+            timeAvailable.saturday_list.split(';')[0].split(':')[0],
+          ),
+          minute: int.parse(
+            timeAvailable.saturday_list.split(';')[0].split(':')[1],
+          ),
+        ),
+        finish: TimeOfDay(
+          hour: int.parse(
+            timeAvailable.saturday_list.split(';')[1].split(':')[0],
+          ),
+          minute: int.parse(
+            timeAvailable.saturday_list.split(';')[1].split(':')[1],
+          ),
+        ),
+        breakpoint: TimeOfDay(
+          hour: int.parse(
+            timeAvailable.saturday_list.split(';')[2].split(':')[0],
+          ),
+          minute: int.parse(
+            timeAvailable.saturday_list.split(';')[2].split(':')[1],
+          ),
+        ),
+        pause: TimeOfDay(
+          hour: int.parse(
+            timeAvailable.saturday_list.split(';')[3].split(':')[0],
+          ),
+          minute: int.parse(
+            timeAvailable.saturday_list.split(';')[3].split(':')[1],
+          ),
+        ),
+      ),
+    );
   }
 
   Future<void> loadWasherInfo(BuildContext context) async {
@@ -486,7 +705,6 @@ class WasherProvider with ChangeNotifier {
 
       if (response.statusCode == 200) {
         _washerInfo = v;
-
       } else if (v['errors'] != '') {
         await comumDialog(
           context,
@@ -538,7 +756,6 @@ class WasherProvider with ChangeNotifier {
           ),
         );
         await loadWasherInfo(context);
-
       } else if (v['errors'] != '') {
         await comumDialog(
           context,

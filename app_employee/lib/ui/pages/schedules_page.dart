@@ -346,8 +346,24 @@ class _SchedulesPageState extends State<SchedulesPage> {
             status[2] != ''
                 ? InkWell(
                     onTap: () {
-                      // FAZER UMA VERIFICAÇÃO PARA DAR DECLINE
-                      scheduleProvider.declineSchedule(context, schedule.id!);
+                      showDialog<void>(
+                        context: context,
+                        builder: (ctx) => AlertDialog(
+                          title: const Text('Decline confirmation'),
+                          content: const Text(
+                              'Are you sure that you want to decline this wash?'),
+                          actions: [
+                            TextButton(
+                              child: const Text('Yes'),
+                              onPressed: () async {
+                                await scheduleProvider.declineSchedule(
+                                    context, schedule.id!);
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ],
+                        ),
+                      );
                     },
                     child: Padding(
                       padding: const EdgeInsets.only(top: 16),

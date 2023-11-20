@@ -217,7 +217,7 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
           const SizedBox(height: 24),
-          // VERIFY IN SCHEDULE NOT CHOOSED
+          // VERIFY IF THERE IS ANY NOT-ACCEPTED WASH
           Container(
             padding: const EdgeInsets.all(24),
             height: 72,
@@ -422,7 +422,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                       backgroundColor: MaterialStateProperty.all<Color>(
-                        Colors.green,
+                        schedule.status == 'not-started' ? Colors.green : Colors.blue,
                       ),
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                         RoundedRectangleBorder(
@@ -431,11 +431,14 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     onPressed: () {
-                      // CHANGE STATUS FUNCTION
+                      setState(() async {
+                        await scheduleProvider.changeStatusSchedule(
+                            context, schedule.id!);
+                      });
                     },
-                    child: const Text(
-                      'Start',
-                      style: TextStyle(
+                    child: Text(
+                      schedule.status == 'not-started' ? 'Start' : 'Finished',
+                      style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
                       ),

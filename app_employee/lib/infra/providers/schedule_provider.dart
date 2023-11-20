@@ -98,7 +98,7 @@ class ScheduleProvider with ChangeNotifier {
     );
     try {
       final response = await http.get(
-        Uri.parse('${Constants.BACKEND_BASE_URL}/schedule/washer/$id'),
+        Uri.parse('${Constants.BACKEND_BASE_URL}/schedule/washer/change/$id'),
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',

@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, must_be_immutable
 
+import 'package:app_employee/data/data.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -23,99 +24,19 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
   bool threeTrue = false;
   TextEditingController insuranceController = TextEditingController();
 
-// GET QUESTIONS FROM PROVIDER
-  List questionList = [
-    [
-      '1. What are the products from Carnawash',
-      [
-        'Microfiber Cloths.',
-        'Carnawash backpacker bag',
-        'Carnawash Uniform',
-        'All above',
-      ],
-      0,
-    ],
-    [
-      '1. What are the products from Carnawash',
-      [
-        'Microfiber Cloths.',
-        'Carnawash backpacker bag',
-        'Carnawash Uniform',
-        'All above',
-      ],
-      0,
-    ],
-    [
-      '2. What are the products from Carnawash',
-      [
-        'Microfiber Cloths.',
-        'Carnawash backpacker bag',
-        'Carnawash Uniform',
-        'All above',
-      ],
-      0,
-    ],
-    [
-      '2. What are the products from Carnawash',
-      [
-        'Microfiber Cloths.',
-        'Carnawash backpacker bag',
-        'Carnawash Uniform',
-        'All above',
-      ],
-      0,
-    ],
-    [
-      '3. What are the products from Carnawash',
-      [
-        'Microfiber Cloths.',
-        'Carnawash backpacker bag',
-        'Carnawash Uniform',
-        'All above',
-      ],
-      0,
-    ],
-    [
-      '3. What are the products from Carnawash',
-      [
-        'Microfiber Cloths.',
-        'Carnawash backpacker bag',
-        'Carnawash Uniform',
-        'All above',
-      ],
-      0,
-    ],
-    [
-      '4. What are the products from Carnawash',
-      [
-        'Microfiber Cloths.',
-        'Carnawash backpacker bag',
-        'Carnawash Uniform',
-        'All above',
-      ],
-      0,
-    ],
-    [
-      '4. What are the products from Carnawash',
-      [
-        'Microfiber Cloths.',
-        'Carnawash backpacker bag',
-        'Carnawash Uniform',
-        'All above',
-      ],
-      0,
-    ],
-    [
-      '5. What are the products from Carnawash',
-      [
-        'Microfiber Cloths.',
-        'Carnawash backpacker bag',
-        'Carnawash Uniform',
-        'All above',
-      ],
-      0,
-    ],
+  List questionList = [];
+
+  List isOpen = [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
   ];
+
+  late TimeAvailableModel timeAvailable;
 
   void _selectTime(oldTime) async {
     final TimeOfDay? newTime = await showTimePicker(
@@ -130,66 +51,6 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
     }
   }
 
-  // AVAILABLE DATA -> FAZER COM QUE INICIE SEM VALOR ALGUM!
-  List<Item> list = [
-    Item(
-      day: 'Monday',
-      start: TimeOfDay(hour: 9, minute: 30),
-      finish: TimeOfDay(hour: 16, minute: 30),
-      pause: TimeOfDay(hour: 10, minute: 00),
-      breakpoint: TimeOfDay(hour: 11, minute: 00),
-      isOpen: false,
-    ),
-    Item(
-      day: 'Tuesday',
-      start: TimeOfDay(hour: 10, minute: 30),
-      finish: TimeOfDay(hour: 16, minute: 30),
-      pause: TimeOfDay(hour: 10, minute: 00),
-      breakpoint: TimeOfDay(hour: 11, minute: 00),
-      isOpen: false,
-    ),
-    Item(
-      day: 'Wednesday',
-      start: TimeOfDay(hour: 9, minute: 30),
-      finish: TimeOfDay(hour: 16, minute: 30),
-      pause: TimeOfDay(hour: 10, minute: 00),
-      breakpoint: TimeOfDay(hour: 11, minute: 00),
-      isOpen: false,
-    ),
-    Item(
-      day: 'Thursday',
-      start: TimeOfDay(hour: 9, minute: 30),
-      finish: TimeOfDay(hour: 16, minute: 30),
-      pause: TimeOfDay(hour: 10, minute: 00),
-      breakpoint: TimeOfDay(hour: 11, minute: 00),
-      isOpen: false,
-    ),
-    Item(
-      day: 'Friday',
-      start: TimeOfDay(hour: 9, minute: 30),
-      finish: TimeOfDay(hour: 16, minute: 30),
-      pause: TimeOfDay(hour: 10, minute: 00),
-      breakpoint: TimeOfDay(hour: 11, minute: 00),
-      isOpen: false,
-    ),
-    Item(
-      day: 'Saturday',
-      start: TimeOfDay(hour: 9, minute: 30),
-      finish: TimeOfDay(hour: 16, minute: 30),
-      pause: TimeOfDay(hour: 10, minute: 00),
-      breakpoint: TimeOfDay(hour: 11, minute: 00),
-      isOpen: false,
-    ),
-    Item(
-      day: 'Sunday',
-      start: TimeOfDay(hour: 9, minute: 30),
-      finish: TimeOfDay(hour: 16, minute: 30),
-      pause: TimeOfDay(hour: 10, minute: 00),
-      breakpoint: TimeOfDay(hour: 11, minute: 00),
-      isOpen: false,
-    ),
-  ];
-
   @override
   void initState() {
     super.initState();
@@ -197,7 +58,22 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
     if (widget.verify! == 1) {
       n = 2;
     }
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      WasherProvider washerProvider = Provider.of(
+        context,
+        listen: false,
+      );
+      timeAvailable = washerProvider.getAllTimeAvailable();
+
+      await washerProvider.loadQuiz(context);
+
+      for (QuizQuestionModel i in washerProvider.listQuizQuestions) {
+        questionList.add([i, 0]);
+      }
+    });
   }
+
+  // CHANGE DOC TO BLOB
 
   @override
   Widget build(BuildContext context) {
@@ -218,6 +94,8 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
   }
 
   Column geralComponent(BuildContext context) {
+    WasherProvider washerProvider = Provider.of(context, listen: false);
+
     return Column(
       children: [
         n == 1
@@ -245,8 +123,7 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
             style: ElevatedButton.styleFrom(
                 backgroundColor: Color.fromRGBO(237, 189, 58, 1),
                 fixedSize: Size(MediaQuery.of(context).size.width * 0.85, 50)),
-            onPressed: () {
-              // SAVE DATA
+            onPressed: () async {
               if (n == 1) {
                 setState(() {
                   n = 2;
@@ -260,6 +137,9 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
                   if (questionValue + 1 < questionList.length / 4) {
                     questionValue++;
                   } else {
+                    setState(() {
+                      washerProvider.loadQuizGrade(questionList);
+                    });
                     n = 4;
                   }
                 });
@@ -276,12 +156,32 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
                   oneTrue = false;
                   twoTrue = false;
                   threeTrue = true;
+                  //
                 });
               } else if (n == 5) {
                 setState(() {
                   n = 6;
                 });
               } else if (n == 6) {
+                await washerProvider.updateTimeAvailable(
+                  context,
+                  TimeAvailableProviderModel(
+                    sunday_list:
+                        '${timeAvailable.sunday_list.start.hour}:${timeAvailable.sunday_list.start.minute};${timeAvailable.sunday_list.finish.hour}:${timeAvailable.sunday_list.finish.minute};${timeAvailable.sunday_list.breakpoint.hour}:${timeAvailable.sunday_list.breakpoint.minute};${timeAvailable.sunday_list.pause.hour}:${timeAvailable.sunday_list.pause.minute};',
+                    monday_list:
+                        '${timeAvailable.monday_list.start.hour}:${timeAvailable.monday_list.start.minute};${timeAvailable.monday_list.finish.hour}:${timeAvailable.monday_list.finish.minute};${timeAvailable.monday_list.breakpoint.hour}:${timeAvailable.monday_list.breakpoint.minute};${timeAvailable.monday_list.pause.hour}:${timeAvailable.monday_list.pause.minute};',
+                    tuesday_list:
+                        '${timeAvailable.tuesday_list.start.hour}:${timeAvailable.tuesday_list.start.minute};${timeAvailable.tuesday_list.finish.hour}:${timeAvailable.tuesday_list.finish.minute};${timeAvailable.tuesday_list.breakpoint.hour}:${timeAvailable.tuesday_list.breakpoint.minute};${timeAvailable.tuesday_list.pause.hour}:${timeAvailable.tuesday_list.pause.minute};',
+                    wednesday_list:
+                        '${timeAvailable.wednesday_list.start.hour}:${timeAvailable.wednesday_list.start.minute};${timeAvailable.wednesday_list.finish.hour}:${timeAvailable.wednesday_list.finish.minute};${timeAvailable.wednesday_list.breakpoint.hour}:${timeAvailable.wednesday_list.breakpoint.minute};${timeAvailable.wednesday_list.pause.hour}:${timeAvailable.wednesday_list.pause.minute};',
+                    thursday_list:
+                        '${timeAvailable.thursday_list.start.hour}:${timeAvailable.thursday_list.start.minute};${timeAvailable.thursday_list.finish.hour}:${timeAvailable.thursday_list.finish.minute};${timeAvailable.thursday_list.breakpoint.hour}:${timeAvailable.thursday_list.breakpoint.minute};${timeAvailable.thursday_list.pause.hour}:${timeAvailable.thursday_list.pause.minute};',
+                    friday_list:
+                        '${timeAvailable.friday_list.start.hour}:${timeAvailable.friday_list.start.minute};${timeAvailable.friday_list.finish.hour}:${timeAvailable.friday_list.finish.minute};${timeAvailable.friday_list.breakpoint.hour}:${timeAvailable.friday_list.breakpoint.minute};${timeAvailable.friday_list.pause.hour}:${timeAvailable.friday_list.pause.minute};',
+                    saturday_list:
+                        '${timeAvailable.saturday_list.start.hour}:${timeAvailable.saturday_list.start.minute};${timeAvailable.saturday_list.finish.hour}:${timeAvailable.saturday_list.finish.minute};${timeAvailable.saturday_list.breakpoint.hour}:${timeAvailable.saturday_list.breakpoint.minute};${timeAvailable.saturday_list.pause.hour}:${timeAvailable.saturday_list.pause.minute};',
+                  ),
+                );
                 setState(() {
                   Navigator.push(
                     context,
@@ -653,29 +553,6 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
                 ),
               ),
               const SizedBox(height: 16),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  // CHANGE MARKERS DEPENDS ON WITCH PAGE THEY ARE
-                  questionsMarker(
-                    context,
-                    true,
-                  ),
-                  questionsMarker(
-                    context,
-                    false,
-                  ),
-                  questionsMarker(
-                    context,
-                    false,
-                  ),
-                  questionsMarker(
-                    context,
-                    false,
-                  ),
-                ],
-              ),
-              const SizedBox(height: 16),
               Column(
                 children: List.generate(
                   chunk(questionList, 4)[questionValue].length,
@@ -712,7 +589,7 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          quest[0],
+          quest[0].question,
           style: const TextStyle(
             fontWeight: FontWeight.w500,
           ),
@@ -720,7 +597,7 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
         Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: List.generate(
-            quest[1].length,
+            quest[0].alternatives_list.split(';').length,
             (index) {
               return ListTile(
                 visualDensity: const VisualDensity(
@@ -728,20 +605,25 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
                   vertical: VisualDensity.minimumDensity,
                 ),
                 title: Text(
-                  quest[1][index],
+                  quest[0].alternatives_list.split(';')[index],
                   style: const TextStyle(
                     color: Colors.black,
                   ),
                 ),
                 leading: Radio(
                   value: index,
-                  groupValue: questionList[n][2],
+                  groupValue: questionList[n][1],
                   fillColor: MaterialStateColor.resolveWith(
                     (states) => Colors.black,
                   ),
                   onChanged: (value) {
                     setState(() {
-                      questionList[n][2] = value!;
+                      if (quest[0].alternatives_list.split(';')[index] ==
+                          quest[0].answer) {
+                        questionList[n][1] = 1;
+                      } else {
+                        questionList[n][1] = 0;
+                      }
                     });
                   },
                 ),
@@ -754,17 +636,9 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
     );
   }
 
-  Container questionsMarker(BuildContext context, bool val) {
-    return Container(
-      width: MediaQuery.of(context).size.width * 0.2,
-      height: 2,
-      decoration: BoxDecoration(
-        color: val ? Color.fromRGBO(237, 189, 58, 1) : Colors.grey,
-      ),
-    );
-  }
-
   Widget partFour(BuildContext context) {
+    WasherProvider washerProvider = Provider.of(context);
+
     return Center(
       child: SizedBox(
         width: MediaQuery.of(context).size.width * 0.85,
@@ -829,8 +703,11 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
                 style: TextStyle(fontWeight: FontWeight.w500),
               ),
               const SizedBox(height: 16),
-              // GET VALUE FROM QUIZPROVIDER
-              const Text('Congratulations!\nYou got 80% of the quiz right.'),
+              washerProvider.quizGrade >= 80
+                  ? Text(
+                      'Congratulations!\nYou got ${washerProvider.quizGrade}% of the quiz right.')
+                  : Text(
+                      'Unfortunately, you got less than 80% correct on the quiz.'),
             ],
           ),
         ),
@@ -905,7 +782,7 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
               const SizedBox(height: 16),
               const Text('Attach your insurance contract here'),
               const SizedBox(height: 16),
-              // CHANGE INPUT TO BLOB
+              //
               geralIconTextInput(
                 context: context,
                 text: "Insurance Contract",
@@ -984,13 +861,13 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
                 style: TextStyle(fontWeight: FontWeight.w500),
               ),
               const SizedBox(height: 16),
-              faqBox(context, 0),
-              faqBox(context, 1),
-              faqBox(context, 2),
-              faqBox(context, 3),
-              faqBox(context, 4),
-              faqBox(context, 5),
-              faqBox(context, 6),
+              timeAvailableBox(context, timeAvailable.sunday_list, 0),
+              timeAvailableBox(context, timeAvailable.monday_list, 1),
+              timeAvailableBox(context, timeAvailable.tuesday_list, 2),
+              timeAvailableBox(context, timeAvailable.wednesday_list, 3),
+              timeAvailableBox(context, timeAvailable.thursday_list, 4),
+              timeAvailableBox(context, timeAvailable.friday_list, 5),
+              timeAvailableBox(context, timeAvailable.saturday_list, 6),
               const SizedBox(height: 16),
             ],
           ),
@@ -999,8 +876,9 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
     );
   }
 
-  Widget faqBox(
+  Widget timeAvailableBox(
     BuildContext context,
+    TimeAvailableChangeModel timeAvailable,
     int index,
   ) {
     return Column(
@@ -1029,17 +907,17 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
                       color: Colors.white),
                 ),
                 Text(
-                  list[index].day,
+                  timeAvailable.day,
                 ),
                 IconButton(
                   splashColor: Colors.white,
                   splashRadius: 10,
-                  icon: Icon(!list[index].isOpen
+                  icon: Icon(!isOpen[index].isOpen
                       ? Icons.keyboard_arrow_down
                       : Icons.keyboard_arrow_down),
                   onPressed: () {
                     setState(() {
-                      list[index].isOpen = !list[index].isOpen;
+                      isOpen[index].isOpen = !isOpen[index].isOpen;
                     });
                   },
                 )
@@ -1047,7 +925,7 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
             ),
           ),
         ),
-        list[index].isOpen
+        isOpen[index].isOpen
             ? Container(
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -1062,7 +940,7 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
                           const Text('Start Time'),
                           GestureDetector(
                             onTap: () {
-                              _selectTime(list[index].start);
+                              _selectTime(timeAvailable.start);
                             },
                             child: Container(
                               width: MediaQuery.of(context).size.width * 0.75,
@@ -1077,7 +955,7 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
                               child: Padding(
                                 padding: const EdgeInsets.all(7),
                                 child: Text(
-                                  '${list[index].start.hour}:${list[index].start.minute}',
+                                  '${timeAvailable.start.hour}:${timeAvailable.start.minute}',
                                 ),
                               ),
                             ),
@@ -1093,7 +971,7 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
                           const Text('Finish Time'),
                           GestureDetector(
                             onTap: () {
-                              _selectTime(list[index].finish);
+                              _selectTime(timeAvailable.finish);
                             },
                             child: Container(
                               width: MediaQuery.of(context).size.width * 0.75,
@@ -1108,7 +986,7 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
                               child: Padding(
                                 padding: const EdgeInsets.all(7),
                                 child: Text(
-                                  '${list[index].finish.hour}:${list[index].finish.minute}',
+                                  '${timeAvailable.finish.hour}:${timeAvailable.finish.minute}',
                                 ),
                               ),
                             ),
@@ -1131,7 +1009,7 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
                               const Text('Break Time'),
                               GestureDetector(
                                 onTap: () {
-                                  _selectTime(list[index].breakpoint);
+                                  _selectTime(timeAvailable.breakpoint);
                                 },
                                 child: Container(
                                   width:
@@ -1147,7 +1025,7 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
                                   child: Padding(
                                     padding: const EdgeInsets.all(7),
                                     child: Text(
-                                      '${list[index].breakpoint.hour}:${list[index].breakpoint.minute}',
+                                      '${timeAvailable.breakpoint.hour}:${timeAvailable.breakpoint.minute}',
                                     ),
                                   ),
                                 ),
@@ -1160,7 +1038,7 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
                               const Text('Pause Time'),
                               GestureDetector(
                                 onTap: () {
-                                  _selectTime(list[index].pause);
+                                  _selectTime(timeAvailable.pause);
                                 },
                                 child: Container(
                                   width:
@@ -1176,7 +1054,7 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
                                   child: Padding(
                                     padding: const EdgeInsets.all(7),
                                     child: Text(
-                                      '${list[index].pause.hour}:${list[index].pause.minute}',
+                                      '${timeAvailable.pause.hour}:${timeAvailable.pause.minute}',
                                     ),
                                   ),
                                 ),

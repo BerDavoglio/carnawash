@@ -1,4 +1,5 @@
 import Quizresponse from '../../models/Quiz/QuizResponse_models';
+import Washerinfo from '../../models/User/Washerinfo_models';
 
 class QuizresponseController {
   async makeResponse(req, res) {
@@ -12,54 +13,34 @@ class QuizresponseController {
         return res.status(400).json({ errors: ['User not Washer'] });
       }
 
+      const washerInfo = await Washerinfo.findOne({
+        where: {
+          user_id: idUser,
+        }
+      });
+
+      await washerInfo.update({
+        made_quiz: true,
+      });
+
       const newQuizresponse = await Quizresponse.create({
         user_id: idUser,
-        responses_list: req.body.responses_list,
+        grade: req.body.grade,
       });
 
       const {
         id,
         user_id,
-        responses_list,
+        grade,
       } = newQuizresponse;
 
       return res.json({
         id,
         user_id,
-        responses_list,
+        grade,
       });
     } catch (err) {
       return res.status(400).json({ errors: `Make Quiz Response / ${err.message}` });
-    }
-  }
-
-  async getResponse(req, res) {
-    try {
-      const idUser = req.userId;
-      if (!idUser) {
-        return res.status(400).json({ errors: ['ID not Found'] });
-      }
-
-      const quizResponses = await Quizresponse.findAll({
-        where: {
-          user_id: idUser
-        }
-      });
-      if (!quizResponses) {
-        return res.status(400).json({ errors: ['Responses not Found'] });
-      }
-
-      // Verificar quantas foram acertadas
-
-      return res.json(quizResponses);
-    } catch (err) {
-      return res.status(400).json({ errors: `Get Quiz Response / ${err.message}` });
-    }
-  }
-
-  async getScore(req, res) {
-    try { } catch (err) {
-      return res.status(400).json({ errors: `Get Quiz Score / ${err.message}` });
     }
   }
 }

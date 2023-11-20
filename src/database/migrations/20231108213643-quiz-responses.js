@@ -12,7 +12,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
-      responses_list: {
+      grade: {
         type: Sequelize.TEXT,
         allowNull: false,
       },

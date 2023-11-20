@@ -34,15 +34,15 @@ module.exports = {
       },
       contract: {
         type: Sequelize.BLOB('long'),
-        allowNull: false,
+        allowNull: true,
       },
       driver_licence: {
         type: Sequelize.BLOB('long'),
-        allowNull: false,
+        allowNull: true,
       },
       picture: {
         type: Sequelize.BLOB('long'),
-        allowNull: false,
+        allowNull: true,
       },
       created_at: {
         type: Sequelize.DATE,

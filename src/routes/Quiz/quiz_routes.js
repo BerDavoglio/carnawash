@@ -13,6 +13,5 @@ router.put('/:id', loginRequired, isAdmin, quizController.update);
 router.delete('/:id', loginRequired, isAdmin, quizController.delete);
 
 router.post('/respon/', loginRequired, quizResponseController.makeResponse);
-router.get('/respon/', loginRequired, quizResponseController.getResponse);
 
 export default router;

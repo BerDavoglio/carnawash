@@ -15,7 +15,6 @@ class AccountPage extends StatefulWidget {
 }
 
 class _AccountPageState extends State<AccountPage> {
-  // GET ALL VALUES FOR PREDATA
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
@@ -27,6 +26,8 @@ class _AccountPageState extends State<AccountPage> {
   TextEditingController accountNumberController = TextEditingController();
   TextEditingController photoController = TextEditingController();
   bool edit = false;
+
+  // CHANGE DOC TO BLOB
 
   @override
   void initState() {
@@ -52,7 +53,6 @@ class _AccountPageState extends State<AccountPage> {
       addressController.text = userProvider.perfil.address;
 
       abnController.text = washerProvider.washerInfo.abn;
-      licenceController.text = washerProvider.washerInfo.driver_licence;
 
       bankController.text = washerProvider.bankInfo.bank_name;
       accountNameController.text = washerProvider.bankInfo.account_name;
@@ -223,12 +223,13 @@ class _AccountPageState extends State<AccountPage> {
                               text: 'ABN',
                               textController: abnController,
                             ),
+                            //
                             geralTextInput(
                               context: context,
                               text: "Driver's Licence number or passport",
                               textController: licenceController,
                             ),
-                            // CHANGE WITH BLOB
+                            //
                             geralIconTextInput(
                               icon: Icons.upload_file,
                               context: context,
@@ -300,7 +301,7 @@ class _AccountPageState extends State<AccountPage> {
                                   context,
                                   WasherInfoModel(
                                     abn: abnController.text,
-                                    driver_licence: licenceController.text,
+                                    // driver_licence: licenceController.text,
                                     // picture: photoController,
                                   ),
                                 );

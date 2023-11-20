@@ -1,6 +1,11 @@
+// ignore_for_file: use_build_context_synchronously
+
+import 'package:app_employee/data/data.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../../infra/infra.dart';
 import '../../ui.dart';
 
 class FirstLoginComponent extends StatefulWidget {
@@ -36,8 +41,12 @@ class FirstLoginComponent extends StatefulWidget {
 class _FirstLoginComponentState extends State<FirstLoginComponent> {
   int n = 1;
 
+  // CHANGE DOC TO BLOB
+
   @override
   Widget build(BuildContext context) {
+    WasherProvider washerProvider = Provider.of(context);
+
     return Column(
       children: [
         Padding(
@@ -82,12 +91,14 @@ class _FirstLoginComponentState extends State<FirstLoginComponent> {
                           text: 'ABN',
                           textController: widget.abnController,
                         ),
+                        //
                         geralIconTextInput(
                           context: context,
                           text: "Driver's Licence or Passport",
                           textController: widget.driveController,
                           icon: Icons.file_download_outlined,
                         ),
+                        //
                         geralIconTextInput(
                           context: context,
                           text: "Profile Picture",
@@ -125,13 +136,27 @@ class _FirstLoginComponentState extends State<FirstLoginComponent> {
             style: ElevatedButton.styleFrom(
                 backgroundColor: const Color.fromRGBO(237, 189, 58, 1),
                 fixedSize: Size(MediaQuery.of(context).size.width * 0.85, 50)),
-            onPressed: () {
+            onPressed: () async {
               if (n == 1) {
                 setState(() {
                   n = 2;
                 });
               } else {
-                // SAVE INFORMATION
+                await washerProvider.fistLogin(
+                  context,
+                  FirstLoginModel(
+                    washer_info: WasherInfoModel(
+                      abn: widget.abnController.text,
+                      // driver_licence: widget.driveController.text,
+                      // picture: widget.pictureController.text,
+                    ),
+                    bank_info: BankInfoModel(
+                      bank_name: widget.bankController.text,
+                      account_name: widget.accountNameController.text,
+                      account_number: widget.accountNumberController.text,
+                    ),
+                  ),
+                );
                 Navigator.of(context)
                     .pushReplacementNamed(AppRoutes.FIRST_LOGIN_HOME);
               }

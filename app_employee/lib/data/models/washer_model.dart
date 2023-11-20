@@ -2,6 +2,8 @@
 
 import 'dart:typed_data';
 
+import 'package:flutter/material.dart';
+
 class BankInfoModel {
   BankInfoModel({
     required this.bank_name,
@@ -14,8 +16,8 @@ class BankInfoModel {
   String account_number;
 }
 
-class TimeAvailableModel {
-  TimeAvailableModel({
+class TimeAvailableProviderModel {
+  TimeAvailableProviderModel({
     required this.sunday_list,
     required this.monday_list,
     required this.tuesday_list,
@@ -34,6 +36,42 @@ class TimeAvailableModel {
   String saturday_list;
 }
 
+class TimeAvailableModel {
+  TimeAvailableModel({
+    required this.sunday_list,
+    required this.monday_list,
+    required this.tuesday_list,
+    required this.wednesday_list,
+    required this.thursday_list,
+    required this.friday_list,
+    required this.saturday_list,
+  });
+
+  TimeAvailableChangeModel sunday_list;
+  TimeAvailableChangeModel monday_list;
+  TimeAvailableChangeModel tuesday_list;
+  TimeAvailableChangeModel wednesday_list;
+  TimeAvailableChangeModel thursday_list;
+  TimeAvailableChangeModel friday_list;
+  TimeAvailableChangeModel saturday_list;
+}
+
+class TimeAvailableChangeModel {
+  TimeAvailableChangeModel({
+    required this.day,
+    required this.start,
+    required this.finish,
+    required this.breakpoint,
+    required this.pause,
+  });
+
+  String day;
+  TimeOfDay start;
+  TimeOfDay finish;
+  TimeOfDay breakpoint;
+  TimeOfDay pause;
+}
+
 class WasherInfoModel {
   WasherInfoModel({
     this.made_quiz,
@@ -42,7 +80,7 @@ class WasherInfoModel {
     this.rate,
     required this.abn,
     this.contract,
-    required this.driver_licence,
+    this.driver_licence,
     this.picture,
   });
 
@@ -52,6 +90,6 @@ class WasherInfoModel {
   double? rate;
   String abn;
   ByteData? contract;
-  String driver_licence;
+  ByteData? driver_licence;
   ByteData? picture;
 }
