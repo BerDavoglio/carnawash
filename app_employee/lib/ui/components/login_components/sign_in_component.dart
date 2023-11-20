@@ -1,5 +1,9 @@
-import 'package:flutter/material.dart';
+// ignore_for_file: use_build_context_synchronously
 
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../../infra/infra.dart';
 import '../../ui.dart';
 
 class SignInComponent extends StatefulWidget {
@@ -21,6 +25,8 @@ class _SignInComponentState extends State<SignInComponent> {
 
   @override
   Widget build(BuildContext context) {
+    WasherProvider washerProvider = Provider.of(context, listen: false);
+
     return Column(
       children: [
         Padding(
@@ -62,26 +68,33 @@ class _SignInComponentState extends State<SignInComponent> {
             style: ElevatedButton.styleFrom(
                 backgroundColor: const Color.fromRGBO(237, 189, 58, 1),
                 fixedSize: Size(MediaQuery.of(context).size.width * 0.85, 50)),
-            onPressed: () {
-              Navigator.of(context).pushNamed(AppRoutes.HOME);
+            onPressed: () async {
+              int i = await washerProvider.verifyFistLogin(context);
+              if (i == 10) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const HomePage(validate: true),
+                  ),
+                );
+              } else if (i == 2) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const HomePage(validate: false),
+                  ),
+                );
+              } else {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => FirstLoginHomePage(verify: i),
+                  ),
+                );
+
+              }
             },
             child: const Text('Login'),
-          ),
-        ),
-        TextButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const LoginPage(index: 2),
-              ),
-            );
-          },
-          child: const Text(
-            "First Login",
-            style: TextStyle(
-              color: Colors.white,
-            ),
           ),
         ),
         const SizedBox(height: 16),

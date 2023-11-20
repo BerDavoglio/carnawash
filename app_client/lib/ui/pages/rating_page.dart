@@ -24,7 +24,7 @@ class _RatingPageState extends State<RatingPage> {
 
   @override
   Widget build(BuildContext context) {
-    ScheduleProvider scheduleProvider = Provider.of(context);
+    ScheduleProvider scheduleProvider = Provider.of(context, listen: false);
 
     return Scaffold(
       bottomNavigationBar: navigationBarComponent(context),

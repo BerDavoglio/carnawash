@@ -14,7 +14,7 @@ class PerfilPage extends StatefulWidget {
 class _PerfilPageState extends State<PerfilPage> {
   @override
   Widget build(BuildContext context) {
-    UserProvider userProvider = Provider.of(context);
+    UserProvider userProvider = Provider.of(context, listen: false);
 
     return Scaffold(
       bottomNavigationBar: navigationBarComponent(context),

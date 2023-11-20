@@ -40,7 +40,7 @@ class _RegisterComponentState extends State<RegisterComponent> {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-      VehiclesProvider vehiclesProvider = Provider.of(context);
+      VehiclesProvider vehiclesProvider = Provider.of(context, listen: false);
 
       await vehiclesProvider.loadBrands(context);
       listBrand = vehiclesProvider.brandList;
@@ -230,7 +230,7 @@ class _RegisterComponentState extends State<RegisterComponent> {
     BuildContext context,
     TextEditingController registrationController,
   ) {
-    ServicesProvider servicesProvider = Provider.of(context);
+    ServicesProvider servicesProvider = Provider.of(context, listen: false);
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 20),
@@ -266,7 +266,7 @@ class _RegisterComponentState extends State<RegisterComponent> {
                       .toList(),
                   onChanged: (item) => setState(() async {
                     brandSelected = item!;
-                    VehiclesProvider vehiclesProvider = Provider.of(context);
+                    VehiclesProvider vehiclesProvider = Provider.of(context, listen: false);
                     await vehiclesProvider.loadModels(context, item).then((value) => {listModel = vehiclesProvider.modelList},);
                   }),
                 ),

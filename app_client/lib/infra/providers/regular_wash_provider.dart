@@ -35,7 +35,7 @@ class RegularwashProvider with ChangeNotifier {
 
       if (response.statusCode == 200) {
         _regularWashList = v;
-        notifyListeners();
+
       } else if (v['errors'] != '') {
         await comumDialog(
           context,
@@ -44,7 +44,7 @@ class RegularwashProvider with ChangeNotifier {
         );
       }
 
-      notifyListeners();
+
     } catch (e) {
       await comumDialog(
         context,

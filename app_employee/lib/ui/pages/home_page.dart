@@ -1,8 +1,16 @@
+// ignore_for_file: use_build_context_synchronously
+
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/ri.dart';
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
+import '../../data/data.dart';
+import '../../infra/infra.dart';
 import '../ui.dart';
 
 class HomePage extends StatefulWidget {
@@ -20,6 +28,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    UserProvider userProvider = Provider.of(context);
+
     return Scaffold(
       backgroundColor: Colors.grey[100],
       bottomNavigationBar: widget.validate
@@ -28,8 +38,12 @@ class _HomePageState extends State<HomePage> {
               onPressed: () {
                 Navigator.of(context).pushReplacementNamed(AppRoutes.LOGIN);
               },
-              child:
-                  const Text('Logout', style: TextStyle(color: Color.fromRGBO(237, 189, 58, 1))),
+              child: const Text(
+                'Logout',
+                style: TextStyle(
+                  color: Color.fromRGBO(237, 189, 58, 1),
+                ),
+              ),
             ),
       body: SingleChildScrollView(
         child: Column(
@@ -52,9 +66,9 @@ class _HomePageState extends State<HomePage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             notificationHomeButtonComponent(context),
-                            const Text(
-                              'Welcome, Jorge!',
-                              style: TextStyle(
+                            Text(
+                              'Welcome, ${userProvider.perfil.name}!',
+                              style: const TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -79,6 +93,15 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget validatedTrue(BuildContext context) {
+    WasherProvider washerProvider = Provider.of(
+      context,
+      listen: false,
+    );
+    ScheduleProvider scheduleProvider = Provider.of(
+      context,
+      listen: false,
+    );
+
     return Padding(
       padding: const EdgeInsets.only(
         left: 25,
@@ -97,7 +120,7 @@ class _HomePageState extends State<HomePage> {
           ),
           const SizedBox(height: 16),
           RatingBarIndicator(
-            rating: 2.75,
+            rating: washerProvider.washerInfo.rate!,
             itemBuilder: (context, index) => const Icon(
               Icons.star,
               color: Color.fromRGBO(237, 189, 58, 1),
@@ -125,6 +148,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   Text(
                     '15',
+                    // GET FROM SCHEDULESHISTORY ALLTIME
                     style: TextStyle(
                       color: Colors.grey,
                       fontSize: 28,
@@ -155,6 +179,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     Text(
                       '3',
+                      // GET FROM SCHEDULESHISTORY ALLTIME
                       style: TextStyle(
                         color: Colors.green,
                         fontSize: 28,
@@ -180,6 +205,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     Text(
                       '2',
+                      // GET FROM SCHEDULESHISTORY ALLTIME
                       style: TextStyle(
                         color: Colors.red,
                         fontSize: 28,
@@ -191,6 +217,7 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
           const SizedBox(height: 24),
+          // VERIFY IN SCHEDULE NOT CHOOSED
           Container(
             padding: const EdgeInsets.all(24),
             height: 72,
@@ -213,148 +240,231 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           const SizedBox(height: 24),
-          SizedBox(
-            width: MediaQuery.of(context).size.width * 0.85,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  'Washing Process:',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                const SizedBox(height: 16),
-                Container(
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.all(Radius.circular(16)),
-                  ),
-                  width: MediaQuery.of(context).size.width * 0.85,
-                  child: Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          'September 10, 2023 - 10PM',
-                          style: TextStyle(
-                            fontWeight: FontWeight.w500,
-                            fontSize: 14,
-                          ),
-                        ),
-                        const Text(
-                          'Costumer: Jorge',
-                          style: TextStyle(
-                            fontWeight: FontWeight.w500,
-                            fontSize: 14,
-                          ),
-                        ),
-                        const Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(top: 8),
-                              child: Text(
-                                'Nissan March - Small',
-                                style: TextStyle(
-                                  color: Colors.grey,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(top: 5),
-                              child: Text(
-                                '3SAM123',
-                                style: TextStyle(
-                                  color: Colors.grey,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(top: 5),
-                              child: Text(
-                                'Wash Outside only',
-                                style: TextStyle(color: Colors.grey),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(top: 5),
-                              child: Text(
-                                '+ Pet Hair',
-                                style: TextStyle(color: Colors.grey),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(top: 5),
-                              child: Row(
-                                children: [
-                                  Icon(
-                                    Icons.location_on_outlined,
-                                    color: Color.fromRGBO(237, 189, 58, 1),
-                                  ),
-                                  Text(
-                                    'Monaco St, Bundall',
-                                    style: TextStyle(color: Colors.grey),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 16),
-                        TextButton(
-                          style: ButtonStyle(
-                            elevation: MaterialStateProperty.all(5),
-                            fixedSize: MaterialStateProperty.all<Size>(
-                              Size(
-                                MediaQuery.of(context).size.width * 0.85,
-                                50,
-                              ),
-                            ),
-                            backgroundColor: MaterialStateProperty.all<Color>(
-                              Colors.green,
-                            ),
-                            shape: MaterialStateProperty.all<
-                                RoundedRectangleBorder>(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                            ),
-                          ),
-                          onPressed: () {},
-                          child: const Text(
-                            'Start',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                        Center(
-                          child: TextButton(
-                            onPressed: () {
-                              Navigator.of(context)
-                                  .pushNamed(AppRoutes.WASH_REQUEST);
-                            },
-                            child: const Text(
-                              'View more information',
-                              style: TextStyle(
-                                color: Color.fromRGBO(237, 189, 58, 1),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                )
-              ],
+          Column(
+            children: List.generate(
+                1,
+                (index) async {
+                  return await washinProcessBlock(
+                    context,
+                    (await scheduleProvider.loadOngoing(context))!,
+                  );
+                } as Widget Function(int index)),
+          )
+        ],
+      ),
+    );
+  }
+
+  Future<Widget> washinProcessBlock(
+    BuildContext context,
+    ScheduleModel schedule,
+  ) async {
+    ScheduleProvider scheduleProvider = Provider.of(context, listen: false);
+    VehiclesProvider vehiclesProvider = Provider.of(context, listen: false);
+    ServicesProvider servicesProvider = Provider.of(context, listen: false);
+
+    List<CarModel?> carsList = [];
+    List<CarObjectModel?> carsObjectList = [];
+    List addonList = [];
+
+    await servicesProvider.loadCarsize(context);
+
+    ClientModel? client = await scheduleProvider.loadClient(
+      context,
+      schedule.id!,
+    );
+
+    for (var i in schedule.cars_list_id.split(';')) {
+      CarObjectModel? car = await scheduleProvider.loadObjectCar(
+        context,
+        json.decode(i).id as int,
+      );
+      if (car != null) {
+        carsObjectList.add(car);
+      }
+      addonList = json.decode(i).additional_list_id;
+    }
+    for (var i in carsObjectList) {
+      CarModel? car = await vehiclesProvider.loadOneCar(
+        context,
+        i!.car_id,
+      );
+      if (car != null) {
+        carsList.add(car);
+      }
+    }
+
+    return SizedBox(
+      width: MediaQuery.of(context).size.width * 0.85,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            'Washing Process:',
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
             ),
           ),
+          const SizedBox(height: 16),
+          Container(
+            decoration: const BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.all(Radius.circular(16)),
+            ),
+            width: MediaQuery.of(context).size.width * 0.85,
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Text(
+                        DateFormat('yMMMMd')
+                            .format(schedule.selected_date)
+                            .toString(),
+                        style: const TextStyle(
+                          fontSize: 16,
+                        ),
+                      ),
+                      Text(
+                        DateFormat('jm')
+                            .format(schedule.selected_date)
+                            .toString(),
+                        style: const TextStyle(
+                          fontSize: 16,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Text(
+                    'Client: ${client!.name}',
+                    style: const TextStyle(
+                      fontSize: 18,
+                    ),
+                  ),
+                  Column(
+                    children: List.generate(
+                      carsList.length,
+                      (indexCar) => Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width * 0.2,
+                                child: Text(
+                                  'Vehicle $indexCar',
+                                  style: const TextStyle(
+                                    color: Colors.grey,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                decoration: const BoxDecoration(
+                                  color: Colors.grey,
+                                ),
+                                width: MediaQuery.of(context).size.width * 0.55,
+                                height: 1,
+                              ),
+                            ],
+                          ),
+                          Text(
+                            '${carsList[indexCar]!.brand} - ${carsList[indexCar]!.model}',
+                            style: const TextStyle(
+                              color: Colors.grey,
+                            ),
+                          ),
+                          Text(
+                            carsList[indexCar]!.plate,
+                            style: const TextStyle(
+                              color: Colors.grey,
+                            ),
+                          ),
+                          Text(
+                            servicesProvider
+                                .getCarsizeComplete(
+                                    carsList[indexCar]!.car_size_id)
+                                .title,
+                            style: const TextStyle(
+                              color: Colors.grey,
+                            ),
+                          ),
+                          Row(
+                            children: List.generate(
+                              addonList.length,
+                              (index) {
+                                return Padding(
+                                  padding: const EdgeInsets.only(top: 8),
+                                  child: Text(
+                                    '${addonList[index]}; ',
+                                    style: const TextStyle(color: Colors.grey),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  TextButton(
+                    style: ButtonStyle(
+                      elevation: MaterialStateProperty.all(5),
+                      fixedSize: MaterialStateProperty.all<Size>(
+                        Size(
+                          MediaQuery.of(context).size.width * 0.85,
+                          50,
+                        ),
+                      ),
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                        Colors.green,
+                      ),
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                      ),
+                    ),
+                    onPressed: () {
+                      // CHANGE STATUS FUNCTION
+                    },
+                    child: const Text(
+                      'Start',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                  Center(
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => WashRequestPage(
+                              preData: schedule,
+                            ),
+                          ),
+                        );
+                      },
+                      child: const Text(
+                        'View more information',
+                        style: TextStyle(
+                          color: Color.fromRGBO(237, 189, 58, 1),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          )
         ],
       ),
     );

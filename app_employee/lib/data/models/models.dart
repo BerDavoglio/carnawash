@@ -7,3 +7,6 @@ export './first_login_model.dart';
 export './washer_model.dart';
 export './quiz_model.dart';
 export './payment_model.dart';
+export './additional_model.dart';
+export './car_model.dart';
+export './carobject_model.dart';

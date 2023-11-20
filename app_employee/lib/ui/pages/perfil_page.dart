@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../infra/infra.dart';
 import '../ui.dart';
 
 class PerfilPage extends StatefulWidget {
@@ -12,6 +14,8 @@ class PerfilPage extends StatefulWidget {
 class _PerfilPageState extends State<PerfilPage> {
   @override
   Widget build(BuildContext context) {
+    UserProvider userProvider = Provider.of(context, listen: false);
+
     return Scaffold(
       bottomNavigationBar: navigationBarComponent(context),
       body: SingleChildScrollView(
@@ -47,21 +51,21 @@ class _PerfilPageState extends State<PerfilPage> {
                   const SizedBox(height: 25),
                   const Divider(),
                   const SizedBox(height: 16),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Jorge Williams',
-                          style: TextStyle(
+                          userProvider.perfil.name,
+                          style: const TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
                         Text(
-                          'jorgewilliams@gmail.com',
-                          style: TextStyle(
+                          userProvider.perfil.email,
+                          style: const TextStyle(
                             fontSize: 18,
                           ),
                         ),

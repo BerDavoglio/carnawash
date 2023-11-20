@@ -30,6 +30,8 @@ class Item {
 }
 
 class _AvailabilityPageState extends State<AvailabilityPage> {
+  // GET VALUE FROM WASHERPROVIDER
+  // POST VALUES FROM WASHERPROVIDER
   void _selectTime(oldTime) async {
     final TimeOfDay? newTime = await showTimePicker(
       context: context,

@@ -23,7 +23,7 @@ class _HistoryPageState extends State<HistoryPage> {
 
   @override
   Widget build(BuildContext context) {
-    ScheduleProvider scheduleProvider = Provider.of(context);
+    ScheduleProvider scheduleProvider = Provider.of(context, listen: false);
 
     return Scaffold(
       backgroundColor: Colors.grey[100],
@@ -131,8 +131,8 @@ class _HistoryPageState extends State<HistoryPage> {
     ScheduleProvider schedule,
     int index,
   ) async {
-    VehiclesProvider vehiclesProvider = Provider.of(context);
-    ServicesProvider servicesProvider = Provider.of(context);
+    VehiclesProvider vehiclesProvider = Provider.of(context, listen: false);
+    ServicesProvider servicesProvider = Provider.of(context, listen: false);
 
     List<CarModel?> carsList = [];
     List<CarObjectModel?> carsObjectList = [];

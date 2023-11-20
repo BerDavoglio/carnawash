@@ -20,7 +20,7 @@ class _TermsConditionsPageState extends State<TermsConditionsPage> {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-      FAQProvider faqProvider = Provider.of(context);
+      FAQProvider faqProvider = Provider.of(context, listen: false);
 
       await faqProvider.loadTerms(context);
       terms = faqProvider.condition;

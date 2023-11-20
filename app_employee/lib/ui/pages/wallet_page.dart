@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../data/data.dart';
+import '../../infra/infra.dart';
 import '../ui.dart';
 
 class WalletPage extends StatefulWidget {
@@ -12,6 +15,8 @@ class WalletPage extends StatefulWidget {
 class _WalletPageState extends State<WalletPage> {
   @override
   Widget build(BuildContext context) {
+    WalletProvider walletProvider = Provider.of(context, listen: false);
+
     return Scaffold(
       backgroundColor: Colors.grey[100]!,
       bottomNavigationBar: navigationBarComponent(context),
@@ -48,10 +53,17 @@ class _WalletPageState extends State<WalletPage> {
                   const SizedBox(height: 16),
                   Column(
                     children: [
-                      creditcardBox(),
-                      creditcardBox(),
-                      creditcardBox(),
-                      creditcardBox(),
+                      Column(
+                        children: List.generate(
+                          walletProvider.cards.length,
+                          (index) async {
+                            return await creditcardBox(
+                              context,
+                              walletProvider.cards[index],
+                            );
+                          } as Widget Function(int index),
+                        ),
+                      ),
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 10),
                         child: TextButton(
@@ -60,7 +72,7 @@ class _WalletPageState extends State<WalletPage> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) =>
-                                    WalletEditPage(initial: false),
+                                    WalletEditPage(),
                               ),
                             );
                           },
@@ -84,7 +96,10 @@ class _WalletPageState extends State<WalletPage> {
     );
   }
 
-  Widget creditcardBox() {
+  Future<Widget> creditcardBox(
+    BuildContext context,
+    CardModel card,
+  ) async {
     return Column(
       children: [
         Container(
@@ -95,7 +110,7 @@ class _WalletPageState extends State<WalletPage> {
             ),
           ),
           child: Padding(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.all(10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -104,6 +119,7 @@ class _WalletPageState extends State<WalletPage> {
                   children: [
                     const Image(
                       height: 30,
+                      // MUDAR IMAGEM DE ACORDO COM O CARTÃO
                       image: AssetImage('images/mastercard-logo.png'),
                     ),
                     Row(
@@ -121,7 +137,7 @@ class _WalletPageState extends State<WalletPage> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) =>
-                                      WalletEditPage(initial: true),
+                                      WalletEditPage(preData: card),
                                 ),
                               );
                             },
@@ -140,38 +156,24 @@ class _WalletPageState extends State<WalletPage> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 11),
-                const Text(
-                  '**** **** **** 1234',
-                  style: TextStyle(
+                Text(
+                  '**** **** **** ${card.last_digits}',
+                  style: const TextStyle(
                     fontWeight: FontWeight.w500,
                     fontSize: 18,
                   ),
                 ),
-                const SizedBox(height: 8),
-                const Text(
-                  'Jorge Williams',
-                  style: TextStyle(
+                Text(
+                  card.name,
+                  style: const TextStyle(
                     color: Colors.grey,
                   ),
                 ),
-                const SizedBox(height: 8),
-                const Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      '12/31',
-                      style: TextStyle(
-                        color: Colors.grey,
-                      ),
-                    ),
-                    Text(
-                      '***',
-                      style: TextStyle(
-                        color: Colors.grey,
-                      ),
-                    ),
-                  ],
+                Text(
+                  '${card.date} - ***',
+                  style: const TextStyle(
+                    color: Colors.grey,
+                  ),
                 ),
               ],
             ),

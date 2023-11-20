@@ -38,7 +38,7 @@ class NotificationProvider with ChangeNotifier {
       if (response.statusCode == 200) {
         _notifications = v;
         await loadGeralNotifications(context);
-        notifyListeners();
+
       } else if (v['errors'] != '') {
         await comumDialog(
           context,
@@ -46,7 +46,7 @@ class NotificationProvider with ChangeNotifier {
           v['errors'],
         );
       }
-      notifyListeners();
+
     } catch (e) {
       await comumDialog(
         context,
@@ -75,7 +75,7 @@ class NotificationProvider with ChangeNotifier {
 
       if (response.statusCode == 200) {
         _geralNotifications = v;
-        notifyListeners();
+
       } else if (v['errors'] != '') {
         await comumDialog(
           context,
@@ -83,7 +83,7 @@ class NotificationProvider with ChangeNotifier {
           v['errors'],
         );
       }
-      notifyListeners();
+
     } catch (e) {
       await comumDialog(
         context,

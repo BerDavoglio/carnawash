@@ -264,6 +264,26 @@ class ScheduleController {
     }
   }
 
+  async indexWasher(req, res) {
+    try {
+      const idUser = req.userId;
+      if (!idUser) {
+        return res.status(400).json({ errors: ['ID not Found'] });
+      }
+
+      const schedule = await Schedule.findOne({
+        where: {
+          id: req.params.id,
+          washer_id: idUser,
+        },
+      });
+
+      return res.json(schedule);
+    } catch (err) {
+      return res.status(400).json({ errors: err.message });
+    }
+  }
+
   async indexByDate(req, res) {
     try {
       const idUser = req.userId;
@@ -399,13 +419,19 @@ class ScheduleController {
         return res.status(400).json({ errors: ['ID not Found'] });
       }
 
-      const schedule = await Schedule.findAll({
+      const schedules = await Schedule.findAll({
         where: {
           washer_id: idUser,
+          selected_date: {
+            [Op.between]: [
+              new Date(req.params.date + 'T00:00:00.000Z'),
+              new Date(req.params.date + 'T23:59:59.999Z')
+            ],
+          },
         },
       });
 
-      return res.json(schedule);
+      return res.json(schedules);
     } catch (err) {
       return res.status(400).json({ errors: err.message });
     }

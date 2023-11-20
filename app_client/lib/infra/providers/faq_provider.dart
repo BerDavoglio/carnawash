@@ -37,7 +37,7 @@ class FAQProvider with ChangeNotifier {
 
       if (response.statusCode == 200) {
         _faq = v;
-        notifyListeners();
+
       } else if (v['errors'] != '') {
         await comumDialog(
           context,
@@ -46,7 +46,7 @@ class FAQProvider with ChangeNotifier {
         );
       }
 
-      notifyListeners();
+
     } catch (e) {
       await comumDialog(
         context,
@@ -75,7 +75,7 @@ class FAQProvider with ChangeNotifier {
 
       if (response.statusCode == 200) {
         _condition = v;
-        notifyListeners();
+
       } else if (v['errors'] != '') {
         await comumDialog(
           context,
@@ -84,7 +84,7 @@ class FAQProvider with ChangeNotifier {
         );
       }
 
-      notifyListeners();
+
     } catch (e) {
       await comumDialog(
         context,

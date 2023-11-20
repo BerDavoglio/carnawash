@@ -81,6 +81,24 @@ class ClientUserController {
     }
   }
 
+  async indexOne(req, res) {
+    try {
+      const user = await User.findByPk(req.params.id, {
+        attributes: [
+          'id',
+          'name',
+        ],
+      });
+      if (!user) {
+        return res.status(400).json({ errors: ['User not Found'] });
+      }
+
+      return res.json(user);
+    } catch (err) {
+      return res.status(400).json({ errors: `Index User / ${err.message}` });
+    }
+  }
+
   async update(req, res) {
     try {
       if (req.body.role) {

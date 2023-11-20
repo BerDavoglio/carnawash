@@ -29,3 +29,13 @@ class UserCompleteModel {
   String phone;
   String address;
 }
+
+class ClientModel {
+  ClientModel({
+    required this.id,
+    required this.name,
+  });
+
+  int id;
+  String name;
+}

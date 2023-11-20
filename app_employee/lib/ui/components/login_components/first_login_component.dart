@@ -13,6 +13,7 @@ class FirstLoginComponent extends StatefulWidget {
     required this.abnController,
     required this.driveController,
     required this.pictureController,
+    required this.bankController,
     required this.accountNameController,
     required this.accountNumberController,
   });
@@ -24,6 +25,7 @@ class FirstLoginComponent extends StatefulWidget {
   final TextEditingController abnController;
   final TextEditingController driveController;
   final TextEditingController pictureController;
+  final TextEditingController bankController;
   final TextEditingController accountNameController;
   final TextEditingController accountNumberController;
 
@@ -32,16 +34,7 @@ class FirstLoginComponent extends StatefulWidget {
 }
 
 class _FirstLoginComponentState extends State<FirstLoginComponent> {
-  List<String> listBank = ['Bank 1', 'Bank 2', 'Bank 3'];
-  String? bankSelected;
   int n = 1;
-
-  @override
-  void initState() {
-    super.initState();
-
-    bankSelected = listBank[0];
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -104,33 +97,10 @@ class _FirstLoginComponentState extends State<FirstLoginComponent> {
                       ],
                     )
                   : Column(children: [
-                      Container(
-                        width: MediaQuery.of(context).size.width * 0.85,
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border.all(color: Colors.grey[700]!),
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(10))),
-                        child: DropdownButton(
-                          isExpanded: true,
-                          padding: const EdgeInsets.symmetric(
-                            vertical: 5,
-                            horizontal: 10,
-                          ),
-                          value: bankSelected,
-                          items: listBank
-                              .map((item) => DropdownMenuItem<String>(
-                                    value: item,
-                                    child: Text(item),
-                                  ))
-                              .toList(),
-                          onChanged: (item) => setState(() {
-                            bankSelected = item!;
-                          }),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 10,
+                      geralTextInput(
+                        context: context,
+                        text: 'Bank',
+                        textController: widget.bankController,
                       ),
                       geralTextInput(
                         context: context,
@@ -161,6 +131,7 @@ class _FirstLoginComponentState extends State<FirstLoginComponent> {
                   n = 2;
                 });
               } else {
+                // SAVE INFORMATION
                 Navigator.of(context)
                     .pushReplacementNamed(AppRoutes.FIRST_LOGIN_HOME);
               }

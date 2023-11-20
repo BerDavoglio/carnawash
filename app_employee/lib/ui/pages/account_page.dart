@@ -1,5 +1,10 @@
-import 'package:flutter/material.dart';
+// ignore_for_file: use_build_context_synchronously
 
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../data/data.dart';
+import '../../infra/infra.dart';
 import '../ui.dart';
 
 class AccountPage extends StatefulWidget {
@@ -10,8 +15,7 @@ class AccountPage extends StatefulWidget {
 }
 
 class _AccountPageState extends State<AccountPage> {
-  List<String> listBank = ['Bank 1', 'Bank 2', 'Bank 3'];
-  String? bankSelected;
+  // GET ALL VALUES FOR PREDATA
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
@@ -19,7 +23,8 @@ class _AccountPageState extends State<AccountPage> {
   TextEditingController abnController = TextEditingController();
   TextEditingController licenceController = TextEditingController();
   TextEditingController bankController = TextEditingController();
-  TextEditingController accountController = TextEditingController();
+  TextEditingController accountNameController = TextEditingController();
+  TextEditingController accountNumberController = TextEditingController();
   TextEditingController photoController = TextEditingController();
   bool edit = false;
 
@@ -27,11 +32,45 @@ class _AccountPageState extends State<AccountPage> {
   void initState() {
     super.initState();
 
-    bankSelected = listBank[0];
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      UserProvider userProvider = Provider.of(
+        context,
+        listen: false,
+      );
+      WasherProvider washerProvider = Provider.of(
+        context,
+        listen: false,
+      );
+
+      await userProvider.loadPerfil(context);
+      await washerProvider.loadBankInfo(context);
+      await washerProvider.loadWasherInfo(context);
+
+      nameController.text = userProvider.perfil.name;
+      emailController.text = userProvider.perfil.email;
+      phoneController.text = userProvider.perfil.phone;
+      addressController.text = userProvider.perfil.address;
+
+      abnController.text = washerProvider.washerInfo.abn;
+      licenceController.text = washerProvider.washerInfo.driver_licence;
+
+      bankController.text = washerProvider.bankInfo.bank_name;
+      accountNameController.text = washerProvider.bankInfo.account_name;
+      accountNumberController.text = washerProvider.bankInfo.account_number;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+    UserProvider userProvider = Provider.of(
+      context,
+      listen: false,
+    );
+    WasherProvider washerProvider = Provider.of(
+      context,
+      listen: false,
+    );
+
     return Scaffold(
       bottomNavigationBar: navigationBarComponent(context),
       body: SingleChildScrollView(
@@ -118,35 +157,13 @@ class _AccountPageState extends State<AccountPage> {
                                 ),
                               ),
                             ),
-                            Container(
-                              width: MediaQuery.of(context).size.width * 0.85,
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  border: Border.all(color: Colors.grey[400]!),
-                                  borderRadius:
-                                      const BorderRadius.all(Radius.circular(10))),
-                              child: DropdownButton(
-                                isExpanded: true,
-                                padding: const EdgeInsets.symmetric(
-                                  vertical: 5,
-                                  horizontal: 10,
-                                ),
-                                value: bankSelected,
-                                items: listBank
-                                    .map((item) => DropdownMenuItem<String>(
-                                          value: item,
-                                          child: Text(item),
-                                        ))
-                                    .toList(),
-                                onChanged: null,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 10,
+                            geralInativeTextInput(
+                              context: context,
+                              text: "Bank Name",
                             ),
                             geralInativeTextInput(
                               context: context,
-                              text: "Bank Details Name",
+                              text: "Account Name",
                             ),
                             geralInativeTextInput(
                               context: context,
@@ -211,6 +228,7 @@ class _AccountPageState extends State<AccountPage> {
                               text: "Driver's Licence number or passport",
                               textController: licenceController,
                             ),
+                            // CHANGE WITH BLOB
                             geralIconTextInput(
                               icon: Icons.upload_file,
                               context: context,
@@ -227,51 +245,30 @@ class _AccountPageState extends State<AccountPage> {
                                 ),
                               ),
                             ),
-                            Container(
-                              width: MediaQuery.of(context).size.width * 0.85,
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  border: Border.all(color: Colors.grey[700]!),
-                                  borderRadius:
-                                      const BorderRadius.all(Radius.circular(10))),
-                              child: DropdownButton(
-                                isExpanded: true,
-                                padding: const EdgeInsets.symmetric(
-                                  vertical: 5,
-                                  horizontal: 10,
-                                ),
-                                value: bankSelected,
-                                items: listBank
-                                    .map((item) => DropdownMenuItem<String>(
-                                          value: item,
-                                          child: Text(item),
-                                        ))
-                                    .toList(),
-                                onChanged: (item) => setState(() {
-                                  bankSelected = item!;
-                                }),
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
                             geralTextInput(
                               context: context,
-                              text: "Bank Details Name",
+                              text: "Bank Name",
                               textController: bankController,
                             ),
                             geralTextInput(
                               context: context,
+                              text: "Account Name",
+                              textController: accountNameController,
+                            ),
+                            geralTextInput(
+                              context: context,
                               text: "Account Number",
-                              textController: accountController,
+                              textController: accountNumberController,
                             ),
                             TextButton(
                               style: ButtonStyle(
                                 elevation: MaterialStateProperty.all(5),
                                 fixedSize: MaterialStateProperty.all<Size>(
-                                  Size(MediaQuery.of(context).size.width * 0.85, 50),
+                                  Size(MediaQuery.of(context).size.width * 0.85,
+                                      50),
                                 ),
-                                backgroundColor: MaterialStateProperty.all<Color>(
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color>(
                                   const Color.fromRGBO(237, 189, 58, 1),
                                 ),
                                 shape: MaterialStateProperty.all<
@@ -281,7 +278,32 @@ class _AccountPageState extends State<AccountPage> {
                                   ),
                                 ),
                               ),
-                              onPressed: () {
+                              onPressed: () async {
+                                await userProvider.updatePerfil(
+                                  context,
+                                  UserCompleteModel(
+                                      name: nameController.text,
+                                      email: emailController.text,
+                                      phone: phoneController.text,
+                                      address: addressController.text),
+                                );
+                                await washerProvider.updateBankInfo(
+                                  context,
+                                  BankInfoModel(
+                                    bank_name: bankController.text,
+                                    account_name: accountNameController.text,
+                                    account_number:
+                                        accountNumberController.text,
+                                  ),
+                                );
+                                await washerProvider.updateWasherInfo(
+                                  context,
+                                  WasherInfoModel(
+                                    abn: abnController.text,
+                                    driver_licence: licenceController.text,
+                                    // picture: photoController,
+                                  ),
+                                );
                                 setState(() {
                                   edit = false;
                                 });

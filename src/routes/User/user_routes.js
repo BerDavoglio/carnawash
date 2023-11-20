@@ -20,6 +20,7 @@ router.post('/refer/', loginRequired, clientUserController.referFriends);
 
 router.post('/regular/', loginRequired, signRegularwashController.newRegular);
 router.get('/regular/', loginRequired, signRegularwashController.indexRegular);
+router.get('/client/geralInfo/:id', loginRequired, clientUserController.indexOne);
 
 router.post('/washer/', loginRequired, washerUserController.firstLogin);
 router.get('/washer/verify/', loginRequired, washerUserController.verifyFirstLogin);

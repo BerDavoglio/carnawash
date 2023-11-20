@@ -36,13 +36,13 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'CarWash',
+        title: 'CarnaWash',
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
         routes: {
-          AppRoutes.HOME: (_) => const HomePage(),
-          AppRoutes.FIRST_LOGIN_HOME: (_) => const FirstLoginHomePage(),
+          AppRoutes.HOME: (_) => const AuthOrHomeScreen(),
+          AppRoutes.FIRST_LOGIN_HOME: (_) => FirstLoginHomePage(),
           AppRoutes.LOGIN: (_) => const LoginPage(),
           AppRoutes.SCHEDULES: (_) => const SchedulesPage(),
           AppRoutes.SUPPLY: (_) => const SupplyPage(),
@@ -57,7 +57,7 @@ class MyApp extends StatelessWidget {
           AppRoutes.NOTIFICATION: (_) => const NotificationPage(),
           AppRoutes.TERMS: (_) => const TermsConditionsPage(),
           AppRoutes.AVAILABILITY: (_) => const AvailabilityPage(),
-          AppRoutes.WASH_REQUEST: (_) => const WashRequestPage(),
+          AppRoutes.WASH_REQUEST: (_) => WashRequestPage(),
         },
       ),
     );

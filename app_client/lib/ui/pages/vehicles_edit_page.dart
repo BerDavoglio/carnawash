@@ -55,7 +55,7 @@ class _VehiclesEditPageState extends State<VehiclesEditPage> {
       edit = false;
 
       WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-        VehiclesProvider vehiclesProvider = Provider.of(context);
+        VehiclesProvider vehiclesProvider = Provider.of(context, listen: false);
 
         await vehiclesProvider.loadBrands(context);
         listBrand = vehiclesProvider.brandList;
@@ -67,8 +67,8 @@ class _VehiclesEditPageState extends State<VehiclesEditPage> {
 
   @override
   Widget build(BuildContext context) {
-    VehiclesProvider vehicleProvider = Provider.of(context);
-    ServicesProvider servicesProvider = Provider.of(context);
+    VehiclesProvider vehicleProvider = Provider.of(context, listen: false);
+    ServicesProvider servicesProvider = Provider.of(context, listen: false);
 
     return Scaffold(
       bottomNavigationBar: navigationBarComponent(context),
@@ -142,7 +142,7 @@ class _VehiclesEditPageState extends State<VehiclesEditPage> {
                               onChanged: (item) => setState(() async {
                                 brandSelected = item!;
                                 VehiclesProvider vehiclesProvider =
-                                    Provider.of(context);
+                                    Provider.of(context, listen: false);
                                 await vehiclesProvider
                                     .loadModels(context, item)
                                     .then(

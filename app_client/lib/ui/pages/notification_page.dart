@@ -19,7 +19,7 @@ class _NotificationPageState extends State<NotificationPage> {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-      NotificationProvider notificationProvider = Provider.of(context);
+      NotificationProvider notificationProvider = Provider.of(context, listen: false);
 
       await notificationProvider.loadGeralNotifications(context);
       await notificationProvider.loadNotifications(context);
@@ -28,7 +28,7 @@ class _NotificationPageState extends State<NotificationPage> {
 
   @override
   Widget build(BuildContext context) {
-    NotificationProvider notificationProvider = Provider.of(context);
+    NotificationProvider notificationProvider = Provider.of(context, listen: false);
 
     return Scaffold(
       bottomNavigationBar: navigationBarComponent(context),

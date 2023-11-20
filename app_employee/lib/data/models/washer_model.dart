@@ -41,9 +41,9 @@ class WasherInfoModel {
     this.enable,
     this.rate,
     required this.abn,
-    required this.contract,
+    this.contract,
     required this.driver_licence,
-    required this.picture,
+    this.picture,
   });
 
   bool? made_quiz;
@@ -51,7 +51,7 @@ class WasherInfoModel {
   bool? enable;
   double? rate;
   String abn;
-  ByteData contract;
-  ByteData driver_licence;
-  ByteData picture;
+  ByteData? contract;
+  String driver_licence;
+  ByteData? picture;
 }

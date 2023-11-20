@@ -65,7 +65,7 @@ class WasherProvider with ChangeNotifier {
             ),
           ),
         );
-        notifyListeners();
+
       } else if (v['errors'] != '') {
         await comumDialog(
           context,
@@ -139,7 +139,7 @@ class WasherProvider with ChangeNotifier {
 
       if (response.statusCode == 200) {
         _listQuizQuestions = v;
-        notifyListeners();
+
       } else if (v['errors'] != '') {
         await comumDialog(
           context,
@@ -189,7 +189,7 @@ class WasherProvider with ChangeNotifier {
           ),
         );
         await quizGrade(context);
-        notifyListeners();
+
       } else if (v['errors'] != '') {
         await comumDialog(
           context,
@@ -272,7 +272,7 @@ class WasherProvider with ChangeNotifier {
             ),
           ),
         );
-        notifyListeners();
+
       } else if (v['errors'] != '') {
         await comumDialog(
           context,
@@ -308,7 +308,7 @@ class WasherProvider with ChangeNotifier {
 
       if (response.statusCode == 200) {
         _bankInfo = v;
-        notifyListeners();
+
       } else if (v['errors'] != '') {
         await comumDialog(
           context,
@@ -359,7 +359,7 @@ class WasherProvider with ChangeNotifier {
           ),
         );
         await loadBankInfo(context);
-        notifyListeners();
+
       } else if (v['errors'] != '') {
         await comumDialog(
           context,
@@ -395,7 +395,7 @@ class WasherProvider with ChangeNotifier {
 
       if (response.statusCode == 200) {
         _timeAvailable = v;
-        notifyListeners();
+
       } else if (v['errors'] != '') {
         await comumDialog(
           context,
@@ -450,7 +450,7 @@ class WasherProvider with ChangeNotifier {
           ),
         );
         await loadTimeAvailable(context);
-        notifyListeners();
+
       } else if (v['errors'] != '') {
         await comumDialog(
           context,
@@ -486,7 +486,7 @@ class WasherProvider with ChangeNotifier {
 
       if (response.statusCode == 200) {
         _washerInfo = v;
-        notifyListeners();
+
       } else if (v['errors'] != '') {
         await comumDialog(
           context,
@@ -538,7 +538,7 @@ class WasherProvider with ChangeNotifier {
           ),
         );
         await loadWasherInfo(context);
-        notifyListeners();
+
       } else if (v['errors'] != '') {
         await comumDialog(
           context,

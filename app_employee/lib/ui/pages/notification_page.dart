@@ -1,5 +1,9 @@
-import 'package:flutter/material.dart';
+// ignore_for_file: use_build_context_synchronously
 
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../infra/infra.dart';
 import '../ui.dart';
 
 class NotificationPage extends StatefulWidget {
@@ -11,7 +15,21 @@ class NotificationPage extends StatefulWidget {
 
 class _NotificationPageState extends State<NotificationPage> {
   @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      NotificationProvider notificationProvider = Provider.of(context, listen: false);
+
+      await notificationProvider.loadGeralNotifications(context);
+      await notificationProvider.loadNotifications(context);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    NotificationProvider notificationProvider = Provider.of(context, listen: false);
+
     return Scaffold(
       bottomNavigationBar: navigationBarComponent(context),
       body: SingleChildScrollView(
@@ -38,36 +56,27 @@ class _NotificationPageState extends State<NotificationPage> {
                       )
                     ],
                   ),
-                  const SizedBox(height: 24),
-                  notificationBox(
-                    context,
-                    'Support responded to chat',
-                    '1 hour ago',
-                    Icons.chat_bubble_outline,
-                  ),
-                  notificationBox(
-                    context,
-                    'Your Nissan wash request has been approved',
-                    '1 hour ago',
-                    Icons.check_circle_outline,
-                  ),
-                  notificationBox(
-                    context,
-                    'Your Nissan wash request has been rejected',
-                    '1 hour ago',
-                    Icons.close,
-                  ),
-                  notificationBox(
-                    context,
-                    'Your wash has started!',
-                    '1 hour ago',
-                    Icons.directions_car,
-                  ),
-                  notificationBox(
-                    context,
-                    'Your wash has finished. Rate us!',
-                    '1 hour ago',
-                    Icons.directions_car,
+                  const SizedBox(height: 16),
+                  Column(
+                    children: List.generate(
+                      notificationProvider.notifications.length,
+                      (index) => notificationBox(
+                        context,
+                        notificationProvider
+                            .getNotificationID(
+                                context,
+                                notificationProvider
+                                    .notifications[index].notification_id)!
+                            .title,
+                        notificationProvider
+                            .getNotificationID(
+                                context,
+                                notificationProvider
+                                    .notifications[index].notification_id)!
+                            .type,
+                        '1 hour ago',
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -78,51 +87,60 @@ class _NotificationPageState extends State<NotificationPage> {
     );
   }
 
-  Widget notificationBox(
+  SizedBox notificationBox(
     BuildContext context,
     String text,
+    int type,
     String time,
-    IconData icon,
   ) {
+    late IconData icon;
+    if (type == 1) {
+      icon = Icons.chat_bubble_outline;
+    } else if (type == 2) {
+      icon = Icons.check_circle_outline;
+    } else if (type == 3) {
+      icon = Icons.close;
+    } else {
+      icon = Icons.directions_car;
+    }
+
     return SizedBox(
       width: MediaQuery.of(context).size.width * 0.85,
       child: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(right: 24),
-                  child: Icon(
-                    icon,
-                    size: 30,
+          Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(20),
+                child: Icon(
+                  icon,
+                  size: 30,
+                ),
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.65,
+                    child: Text(
+                      text,
+                    ),
                   ),
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.6,
-                      child: Text(
-                        text,
-                        style: const TextStyle(fontSize: 18),
-                      ),
+                  const SizedBox(height: 5),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.65,
+                    child: Text(
+                      time,
+                      style: const TextStyle(color: Colors.grey, fontSize: 12),
                     ),
-                    const SizedBox(height: 6),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.6,
-                      child: Text(
-                        time,
-                        style: const TextStyle(color: Colors.grey),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
+                  ),
+                ],
+              ),
+            ],
           ),
-          const Divider(),
+          const Divider(
+            thickness: 1,
+          ),
         ],
       ),
     );

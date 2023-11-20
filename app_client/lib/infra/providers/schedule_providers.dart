@@ -5,6 +5,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../../data/data.dart';
@@ -43,7 +44,7 @@ class ScheduleProvider with ChangeNotifier {
 
       if (response.statusCode == 200) {
         _listSchedules = v;
-        notifyListeners();
+
       } else if (v['errors'] != '') {
         await comumDialog(
           context,
@@ -68,7 +69,7 @@ class ScheduleProvider with ChangeNotifier {
     try {
       final response = await http.get(
         Uri.parse(
-            '${Constants.BACKEND_BASE_URL}/schedule/client/by-date/$date'),
+            '${Constants.BACKEND_BASE_URL}/schedule/client/by-date/${DateFormat('yyyy-MM-dd').format(date)}'),
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
@@ -80,7 +81,7 @@ class ScheduleProvider with ChangeNotifier {
 
       if (response.statusCode == 200) {
         _listByDate = v;
-        notifyListeners();
+
       } else if (v['errors'] != '') {
         await comumDialog(
           context,
@@ -118,7 +119,7 @@ class ScheduleProvider with ChangeNotifier {
 
       if (response.statusCode == 200) {
         _listHistorySchedules = v;
-        notifyListeners();
+
       } else if (v['errors'] != '') {
         await comumDialog(
           context,
@@ -288,7 +289,7 @@ class ScheduleProvider with ChangeNotifier {
             ),
           ),
         );
-        notifyListeners();
+
       } else if (v['errors'] != '') {
         await comumDialog(
           context,
@@ -335,7 +336,7 @@ class ScheduleProvider with ChangeNotifier {
           ),
         );
         await loadSchedules(context);
-        notifyListeners();
+
       } else if (v['errors'] != '') {
         await comumDialog(
           context,
@@ -378,7 +379,7 @@ class ScheduleProvider with ChangeNotifier {
 
       if (response.statusCode == 200) {
         await loadSchedules(context);
-        notifyListeners();
+
       } else if (v['errors'] != '') {
         await comumDialog(
           context,

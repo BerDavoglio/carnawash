@@ -24,6 +24,7 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController abnController = TextEditingController();
   TextEditingController driveController = TextEditingController();
   TextEditingController pictureController = TextEditingController();
+  TextEditingController bankController = TextEditingController();
   TextEditingController accountNameController = TextEditingController();
   TextEditingController accountNumberController = TextEditingController();
 
@@ -70,6 +71,7 @@ class _LoginPageState extends State<LoginPage> {
                         abnController: abnController,
                         driveController: driveController,
                         pictureController: pictureController,
+                        bankController: bankController,
                         accountNameController: accountNameController,
                         accountNumberController: accountNumberController,
                       ),

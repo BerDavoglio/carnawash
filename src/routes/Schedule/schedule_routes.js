@@ -21,7 +21,8 @@ router.get('/client/ongoing/', loginRequired, scheduleController.indexClientOngo
 router.put('/cancel/:id', loginRequired, scheduleController.clientCancel);
 router.put('/rate/:id', loginRequired, scheduleController.rate);
 
-router.get('/washer/all/', loginRequired, scheduleController.showWasher);
+router.get('/washer/by-id/:id', loginRequired, scheduleController.indexWasher);
+router.get('/washer/by-date/:date', loginRequired, scheduleController.showWasher);
 router.get('/washer/:id', loginRequired, scheduleController.indexWasher);
 router.put('/washer/:id', loginRequired, scheduleController.changeStatus);
 router.put('/washer/decline/:id', loginRequired, scheduleController.declineWasher);

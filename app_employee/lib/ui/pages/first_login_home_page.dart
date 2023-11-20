@@ -1,12 +1,15 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, must_be_immutable
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../infra/infra.dart';
 import '../ui.dart';
 
 class FirstLoginHomePage extends StatefulWidget {
-  const FirstLoginHomePage({super.key});
+  int? verify;
+  FirstLoginHomePage({super.key, this.verify});
 
   @override
   State<FirstLoginHomePage> createState() => _FirstLoginHomePageState();
@@ -20,6 +23,7 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
   bool threeTrue = false;
   TextEditingController insuranceController = TextEditingController();
 
+// GET QUESTIONS FROM PROVIDER
   List questionList = [
     [
       '1. What are the products from Carnawash',
@@ -126,6 +130,7 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
     }
   }
 
+  // AVAILABLE DATA -> FAZER COM QUE INICIE SEM VALOR ALGUM!
   List<Item> list = [
     Item(
       day: 'Monday',
@@ -186,6 +191,15 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
   ];
 
   @override
+  void initState() {
+    super.initState();
+
+    if (widget.verify! == 1) {
+      n = 2;
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[100],
@@ -232,6 +246,7 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
                 backgroundColor: Color.fromRGBO(237, 189, 58, 1),
                 fixedSize: Size(MediaQuery.of(context).size.width * 0.85, 50)),
             onPressed: () {
+              // SAVE DATA
               if (n == 1) {
                 setState(() {
                   n = 2;
@@ -309,6 +324,8 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
   }
 
   Widget partOne(BuildContext context) {
+    UserProvider userProvider = Provider.of(context);
+
     return Column(
       children: [
         Container(
@@ -328,8 +345,8 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         notificationHomeButtonComponent(context),
-                        const Text(
-                          'Welcome, John!',
+                        Text(
+                          'Welcome, ${userProvider.perfil.name}!',
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.w500,
@@ -639,6 +656,7 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  // CHANGE MARKERS DEPENDS ON WITCH PAGE THEY ARE
                   questionsMarker(
                     context,
                     true,
@@ -811,6 +829,7 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
                 style: TextStyle(fontWeight: FontWeight.w500),
               ),
               const SizedBox(height: 16),
+              // GET VALUE FROM QUIZPROVIDER
               const Text('Congratulations!\nYou got 80% of the quiz right.'),
             ],
           ),
@@ -886,6 +905,7 @@ class _FirstLoginHomePageState extends State<FirstLoginHomePage> {
               const SizedBox(height: 16),
               const Text('Attach your insurance contract here'),
               const SizedBox(height: 16),
+              // CHANGE INPUT TO BLOB
               geralIconTextInput(
                 context: context,
                 text: "Insurance Contract",

@@ -1,15 +1,55 @@
-import 'package:flutter/material.dart';
+// ignore_for_file: use_build_context_synchronously, must_be_immutable
 
+import 'dart:convert';
+
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+
+import '../../data/data.dart';
+import '../../infra/infra.dart';
 import '../ui.dart';
 
 class WashRequestPage extends StatefulWidget {
-  const WashRequestPage({super.key});
+  ScheduleModel? preData;
+
+  WashRequestPage({
+    super.key,
+    this.preData,
+  });
 
   @override
   State<WashRequestPage> createState() => _WashRequestPageState();
 }
 
 class _WashRequestPageState extends State<WashRequestPage> {
+  ClientModel? client;
+  List<CarObjectModel> carsObjectList = [];
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      ScheduleProvider scheduleProvider = Provider.of(context, listen: false);
+      ServicesProvider servicesProvider = Provider.of(context, listen: false);
+
+      await servicesProvider.loadAdditional(context);
+
+      client = await scheduleProvider.loadClient(context, widget.preData!.id!);
+
+      for (var i in widget.preData!.cars_list_id.split(';')) {
+        CarObjectModel? car = await scheduleProvider.loadObjectCar(
+          context,
+          json.decode(i).car_id as int,
+        );
+        if (car != null) {
+          carsObjectList.add(car);
+        }
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,23 +89,29 @@ class _WashRequestPageState extends State<WashRequestPage> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        'September 10, 2023 - 10:00am',
-                        style: TextStyle(
+                      Text(
+                        DateFormat('yMMMMd h:mm a')
+                            .format(widget.preData!.selected_date)
+                            .toString(),
+                        style: const TextStyle(
                           fontWeight: FontWeight.w500,
                         ),
                       ),
                       const SizedBox(height: 16),
-                      const Text(
-                        'Customer: Jorge',
-                        style: TextStyle(
+                      Text(
+                        'Customer: ${client!.name}',
+                        style: const TextStyle(
                           fontWeight: FontWeight.w500,
                         ),
                       ),
-                      const SizedBox(height: 16),
-                      requestBox(context),
-                      const SizedBox(height: 16),
-                      requestBox(context),
+                      Column(
+                        children: List.generate(
+                          carsObjectList.length,
+                          (index) async {
+                            return await requestBox(context, index);
+                          } as Widget Function(int index),
+                        ),
+                      ),
                       const SizedBox(height: 24),
                       Container(
                         padding: const EdgeInsets.all(16),
@@ -148,123 +194,160 @@ class _WashRequestPageState extends State<WashRequestPage> {
     );
   }
 
-  Container requestBox(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        borderRadius: BorderRadius.all(
-          Radius.circular(10),
-        ),
-        color: Colors.white,
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
+  Future<Widget> requestBox(
+    BuildContext context,
+    int id,
+  ) async {
+    VehiclesProvider vehiclesProvider = Provider.of(context, listen: false);
+    ServicesProvider servicesProvider = Provider.of(context, listen: false);
+
+    List<CarModel> carsList = [];
+    List<AdditionalModel> addonList = [];
+    for (var i in carsObjectList) {
+      CarModel? car = await vehiclesProvider.loadOneCar(
+        context,
+        i.car_id,
+      );
+      if (car != null) {
+        carsList.add(car);
+      }
+      for (var j in i.additional_list_id.split(';')) {
+        AdditionalModel? addon =
+            servicesProvider.getAdditionalComplete(int.parse(j));
+        addonList.add(addon!);
+      }
+    }
+
+    return Column(
+      children: [
+        const SizedBox(height: 16),
+        Container(
+          decoration: const BoxDecoration(
+            borderRadius: BorderRadius.all(
+              Radius.circular(10),
+            ),
+            color: Colors.white,
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.2,
-                  child: const Text(
-                    'Vehicle 1',
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 16,
+                Row(
+                  children: [
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.2,
+                      child: Text(
+                        'Vehicle $id',
+                        style: const TextStyle(
+                          color: Colors.grey,
+                          fontSize: 16,
+                        ),
+                      ),
                     ),
-                  ),
+                    Container(
+                      decoration: const BoxDecoration(
+                        color: Colors.grey,
+                      ),
+                      width: MediaQuery.of(context).size.width * 0.55,
+                      height: 1,
+                    ),
+                  ],
                 ),
-                Container(
-                  decoration: const BoxDecoration(
+                const SizedBox(height: 16),
+                Text(
+                  '${carsList[id].brand} - ${carsList[id].model} - ${servicesProvider.getCarsizeComplete(carsList[0].car_size_id).title}',
+                  style: const TextStyle(
                     color: Colors.grey,
+                    fontWeight: FontWeight.w500,
                   ),
-                  width: MediaQuery.of(context).size.width * 0.55,
-                  height: 1,
-                ),
-              ],
-            ),
-            const SizedBox(height: 16),
-            const Text(
-              'Nissam - March - Small',
-              style: TextStyle(
-                color: Colors.grey,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            const Text(
-              '3SAM123',
-              style: TextStyle(
-                color: Colors.grey,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            const Text(
-              'Wash outside only',
-              style: TextStyle(
-                color: Colors.grey,
-              ),
-            ),
-            const Text(
-              '+ Pet Hair',
-              style: TextStyle(
-                color: Colors.grey,
-              ),
-            ),
-            const Row(
-              children: [
-                Icon(
-                  Icons.place_outlined,
-                  color: Color.fromRGBO(237, 189, 58, 1),
                 ),
                 Text(
-                  'Monaco St, Bundall',
+                  carsList[id].plate,
+                  style: const TextStyle(
+                    color: Colors.grey,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                const Text(
+                  'Wash outside only',
                   style: TextStyle(
                     color: Colors.grey,
                   ),
                 ),
+                Row(
+                  children: List.generate(
+                    addonList.length,
+                    (index) {
+                      return Padding(
+                        padding: const EdgeInsets.only(top: 8),
+                        child: Text(
+                          '${addonList[index]}; ',
+                          style: const TextStyle(color: Colors.grey),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                Row(
+                  children: [
+                    const Icon(
+                      Icons.place_outlined,
+                      color: Color.fromRGBO(237, 189, 58, 1),
+                    ),
+                    Text(
+                      widget.preData!.address,
+                      style: const TextStyle(
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 16),
+                const Text(
+                  'Your earnings',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                const SizedBox(height: 16),
+                const Text(
+                  // VALUE AFTER MARKUP
+                  '\$ 60.00',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 18,
+                  ),
+                ),
+                const SizedBox(height: 16),
+                const Text(
+                  "Costumer's comments",
+                  style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                const SizedBox(height: 16),
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.85,
+                  height: 100,
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.black),
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(10),
+                    ),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: SingleChildScrollView(
+                      child: Text(widget.preData!.observation_address),
+                    ),
+                  ),
+                ),
               ],
             ),
-            const SizedBox(height: 16),
-            const Text(
-              'Your earnings',
-              style: TextStyle(
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            const SizedBox(height: 16),
-            const Text(
-              '\$ 60.00',
-              style: TextStyle(
-                fontWeight: FontWeight.w600,
-                fontSize: 18,
-              ),
-            ),
-            const SizedBox(height: 16),
-            const Text(
-              "Costumer's comments",
-              style: TextStyle(
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            const SizedBox(height: 16),
-            Container(
-              width: MediaQuery.of(context).size.width * 0.85,
-              height: 100,
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.black),
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(10),
-                ),
-              ),
-              child: const Padding(
-                padding: EdgeInsets.all(10),
-                child: SingleChildScrollView(
-                  child: Text(''),
-                ),
-              ),
-            ),
-          ],
+          ),
         ),
-      ),
+      ],
     );
   }
 }

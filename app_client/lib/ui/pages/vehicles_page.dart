@@ -26,7 +26,7 @@ class _VehiclesPageState extends State<VehiclesPage> {
 
   @override
   Widget build(BuildContext context) {
-    VehiclesProvider vehiclesProvider = Provider.of(context);
+    VehiclesProvider vehiclesProvider = Provider.of(context, listen: false);
 
     return Scaffold(
       backgroundColor: Colors.grey[100]!,
@@ -107,7 +107,7 @@ class _VehiclesPageState extends State<VehiclesPage> {
     BuildContext context,
     CarModel car,
   ) async {
-    ServicesProvider servicesProvider = Provider.of(context);
+    ServicesProvider servicesProvider = Provider.of(context, listen: false);
 
     await servicesProvider.loadCarsize(context);
 

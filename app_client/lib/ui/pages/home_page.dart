@@ -38,9 +38,9 @@ class _HomePageState extends State<HomePage> {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-      VehiclesProvider vehiclesProvider = Provider.of(context);
-      ScheduleProvider scheduleProvider = Provider.of(context);
-      ServicesProvider servicesProvider = Provider.of(context);
+      VehiclesProvider vehiclesProvider = Provider.of(context, listen: false);
+      ScheduleProvider scheduleProvider = Provider.of(context, listen: false);
+      ServicesProvider servicesProvider = Provider.of(context, listen: false);
 
       scheduleRebook = await scheduleProvider.loadRebookSchedule(context);
       for (var i in scheduleRebook!.cars_list_id.split(';')) {
@@ -103,7 +103,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    UserProvider userProvider = Provider.of(context);
+    UserProvider userProvider = Provider.of(context, listen: false);
 
     return Scaffold(
       backgroundColor: Colors.grey[100]!,
@@ -427,7 +427,7 @@ class _HomePageState extends State<HomePage> {
     List addonList,
     double price,
   ) {
-    ServicesProvider servicesProvider = Provider.of(context);
+    ServicesProvider servicesProvider = Provider.of(context, listen: false);
 
     return Container(
       decoration: const BoxDecoration(
@@ -550,7 +550,7 @@ class _HomePageState extends State<HomePage> {
     List addonList,
     String side,
   ) {
-    ServicesProvider servicesProvider = Provider.of(context);
+    ServicesProvider servicesProvider = Provider.of(context, listen: false);
 
     List status = [
       Colors.grey,

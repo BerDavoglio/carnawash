@@ -39,7 +39,7 @@ class PaymentProvider with ChangeNotifier {
 
       if (response.statusCode == 200) {
         _listPayment = v;
-        notifyListeners();
+
       } else if (v['errors'] != '') {
         await comumDialog(
           context,

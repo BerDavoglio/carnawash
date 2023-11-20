@@ -38,10 +38,10 @@ class _SchedulesPageState extends State<SchedulesPage> {
   }
 
   void _onDaySelected(DateTime day, DateTime focusedDay) {
-    setState(() {
+    setState(() async {
       today = day;
 
-      scheduleProvider.loadDate(context, day);
+      await scheduleProvider.loadDate(context, day);
     });
   }
 
@@ -126,9 +126,9 @@ class _SchedulesPageState extends State<SchedulesPage> {
     BuildContext context,
     ScheduleModel schedule,
   ) async {
-    VehiclesProvider vehiclesProvider = Provider.of(context);
-    ScheduleProvider scheduleProvider = Provider.of(context);
-    ServicesProvider servicesProvider = Provider.of(context);
+    VehiclesProvider vehiclesProvider = Provider.of(context, listen: false);
+    ScheduleProvider scheduleProvider = Provider.of(context, listen: false);
+    ServicesProvider servicesProvider = Provider.of(context, listen: false);
 
     List<CarModel> carsList = [];
     List<CarObjectModel> carsObjectList = [];

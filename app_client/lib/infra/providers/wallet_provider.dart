@@ -43,7 +43,7 @@ class WalletProvider with ChangeNotifier {
         );
       }
 
-      notifyListeners();
+
     } catch (e) {
       await comumDialog(
         context,
@@ -100,7 +100,7 @@ class WalletProvider with ChangeNotifier {
         );
       }
 
-      notifyListeners();
+
     } catch (e) {
       await comumDialog(
         context,
@@ -157,7 +157,7 @@ class WalletProvider with ChangeNotifier {
         );
       }
 
-      notifyListeners();
+
     } catch (e) {
       await comumDialog(
         context,
@@ -209,7 +209,7 @@ class WalletProvider with ChangeNotifier {
         );
       }
 
-      notifyListeners();
+
     } catch (e) {
       await comumDialog(
         context,

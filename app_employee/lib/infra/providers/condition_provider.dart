@@ -34,7 +34,7 @@ class ConditionProvider with ChangeNotifier {
 
       if (response.statusCode == 200) {
         _condition = v;
-        notifyListeners();
+
       } else if (v['errors'] != '') {
         await comumDialog(
           context,
@@ -43,7 +43,7 @@ class ConditionProvider with ChangeNotifier {
         );
       }
 
-      notifyListeners();
+
     } catch (e) {
       await comumDialog(
         context,

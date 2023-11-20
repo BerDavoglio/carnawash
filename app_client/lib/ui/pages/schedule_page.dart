@@ -85,12 +85,12 @@ class _SchedulePageState extends State<SchedulePage> {
   }
 
   Future<void> _loadCarSelected(BuildContext context) async {
-    VehiclesProvider vehiclesProvider = Provider.of(context);
+    VehiclesProvider vehiclesProvider = Provider.of(context, listen: false);
     await vehiclesProvider.loadOneCar(context, carSelected);
   }
 
   double priceCalculate(BuildContext context, CarModel car, int washSelect) {
-    ServicesProvider servicesProvider = Provider.of(context);
+    ServicesProvider servicesProvider = Provider.of(context, listen: false);
     double carValue =
         double.parse(servicesProvider.getCarsizeComplete(car.id!).price);
 
@@ -240,7 +240,7 @@ class _SchedulePageState extends State<SchedulePage> {
   }
 
   Column firstPart(BuildContext context) {
-    VehiclesProvider vehiclesProvider = Provider.of(context);
+    VehiclesProvider vehiclesProvider = Provider.of(context, listen: false);
 
     return Column(
       children: [
@@ -309,7 +309,7 @@ class _SchedulePageState extends State<SchedulePage> {
     int index,
     CarModel car,
   ) {
-    ServicesProvider servicesProvider = Provider.of(context);
+    ServicesProvider servicesProvider = Provider.of(context, listen: false);
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10),
@@ -394,7 +394,7 @@ class _SchedulePageState extends State<SchedulePage> {
     BuildContext context,
     CarModel carSelec,
   ) {
-    ServicesProvider servicesProvider = Provider.of(context);
+    ServicesProvider servicesProvider = Provider.of(context, listen: false);
 
     return Column(
       children: [
@@ -1019,7 +1019,7 @@ class _SchedulePageState extends State<SchedulePage> {
   }
 
   Widget fifthPart(BuildContext context) {
-    UserProvider userProvider = Provider.of(context);
+    UserProvider userProvider = Provider.of(context, listen: false);
 
     return Column(
       children: [
@@ -1115,7 +1115,7 @@ class _SchedulePageState extends State<SchedulePage> {
     BuildContext context,
     CardModel card,
   ) {
-    ScheduleProvider scheduleProvider = Provider.of(context);
+    ScheduleProvider scheduleProvider = Provider.of(context, listen: false);
     TextEditingController threeController = TextEditingController();
 
     return Column(

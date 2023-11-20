@@ -38,7 +38,7 @@ class UserProvider with ChangeNotifier {
         _token = v['token'];
         await loadPerfil(context);
         Navigator.of(context).pushReplacementNamed(AppRoutes.HOME);
-        notifyListeners();
+
       } else {
         await comumDialog(
           context,
@@ -49,7 +49,7 @@ class UserProvider with ChangeNotifier {
 
       Navigator.of(context).pushNamed(AppRoutes.HOME);
 
-      notifyListeners();
+
     } catch (e) {
       await comumDialog(
         context,
@@ -99,7 +99,7 @@ class UserProvider with ChangeNotifier {
 
       Navigator.of(context).pushNamed(AppRoutes.HOME);
 
-      notifyListeners();
+
     } catch (e) {
       await comumDialog(
         context,
@@ -122,7 +122,7 @@ class UserProvider with ChangeNotifier {
 
       if (response.statusCode == 200) {
         _perfil = jsonDecode(response.body);
-        notifyListeners();
+
       } else if (jsonDecode(response.body)['errors'] != '') {
         await comumDialog(
           context,
@@ -162,7 +162,7 @@ class UserProvider with ChangeNotifier {
         );
         await loadPerfil(context);
         Navigator.of(context).pop();
-        notifyListeners();
+
       } else if (v['errors'] != '') {
         await comumDialog(
           context,
@@ -181,6 +181,6 @@ class UserProvider with ChangeNotifier {
 
   void logout() {
     _token = '';
-    notifyListeners();
+
   }
 }

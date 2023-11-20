@@ -39,7 +39,7 @@ class _WalletEditPageState extends State<WalletEditPage> {
 
   @override
   Widget build(BuildContext context) {
-    WalletProvider walletProvider = Provider.of(context);
+    WalletProvider walletProvider = Provider.of(context, listen: false);
 
     return Scaffold(
       bottomNavigationBar: navigationBarComponent(context),
