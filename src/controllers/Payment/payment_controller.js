@@ -1,5 +1,5 @@
 import Paymentcard from '../../models/Payment/PaymentCard_models';
-import Paymentschedule from '../../models/Payment/Paymentschedule_models';
+import Paymentschedule from '../../models/Payment/PaymentSchedule_models';
 import Paymentwasher from '../../models/Payment/PaymentWasher_models';
 
 class PaymentController {

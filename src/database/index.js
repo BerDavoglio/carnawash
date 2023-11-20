@@ -11,7 +11,7 @@ import Condition from '../models/FaqTerms/Condition_models';
 import Notification from '../models/Notification/Notification_models';
 import Sentnotification from '../models/Notification/SentNotification_models';
 import Paymentcard from '../models/Payment/PaymentCard_models';
-import Paymentschedule from '../models/Payment/Paymentschedule_models';
+import Paymentschedule from '../models/Payment/PaymentSchedule_models';
 import Quiz from '../models/Quiz/Quiz_models';
 import Quizresponse from '../models/Quiz/QuizResponse_models';
 import Schedule from '../models/Schedules/Schedule_models';

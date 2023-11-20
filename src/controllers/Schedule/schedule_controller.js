@@ -9,7 +9,7 @@ import Regularwash from '../../models/Services/RegularWash_models';
 import Coupon from '../../models/Coupon/Coupon_models';
 
 import Paymentcard from '../../models/Payment/PaymentCard_models';
-import Paymentschedule from '../../models/Payment/Paymentschedule_models';
+import Paymentschedule from '../../models/Payment/PaymentSchedule_models';
 import Paymentwasher from '../../models/Payment/PaymentWasher_models';
 const { Op } = require("sequelize");
 const { format } = require('date-fns');
