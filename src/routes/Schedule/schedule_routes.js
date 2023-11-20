@@ -18,12 +18,15 @@ router.get('/client/by-date/:date', loginRequired, scheduleController.indexByDat
 router.get('/client/history/:initDate/:endDate', loginRequired, scheduleController.indexHistory);
 router.get('/client/rebook/', loginRequired, scheduleController.indexClientRebook);
 router.get('/client/ongoing/', loginRequired, scheduleController.indexClientOngoing);
-router.put('/cancel/:id', loginRequired, scheduleController.userCancel);
+router.put('/cancel/:id', loginRequired, scheduleController.clientCancel);
 router.put('/rate/:id', loginRequired, scheduleController.rate);
 
 router.get('/washer/all/', loginRequired, scheduleController.showWasher);
 router.get('/washer/:id', loginRequired, scheduleController.indexWasher);
-router.put('/admin/:id', loginRequired, isAdmin, scheduleController.updateWasher);
 router.put('/washer/:id', loginRequired, scheduleController.changeStatus);
+router.put('/washer/decline/:id', loginRequired, scheduleController.declineWasher);
+router.get('/washer/history/:initDate/:endDate', loginRequired, scheduleController.indexWasherHistory);
+
+router.put('/admin/:id', loginRequired, isAdmin, scheduleController.updateWasher);
 
 export default router;

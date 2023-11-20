@@ -14,21 +14,18 @@ class QuizresponseController {
 
       const newQuizresponse = await Quizresponse.create({
         user_id: idUser,
-        question_id: req.body.question_id,
         responses_list: req.body.responses_list,
       });
 
       const {
         id,
         user_id,
-        question_id,
         responses_list,
       } = newQuizresponse;
 
       return res.json({
         id,
         user_id,
-        question_id,
         responses_list,
       });
     } catch (err) {
@@ -51,6 +48,8 @@ class QuizresponseController {
       if (!quizResponses) {
         return res.status(400).json({ errors: ['Responses not Found'] });
       }
+
+      // Verificar quantas foram acertadas
 
       return res.json(quizResponses);
     } catch (err) {

@@ -13,7 +13,25 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
+          create: (_) => ConditionProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => NotificationProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => PaymentProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => ScheduleProvider(),
+        ),
+        ChangeNotifierProvider(
           create: (_) => UserProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => WalletProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => WasherProvider(),
         ),
       ],
       child: MaterialApp(

@@ -63,6 +63,19 @@ class CarController {
     }
   }
 
+  async indexCar(req, res) {
+    try {
+      const car = await Car.findByPk(req.params.id);
+      if (!car) {
+        return res.status(400).json({ errors: ['Car not Found'] });
+      }
+
+      return res.json(car);
+    } catch (err) {
+      return res.status(400).json({ errors: err.message });
+    }
+  }
+
   async update(req, res) {
     try {
       const idReq = req.userId;

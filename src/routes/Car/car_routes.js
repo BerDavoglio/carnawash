@@ -7,6 +7,7 @@ const router = new Router();
 
 router.post('/', loginRequired, carController.store);
 router.get('/', loginRequired, carController.show);
+router.get('/washer/:id', loginRequired, carController.indexCar);
 router.put('/:id', loginRequired, carController.update);
 router.delete('/:id', loginRequired, carController.delete);
 

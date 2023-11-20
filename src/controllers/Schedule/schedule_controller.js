@@ -10,6 +10,7 @@ import Coupon from '../../models/Coupon/Coupon_models';
 
 import Paymentcard from '../../models/Payment/PaymentCard_models';
 import Paymentschedule from '../../models/Payment/Paymentschedule_models';
+import Paymentwasher from '../../models/Payment/PaymentWasher_models';
 const { Op } = require("sequelize");
 const { format } = require('date-fns');
 
@@ -296,6 +297,32 @@ class ScheduleController {
 
       const schedule = await Schedule.findAll({
         where: {
+          user_id: idUser,
+          selected_date: {
+            [Op.between]: [
+              new Date(req.params.initDate + 'T00:00:00.000Z'),
+              new Date(req.params.endDate + 'T23:59:59.999Z')
+            ]
+          },
+        },
+      });
+
+      return res.json(schedule);
+    } catch (err) {
+      return res.status(400).json({ errors: err.message });
+    }
+  }
+
+  async indexWasherHistory(req, res) {
+    try {
+      const idUser = req.userId;
+      if (!idUser) {
+        return res.status(400).json({ errors: ['ID not Found'] });
+      }
+
+      const schedule = await Schedule.findAll({
+        where: {
+          washer_id: idUser,
           selected_date: {
             [Op.between]: [
               new Date(req.params.initDate + 'T00:00:00.000Z'),
@@ -419,6 +446,23 @@ class ScheduleController {
     }
   }
 
+  async declineWasher(req, res) {
+    try {
+      const schedule = await Schedule.findByPk(req.params.id);
+      if (schedule.status != 'not-started') {
+        return res.status(400).json({ message: 'You cant decline a wash that you already accepted' });
+      }
+
+      await schedule.update({
+        washer_id: 0,
+      });
+
+      return res.json({ message: ['Washer updated with success'] });
+    } catch (err) {
+      return res.status(400).json({ errors: err.message });
+    }
+  }
+
   async changeStatus(req, res) {
     try {
       const idUser = req.userId;
@@ -452,7 +496,7 @@ class ScheduleController {
     }
   }
 
-  async userCancel(req, res) {
+  async clientCancel(req, res) {
     try {
       const idUser = req.userId;
       if (!idUser) {
@@ -489,7 +533,7 @@ class ScheduleController {
         where: {
           id: req.params.id,
           user_id: idUser,
-          // status: 'finished',
+          status: 'finished',
         },
       });
 
@@ -527,6 +571,13 @@ class ScheduleController {
         source: token,
         description: 'Payment - ' + schedule.id,
       });
+
+      await Paymentwasher.create({
+        washer_id: schedule.washer_id,
+        wash_id: schedule.id,
+        wash_date: schedule.selected_date,
+        pay_data: null,
+      })
 
       return res.json(charge);
     } catch (err) {

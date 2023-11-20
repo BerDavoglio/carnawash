@@ -7,10 +7,6 @@ export default class Quizresponse extends Model {
         type: Sequelize.INTEGER,
         defaultValue: 0,
       },
-      question_id: {
-        type: Sequelize.INTEGER,
-        defaultValue: 0,
-      },
       responses_list: {
         type: Sequelize.TEXT,
         defaultValue: '',

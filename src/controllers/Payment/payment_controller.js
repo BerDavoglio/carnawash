@@ -1,5 +1,6 @@
 import Paymentcard from '../../models/Payment/PaymentCard_models';
 import Paymentschedule from '../../models/Payment/Paymentschedule_models';
+import Paymentwasher from '../../models/Payment/PaymentWasher_models';
 
 class PaymentController {
   async store(req, res) {
@@ -64,12 +65,6 @@ class PaymentController {
 
   async index(req, res) {
     try {
-      const cardsActive = await Paymentschedule.findAll({
-        where: {
-          card_id: req.params.id
-        }
-      })
-
       const idReq = req.userId;
       if (!idReq) {
         return res.status(400).json({ errors: ['ID not Found'] });
@@ -182,6 +177,50 @@ class PaymentController {
       return res.json({ message: 'Paymentcard deleted with success' });
     } catch (err) {
       return res.status(400).json({ errors: `Delete Paymentcard / ${err.message}` });
+    }
+  }
+
+  async payWasher(req, res) {
+    try {
+      const idReq = req.userId;
+      if (!idReq) {
+        return res.status(400).json({ errors: ['ID not Found'] });
+      }
+
+      const payment = await Paymentwasher.findByPk(req.params.id);
+
+      const updatedPayment = await payment.update({
+        pay_data: new Date(),
+      })
+
+      return res.json(updatedPayment);
+    } catch (err) {
+      return res.status(400).json({ errors: `Show Paymentcard / ${err.message}` });
+    }
+  }
+
+  async getPayedsWashers(req, res) {
+    try {
+      const idReq = req.userId;
+      if (!idReq) {
+        return res.status(400).json({ errors: ['ID not Found'] });
+      }
+
+      const payments = await Paymentwasher.findAll({
+        where: {
+          washer_id: idReq,
+          wash_date: {
+            [Op.between]: [
+              new Date(req.params.initDate + 'T00:00:00.000Z'),
+              new Date(req.params.endDate + 'T23:59:59.999Z')
+            ]
+          },
+        },
+      });
+
+      return res.json(payments);
+    } catch (err) {
+      return res.status(400).json({ errors: `Show Paymentcard / ${err.message}` });
     }
   }
 }
