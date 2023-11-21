@@ -15,7 +15,7 @@ class ConditionController {
     try {
       const condition = await Condition.findByPk(req.params.id);
       if (!condition) {
-        return res.status(400).json({ errors: ['Terms and Conditions not found'] });
+        return res.status(400).json({ errors: 'Terms and Conditions not found' });
       }
 
       const updateCondition = await condition.update(req.body);

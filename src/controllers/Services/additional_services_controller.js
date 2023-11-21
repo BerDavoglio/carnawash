@@ -35,7 +35,7 @@ class AdditionalservicesController {
     try {
       const additional = await Additionalservice.findByPk(req.params.id);
       if (!additional) {
-        return res.status(400).json({ errors: ['Additional Service not found'] });
+        return res.status(400).json({ errors: 'Additional Service not found' });
       }
 
       const updateAdditional = await additional.update(req.body);
@@ -60,7 +60,7 @@ class AdditionalservicesController {
     try {
       const additional = await Additionalservice.findByPk(req.params.id);
       if (!additional) {
-        return res.status(400).json({ errors: ['Additional Service not found'] });
+        return res.status(400).json({ errors: 'Additional Service not found' });
       }
 
       await additional.destroy();

@@ -8,11 +8,11 @@ class WasherUserController {
     try {
       const idUser = req.userId;
       if (!idUser) {
-        return res.status(400).json({ errors: ['ID not Found'] });
+        return res.status(400).json({ errors: 'ID not Found' });
       }
       const user = await User.findByPk(idUser);
       if (!user) {
-        return res.status(400).json({ errors: ['User not Found'] });
+        return res.status(400).json({ errors: 'User not Found' });
       }
 
       await Washerinfo.create({
@@ -59,11 +59,11 @@ class WasherUserController {
     try {
       const idUser = req.userId;
       if (!idUser) {
-        return res.status(400).json({ errors: ['ID not Found'] });
+        return res.status(400).json({ errors: 'ID not Found' });
       }
       const user = await User.findByPk(idUser);
       if (!user) {
-        return res.status(400).json({ errors: ['User not Found'] });
+        return res.status(400).json({ errors: 'User not Found' });
       }
       if (user.first_login) {
         const washer = await Washerinfo.findOne({
@@ -72,7 +72,7 @@ class WasherUserController {
           }
         });
         if (!washer) {
-          return res.status(400).json({ errors: ['Washer not Found'] });
+          return res.status(400).json({ errors: 'Washer not Found' });
         }
         if (!washer.made_quiz) {
           return res.json({ message: 1 });
@@ -92,7 +92,7 @@ class WasherUserController {
     try {
       const id = req.userId;
       if (!id) {
-        return res.status(400).json({ errors: ['ID not Found'] });
+        return res.status(400).json({ errors: 'ID not Found' });
       }
 
       const washer = await Washerinfo.findOne({
@@ -101,7 +101,7 @@ class WasherUserController {
         }
       });
       if (!washer) {
-        return res.status(400).json({ errors: ['Washer not Found'] });
+        return res.status(400).json({ errors: 'Washer not Found' });
       }
 
       return res.json(washer);
@@ -118,11 +118,11 @@ class WasherUserController {
         }
       });
       if (!washer) {
-        return res.status(400).json({ errors: ['Washer not Found'] });
+        return res.status(400).json({ errors: 'Washer not Found' });
       }
       const user = await User.findByPk(washer.user_id);
       if (!user) {
-        return res.status(400).json({ errors: ['User not Found'] });
+        return res.status(400).json({ errors: 'User not Found' });
       }
 
       const {
@@ -145,7 +145,7 @@ class WasherUserController {
     try {
       const idReq = req.userId;
       if (!idReq) {
-        return res.status(400).json({ errors: ['ID not Found'] });
+        return res.status(400).json({ errors: 'ID not Found' });
       }
 
       const washer = await Washerinfo.findOne({
@@ -154,7 +154,7 @@ class WasherUserController {
         }
       });
       if (!washer) {
-        return res.status(400).json({ errors: ['Washer not Found'] });
+        return res.status(400).json({ errors: 'Washer not Found' });
       }
 
       const updateWasher = await washer.update(req.body);
@@ -169,7 +169,7 @@ class WasherUserController {
     try {
       const idReq = req.userId;
       if (!idReq) {
-        return res.status(400).json({ errors: ['ID not Found'] });
+        return res.status(400).json({ errors: 'ID not Found' });
       }
 
       const bank = await Bankinfo.findOne({
@@ -178,7 +178,7 @@ class WasherUserController {
         }
       });
       if (!bank) {
-        return res.status(400).json({ errors: ['Bank Info not Found'] });
+        return res.status(400).json({ errors: 'Bank Info not Found' });
       }
 
       const {
@@ -205,7 +205,7 @@ class WasherUserController {
     try {
       const idReq = req.userId;
       if (!idReq) {
-        return res.status(400).json({ errors: ['ID not Found'] });
+        return res.status(400).json({ errors: 'ID not Found' });
       }
 
       const bank = await Bankinfo.findOne({
@@ -214,7 +214,7 @@ class WasherUserController {
         }
       });
       if (!bank) {
-        return res.status(400).json({ errors: ['Washer not Found'] });
+        return res.status(400).json({ errors: 'Washer not Found' });
       }
 
       const updateBank = await bank.update(req.body);
@@ -243,7 +243,7 @@ class WasherUserController {
     try {
       const idReq = req.userId;
       if (!idReq) {
-        return res.status(400).json({ errors: ['ID not Found'] });
+        return res.status(400).json({ errors: 'ID not Found' });
       }
 
       const time = await Timeavailable.findOne({
@@ -252,7 +252,7 @@ class WasherUserController {
         }
       });
       if (!time) {
-        return res.status(400).json({ errors: ['Time Available not Found'] });
+        return res.status(400).json({ errors: 'Time Available not Found' });
       }
 
       const {
@@ -287,7 +287,7 @@ class WasherUserController {
     try {
       const idReq = req.userId;
       if (!idReq) {
-        return res.status(400).json({ errors: ['ID not Found'] });
+        return res.status(400).json({ errors: 'ID not Found' });
       }
 
       const time = await Timeavailable.findOne({
@@ -296,7 +296,7 @@ class WasherUserController {
         }
       });
       if (!time) {
-        return res.status(400).json({ errors: ['Washer not Found'] });
+        return res.status(400).json({ errors: 'Washer not Found' });
       }
 
       const updateTime = await time.update(req.body);

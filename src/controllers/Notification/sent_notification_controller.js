@@ -30,11 +30,11 @@ class SentNotificationController {
     try {
       const id = req.userId;
       if (!id) {
-        return res.status(400).json({ errors: ['ID not Found'] });
+        return res.status(400).json({ errors: 'ID not Found' });
       }
       const user = await User.findByPk(id);
       if (!user) {
-        return res.status(400).json({ errors: ['User not Found'] });
+        return res.status(400).json({ errors: 'User not Found' });
       }
       let type = 2;
       switch (user.role) {

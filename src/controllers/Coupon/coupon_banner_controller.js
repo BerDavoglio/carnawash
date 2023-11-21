@@ -15,7 +15,7 @@ class CouponBannerController {
     try {
       const coupon = await Couponbanner.findByPk(req.params.id);
       if (!coupon) {
-        return res.status(400).json({ errors: ['Coupon Banner not found'] });
+        return res.status(400).json({ errors: 'Coupon Banner not found' });
       }
 
       const updateCoupon = await coupon.update(req.body);

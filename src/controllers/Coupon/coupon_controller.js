@@ -37,7 +37,7 @@ class CouponController {
     try {
       const coupon = await Coupon.findByPk(req.params.id);
       if (!coupon) {
-        return res.status(400).json({ errors: ['Coupon not Found'] });
+        return res.status(400).json({ errors: 'Coupon not Found' });
       }
 
       const {
@@ -66,7 +66,7 @@ class CouponController {
     try {
       const coupon = await Coupon.findByPk(req.params.id);
       if (!coupon) {
-        return res.status(400).json({ errors: ['Coupon not found'] });
+        return res.status(400).json({ errors: 'Coupon not found' });
       }
 
       const updateCoupon = await coupon.update(req.body);
@@ -97,7 +97,7 @@ class CouponController {
     try {
       const coupon = await Coupon.findByPk(req.params.id);
       if (!coupon) {
-        return res.status(400).json({ errors: ['Coupon not found'] });
+        return res.status(400).json({ errors: 'Coupon not found' });
       }
 
       await coupon.destroy();

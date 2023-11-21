@@ -20,16 +20,16 @@ class AdminClientController {
     try {
       const idReq = req.params.id;
       if (!idReq) {
-        return res.status(400).json({ errors: ['ID not Found'] });
+        return res.status(400).json({ errors: 'ID not Found' });
       }
       const user = User.findByPk(idReq);
       if (!user) {
-        return res.status(400).json({ errors: ['User not Found'] });
+        return res.status(400).json({ errors: 'User not Found' });
       }
 
       await user.update(req.body);
 
-      return res.json({ message: ['User updated with success'] });
+      return res.json({ message: 'User updated with success' });
     } catch (err) {
       return res.status(400).json({ errors: `Update Admin Client / ${err.message}` });
     }
@@ -39,11 +39,11 @@ class AdminClientController {
     try {
       const idReq = req.params.id;
       if (!idReq) {
-        return res.status(400).json({ errors: ['ID not Found'] });
+        return res.status(400).json({ errors: 'ID not Found' });
       }
       const user = User.findByPk(idReq);
       if (!user) {
-        return res.status(400).json({ errors: ['User not Found'] });
+        return res.status(400).json({ errors: 'User not Found' });
       }
 
       const cars = Car.findAll({
@@ -57,7 +57,7 @@ class AdminClientController {
 
       await user.destroy();
 
-      return res.json({ message: ['User deleted with success'] });
+      return res.json({ message: 'User deleted with success' });
     } catch (err) {
       return res.status(400).json({ errors: `Delete Admin Client / ${err.message}` });
     }
@@ -67,11 +67,11 @@ class AdminClientController {
     try {
       const idReq = req.params.client;
       if (!idReq) {
-        return res.status(400).json({ errors: ['ID not Found'] });
+        return res.status(400).json({ errors: 'ID not Found' });
       }
       const user = User.findByPk(idReq);
       if (!user) {
-        return res.status(400).json({ errors: ['User not Found'] });
+        return res.status(400).json({ errors: 'User not Found' });
       }
 
       await Car.create({
@@ -83,7 +83,7 @@ class AdminClientController {
         car_size_id: req.body.car_size_id,
       });
 
-      return res.json({ message: ['Car created with success'] });
+      return res.json({ message: 'Car created with success' });
     } catch (err) {
       return res.status(400).json({ errors: `Create Admin Client Car / ${err.message}` });
     }
@@ -108,11 +108,11 @@ class AdminClientController {
     try {
       const idReq = req.params.client;
       if (!idReq) {
-        return res.status(400).json({ errors: ['ID not Found'] });
+        return res.status(400).json({ errors: 'ID not Found' });
       }
       const user = User.findByPk(idReq);
       if (!user) {
-        return res.status(400).json({ errors: ['User not Found'] });
+        return res.status(400).json({ errors: 'User not Found' });
       }
 
       const car = await Car.findOne({
@@ -122,7 +122,7 @@ class AdminClientController {
         },
       });
       if (!car) {
-        return res.status(400).json({ errors: ['Car not Found'] });
+        return res.status(400).json({ errors: 'Car not Found' });
       }
 
       await car.update({
@@ -134,7 +134,7 @@ class AdminClientController {
         car_size_id: req.body.car_size_id,
       });
 
-      return res.json({ message: ['Car updated with success'] });
+      return res.json({ message: 'Car updated with success' });
     } catch (err) {
       return res.status(400).json({ errors: `Update Admin Client Car / ${err.message}` });
     }
@@ -144,11 +144,11 @@ class AdminClientController {
     try {
       const idReq = req.params.client;
       if (!idReq) {
-        return res.status(400).json({ errors: ['ID not Found'] });
+        return res.status(400).json({ errors: 'ID not Found' });
       }
       const user = User.findByPk(idReq);
       if (!user) {
-        return res.status(400).json({ errors: ['User not Found'] });
+        return res.status(400).json({ errors: 'User not Found' });
       }
 
       const car = await Car.findOne({
@@ -158,12 +158,12 @@ class AdminClientController {
         },
       });
       if (!car) {
-        return res.status(400).json({ errors: ['Car not Found'] });
+        return res.status(400).json({ errors: 'Car not Found' });
       }
 
       await car.destroy();
 
-      return res.json({ message: ['Car deleted with success'] });
+      return res.json({ message: 'Car deleted with success' });
     } catch (err) {
       return res.status(400).json({ errors: `Delete Admin Client Car / ${err.message}` });
     }

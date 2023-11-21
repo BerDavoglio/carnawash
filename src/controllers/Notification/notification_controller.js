@@ -38,11 +38,11 @@ class NotificationController {
     try {
       const id = req.userId;
       if (!id) {
-        return res.status(400).json({ errors: ['ID not Found'] });
+        return res.status(400).json({ errors: 'ID not Found' });
       }
       const user = await User.findByPk(id);
       if (!user) {
-        return res.status(400).json({ errors: ['User not Found'] });
+        return res.status(400).json({ errors: 'User not Found' });
       }
 
       const notifications = await Notification.findAll({
@@ -61,7 +61,7 @@ class NotificationController {
     try {
       const notification = await Notification.findByPk(req.params.id);
       if (!notification) {
-        return res.status(400).json({ errors: ['Notification not found'] });
+        return res.status(400).json({ errors: 'Notification not found' });
       }
 
       const updateNotification = await notification.update(req.body);
@@ -88,7 +88,7 @@ class NotificationController {
     try {
       const notification = await Notification.findByPk(req.params.id);
       if (!notification) {
-        return res.status(400).json({ errors: ['Notification not found'] });
+        return res.status(400).json({ errors: 'Notification not found' });
       }
 
       await notification.destroy();

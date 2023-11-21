@@ -37,7 +37,7 @@ class CarsizeController {
     try {
       const carSize = await Carsize.findByPk(req.params.id);
       if (!carSize) {
-        return res.status(400).json({ errors: ['Car Size not found'] });
+        return res.status(400).json({ errors: 'Car Size not found' });
       }
 
       const updateSize = await carSize.update(req.body);
@@ -64,7 +64,7 @@ class CarsizeController {
     try {
       const carSize = await Carsize.findByPk(req.params.id);
       if (!carSize) {
-        return res.status(400).json({ errors: ['Car Size not found'] });
+        return res.status(400).json({ errors: 'Car Size not found' });
       }
 
       await carSize.destroy();

@@ -8,7 +8,7 @@ class ClientUserController {
     try {
       if (req.body.role) {
         return res.status(401)
-          .json({ errors: ['Unauthorized'] });
+          .json({ errors: 'Unauthorized' });
       }
 
       const newUser = await User.create(req.body);
@@ -44,12 +44,12 @@ class ClientUserController {
     try {
       const id = req.userId;
       if (!id) {
-        return res.status(400).json({ errors: ['ID not Found'] });
+        return res.status(400).json({ errors: 'ID not Found' });
       }
 
       const user = await User.findByPk(id);
       if (!user) {
-        return res.status(400).json({ errors: ['User not Found'] });
+        return res.status(400).json({ errors: 'User not Found' });
       }
 
       await Referedfriend.create({
@@ -57,7 +57,7 @@ class ClientUserController {
         emails: req.body.emails,
       });
 
-      return res.json({ message: ['Refer with success!'] })
+      return res.json({ message: 'Refer with success' })
     } catch (err) {
       return res.status(400).json({ errors: `Refer Friends / ${err.message}` });
     }
@@ -67,12 +67,12 @@ class ClientUserController {
     try {
       const id = req.userId;
       if (!id) {
-        return res.status(400).json({ errors: ['ID not Found'] });
+        return res.status(400).json({ errors: 'ID not Found' });
       }
 
       const user = await User.findByPk(id);
       if (!user) {
-        return res.status(400).json({ errors: ['User not Found'] });
+        return res.status(400).json({ errors: 'User not Found' });
       }
 
       return res.json(user);
@@ -90,7 +90,7 @@ class ClientUserController {
         ],
       });
       if (!user) {
-        return res.status(400).json({ errors: ['User not Found'] });
+        return res.status(400).json({ errors: 'User not Found' });
       }
 
       return res.json(user);
@@ -103,17 +103,17 @@ class ClientUserController {
     try {
       if (req.body.role) {
         return res.status(401)
-          .json({ errors: ['Unauthorized'] });
+          .json({ errors: 'Unauthorized' });
       }
 
       const idreq = req.userId;
       if (!idreq) {
-        return res.status(400).json({ errors: ['ID not Found'] });
+        return res.status(400).json({ errors: 'ID not Found' });
       }
 
       const user = await User.findByPk(idreq);
       if (!user) {
-        return res.status(400).json({ errors: ['User not Found'] });
+        return res.status(400).json({ errors: 'User not Found' });
       }
 
       const newUser = await user.update(req.body);
@@ -149,12 +149,12 @@ class ClientUserController {
     try {
       const id = req.userId;
       if (!id) {
-        return res.status(400).json({ errors: ['ID not Found'] });
+        return res.status(400).json({ errors: 'ID not Found' });
       }
 
       const user = await User.findByPk(id);
       if (!user) {
-        return res.status(400).json({ errors: ['User not Found'] });
+        return res.status(400).json({ errors: 'User not Found' });
       }
 
       await user.destroy();

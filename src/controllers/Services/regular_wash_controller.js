@@ -37,7 +37,7 @@ class RegularwashController {
     try {
       const regular = await Regularwash.findByPk(req.params.id);
       if (!regular) {
-        return res.status(400).json({ errors: ['Regular Wash not found'] });
+        return res.status(400).json({ errors: 'Regular Wash not found' });
       }
 
       const updateRegular = await regular.update(req.body);
@@ -64,7 +64,7 @@ class RegularwashController {
     try {
       const regular = await Regularwash.findByPk(req.params.id);
       if (!regular) {
-        return res.status(400).json({ errors: ['Regular Wash not found'] });
+        return res.status(400).json({ errors: 'Regular Wash not found' });
       }
 
       await regular.destroy();

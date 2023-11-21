@@ -15,7 +15,7 @@ class MarkupController {
     try {
       const markup = await Markup.findByPk(req.params.id);
       if (!markup) {
-        return res.status(400).json({ errors: ['Markup not found'] });
+        return res.status(400).json({ errors: 'Markup not found' });
       }
 
       const updateMarkup = await markup.update(req.body);

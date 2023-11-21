@@ -19,7 +19,7 @@ class ScheduleController {
     try {
       const idUser = req.userId;
       if (!idUser) {
-        return res.status(400).json({ errors: ['ID not Found'] });
+        return res.status(400).json({ errors: 'ID not Found' });
       }
 
       let cars_list_id = '';
@@ -66,7 +66,7 @@ class ScheduleController {
     try {
       const idUser = req.userId;
       if (!idUser) {
-        return res.status(400).json({ errors: ['ID not Found'] });
+        return res.status(400).json({ errors: 'ID not Found' });
       }
 
       const newCarsobjects = await Carsobjects.findByPk(req.params.id);
@@ -156,13 +156,13 @@ class ScheduleController {
 
       const schedule = await Schedule.findByPk(req.params.id);
       if (!schedule) {
-        return res.status(400).json({ errors: ['Schedule not Found'] });
+        return res.status(400).json({ errors: 'Schedule not Found' });
       }
 
       schedule.cars_list_id.split(';').forEach(async (cars_obj_id) => {
         const cars_obj = await Carsobjects.findByPk(cars_obj_id);
         if (!cars_obj) {
-          return res.status(400).json({ errors: ['Carsobjects not Found'] });
+          return res.status(400).json({ errors: 'Carsobjects not Found' });
         }
         total += this.calcCarRegularPrice(
           cars_obj.car_id,
@@ -174,10 +174,10 @@ class ScheduleController {
       if (schedule.coupon_id != 0) {
         const coupon = Coupon.findByPk(schedule.coupon_id);
         if (!coupon) {
-          return res.status(400).json({ errors: ['Coupon not Found'] });
+          return res.status(400).json({ errors: 'Coupon not Found' });
         }
         if (coupon.is_disabled) {
-          return res.status(401).json({ errors: ['Coupon not Active'] });
+          return res.status(401).json({ errors: 'Coupon not Active' });
         }
 
         total = total * coupon.discount / 100;
@@ -209,7 +209,7 @@ class ScheduleController {
     try {
       const idUser = req.userId;
       if (!idUser) {
-        return res.status(400).json({ errors: ['ID not Found'] });
+        return res.status(400).json({ errors: 'ID not Found' });
       }
 
       const schedule = await Schedule.findOne({
@@ -229,7 +229,7 @@ class ScheduleController {
     try {
       const idUser = req.userId;
       if (!idUser) {
-        return res.status(400).json({ errors: ['ID not Found'] });
+        return res.status(400).json({ errors: 'ID not Found' });
       }
 
       const schedules = await Schedule.findAll({
@@ -248,7 +248,7 @@ class ScheduleController {
     try {
       const idUser = req.userId;
       if (!idUser) {
-        return res.status(400).json({ errors: ['ID not Found'] });
+        return res.status(400).json({ errors: 'ID not Found' });
       }
 
       const schedule = await Schedule.findOne({
@@ -268,7 +268,7 @@ class ScheduleController {
     try {
       const idUser = req.userId;
       if (!idUser) {
-        return res.status(400).json({ errors: ['ID not Found'] });
+        return res.status(400).json({ errors: 'ID not Found' });
       }
 
       const schedule = await Schedule.findOne({
@@ -288,7 +288,7 @@ class ScheduleController {
     try {
       const idUser = req.userId;
       if (!idUser) {
-        return res.status(400).json({ errors: ['ID not Found'] });
+        return res.status(400).json({ errors: 'ID not Found' });
       }
 
       const schedules = await Schedule.findAll({
@@ -312,7 +312,7 @@ class ScheduleController {
     try {
       const idUser = req.userId;
       if (!idUser) {
-        return res.status(400).json({ errors: ['ID not Found'] });
+        return res.status(400).json({ errors: 'ID not Found' });
       }
 
       const schedule = await Schedule.findAll({
@@ -337,7 +337,7 @@ class ScheduleController {
     try {
       const idUser = req.userId;
       if (!idUser) {
-        return res.status(400).json({ errors: ['ID not Found'] });
+        return res.status(400).json({ errors: 'ID not Found' });
       }
 
       const schedule = await Schedule.findAll({
@@ -362,7 +362,7 @@ class ScheduleController {
     try {
       const idUser = req.userId;
       if (!idUser) {
-        return res.status(400).json({ errors: ['ID not Found'] });
+        return res.status(400).json({ errors: 'ID not Found' });
       }
 
       const schedule = await Schedule.findAll({
@@ -381,7 +381,7 @@ class ScheduleController {
     try {
       const idUser = req.userId;
       if (!idUser) {
-        return res.status(400).json({ errors: ['ID not Found'] });
+        return res.status(400).json({ errors: 'ID not Found' });
       }
 
       const schedule = await Schedule.findAll({
@@ -401,7 +401,7 @@ class ScheduleController {
     try {
       const idUser = req.userId;
       if (!idUser) {
-        return res.status(400).json({ errors: ['ID not Found'] });
+        return res.status(400).json({ errors: 'ID not Found' });
       }
 
       const schedule = await Schedule.findAll({
@@ -421,7 +421,7 @@ class ScheduleController {
     try {
       const idUser = req.userId;
       if (!idUser) {
-        return res.status(400).json({ errors: ['ID not Found'] });
+        return res.status(400).json({ errors: 'ID not Found' });
       }
 
       const schedule = await Schedule.findOne({
@@ -431,7 +431,7 @@ class ScheduleController {
         order: [['updated_at', 'DESC']],
       });
       if (!schedule) {
-        return res.status(400).json({ errors: ['Schedule not finded'] });
+        return res.status(400).json({ errors: 'Schedule not finded' });
       }
 
       return res.json(schedule);
@@ -444,7 +444,7 @@ class ScheduleController {
     try {
       const idUser = req.userId;
       if (!idUser) {
-        return res.status(400).json({ errors: ['ID not Found'] });
+        return res.status(400).json({ errors: 'ID not Found' });
       }
 
       const schedule = await Schedule.findOne({
@@ -462,7 +462,7 @@ class ScheduleController {
         },
       });
       if (!schedule) {
-        return res.status(400).json({ errors: ['Schedule not finded'] });
+        return res.status(400).json({ errors: 'Schedule not finded' });
       }
 
       return res.json(schedule);
@@ -475,7 +475,7 @@ class ScheduleController {
     try {
       const idUser = req.userId;
       if (!idUser) {
-        return res.status(400).json({ errors: ['ID not Found'] });
+        return res.status(400).json({ errors: 'ID not Found' });
       }
 
       const schedules = await Schedule.findAll({
@@ -500,7 +500,7 @@ class ScheduleController {
     try {
       const idUser = req.userId;
       if (!idUser) {
-        return res.status(400).json({ errors: ['ID not Found'] });
+        return res.status(400).json({ errors: 'ID not Found' });
       }
 
       const schedule = await Schedule.findOne({
@@ -525,7 +525,7 @@ class ScheduleController {
         status: 'not-started',
       });
 
-      return res.json({ message: ['Washer updated with success'] });
+      return res.json({ message: 'Washer updated with success' });
     } catch (err) {
       return res.status(400).json({ errors: err.message });
     }
@@ -540,7 +540,7 @@ class ScheduleController {
           status: 'not-assign'
         });
 
-        return res.json({ message: ['Washer updated with success'] });
+        return res.json({ message: 'Washer updated with success' });
       } else {
         return res.status(400).json({ message: 'You cant decline a wash that you already accepted' });
       }
@@ -553,7 +553,7 @@ class ScheduleController {
     try {
       const idUser = req.userId;
       if (!idUser) {
-        return res.status(400).json({ errors: ['ID not Found'] });
+        return res.status(400).json({ errors: 'ID not Found' });
       }
 
       const schedule = await Schedule.findOne({
@@ -580,7 +580,7 @@ class ScheduleController {
           });
           break;
         default:
-          return res.status(400).json({ errors: ['Some error has occour!'] });
+          return res.status(400).json({ errors: 'Some error has occour' });
       }
     } catch (err) {
       return res.status(400).json({ errors: err.message });
@@ -591,7 +591,7 @@ class ScheduleController {
     try {
       const idUser = req.userId;
       if (!idUser) {
-        return res.status(400).json({ errors: ['ID not Found'] });
+        return res.status(400).json({ errors: 'ID not Found' });
       }
 
       const schedule = await Schedule.findOne({
@@ -617,7 +617,7 @@ class ScheduleController {
     try {
       const idUser = req.userId;
       if (!idUser) {
-        return res.status(400).json({ errors: ['ID not Found'] });
+        return res.status(400).json({ errors: 'ID not Found' });
       }
 
       const schedule = await Schedule.findOne({

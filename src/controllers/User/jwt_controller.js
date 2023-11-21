@@ -13,18 +13,18 @@ class JWTController {
       } = req.body;
       if (!email || !password) {
         return res.status(401)
-          .json({ errors: ['Unauthorized'] });
+          .json({ errors: 'Unauthorized' });
       }
 
       const user = await User.findOne({ where: { email } });
       if (!user) {
         return res.status(401)
-          .json({ errors: ['User does not exist!'] });
+          .json({ errors: 'User does not exist' });
       }
 
       if (!(await user.passwordIsValid(password))) {
         return res.status(401)
-          .json({ errors: ['Wrong password'] });
+          .json({ errors: 'Wrong password' });
       }
 
       const {

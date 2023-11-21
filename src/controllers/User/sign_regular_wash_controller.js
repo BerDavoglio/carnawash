@@ -5,10 +5,10 @@ class SignregularwashController {
     try {
       const idUser = req.userId;
       if (!idUser) {
-        return res.status(400).json({ errors: ['ID not Found'] });
+        return res.status(400).json({ errors: 'ID not Found' });
       }
       if (req.userRole != 'client') {
-        return res.status(400).json({ errors: ['User not Client'] });
+        return res.status(400).json({ errors: 'User not Client' });
       }
 
       // const regular = await Signregularwash.findOne({
@@ -19,11 +19,11 @@ class SignregularwashController {
       // if (regular) {
       //   if (!regular.is_broken) {
       //     // VER OQ FAZ
-      //     return res.status(400).json({ errors: ['This client already has a Regular Wash active'] });
+      //     return res.status(400).json({ errors: 'This client already has a Regular Wash active' });
       //   }
       //   if (regular.is_broken) {
       //     // VER OQ FAZ
-      //     return res.status(400).json({ errors: ['This client have broken a Regular Wash'] });
+      //     return res.status(400).json({ errors: 'This client have broken a Regular Wash' });
       //   }
       // }
 
@@ -58,7 +58,7 @@ class SignregularwashController {
     try {
       const idUser = req.userId;
       if (!idUser) {
-        return res.status(400).json({ errors: ['ID not Found'] });
+        return res.status(400).json({ errors: 'ID not Found' });
       }
 
       const regular = await Signregularwash.findOne({
@@ -67,7 +67,7 @@ class SignregularwashController {
         }
       });
       if (!regular) {
-        return res.status(400).json({ errors: ['Regular Wash not Found'] });
+        return res.status(400).json({ errors: 'Regular Wash not Found' });
       }
 
       return res.json(regular);

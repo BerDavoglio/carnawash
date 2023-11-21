@@ -5,7 +5,7 @@ export default async (req, res, next) => {
   const { authorization } = req.headers;
   if (!authorization) {
     return res.status(401)
-      .json({ errors: ['Login Required'] });
+      .json({ errors: 'Login Required'] });
   }
 
   const [, token] = authorization.split(' ');
@@ -26,7 +26,7 @@ export default async (req, res, next) => {
     });
     if (!user) {
       return res.status(401)
-        .json({ errors: ['Invalid Token'] });
+        .json({ errors: 'Invalid Token' });
     }
 
     req.userId = id;
@@ -36,6 +36,6 @@ export default async (req, res, next) => {
     return next();
   } catch (e) {
     return res.status(401)
-      .json({ errors: ['[LOGINREQUIRED] Invalid Token'] });
+      .json({ errors: '[LOGINREQUIRED] Invalid Token' });
   }
 };

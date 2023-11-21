@@ -7,7 +7,7 @@ class PaymentController {
     try {
       const idUser = req.userId;
       if (!idUser) {
-        return res.status(400).json({ errors: ['ID not Found'] });
+        return res.status(400).json({ errors: 'ID not Found' });
       }
 
       const newCard = await Paymentcard.create({
@@ -41,7 +41,7 @@ class PaymentController {
     try {
       const idReq = req.userId;
       if (!idReq) {
-        return res.status(400).json({ errors: ['ID not Found'] });
+        return res.status(400).json({ errors: 'ID not Found' });
       }
 
       const cards = await Paymentcard.findAll({
@@ -67,7 +67,7 @@ class PaymentController {
     try {
       const idReq = req.userId;
       if (!idReq) {
-        return res.status(400).json({ errors: ['ID not Found'] });
+        return res.status(400).json({ errors: 'ID not Found' });
       }
 
       const card = await Paymentcard.findOne({
@@ -77,7 +77,7 @@ class PaymentController {
         }
       });
       if (!card) {
-        return res.status(400).json({ errors: ['Paymentcard not Found'] });
+        return res.status(400).json({ errors: 'Paymentcard not Found' });
       }
 
       const {
@@ -104,7 +104,7 @@ class PaymentController {
     try {
       const idReq = req.userId;
       if (!idReq) {
-        return res.status(400).json({ errors: ['ID not Found'] });
+        return res.status(400).json({ errors: 'ID not Found' });
       }
 
       const card = await Paymentcard.findOne({
@@ -114,7 +114,7 @@ class PaymentController {
         }
       });
       if (!card) {
-        return res.status(400).json({ errors: ['Paymentcard not Found'] });
+        return res.status(400).json({ errors: 'Paymentcard not Found' });
       }
 
       const cardsActive = await Paymentschedule.findAll({
@@ -150,7 +150,7 @@ class PaymentController {
     try {
       const idReq = req.userId;
       if (!idReq) {
-        return res.status(400).json({ errors: ['ID not Found'] });
+        return res.status(400).json({ errors: 'ID not Found' });
       }
 
       const card = await Paymentcard.findOne({
@@ -160,7 +160,7 @@ class PaymentController {
         }
       });
       if (!card) {
-        return res.status(400).json({ errors: ['Paymentcard not Found'] });
+        return res.status(400).json({ errors: 'Paymentcard not Found' });
       }
 
       const cardsActive = await Paymentschedule.findAll({
@@ -184,7 +184,7 @@ class PaymentController {
     try {
       const idReq = req.userId;
       if (!idReq) {
-        return res.status(400).json({ errors: ['ID not Found'] });
+        return res.status(400).json({ errors: 'ID not Found' });
       }
 
       const payment = await Paymentwasher.findByPk(req.params.id);
@@ -203,7 +203,7 @@ class PaymentController {
     try {
       const idReq = req.userId;
       if (!idReq) {
-        return res.status(400).json({ errors: ['ID not Found'] });
+        return res.status(400).json({ errors: 'ID not Found' });
       }
 
       const payments = await Paymentwasher.findAll({

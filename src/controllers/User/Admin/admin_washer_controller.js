@@ -23,7 +23,7 @@ class AdminWasherController {
     try {
       const washer = User.findByPk(req.params.id);
       if (!washer) {
-        return res.status(400).json({ errors: ['Washer not Found'] });
+        return res.status(400).json({ errors: 'Washer not Found' });
       };
 
       const info = Washerinfo.findOne({
@@ -32,13 +32,13 @@ class AdminWasherController {
         }
       });
       if (!info) {
-        return res.status(400).json({ errors: ['Washerinfo not Found'] });
+        return res.status(400).json({ errors: 'Washerinfo not Found' });
       };
 
       washer.update(req.body.washer);
       info.update(req.body.info);
 
-      return res.json({ message: ['Washer updated with success'] });
+      return res.json({ message: 'Washer updated with success' });
     } catch (err) {
       return res.status(400).json({ errors: `Update Admin Washer / ${err.message}` });
     }
@@ -52,7 +52,7 @@ class AdminWasherController {
         }
       });
       if (!bank) {
-        return res.status(400).json({ errors: ['Bank not Found'] });
+        return res.status(400).json({ errors: 'Bank not Found' });
       };
 
       return res.json(bank);
@@ -69,7 +69,7 @@ class AdminWasherController {
         }
       });
       if (!bank) {
-        return res.status(400).json({ errors: ['Bank not Found'] });
+        return res.status(400).json({ errors: 'Bank not Found' });
       };
 
       bank.update(req.body);

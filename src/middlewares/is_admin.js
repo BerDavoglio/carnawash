@@ -5,6 +5,6 @@ export default (req, res, next) => {
     }
     return next();
   } catch (e) {
-    return res.status(401).json({ errors: ['[ISADMIN] Invalid Token'] });
+    return res.status(401).json({ errors: '[ISADMIN] Invalid Token' });
   }
 };

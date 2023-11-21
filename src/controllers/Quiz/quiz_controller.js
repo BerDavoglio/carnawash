@@ -37,7 +37,7 @@ class QuizController {
     try {
       const quiz = await Quiz.findByPk(req.params.id);
       if (!quiz) {
-        return res.status(400).json({ errors: ['Quiz not found'] });
+        return res.status(400).json({ errors: 'Quiz not found' });
       }
 
       const updateQuiz = await quiz.update(req.body);
@@ -64,7 +64,7 @@ class QuizController {
     try {
       const quiz = await Quiz.findByPk(req.params.id);
       if (!quiz) {
-        return res.status(400).json({ errors: ['Quiz not found'] });
+        return res.status(400).json({ errors: 'Quiz not found' });
       }
 
       await quiz.destroy();

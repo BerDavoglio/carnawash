@@ -6,11 +6,11 @@ class QuizresponseController {
     try {
       const idUser = req.userId;
       if (!idUser) {
-        return res.status(400).json({ errors: ['ID not Found'] });
+        return res.status(400).json({ errors: 'ID not Found' });
       }
 
       if (req.userRole != 'washer') {
-        return res.status(400).json({ errors: ['User not Washer'] });
+        return res.status(400).json({ errors: 'User not Washer' });
       }
 
       const washerInfo = await Washerinfo.findOne({

@@ -5,7 +5,7 @@ class CarController {
     try {
       const idReq = req.userId;
       if (!idReq) {
-        return res.status(400).json({ errors: ['ID not Found'] });
+        return res.status(400).json({ errors: 'ID not Found' });
       }
 
       const newCar = await Car.create({
@@ -45,7 +45,7 @@ class CarController {
     try {
       const id = req.userId;
       if (!id) {
-        return res.status(400).json({ errors: ['ID not Found'] });
+        return res.status(400).json({ errors: 'ID not Found' });
       }
 
       const cars = await Car.findAll({
@@ -54,7 +54,7 @@ class CarController {
         }
       });
       if (!cars) {
-        return res.status(400).json({ errors: ['Cars not Found'] });
+        return res.status(400).json({ errors: 'Cars not Found' });
       }
 
       return res.json(cars);
@@ -67,7 +67,7 @@ class CarController {
     try {
       const car = await Car.findByPk(req.params.id);
       if (!car) {
-        return res.status(400).json({ errors: ['Car not Found'] });
+        return res.status(400).json({ errors: 'Car not Found' });
       }
 
       return res.json(car);
@@ -80,7 +80,7 @@ class CarController {
     try {
       const idReq = req.userId;
       if (!idReq) {
-        return res.status(400).json({ errors: ['ID not Found'] });
+        return res.status(400).json({ errors: 'ID not Found' });
       }
 
       const car = await Car.findOne({
@@ -90,7 +90,7 @@ class CarController {
         },
       });
       if (!car) {
-        return res.status(401).json({ errors: ['Unauthorized'] });
+        return res.status(401).json({ errors: 'Unauthorized' });
       }
 
       const updateCar = await car.update(req.body);
@@ -123,7 +123,7 @@ class CarController {
     try {
       const idReq = req.userId;
       if (!idReq) {
-        return res.status(400).json({ errors: ['ID not Found'] });
+        return res.status(400).json({ errors: 'ID not Found' });
       }
 
       const car = await Car.findOne({
@@ -133,7 +133,7 @@ class CarController {
         },
       });
       if (!car) {
-        return res.status(401).json({ errors: ['Unauthorized'] });
+        return res.status(401).json({ errors: 'Unauthorized' });
       }
 
       await car.destroy();

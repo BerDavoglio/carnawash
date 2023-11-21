@@ -34,6 +34,7 @@ class UserProvider with ChangeNotifier {
       );
 
       var v = jsonDecode(response.body);
+      print(v['errors']);
 
       if (response.statusCode == 200) {
         _token = v['token'];

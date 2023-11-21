@@ -35,7 +35,7 @@ class FaqController {
     try {
       const faq = await Faq.findByPk(req.params.id);
       if (!faq) {
-        return res.status(400).json({ errors: ['FAQ not found'] });
+        return res.status(400).json({ errors: 'FAQ not found' });
       }
 
       const updateFaq = await faq.update(req.body);
@@ -60,7 +60,7 @@ class FaqController {
     try {
       const faq = await Faq.findByPk(req.params.id);
       if (!faq) {
-        return res.status(400).json({ errors: ['FAQ not found'] });
+        return res.status(400).json({ errors: 'FAQ not found' });
       }
 
       await faq.destroy();

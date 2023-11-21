@@ -20,14 +20,14 @@ class AdminUserController {
     try {
       const user = await User.findByPk(req.params.id);
       if (!user) {
-        return res.status(400).json({ errors: ['User not found'] });
+        return res.status(400).json({ errors: 'User not found' });
       }
 
       user.update({
         role: req.body.role,
       });
 
-      return res.json({ message: ['Role changed with success'] });
+      return res.json({ message: 'Role changed with success' });
     } catch (err) {
       return res.status(400).json({ errors: `Show Admin / ${err.message}` });
     }
@@ -37,14 +37,14 @@ class AdminUserController {
     try {
       const user = await User.findByPk(req.params.id);
       if (!user) {
-        return res.status(400).json({ errors: ['User not found'] });
+        return res.status(400).json({ errors: 'User not found' });
       }
 
       user.update({
         subrole: req.body.subrole,
       });
 
-      return res.json({ message: ['Subrole changed with success'] });
+      return res.json({ message: 'Subrole changed with success' });
     } catch (err) {
       return res.status(400).json({ errors: `Show Admin / ${err.message}` });
     }
@@ -90,7 +90,7 @@ class AdminUserController {
     try {
       const type = await Usertype.findByPk(req.params.id);
       if (!type) {
-        return res.status(400).json({ errors: ['User Type not found'] });
+        return res.status(400).json({ errors: 'User Type not found' });
       }
 
       const updateType = await type.update(req.body);
@@ -117,7 +117,7 @@ class AdminUserController {
     try {
       const type = await Usertype.findByPk(req.params.id);
       if (!type) {
-        return res.status(400).json({ errors: ['User Type not found'] });
+        return res.status(400).json({ errors: 'User Type not found' });
       }
 
       const users = await User.findAll({
