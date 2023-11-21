@@ -12,8 +12,8 @@ import '../../ui/ui.dart';
 import '../infra.dart';
 
 class NotificationProvider with ChangeNotifier {
-  late List<GeralNotificationModel> _geralNotifications;
-  late List<UserNotificationModel> _notifications;
+  final List<GeralNotificationModel> _geralNotifications = [];
+  final List<UserNotificationModel> _notifications = [];
 
   List<GeralNotificationModel> get geralNotifications => _geralNotifications;
   List<UserNotificationModel> get notifications => _notifications;
@@ -36,9 +36,13 @@ class NotificationProvider with ChangeNotifier {
       var v = jsonDecode(response.body);
 
       if (response.statusCode == 200) {
-        _notifications = v;
+        for (Map i in v) {
+          _notifications.add(UserNotificationModel(
+              notification_id: i['notification_id'],
+              user_type_id: i['user_type_id'],
+              user_id: i['user_id']));
+        }
         await loadGeralNotifications(context);
-
       } else if (v['errors'] != '') {
         await comumDialog(
           context,
@@ -46,7 +50,6 @@ class NotificationProvider with ChangeNotifier {
           v['errors'],
         );
       }
-
     } catch (e) {
       await comumDialog(
         context,
@@ -74,8 +77,13 @@ class NotificationProvider with ChangeNotifier {
       var v = jsonDecode(response.body);
 
       if (response.statusCode == 200) {
-        _geralNotifications = v;
-
+        for (Map i in v) {
+          _geralNotifications.add(GeralNotificationModel(
+              id: i['id'],
+              title: i['title'],
+              destined_to: i['destined_to'],
+              type: i['type']));
+        }
       } else if (v['errors'] != '') {
         await comumDialog(
           context,
@@ -83,7 +91,6 @@ class NotificationProvider with ChangeNotifier {
           v['errors'],
         );
       }
-
     } catch (e) {
       await comumDialog(
         context,

@@ -34,7 +34,17 @@ class WalletProvider with ChangeNotifier {
       var v = jsonDecode(response.body);
 
       if (response.statusCode == 200) {
-        _cards = v;
+        for (Map i in v) {
+          _cards.add(
+            CardModel(
+              id: i['id'],
+              name: i['name'],
+              user_id: i['user_id'],
+              last_digits: i['last_digits'],
+              date: i['date'],
+            ),
+          );
+        }
       } else if (v['errors'] != '') {
         await comumDialog(
           context,
@@ -64,11 +74,11 @@ class WalletProvider with ChangeNotifier {
     try {
       final response = await http.post(
         Uri.parse('${Constants.BACKEND_BASE_URL}/payment/'),
-        body: {
+        body: jsonEncode({
           'name': card.name,
           'card': card.card,
           'date': card.date,
-        },
+        }),
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
@@ -121,11 +131,11 @@ class WalletProvider with ChangeNotifier {
     try {
       final response = await http.post(
         Uri.parse('${Constants.BACKEND_BASE_URL}/payment/${card.id}'),
-        body: {
+        body: jsonEncode({
           'name': card.name,
           'card': card.card,
           'date': card.date,
-        },
+        }),
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',

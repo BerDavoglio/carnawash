@@ -26,10 +26,10 @@ class UserProvider with ChangeNotifier {
     try {
       final response = await http.post(
         Uri.parse('${Constants.BACKEND_BASE_URL}/jwt/'),
-        body: {
+        body: jsonEncode({
           "email": email,
           "password": password,
-        },
+        }),
       );
 
       var v = jsonDecode(response.body);
@@ -66,13 +66,13 @@ class UserProvider with ChangeNotifier {
     try {
       final response = await http.post(
         Uri.parse('${Constants.BACKEND_BASE_URL}/users/'),
-        body: {
+        body: jsonEncode({
           "email": user.email,
           "password": user.password,
           "name": user.name,
           "phone": user.phone,
           "address": user.address,
-        },
+        }),
       );
 
       var v = jsonDecode(response.body);

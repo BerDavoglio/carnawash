@@ -102,8 +102,41 @@ class _WalletEditPageState extends State<WalletEditPage> {
                           edit
                               ? GestureDetector(
                                   onTap: () async {
-                                    await walletProvider.deleteCard(
-                                        context, widget.preData!.id!);
+                                    showDialog<void>(
+                                      context: context,
+                                      builder: (ctx) => AlertDialog(
+                                        title: const Text('Confirm Delete'),
+                                        content: const Text(
+                                            'Are you sure you want to DELETE this card?'),
+                                        actions: [
+                                          TextButton(
+                                            child: const Text('Ok'),
+                                            onPressed: () {
+                                              showDialog<void>(
+                                                context: context,
+                                                builder: (ctx) => AlertDialog(
+                                                  title: const Text(
+                                                      'Confirm Delete'),
+                                                  content: const Text(
+                                                      'Are you sure you want to DELETE this card?'),
+                                                  actions: [
+                                                    TextButton(
+                                                      child: const Text('Ok'),
+                                                      onPressed: () async =>
+                                                          await walletProvider
+                                                              .deleteCard(
+                                                        context,
+                                                        widget.preData!.id!,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              );
+                                            },
+                                          ),
+                                        ],
+                                      ),
+                                    );
                                   },
                                   child: const Text(
                                     'Delete this credit card',

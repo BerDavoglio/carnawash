@@ -13,7 +13,7 @@ import '../../ui/ui.dart';
 import '../infra.dart';
 
 class ScheduleProvider with ChangeNotifier {
-  late List<ScheduleModel> _listSchedules;
+  List<ScheduleModel> _listSchedules = [];
   // late List<ScheduleModel> _listSchedulesHistory;
 
   List<ScheduleModel> get listSchedules => _listSchedules;
@@ -37,8 +37,21 @@ class ScheduleProvider with ChangeNotifier {
       var v = jsonDecode(response.body);
 
       if (response.statusCode == 200) {
-        _listSchedules = v;
-
+        for (Map i in v) {
+          _listSchedules.add(ScheduleModel(
+            id: i['id'],
+            user_id: i['user_id'],
+            cars_list_id: i['cars_list_id'],
+            selected_date: i['selected_date'],
+            address: i['address'],
+            observation_address: i['observation_address'],
+            coupon_id: i['coupon_id'],
+            payment_schedule_id: i['payment_schedule_id'],
+            status: i['status'],
+            washer_id: i['washer_id'],
+            rate: i['rate'],
+          ));
+        }
       } else if (v['errors'] != '') {
         await comumDialog(
           context,
@@ -421,7 +434,7 @@ class ScheduleProvider with ChangeNotifier {
     }
     return 0;
   }
-  
+
   Future<int> countNext(BuildContext context) async {
     UserProvider userProvider = Provider.of(
       context,

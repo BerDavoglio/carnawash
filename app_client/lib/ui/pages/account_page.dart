@@ -82,13 +82,17 @@ class _AccountPageState extends State<AccountPage> {
                       ? Column(
                           children: [
                             geralInativeTextInput(
-                                context: context, text: nameController.text),
+                                context: context,
+                                textController: nameController),
                             geralInativeTextInput(
-                                context: context, text: emailController.text),
+                                context: context,
+                                textController: emailController),
                             geralInativeTextInput(
-                                context: context, text: phoneController.text),
+                                context: context,
+                                textController: phoneController),
                             geralInativeTextInput(
-                                context: context, text: addressController.text),
+                                context: context,
+                                textController: addressController),
                             TextButton(
                               onPressed: () {
                                 setState(() {

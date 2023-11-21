@@ -57,9 +57,15 @@ Widget geralMultilineTextInput({
 
 Widget geralInativeTextInput({
   required BuildContext context,
-  required String text,
+  TextEditingController? textController,
+  String? text,
   double larg = 0.85,
 }) {
+  TextEditingController unable = TextEditingController();
+  if (textController != null) {
+    unable.text = text!;
+  }
+
   return Column(
     children: [
       SizedBox(
@@ -69,10 +75,11 @@ Widget geralInativeTextInput({
           decoration: InputDecoration(
             filled: true,
             fillColor: Colors.white,
+            hintText: text ?? '',
             border: const OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(10))),
-            hintText: text,
           ),
+          controller: textController ?? unable,
         ),
       ),
       const SizedBox(height: 16),
@@ -122,7 +129,8 @@ Widget chatTextInput({
         width: MediaQuery.of(context).size.width * larg,
         child: TextFormField(
           decoration: InputDecoration(
-            contentPadding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+            contentPadding:
+                const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
             filled: true,
             fillColor: Colors.white,
             border: const OutlineInputBorder(

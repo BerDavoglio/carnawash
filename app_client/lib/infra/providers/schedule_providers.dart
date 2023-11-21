@@ -14,9 +14,9 @@ import '../infra.dart';
 
 class ScheduleProvider with ChangeNotifier {
   late ScheduleModel _selectedSchedule;
-  late List<ScheduleModel> _listSchedules;
-  late List<ScheduleModel> _listHistorySchedules;
-  late List<ScheduleModel> _listByDate;
+  final List<ScheduleModel> _listSchedules = [];
+  final List<ScheduleModel> _listHistorySchedules = [];
+  final List<ScheduleModel> _listByDate = [];
 
   ScheduleModel get selectedSchedule => _selectedSchedule;
   List<ScheduleModel> get listSchedules => _listSchedules;
@@ -43,8 +43,21 @@ class ScheduleProvider with ChangeNotifier {
       var v = jsonDecode(response.body);
 
       if (response.statusCode == 200) {
-        _listSchedules = v;
-
+        for (Map i in v) {
+          _listSchedules.add(ScheduleModel(
+            id: i['id'],
+            user_id: i['user_id'],
+            cars_list_id: i['cars_list_id'],
+            selected_date: i['selected_date'],
+            address: i['address'],
+            observation_address: i['observation_address'],
+            coupon_id: i['coupon_id'],
+            payment_schedule_id: i['payment_schedule_id'],
+            status: i['status'],
+            washer_id: i['washer_id'],
+            rate: i['rate'],
+          ));
+        }
       } else if (v['errors'] != '') {
         await comumDialog(
           context,
@@ -80,8 +93,21 @@ class ScheduleProvider with ChangeNotifier {
       var v = jsonDecode(response.body);
 
       if (response.statusCode == 200) {
-        _listByDate = v;
-
+        for (Map i in v) {
+          _listByDate.add(ScheduleModel(
+            id: i['id'],
+            user_id: i['user_id'],
+            cars_list_id: i['cars_list_id'],
+            selected_date: i['selected_date'],
+            address: i['address'],
+            observation_address: i['observation_address'],
+            coupon_id: i['coupon_id'],
+            payment_schedule_id: i['payment_schedule_id'],
+            status: i['status'],
+            washer_id: i['washer_id'],
+            rate: i['rate'],
+          ));
+        }
       } else if (v['errors'] != '') {
         await comumDialog(
           context,
@@ -118,8 +144,21 @@ class ScheduleProvider with ChangeNotifier {
       var v = jsonDecode(response.body);
 
       if (response.statusCode == 200) {
-        _listHistorySchedules = v;
-
+        for (Map i in v) {
+          _listHistorySchedules.add(ScheduleModel(
+            id: i['id'],
+            user_id: i['user_id'],
+            cars_list_id: i['cars_list_id'],
+            selected_date: i['selected_date'],
+            address: i['address'],
+            observation_address: i['observation_address'],
+            coupon_id: i['coupon_id'],
+            payment_schedule_id: i['payment_schedule_id'],
+            status: i['status'],
+            washer_id: i['washer_id'],
+            rate: i['rate'],
+          ));
+        }
       } else if (v['errors'] != '') {
         await comumDialog(
           context,
@@ -289,7 +328,6 @@ class ScheduleProvider with ChangeNotifier {
             ),
           ),
         );
-
       } else if (v['errors'] != '') {
         await comumDialog(
           context,
@@ -336,7 +374,6 @@ class ScheduleProvider with ChangeNotifier {
           ),
         );
         await loadSchedules(context);
-
       } else if (v['errors'] != '') {
         await comumDialog(
           context,
@@ -379,7 +416,6 @@ class ScheduleProvider with ChangeNotifier {
 
       if (response.statusCode == 200) {
         await loadSchedules(context);
-
       } else if (v['errors'] != '') {
         await comumDialog(
           context,

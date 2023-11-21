@@ -16,7 +16,7 @@ class WasherProvider with ChangeNotifier {
   late BankInfoModel _bankInfo;
   late TimeAvailableProviderModel _timeAvailable;
   late WasherInfoModel _washerInfo;
-  late List<QuizQuestionModel> _listQuizQuestions;
+  final List<QuizQuestionModel> _listQuizQuestions = [];
   late int _quizGrade;
 
   BankInfoModel get bankInfo => _bankInfo;
@@ -41,7 +41,7 @@ class WasherProvider with ChangeNotifier {
             'Accept': 'application/json',
             'Authorization': 'Bearer ${userProvider.token}',
           },
-          body: {
+          body: jsonEncode({
             "bank_info": {
               "bank_name": firstLoginModel.bank_info.bank_name,
               "account_name": firstLoginModel.bank_info.account_name,
@@ -53,7 +53,7 @@ class WasherProvider with ChangeNotifier {
               "driver_licence": firstLoginModel.washer_info.driver_licence,
               "picture": firstLoginModel.washer_info.picture,
             },
-          });
+          }));
 
       var v = jsonDecode(response.body);
 
@@ -139,7 +139,14 @@ class WasherProvider with ChangeNotifier {
       var v = jsonDecode(response.body);
 
       if (response.statusCode == 200) {
-        _listQuizQuestions = v;
+        for (Map i in v) {
+          _listQuizQuestions.add(QuizQuestionModel(
+            id: i['id'],
+            question: i['question'],
+            alternatives_list: i['alternatives_list'],
+            answer: i['answer'],
+          ));
+        }
       } else if (v['errors'] != '') {
         await comumDialog(
           context,
@@ -171,9 +178,9 @@ class WasherProvider with ChangeNotifier {
             'Accept': 'application/json',
             'Authorization': 'Bearer ${userProvider.token}',
           },
-          body: {
+          body: jsonEncode({
             "grade": _quizGrade,
-          });
+          }));
 
       var v = jsonDecode(response.body);
 
@@ -228,9 +235,9 @@ class WasherProvider with ChangeNotifier {
             'Accept': 'application/json',
             'Authorization': 'Bearer ${userProvider.token}',
           },
-          body: {
+          body: jsonEncode({
             "contract": contract,
-          });
+          }));
 
       var v = jsonDecode(response.body);
 
@@ -278,7 +285,11 @@ class WasherProvider with ChangeNotifier {
       var v = jsonDecode(response.body);
 
       if (response.statusCode == 200) {
-        _bankInfo = v;
+        _bankInfo = BankInfoModel(
+          bank_name: v['bank_name'],
+          account_name: v['account_name'],
+          account_number: v['account_number'],
+        );
       } else if (v['errors'] != '') {
         await comumDialog(
           context,
@@ -309,11 +320,11 @@ class WasherProvider with ChangeNotifier {
           'Accept': 'application/json',
           'Authorization': 'Bearer ${userProvider.token}',
         },
-        body: {
+        body: jsonEncode({
           "bank_name": bankInfo.bank_name,
           "account_name": bankInfo.account_name,
           "account_number": bankInfo.account_number,
-        },
+        }),
       );
 
       var v = jsonDecode(response.body);
@@ -363,7 +374,15 @@ class WasherProvider with ChangeNotifier {
       var v = jsonDecode(response.body);
 
       if (response.statusCode == 200) {
-        _timeAvailable = v;
+        _timeAvailable = TimeAvailableProviderModel(
+          saturday_list: v['saturday_list'],
+          sunday_list: v['sunday_list'],
+          monday_list: v['monday_list'],
+          thursday_list: v['thursday_list'],
+          tuesday_list: v['tuesday_list'],
+          wednesday_list: v['wednesday_list'],
+          friday_list: v['friday_list'],
+        );
       } else if (v['errors'] != '') {
         await comumDialog(
           context,
@@ -396,7 +415,7 @@ class WasherProvider with ChangeNotifier {
           'Accept': 'application/json',
           'Authorization': 'Bearer ${userProvider.token}',
         },
-        body: {
+        body: jsonEncode({
           "sunday_list": timeAvailable.sunday_list,
           "monday_list": timeAvailable.monday_list,
           "tuesday_list": timeAvailable.tuesday_list,
@@ -404,7 +423,7 @@ class WasherProvider with ChangeNotifier {
           "thursday_list": timeAvailable.thursday_list,
           "friday_list": timeAvailable.friday_list,
           "saturday_list": timeAvailable.saturday_list,
-        },
+        }),
       );
 
       var v = jsonDecode(response.body);
@@ -704,7 +723,16 @@ class WasherProvider with ChangeNotifier {
       var v = jsonDecode(response.body);
 
       if (response.statusCode == 200) {
-        _washerInfo = v;
+        _washerInfo = WasherInfoModel(
+          made_quiz: v['made_quiz'],
+          contract_accept: v['contract_accept'],
+          enable: v['enable'],
+          rate: v['rate'],
+          abn: v['abn'],
+          contract: v['contract'],
+          driver_licence: v['driver_licence'],
+          picture: v['picture'],
+        );
       } else if (v['errors'] != '') {
         await comumDialog(
           context,
@@ -735,12 +763,12 @@ class WasherProvider with ChangeNotifier {
           'Accept': 'application/json',
           'Authorization': 'Bearer ${userProvider.token}',
         },
-        body: {
+        body: jsonEncode({
           "abn": washerInfo.abn,
           "contract": washerInfo.contract,
           "driver_licence": washerInfo.driver_licence,
           "picture": washerInfo.picture,
-        },
+        }),
       );
 
       var v = jsonDecode(response.body);

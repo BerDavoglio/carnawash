@@ -12,7 +12,7 @@ import '../../ui/ui.dart';
 import '../infra.dart';
 
 class RegularwashProvider with ChangeNotifier {
-  late List<SubscriptionBoxModel> _regularWashList;
+  List<SubscriptionBoxModel> _regularWashList = [];
 
   List<SubscriptionBoxModel> get regularWashList => _regularWashList;
 
@@ -34,8 +34,13 @@ class RegularwashProvider with ChangeNotifier {
       var v = jsonDecode(response.body);
 
       if (response.statusCode == 200) {
-        _regularWashList = v;
-
+        for (Map i in v) {
+          _regularWashList.add(SubscriptionBoxModel(
+            car_size: i['car_size'],
+            price: i['price'],
+            additional_services: i['additional_services'],
+          ));
+        }
       } else if (v['errors'] != '') {
         await comumDialog(
           context,
@@ -43,8 +48,6 @@ class RegularwashProvider with ChangeNotifier {
           v['errors'],
         );
       }
-
-
     } catch (e) {
       await comumDialog(
         context,

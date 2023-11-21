@@ -33,8 +33,10 @@ class ConditionProvider with ChangeNotifier {
       var v = jsonDecode(response.body);
 
       if (response.statusCode == 200) {
-        _condition = v;
-
+        _condition = ConditionModel(
+          id: v['id'],
+          tems_conditions: v['tems_conditions'],
+        );
       } else if (v['errors'] != '') {
         await comumDialog(
           context,
@@ -42,8 +44,6 @@ class ConditionProvider with ChangeNotifier {
           v['errors'],
         );
       }
-
-
     } catch (e) {
       await comumDialog(
         context,

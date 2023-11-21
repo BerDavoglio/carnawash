@@ -12,6 +12,18 @@ class PerfilPage extends StatefulWidget {
 }
 
 class _PerfilPageState extends State<PerfilPage> {
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      // LOAD VEHICLES
+      // LOAD WALLET
+      // LOAD FAQ
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     UserProvider userProvider = Provider.of(context, listen: false);

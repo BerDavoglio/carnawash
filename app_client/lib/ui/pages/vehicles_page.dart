@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -19,8 +21,10 @@ class _VehiclesPageState extends State<VehiclesPage> {
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
       VehiclesProvider vehiclesProvider = Provider.of(context, listen: false);
+      ServicesProvider servicesProvider = Provider.of(context, listen: false);
 
       await vehiclesProvider.loadCars(context);
+      await servicesProvider.loadCarsize(context);
     });
   }
 
@@ -67,12 +71,12 @@ class _VehiclesPageState extends State<VehiclesPage> {
                       Column(
                         children: List.generate(
                           vehiclesProvider.carsList.length,
-                          (index) async {
-                            return await vehicleBox(
+                          (index) {
+                            return vehicleBox(
                               context,
                               vehiclesProvider.carsList[index],
                             );
-                          } as Widget Function(int index),
+                          },
                         ),
                       ),
                       TextButton(
@@ -103,13 +107,12 @@ class _VehiclesPageState extends State<VehiclesPage> {
     );
   }
 
-  Future<Widget> vehicleBox(
+  Widget vehicleBox(
     BuildContext context,
     CarModel car,
-  ) async {
+  ) {
     ServicesProvider servicesProvider = Provider.of(context, listen: false);
-
-    await servicesProvider.loadCarsize(context);
+    VehiclesProvider vehiclesProvider = Provider.of(context, listen: false);
 
     return Column(
       children: [
@@ -163,7 +166,26 @@ class _VehiclesPageState extends State<VehiclesPage> {
                             ),
                             splashRadius: 26,
                             iconSize: 26,
-                            onPressed: () {},
+                            onPressed: () {
+                              showDialog<void>(
+                                context: context,
+                                builder: (ctx) => AlertDialog(
+                                  title: const Text('Confirm Delete'),
+                                  content: const Text(
+                                      'Are you sure you want to DELETE this card?'),
+                                  actions: [
+                                    TextButton(
+                                      child: const Text('Ok'),
+                                      onPressed: () async =>
+                                          await vehiclesProvider.deleteCar(
+                                        context,
+                                        car.id!,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
                             icon: const Icon(Icons.delete_outline)),
                       ],
                     ),

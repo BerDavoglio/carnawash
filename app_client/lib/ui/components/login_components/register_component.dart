@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -41,7 +43,9 @@ class _RegisterComponentState extends State<RegisterComponent> {
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
       VehiclesProvider vehiclesProvider = Provider.of(context, listen: false);
+      ServicesProvider servicesProvider = Provider.of(context, listen: false);
 
+      await servicesProvider.loadCarsize(context);
       await vehiclesProvider.loadBrands(context);
       listBrand = vehiclesProvider.brandList;
       brandSelected = listBrand[0].name;
@@ -90,10 +94,12 @@ class _RegisterComponentState extends State<RegisterComponent> {
                 backgroundColor: const Color.fromRGBO(237, 189, 58, 1),
                 fixedSize: Size(MediaQuery.of(context).size.width * 0.85, 50)),
             onPressed: () {
-              setState(() async {
-                if (n != 2) {
+              if (n != 2) {
+                setState(() {
                   n++;
-                } else {
+                });
+              } else {
+                setState(() async {
                   await userProvider.signIn(
                     context,
                     UserSignModel(
@@ -111,8 +117,8 @@ class _RegisterComponentState extends State<RegisterComponent> {
                       car_size_id: sizeSelected,
                     ),
                   );
-                }
-              });
+                });
+              }
             },
             child: const Text('Next'),
           ),
@@ -252,24 +258,28 @@ class _RegisterComponentState extends State<RegisterComponent> {
                     border: Border.all(color: Colors.grey[700]!),
                     borderRadius: const BorderRadius.all(Radius.circular(10))),
                 child: DropdownButton(
-                  isExpanded: true,
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 5,
-                    horizontal: 10,
-                  ),
-                  value: brandSelected,
-                  items: listBrand
-                      .map((item) => DropdownMenuItem<String>(
-                            value: item.name,
-                            child: Text(item.name),
-                          ))
-                      .toList(),
-                  onChanged: (item) => setState(() async {
-                    brandSelected = item!;
-                    VehiclesProvider vehiclesProvider = Provider.of(context, listen: false);
-                    await vehiclesProvider.loadModels(context, item).then((value) => {listModel = vehiclesProvider.modelList},);
-                  }),
-                ),
+                    isExpanded: true,
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 5,
+                      horizontal: 10,
+                    ),
+                    value: brandSelected,
+                    items: listBrand
+                        .map((item) => DropdownMenuItem<String>(
+                              value: item.name,
+                              child: Text(item.name),
+                            ))
+                        .toList(),
+                    onChanged: (item) async {
+                      setState(() {
+                        brandSelected = item!;
+                      });
+                      VehiclesProvider vehiclesProvider =
+                          Provider.of(context, listen: false);
+                      await vehiclesProvider.loadModels(context, item!).then(
+                            (value) => {listModel = vehiclesProvider.modelList},
+                          );
+                    }),
               ),
               const SizedBox(
                 height: 10,

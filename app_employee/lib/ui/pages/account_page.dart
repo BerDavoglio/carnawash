@@ -120,23 +120,28 @@ class _AccountPageState extends State<AccountPage> {
                             ),
                             geralInativeTextInput(
                               context: context,
-                              text: 'Name',
+                              text: nameController.text,
+                              textController: nameController,
                             ),
                             geralInativeTextInput(
                               context: context,
-                              text: 'Email',
+                              text: emailController.text,
+                              textController: emailController,
                             ),
                             geralInativeTextInput(
                               context: context,
-                              text: 'Phone Number',
+                              text: phoneController.text,
+                              textController: phoneController,
                             ),
                             geralInativeTextInput(
                               context: context,
-                              text: 'Address',
+                              text: addressController.text,
+                              textController: addressController,
                             ),
                             geralInativeTextInput(
                               context: context,
-                              text: 'ABN',
+                              text: abnController.text,
+                              textController: abnController,
                             ),
                             geralInativeTextInput(
                               context: context,
@@ -159,15 +164,18 @@ class _AccountPageState extends State<AccountPage> {
                             ),
                             geralInativeTextInput(
                               context: context,
-                              text: "Bank Name",
+                              text: bankController.text,
+                              textController: bankController,
                             ),
                             geralInativeTextInput(
                               context: context,
-                              text: "Account Name",
+                              text: accountNameController.text,
+                              textController: accountNameController,
                             ),
                             geralInativeTextInput(
                               context: context,
-                              text: "Account Number",
+                              text: accountNumberController.text,
+                              textController: accountNumberController,
                             ),
                             TextButton(
                               onPressed: () {

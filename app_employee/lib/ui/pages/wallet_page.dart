@@ -100,6 +100,7 @@ class _WalletPageState extends State<WalletPage> {
     BuildContext context,
     CardModel card,
   ) async {
+    WalletProvider walletProvider = Provider.of(context);
     return Column(
       children: [
         Container(
@@ -150,7 +151,26 @@ class _WalletPageState extends State<WalletPage> {
                               horizontal: VisualDensity.minimumDensity,
                               vertical: VisualDensity.minimumDensity,
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              showDialog<void>(
+                                context: context,
+                                builder: (ctx) => AlertDialog(
+                                  title: const Text('Confirm Delete'),
+                                  content: const Text(
+                                      'Are you sure you want to DELETE this card?'),
+                                  actions: [
+                                    TextButton(
+                                      child: const Text('Ok'),
+                                      onPressed: () async =>
+                                          await walletProvider.deleteCard(
+                                        context,
+                                        card.id!,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
                             icon: const Icon(Icons.delete_outline)),
                       ],
                     ),

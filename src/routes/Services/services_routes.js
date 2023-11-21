@@ -10,7 +10,7 @@ import isAdmin from '../../middlewares/is_admin';
 const router = new Router();
 
 router.post('/additional/', loginRequired, isAdmin, additionalServicesController.store);
-router.get('/additional/', loginRequired, additionalServicesController.show);
+router.get('/additional/', additionalServicesController.show);
 router.put('/additional/:id', loginRequired, isAdmin, additionalServicesController.update);
 router.delete('/additional/:id', loginRequired, isAdmin, additionalServicesController.delete);
 

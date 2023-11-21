@@ -27,20 +27,18 @@ class UserProvider with ChangeNotifier {
     try {
       final response = await http.post(
         Uri.parse('${Constants.BACKEND_BASE_URL}/jwt/'),
-        body: {
+        body: jsonEncode({
           "email": email,
           "password": password,
-        },
+        }),
       );
 
       var v = jsonDecode(response.body);
-      print(v['errors']);
 
       if (response.statusCode == 200) {
         _token = v['token'];
         await loadPerfil(context);
         Navigator.of(context).pushReplacementNamed(AppRoutes.HOME);
-
       } else {
         await comumDialog(
           context,
@@ -50,8 +48,6 @@ class UserProvider with ChangeNotifier {
       }
 
       Navigator.of(context).pushNamed(AppRoutes.HOME);
-
-
     } catch (e) {
       await comumDialog(
         context,
@@ -71,13 +67,13 @@ class UserProvider with ChangeNotifier {
 
       final response = await http.post(
         Uri.parse('${Constants.BACKEND_BASE_URL}/users/'),
-        body: {
+        body: jsonEncode({
           "email": user.email,
           "password": user.password,
           "name": user.name,
           "phone": user.phone,
           "address": user.address,
-        },
+        }),
       );
 
       var v = jsonDecode(response.body);
@@ -107,8 +103,6 @@ class UserProvider with ChangeNotifier {
       }
 
       Navigator.of(context).pushNamed(AppRoutes.HOME);
-
-
     } catch (e) {
       await comumDialog(
         context,
@@ -121,7 +115,7 @@ class UserProvider with ChangeNotifier {
   Future<void> loadPerfil(BuildContext context) async {
     try {
       final response = await http.get(
-        Uri.parse('${Constants.BACKEND_BASE_URL}/user/'),
+        Uri.parse('${Constants.BACKEND_BASE_URL}/users/'),
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
@@ -129,14 +123,22 @@ class UserProvider with ChangeNotifier {
         },
       );
 
-      if (response.statusCode == 200) {
-        _perfil = jsonDecode(response.body);
+      var v = jsonDecode(response.body);
+      print(v);
 
-      } else if (jsonDecode(response.body)['errors'] != '') {
+      if (response.statusCode == 200) {
+        _perfil = UserCompleteModel(
+          id: v['id'],
+          name: v['name'],
+          email: v['email'],
+          phone: v['phone'],
+          address: v['address'],
+        );
+      } else if (v['errors'] != '') {
         await comumDialog(
           context,
           'Erro!',
-          jsonDecode(response.body)['errors'],
+          v['errors'],
         );
       }
     } catch (e) {
@@ -152,7 +154,7 @@ class UserProvider with ChangeNotifier {
       BuildContext context, UserCompleteModel newUser) async {
     try {
       final response = await http.put(
-        Uri.parse('${Constants.BACKEND_BASE_URL}/user/'),
+        Uri.parse('${Constants.BACKEND_BASE_URL}/users/'),
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
@@ -171,7 +173,6 @@ class UserProvider with ChangeNotifier {
         );
         await loadPerfil(context);
         Navigator.of(context).pop();
-
       } else if (v['errors'] != '') {
         await comumDialog(
           context,
@@ -201,10 +202,10 @@ class UserProvider with ChangeNotifier {
           'Accept': 'application/json',
           'Authorization': 'Bearer $_token',
         },
-        body: {
+        body: jsonEncode({
           'init_date': init_date,
           'date_to_date': date_to_date,
-        },
+        }),
       );
 
       var v = jsonDecode(response.body);
@@ -219,7 +220,6 @@ class UserProvider with ChangeNotifier {
             ),
           ),
         );
-
       } else {
         await comumDialog(
           context,
@@ -229,8 +229,6 @@ class UserProvider with ChangeNotifier {
       }
 
       Navigator.of(context).pushNamed(AppRoutes.HOME);
-
-
     } catch (e) {
       await comumDialog(
         context,
@@ -252,9 +250,9 @@ class UserProvider with ChangeNotifier {
           'Accept': 'application/json',
           'Authorization': 'Bearer $_token',
         },
-        body: {
+        body: jsonEncode({
           "emails": listFriends,
-        },
+        }),
       );
 
       var v = jsonDecode(response.body);
@@ -277,8 +275,6 @@ class UserProvider with ChangeNotifier {
           v['errors'],
         );
       }
-
-
     } catch (e) {
       await comumDialog(
         context,
@@ -290,6 +286,5 @@ class UserProvider with ChangeNotifier {
 
   void logout() {
     _token = '';
-
   }
 }

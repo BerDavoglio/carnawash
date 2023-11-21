@@ -13,8 +13,8 @@ import '../../ui/ui.dart';
 import '../infra.dart';
 
 class ServicesProvider with ChangeNotifier {
-  late List<AdditionalModel> _additionalList;
-  late List<CarsizeModel> _carSizeList;
+  final List<AdditionalModel> _additionalList = [];
+  final List<CarsizeModel> _carSizeList = [];
 
   List<CarsizeModel> get carSizeList => _carSizeList;
   List<AdditionalModel> get additionalList => _additionalList;
@@ -37,8 +37,13 @@ class ServicesProvider with ChangeNotifier {
       var v = jsonDecode(response.body);
 
       if (response.statusCode == 200) {
-        _additionalList = v;
-
+        for (Map i in v) {
+          _additionalList.add(AdditionalModel(
+            id: i['id'],
+            title: i['title'],
+            price: i['price'],
+          ));
+        }
       } else if (v['errors'] != '') {
         await comumDialog(
           context,
@@ -46,8 +51,6 @@ class ServicesProvider with ChangeNotifier {
           v['errors'],
         );
       }
-
-
     } catch (e) {
       await comumDialog(
         context,
@@ -58,25 +61,27 @@ class ServicesProvider with ChangeNotifier {
   }
 
   Future<void> loadCarsize(BuildContext context) async {
-    final UserProvider userProvider = Provider.of(
-      context,
-      listen: false,
-    );
     try {
       final response = await http.get(
         Uri.parse('${Constants.BACKEND_BASE_URL}/services/size/'),
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
-          'Authorization': 'Bearer ${userProvider.token}',
         },
       );
 
       var v = jsonDecode(response.body);
+      print(v);
 
       if (response.statusCode == 200) {
-        _carSizeList = v;
-
+        for (Map i in v) {
+          _carSizeList.add(CarsizeModel(
+            id: i['id'],
+            title: i['title'],
+            price: i['price'].toString(),
+            additional_information: i['additional_information'],
+          ));
+        }
       } else if (v['errors'] != '') {
         await comumDialog(
           context,
@@ -84,8 +89,6 @@ class ServicesProvider with ChangeNotifier {
           v['errors'],
         );
       }
-
-
     } catch (e) {
       await comumDialog(
         context,

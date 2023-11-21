@@ -13,9 +13,9 @@ import '../../ui/ui.dart';
 import '../infra.dart';
 
 class VehiclesProvider with ChangeNotifier {
-  List<CarModel> _carsList = [];
-  List<BrandModel> _brandList = [];
-  List<ModelModel> _modelList = [];
+  final List<CarModel> _carsList = [];
+  final List<BrandModel> _brandList = [];
+  final List<ModelModel> _modelList = [];
 
   List<CarModel> get carsList => _carsList;
   List<BrandModel> get brandList => _brandList;
@@ -39,7 +39,16 @@ class VehiclesProvider with ChangeNotifier {
       var v = jsonDecode(response.body);
 
       if (response.statusCode == 200) {
-        _carsList = v;
+        for (Map i in v) {
+          _carsList.add(CarModel(
+            id: i['id'],
+            brand: i['brand'],
+            model: i['model'],
+            plate: i['plate'],
+            color: i['color'],
+            car_size_id: i['car_size_id'],
+          ));
+        }
       } else if (v['errors'] != '') {
         await comumDialog(
           context,
@@ -47,8 +56,6 @@ class VehiclesProvider with ChangeNotifier {
           v['errors'],
         );
       }
-
-
     } catch (e) {
       await comumDialog(
         context,
@@ -82,13 +89,13 @@ class VehiclesProvider with ChangeNotifier {
     try {
       final response = await http.post(
         Uri.parse('${Constants.BACKEND_BASE_URL}/cars/'),
-        body: {
+        body: jsonEncode({
           'brand': car.brand,
           'model': car.model,
           'plate': car.plate,
           'color': car.color,
           'car_size_id': car.car_size_id,
-        },
+        }),
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
@@ -119,8 +126,6 @@ class VehiclesProvider with ChangeNotifier {
           v['errors'],
         );
       }
-
-
     } catch (e) {
       await comumDialog(
         context,
@@ -141,13 +146,13 @@ class VehiclesProvider with ChangeNotifier {
     try {
       final response = await http.put(
         Uri.parse('${Constants.BACKEND_BASE_URL}/cars/${car.id}'),
-        body: {
+        body: jsonEncode({
           'brand': car.brand,
           'model': car.model,
           'color': car.color,
           'plate': car.plate,
           'car_size_id': car.car_size_id,
-        },
+        }),
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
@@ -178,8 +183,6 @@ class VehiclesProvider with ChangeNotifier {
           v['errors'],
         );
       }
-
-
     } catch (e) {
       await comumDialog(
         context,
@@ -230,8 +233,6 @@ class VehiclesProvider with ChangeNotifier {
           v['errors'],
         );
       }
-
-
     } catch (e) {
       await comumDialog(
         context,
@@ -243,7 +244,7 @@ class VehiclesProvider with ChangeNotifier {
 
   Future<void> loadBrands(BuildContext context) async {
     try {
-      final response = await http.put(
+      final response = await http.get(
         Uri.parse(
             'https://private-anon-b9062fef92-carsapi1.apiary-mock.com/manufacturers'),
         headers: {
@@ -253,9 +254,17 @@ class VehiclesProvider with ChangeNotifier {
       );
 
       var v = jsonDecode(response.body);
+      print(v);
 
       if (response.statusCode == 200) {
-        _brandList = v;
+        for (Map i in v) {
+          _brandList.add(
+            BrandModel(
+              id: i['id'],
+              name: i['name'],
+            ),
+          );
+        }
       } else if (v['errors'] != '') {
         await comumDialog(
           context,
@@ -263,12 +272,10 @@ class VehiclesProvider with ChangeNotifier {
           v['errors'],
         );
       }
-
-
     } catch (e) {
       await comumDialog(
         context,
-        'Provider Error! UpdateCar',
+        'Provider Error! LoadBrand',
         e.toString(),
       );
     }
@@ -278,7 +285,7 @@ class VehiclesProvider with ChangeNotifier {
     try {
       final response = await http.put(
         Uri.parse(
-            'https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/all-vehicles-model/records?select=model&limit=100&refine=make%3A"${brand.capitalize}"'),
+            'https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/all-vehicles-model/records?select=model&limit=100&refine=make%3A${brand.capitalize!}'),
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
@@ -286,9 +293,17 @@ class VehiclesProvider with ChangeNotifier {
       );
 
       var v = jsonDecode(response.body);
+      print(response);
 
       if (response.statusCode == 200) {
-        _modelList = v;
+        for (Map i in v) {
+          _modelList.add(
+            ModelModel(
+              id: i['id'],
+              name: i['name'],
+            ),
+          );
+        }
       } else if (v['errors'] != '') {
         await comumDialog(
           context,
@@ -296,12 +311,10 @@ class VehiclesProvider with ChangeNotifier {
           v['errors'],
         );
       }
-
-
     } catch (e) {
       await comumDialog(
         context,
-        'Provider Error! UpdateCar',
+        'Provider Error! LoadModels',
         e.toString(),
       );
     }

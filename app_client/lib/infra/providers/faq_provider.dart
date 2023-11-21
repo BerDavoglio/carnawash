@@ -12,7 +12,7 @@ import '../../ui/ui.dart';
 import '../infra.dart';
 
 class FAQProvider with ChangeNotifier {
-  late List<FAQModel> _faq;
+  List<FAQModel> _faq = [];
   late ConditionModel _condition;
 
   List<FAQModel> get faq => _faq;
@@ -36,8 +36,13 @@ class FAQProvider with ChangeNotifier {
       var v = jsonDecode(response.body);
 
       if (response.statusCode == 200) {
-        _faq = v;
-
+        for (Map i in v) {
+          _faq.add(FAQModel(
+            id: i['id'],
+            question: i['question'],
+            answer: i['answer'],
+          ));
+        }
       } else if (v['errors'] != '') {
         await comumDialog(
           context,
@@ -45,8 +50,6 @@ class FAQProvider with ChangeNotifier {
           v['errors'],
         );
       }
-
-
     } catch (e) {
       await comumDialog(
         context,
@@ -74,8 +77,10 @@ class FAQProvider with ChangeNotifier {
       var v = jsonDecode(response.body);
 
       if (response.statusCode == 200) {
-        _condition = v;
-
+        _condition = ConditionModel(
+          id: v['id'],
+          tems_conditions: v['tems_conditions'],
+        );
       } else if (v['errors'] != '') {
         await comumDialog(
           context,
@@ -83,8 +88,6 @@ class FAQProvider with ChangeNotifier {
           v['errors'],
         );
       }
-
-
     } catch (e) {
       await comumDialog(
         context,
