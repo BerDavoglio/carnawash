@@ -25,8 +25,17 @@ class UserProvider with ChangeNotifier {
   Future<void> submitLogin(
       BuildContext context, String email, String password) async {
     try {
+      print(jsonEncode({
+        "email": email,
+        "password": password,
+      }));
+
       final response = await http.post(
         Uri.parse('${Constants.BACKEND_BASE_URL}/jwt/'),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
         body: jsonEncode({
           "email": email,
           "password": password,
@@ -67,6 +76,10 @@ class UserProvider with ChangeNotifier {
 
       final response = await http.post(
         Uri.parse('${Constants.BACKEND_BASE_URL}/users/'),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
         body: jsonEncode({
           "email": user.email,
           "password": user.password,
@@ -124,7 +137,6 @@ class UserProvider with ChangeNotifier {
       );
 
       var v = jsonDecode(response.body);
-      ;
 
       if (response.statusCode == 200) {
         _perfil = UserCompleteModel(

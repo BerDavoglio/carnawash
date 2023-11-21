@@ -34,7 +34,7 @@ class _SchedulePageState extends State<SchedulePage> {
   int? initial;
   double additionalPrice = 0;
   List<CarObjectModel> listCars = [];
-  List<int> listAddon = [];
+  String listAddon = '';
   late int n;
   late CarModel carSelectedModel;
 

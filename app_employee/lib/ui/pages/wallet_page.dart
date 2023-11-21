@@ -56,12 +56,12 @@ class _WalletPageState extends State<WalletPage> {
                       Column(
                         children: List.generate(
                           walletProvider.cards.length,
-                          (index) async {
-                            return await creditcardBox(
+                          (index) {
+                            return creditcardBox(
                               context,
                               walletProvider.cards[index],
                             );
-                          } as Widget Function(int index),
+                          },
                         ),
                       ),
                       Padding(
@@ -71,8 +71,7 @@ class _WalletPageState extends State<WalletPage> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) =>
-                                    WalletEditPage(),
+                                builder: (context) => WalletEditPage(),
                               ),
                             );
                           },
@@ -96,10 +95,10 @@ class _WalletPageState extends State<WalletPage> {
     );
   }
 
-  Future<Widget> creditcardBox(
+  Widget creditcardBox(
     BuildContext context,
     CardModel card,
-  ) async {
+  ) {
     WalletProvider walletProvider = Provider.of(context);
     return Column(
       children: [

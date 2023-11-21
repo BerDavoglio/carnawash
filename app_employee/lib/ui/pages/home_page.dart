@@ -1,6 +1,4 @@
-// ignore_for_file: use_build_context_synchronously
-
-import 'dart:convert';
+// ignore_for_file: use_build_context_synchronously, must_be_immutable
 
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -29,6 +27,7 @@ class _HomePageState extends State<HomePage> {
   late int allWashes;
   late int nextWashes;
   late int cancelWashes;
+  late ScheduleModel? scheduleOngoing;
 
   @override
   void initState() {
@@ -39,10 +38,16 @@ class _HomePageState extends State<HomePage> {
         context,
         listen: false,
       );
+      ServicesProvider servicesProvider = Provider.of(
+        context,
+        listen: false,
+      );
       await scheduleProvider.loadSchedules(context, DateTime.now());
       allWashes = await scheduleProvider.countAll(context);
       nextWashes = await scheduleProvider.countNext(context);
       cancelWashes = await scheduleProvider.countCancel(context);
+      await servicesProvider.loadCarsize(context);
+      scheduleOngoing = await scheduleProvider.loadOngoing(context);
     });
   }
 
@@ -256,61 +261,143 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                 )
-              : Container(),
+              : const SizedBox(),
           const SizedBox(height: 24),
           Column(
-            children: List.generate(
-                1,
-                (index) async {
-                  return await washinProcessBlock(
-                    context,
-                    (await scheduleProvider.loadOngoing(context))!,
-                  );
-                } as Widget Function(int index)),
-          )
+              children: List.generate(
+            1,
+            (index) {
+              return WashingProcessBlock(
+                scheduleModel: scheduleOngoing!,
+              );
+            },
+          )),
         ],
       ),
     );
   }
 
-  Future<Widget> washinProcessBlock(
-    BuildContext context,
-    ScheduleModel schedule,
-  ) async {
-    ScheduleProvider scheduleProvider = Provider.of(context, listen: false);
-    VehiclesProvider vehiclesProvider = Provider.of(context, listen: false);
-    ServicesProvider servicesProvider = Provider.of(context, listen: false);
-
-    List<CarModel?> carsList = [];
-    List<CarObjectModel?> carsObjectList = [];
-    List addonList = [];
-
-    await servicesProvider.loadCarsize(context);
-
-    ClientModel? client = await scheduleProvider.loadClient(
-      context,
-      schedule.id!,
+  Widget validatedFalse(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(
+        left: 25,
+        right: 25,
+        bottom: 25,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 32),
+            child: Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: const BoxDecoration(
+                    color: Color.fromRGBO(16, 126, 196, 0.2),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(100),
+                    ),
+                  ),
+                  child: const Iconify(
+                    Ri.loader_2_fill,
+                  ),
+                ),
+                const SizedBox(width: 10),
+                const Text(
+                  'Your information is processing',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                    fontSize: 16,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const Text(
+            'We have recivied you information.',
+            style: TextStyle(
+              fontWeight: FontWeight.w300,
+              fontSize: 16,
+            ),
+          ),
+          const SizedBox(height: 16),
+          const Text(
+            'You will receive a notification via the app once you access is activate',
+            style: TextStyle(
+              fontWeight: FontWeight.w300,
+              fontSize: 16,
+            ),
+          ),
+        ],
+      ),
     );
+  }
+}
 
-    for (var i in schedule.cars_list_id.split(';')) {
-      CarObjectModel? car = await scheduleProvider.loadObjectCar(
+class WashingProcessBlock extends StatefulWidget {
+  late ScheduleModel scheduleModel;
+
+  WashingProcessBlock({
+    super.key,
+    required ScheduleModel scheduleModel,
+  });
+
+  @override
+  State<WashingProcessBlock> createState() => _WashingProcessBlockState();
+}
+
+class _WashingProcessBlockState extends State<WashingProcessBlock> {
+  List<CarModel?> carsList = [];
+  List<CarObjectModel?> carsObjectList = [];
+  List addonList = [];
+  late ClientModel? client;
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      ScheduleProvider scheduleProvider = Provider.of(context, listen: false);
+      ServicesProvider servicesProvider = Provider.of(context, listen: false);
+      VehiclesProvider vehiclesProvider = Provider.of(context, listen: false);
+
+      client = await scheduleProvider.loadClient(
         context,
-        json.decode(i).id as int,
+        widget.scheduleModel.id!,
       );
-      if (car != null) {
-        carsObjectList.add(car);
+      for (var i in widget.scheduleModel.cars_list_id.split(';')) {
+        CarObjectModel? car = await scheduleProvider.loadObjectCar(
+          context,
+          int.parse(i[0]),
+        );
+        if (car != null) {
+          carsObjectList.add(car);
+        }
+        for (var j in car!.additional_list_id.split(';')) {
+          AdditionalModel? addon =
+              servicesProvider.getAdditionalComplete(int.parse(j));
+          if (addon != null) {
+            addonList.add(addon);
+          }
+        }
       }
-      addonList = json.decode(i).additional_list_id;
-    }
-    for (var i in carsObjectList) {
-      CarModel? car = await vehiclesProvider.loadOneCar(
-        context,
-        i!.car_id,
-      );
-      if (car != null) {
-        carsList.add(car);
+      for (var i in carsObjectList) {
+        CarModel? car = vehiclesProvider.loadOneCar(
+          context,
+          i!.car_id,
+        );
+        if (car != null) {
+          carsList.add(car);
+        }
       }
-    }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    ScheduleProvider scheduleProvider = Provider.of(context, listen: false);
+    ServicesProvider servicesProvider = Provider.of(context, listen: false);
 
     return SizedBox(
       width: MediaQuery.of(context).size.width * 0.85,
@@ -341,7 +428,7 @@ class _HomePageState extends State<HomePage> {
                     children: [
                       Text(
                         DateFormat('yMMMMd')
-                            .format(schedule.selected_date)
+                            .format(widget.scheduleModel.selected_date)
                             .toString(),
                         style: const TextStyle(
                           fontSize: 16,
@@ -349,7 +436,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                       Text(
                         DateFormat('jm')
-                            .format(schedule.selected_date)
+                            .format(widget.scheduleModel.selected_date)
                             .toString(),
                         style: const TextStyle(
                           fontSize: 16,
@@ -440,9 +527,9 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                       backgroundColor: MaterialStateProperty.all<Color>(
-                        schedule.status == 'not-started'
+                        widget.scheduleModel.status == 'not-started'
                             ? Colors.green
-                            : schedule.status == 'not-accepted'
+                            : widget.scheduleModel.status == 'not-accepted'
                                 ? Colors.yellow
                                 : Colors.blue,
                       ),
@@ -456,14 +543,14 @@ class _HomePageState extends State<HomePage> {
                       setState(() async {
                         await scheduleProvider.changeStatusSchedule(
                           context,
-                          schedule.id!,
+                          widget.scheduleModel.id!,
                         );
                       });
                     },
                     child: Text(
-                      schedule.status == 'not-started'
+                      widget.scheduleModel.status == 'not-started'
                           ? 'Start'
-                          : schedule.status == 'not-accepted'
+                          : widget.scheduleModel.status == 'not-accepted'
                               ? 'Accept'
                               : 'Finished',
                       style: const TextStyle(
@@ -479,7 +566,7 @@ class _HomePageState extends State<HomePage> {
                           context,
                           MaterialPageRoute(
                             builder: (context) => WashRequestPage(
-                              preData: schedule,
+                              preData: widget.scheduleModel,
                             ),
                           ),
                         );
@@ -496,63 +583,6 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           )
-        ],
-      ),
-    );
-  }
-
-  Widget validatedFalse(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(
-        left: 25,
-        right: 25,
-        bottom: 25,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 32),
-            child: Row(
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(8),
-                  decoration: const BoxDecoration(
-                    color: Color.fromRGBO(16, 126, 196, 0.2),
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(100),
-                    ),
-                  ),
-                  child: const Iconify(
-                    Ri.loader_2_fill,
-                  ),
-                ),
-                const SizedBox(width: 10),
-                const Text(
-                  'Your information is processing',
-                  style: TextStyle(
-                    fontWeight: FontWeight.w500,
-                    fontSize: 16,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          const Text(
-            'We have recivied you information.',
-            style: TextStyle(
-              fontWeight: FontWeight.w300,
-              fontSize: 16,
-            ),
-          ),
-          const SizedBox(height: 16),
-          const Text(
-            'You will receive a notification via the app once you access is activate',
-            style: TextStyle(
-              fontWeight: FontWeight.w300,
-              fontSize: 16,
-            ),
-          ),
         ],
       ),
     );

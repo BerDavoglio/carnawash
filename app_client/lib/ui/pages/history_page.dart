@@ -1,6 +1,4 @@
-// ignore_for_file: use_build_context_synchronously
-
-import 'dart:convert';
+// ignore_for_file: use_build_context_synchronously, must_be_immutable
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -105,13 +103,12 @@ class _HistoryPageState extends State<HistoryPage> {
                         Column(
                           children: List.generate(
                             scheduleProvider.listSchedules.length,
-                            (index) async {
-                              return await historyBoxComponent(
-                                context,
-                                scheduleProvider,
-                                index,
+                            (index) {
+                              return HistoryBoxComponent(
+                                scheduleModel:
+                                    scheduleProvider.listSchedules[index],
                               );
-                            } as Widget Function(int index),
+                            },
                           ),
                         ),
                       ],
@@ -125,46 +122,75 @@ class _HistoryPageState extends State<HistoryPage> {
       ),
     );
   }
+}
 
-  Future<Widget> historyBoxComponent(
-    BuildContext context,
-    ScheduleProvider schedule,
-    int index,
-  ) async {
-    VehiclesProvider vehiclesProvider = Provider.of(context, listen: false);
+class HistoryBoxComponent extends StatefulWidget {
+  late ScheduleModel scheduleModel;
+
+  HistoryBoxComponent({
+    super.key,
+    required ScheduleModel scheduleModel,
+  });
+
+  @override
+  State<HistoryBoxComponent> createState() => HistoryBoxComponentState();
+}
+
+class HistoryBoxComponentState extends State<HistoryBoxComponent> {
+  List<CarModel?> carsList = [];
+  List<CarObjectModel?> carsObjectList = [];
+  List addonList = [];
+  late double? price;
+  late WasherModel? washer;
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      ScheduleProvider scheduleProvider = Provider.of(context, listen: false);
+      ServicesProvider servicesProvider = Provider.of(context, listen: false);
+      VehiclesProvider vehiclesProvider = Provider.of(context, listen: false);
+
+      await servicesProvider.loadCarsize(context);
+      washer = await scheduleProvider.loadWasher(
+        context,
+        widget.scheduleModel.washer_id!,
+      );
+
+      for (var i in widget.scheduleModel.cars_list_id.split(';')) {
+        CarObjectModel? car = await scheduleProvider.loadObjectCar(
+          context,
+          int.parse(i[0]),
+        );
+        if (car != null) {
+          carsObjectList.add(car);
+        }
+        for (var j in car!.additional_list_id.split(';')) {
+          AdditionalModel? addon =
+              servicesProvider.getAdditionalComplete(int.parse(j));
+          if (addon != null) {
+            addonList.add(addon);
+          }
+        }
+      }
+      for (var i in carsObjectList) {
+        CarModel? car = await vehiclesProvider.loadOneCar(
+          context,
+          i!.car_id,
+        );
+        if (car != null) {
+          carsList.add(car);
+        }
+      }
+      price =
+          await scheduleProvider.loadPrice(context, widget.scheduleModel.id!);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     ServicesProvider servicesProvider = Provider.of(context, listen: false);
-
-    List<CarModel?> carsList = [];
-    List<CarObjectModel?> carsObjectList = [];
-    List addonList = [];
-
-    await servicesProvider.loadCarsize(context);
-
-    WasherModel? washer = await schedule.loadWasher(
-      context,
-      schedule.listHistorySchedules[index].id!,
-    );
-    for (var i
-        in schedule.listHistorySchedules[index].cars_list_id.split(';')) {
-      CarObjectModel? car = await schedule.loadObjectCar(
-        context,
-        json.decode(i).id as int,
-      );
-      if (car != null) {
-        carsObjectList.add(car);
-      }
-      addonList = json.decode(i).additional_list_id;
-    }
-    for (var i in carsObjectList) {
-      CarModel? car = await vehiclesProvider.loadOneCar(
-        context,
-        i!.car_id,
-      );
-      if (car != null) {
-        carsList.add(car);
-      }
-    }
-    double? price = await schedule.loadPrice(context, index);
 
     return Column(
       children: [
@@ -185,7 +211,7 @@ class _HistoryPageState extends State<HistoryPage> {
                   children: [
                     washer != null
                         ? Text(
-                            'Washer: ${washer.name}',
+                            'Washer: ${washer!.name}',
                             style: const TextStyle(
                               fontSize: 18,
                             ),
@@ -199,8 +225,7 @@ class _HistoryPageState extends State<HistoryPage> {
                       children: [
                         Text(
                           DateFormat('yMMMMd')
-                              .format(
-                                  schedule.listSchedules[index].selected_date)
+                              .format(widget.scheduleModel.selected_date)
                               .toString(),
                           style: const TextStyle(
                             fontSize: 16,
@@ -208,8 +233,7 @@ class _HistoryPageState extends State<HistoryPage> {
                         ),
                         Text(
                           DateFormat('jm')
-                              .format(
-                                  schedule.listSchedules[index].selected_date)
+                              .format(widget.scheduleModel.selected_date)
                               .toString(),
                           style: const TextStyle(
                             fontSize: 16,

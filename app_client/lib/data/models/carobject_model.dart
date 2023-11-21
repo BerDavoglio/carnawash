@@ -11,5 +11,5 @@ class CarObjectModel {
   int? id;
   int car_id;
   int wash_type;
-  List<int> additional_list_id;
+  String additional_list_id;
 }

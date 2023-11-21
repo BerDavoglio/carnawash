@@ -59,10 +59,10 @@ class VehiclesProvider with ChangeNotifier {
     }
   }
 
-  Future<CarModel?> loadOneCar(
+  CarModel? loadOneCar(
     BuildContext context,
     int id,
-  ) async {
+  ) {
     for (CarModel element in _carsList) {
       if (element.id == id) {
         return element;

@@ -1,6 +1,4 @@
-// ignore_for_file: use_build_context_synchronously
-
-import 'dart:convert';
+// ignore_for_file: use_build_context_synchronously, must_be_immutable
 
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -104,12 +102,11 @@ class _SchedulesPageState extends State<SchedulesPage> {
                   Column(
                     children: List.generate(
                       scheduleProvider.listByDate.length,
-                      (index) async {
-                        return await scheduleBox(
-                          context,
-                          scheduleProvider.listByDate[index],
+                      (index) {
+                        return ScheduleBox(
+                          schedule: scheduleProvider.listByDate[index],
                         );
-                      } as Widget Function(int index),
+                      },
                     ),
                   ),
                   const SizedBox(height: 16),
@@ -121,58 +118,87 @@ class _SchedulesPageState extends State<SchedulesPage> {
       ),
     );
   }
+}
 
-  Future<Container> scheduleBox(
-    BuildContext context,
-    ScheduleModel schedule,
-  ) async {
-    VehiclesProvider vehiclesProvider = Provider.of(context, listen: false);
+class ScheduleBox extends StatefulWidget {
+  late ScheduleModel schedule;
+
+  ScheduleBox({super.key, required ScheduleModel schedule});
+
+  @override
+  State<ScheduleBox> createState() => _ScheduleBoxState();
+}
+
+class _ScheduleBoxState extends State<ScheduleBox> {
+  List<CarModel> carsList = [];
+  List<CarObjectModel> carsObjectList = [];
+  List<AdditionalModel> addonList = [];
+
+  WasherModel? washer;
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      VehiclesProvider vehiclesProvider = Provider.of(context, listen: false);
+      ScheduleProvider scheduleProvider = Provider.of(context, listen: false);
+      ServicesProvider servicesProvider = Provider.of(context, listen: false);
+
+      washer = await scheduleProvider.loadWasher(
+        context,
+        widget.schedule.washer_id!,
+      );
+
+      for (var i in widget.schedule.cars_list_id.split(';')) {
+        CarObjectModel? car = await scheduleProvider.loadObjectCar(
+          context,
+          int.parse(i[0]),
+        );
+        if (car != null) {
+          carsObjectList.add(car);
+        }
+        for (var j in car!.additional_list_id.split(';')) {
+          AdditionalModel? addon =
+              servicesProvider.getAdditionalComplete(int.parse(j));
+          if (addon != null) {
+            addonList.add(addon);
+          }
+        }
+      }
+      for (var i in carsObjectList) {
+        CarModel? car = await vehiclesProvider.loadOneCar(
+          context,
+          i.car_id,
+        );
+        if (car != null) {
+          carsList.add(car);
+        }
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     ScheduleProvider scheduleProvider = Provider.of(context, listen: false);
     ServicesProvider servicesProvider = Provider.of(context, listen: false);
-
-    List<CarModel> carsList = [];
-    List<CarObjectModel> carsObjectList = [];
-    List<AdditionalModel> addonList = [];
-
-    WasherModel? washer =
-        await scheduleProvider.loadWasher(context, schedule.id!);
-
-    for (var i in schedule.cars_list_id.split(';')) {
-      CarObjectModel? car = await scheduleProvider.loadObjectCar(
-        context,
-        json.decode(i).id as int,
-      );
-      if (car != null) {
-        carsObjectList.add(car);
-      }
-      addonList = json.decode(i).additional_list_id;
-    }
-    for (var i in carsObjectList) {
-      CarModel? car = await vehiclesProvider.loadOneCar(
-        context,
-        i.car_id,
-      );
-      if (car != null) {
-        carsList.add(car);
-      }
-    }
 
     List status = [
       Colors.grey,
       'Not Started',
     ];
 
-    if (schedule.status == 'finished') {
+    if (widget.schedule.status == 'finished') {
       status = [
         Colors.grey,
         'Not Started',
       ];
-    } else if (schedule.status == 'not-started') {
+    } else if (widget.schedule.status == 'not-started') {
       status = [
         Colors.blue,
         'Started',
       ];
-    } else if (schedule.status == 'started') {
+    } else if (widget.schedule.status == 'started') {
       status = [
         Colors.green,
         'Finished',
@@ -193,7 +219,7 @@ class _SchedulesPageState extends State<SchedulesPage> {
               children: [
                 Text(
                   DateFormat('yMMMMd h:mm a')
-                      .format(schedule.selected_date)
+                      .format(widget.schedule.selected_date)
                       .toString(),
                   style: const TextStyle(fontWeight: FontWeight.w500),
                 ),
@@ -202,11 +228,11 @@ class _SchedulesPageState extends State<SchedulesPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Washer: ${washer.name}',
+                            'Washer: ${washer!.name}',
                             style: const TextStyle(fontWeight: FontWeight.w500),
                           ),
                           RatingBarIndicator(
-                            rating: washer.rate,
+                            rating: washer!.rate,
                             itemBuilder: (context, index) => const Icon(
                               Icons.star,
                               color: Color.fromRGBO(237, 189, 58, 1),
@@ -233,7 +259,7 @@ class _SchedulesPageState extends State<SchedulesPage> {
                               style: const TextStyle(color: Colors.grey)),
                           Text(carsList[0].plate,
                               style: const TextStyle(color: Colors.grey)),
-                          Text(schedule.address,
+                          Text(widget.schedule.address,
                               style: const TextStyle(color: Colors.grey)),
                           Text(
                               servicesProvider
@@ -278,7 +304,7 @@ class _SchedulesPageState extends State<SchedulesPage> {
                     ],
                   ),
                 ),
-                schedule.status == 'finished'
+                widget.schedule.status == 'finished'
                     ? TextButton(
                         style: ButtonStyle(
                           elevation: MaterialStateProperty.all(5),
@@ -317,7 +343,7 @@ class _SchedulesPageState extends State<SchedulesPage> {
                     : const Center(),
               ],
             ),
-            DateTime.now().difference(schedule.selected_date).inHours > 2
+            DateTime.now().difference(widget.schedule.selected_date).inHours > 2
                 ? Padding(
                     padding: const EdgeInsets.only(top: 10),
                     child: InkWell(
@@ -333,7 +359,7 @@ class _SchedulesPageState extends State<SchedulesPage> {
                                 child: const Text('Yes'),
                                 onPressed: () async {
                                   await scheduleProvider.cancelSchedule(
-                                      context, schedule.id!);
+                                      context, widget.schedule.id!);
                                   Navigator.of(context).pop();
                                 },
                               ),

@@ -1,6 +1,4 @@
-// ignore_for_file: use_build_context_synchronously
-
-import 'dart:convert';
+// ignore_for_file: use_build_context_synchronously, must_be_immutable
 
 import 'package:app_employee/infra/infra.dart';
 import 'package:flutter/material.dart';
@@ -134,14 +132,12 @@ class _PaymentsPageState extends State<PaymentsPage> {
                       ),
                       Column(
                         children: List.generate(
-                            paymentProvider.listPayment.length,
-                            (indexPayment) async {
-                              return await historyBoxComponent(
-                                context,
+                            paymentProvider.listPayment.length, (indexPayment) {
+                          return HistoryBoxComponent(
+                            paymentModel:
                                 paymentProvider.listPayment[indexPayment],
-                                indexPayment,
-                              );
-                            } as Widget Function(int index)),
+                          );
+                        }),
                       ),
                       const SizedBox(height: 16),
                       Container(
@@ -184,50 +180,77 @@ class _PaymentsPageState extends State<PaymentsPage> {
       ),
     );
   }
+}
 
-  Future<Widget> historyBoxComponent(
-    BuildContext context,
-    PaymentModel payment,
-    int index,
-  ) async {
-    ScheduleProvider scheduleProvider = Provider.of(context, listen: false);
-    VehiclesProvider vehiclesProvider = Provider.of(context, listen: false);
+class HistoryBoxComponent extends StatefulWidget {
+  late PaymentModel paymentModel;
+
+  HistoryBoxComponent({super.key, required PaymentModel paymentModel});
+
+  @override
+  State<HistoryBoxComponent> createState() => _HistoryBoxComponentState();
+}
+
+class _HistoryBoxComponentState extends State<HistoryBoxComponent> {
+  List<CarModel?> carsList = [];
+  List<CarObjectModel?> carsObjectList = [];
+  List addonList = [];
+  double? price;
+
+  ClientModel? client;
+  ScheduleModel? sched;
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      ScheduleProvider scheduleProvider = Provider.of(context, listen: false);
+      VehiclesProvider vehiclesProvider = Provider.of(context, listen: false);
+      ServicesProvider servicesProvider = Provider.of(context, listen: false);
+
+      sched = await scheduleProvider.loadScheduleId(
+          context, widget.paymentModel.wash_id);
+      await servicesProvider.loadCarsize(context);
+
+      client = await scheduleProvider.loadClient(
+        context,
+        sched!.id!,
+      );
+
+      for (var i in sched!.cars_list_id.split(';')) {
+        CarObjectModel? car = await scheduleProvider.loadObjectCar(
+          context,
+          int.parse(i[0]),
+        );
+        if (car != null) {
+          carsObjectList.add(car);
+        }
+        for (var j in car!.additional_list_id.split(';')) {
+          AdditionalModel? addon =
+              servicesProvider.getAdditionalComplete(int.parse(j));
+          if (addon != null) {
+            addonList.add(addon);
+          }
+        }
+      }
+      for (var i in carsObjectList) {
+        CarModel? car = vehiclesProvider.loadOneCar(
+          context,
+          i!.car_id,
+        );
+        if (car != null) {
+          carsList.add(car);
+        }
+      }
+      price = await scheduleProvider.loadPrice(context, sched!.id!);
+      // totalDay += price!;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     ServicesProvider servicesProvider = Provider.of(context, listen: false);
-
-    List<CarModel?> carsList = [];
-    List<CarObjectModel?> carsObjectList = [];
-    List addonList = [];
-
-    ScheduleModel? sched =
-        await scheduleProvider.loadScheduleId(context, payment.wash_id);
-    await servicesProvider.loadCarsize(context);
-
-    ClientModel? client = await scheduleProvider.loadClient(
-      context,
-      sched!.id!,
-    );
-
-    for (var i in sched.cars_list_id.split(';')) {
-      CarObjectModel? car = await scheduleProvider.loadObjectCar(
-        context,
-        json.decode(i).id as int,
-      );
-      if (car != null) {
-        carsObjectList.add(car);
-      }
-      addonList = json.decode(i).additional_list_id;
-    }
-    for (var i in carsObjectList) {
-      CarModel? car = await vehiclesProvider.loadOneCar(
-        context,
-        i!.car_id,
-      );
-      if (car != null) {
-        carsList.add(car);
-      }
-    }
-    double? price = await scheduleProvider.loadPrice(context, sched.id!);
-    totalDay += price!;
 
     return Column(
       children: [
@@ -257,7 +280,7 @@ class _PaymentsPageState extends State<PaymentsPage> {
                       children: [
                         Text(
                           DateFormat('yMMMMd')
-                              .format(sched.selected_date)
+                              .format(sched!.selected_date)
                               .toString(),
                           style: const TextStyle(
                             fontSize: 16,
@@ -265,7 +288,7 @@ class _PaymentsPageState extends State<PaymentsPage> {
                         ),
                         Text(
                           DateFormat('jm')
-                              .format(sched.selected_date)
+                              .format(sched!.selected_date)
                               .toString(),
                           style: const TextStyle(
                             fontSize: 16,
@@ -361,9 +384,9 @@ class _PaymentsPageState extends State<PaymentsPage> {
                             ),
                           ),
                           const SizedBox(height: 8),
-                          payment.pay_data != null
+                          widget.paymentModel.pay_data != null
                               ? Text(
-                                  'Recivied in: ${payment.pay_data}',
+                                  'Recivied in: ${widget.paymentModel.pay_data}',
                                   style: const TextStyle(
                                     color: Colors.grey,
                                   ),

@@ -12,7 +12,7 @@ import '../../ui/ui.dart';
 import '../infra.dart';
 
 class PaymentProvider with ChangeNotifier {
-  List<PaymentModel> _listPayment = [];
+  final List<PaymentModel> _listPayment = [];
   List<PaymentModel> get listPayment => _listPayment;
 
   Future<void> loadHistory(
@@ -84,7 +84,14 @@ class PaymentProvider with ChangeNotifier {
 
       if (response.statusCode == 200) {
         await loadCarSizes(context);
-        return v;
+        CarModel(
+          id: v['id'],
+          brand: v['brand'],
+          model: v['model'],
+          plate: v['plate'],
+          color: v['color'],
+          car_size_id: v['car_size_id'],
+        );
       } else if (v['errors'] != '') {
         await comumDialog(
           context,
@@ -120,7 +127,17 @@ class PaymentProvider with ChangeNotifier {
       var v = jsonDecode(response.body);
 
       if (response.statusCode == 200) {
-        return v;
+        List list = [];
+        for (Map i in v) {
+          list.add(
+            CarsizeModel(
+              id: i['id'],
+              title: i['title'],
+              price: i['price'],
+              additional_information: i['additional_information'],
+            ),
+          );
+        }
       } else if (v['errors'] != '') {
         await comumDialog(
           context,

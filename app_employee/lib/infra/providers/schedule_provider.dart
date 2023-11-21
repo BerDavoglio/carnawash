@@ -13,7 +13,7 @@ import '../../ui/ui.dart';
 import '../infra.dart';
 
 class ScheduleProvider with ChangeNotifier {
-  List<ScheduleModel> _listSchedules = [];
+  final List<ScheduleModel> _listSchedules = [];
   // late List<ScheduleModel> _listSchedulesHistory;
 
   List<ScheduleModel> get listSchedules => _listSchedules;
@@ -26,7 +26,8 @@ class ScheduleProvider with ChangeNotifier {
     );
     try {
       final response = await http.get(
-        Uri.parse('${Constants.BACKEND_BASE_URL}/schedule/washer/by-date/${DateFormat('yyyy-MM-dd').format(date)}'),
+        Uri.parse(
+            '${Constants.BACKEND_BASE_URL}/schedule/washer/by-date/${DateFormat('yyyy-MM-dd').format(date)}'),
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
@@ -141,7 +142,6 @@ class ScheduleProvider with ChangeNotifier {
           ),
         );
         await loadSchedules(context, DateTime.now());
-
       } else if (v['errors'] != '') {
         await comumDialog(
           context,
@@ -219,7 +219,19 @@ class ScheduleProvider with ChangeNotifier {
       var v = jsonDecode(response.body);
 
       if (response.statusCode == 200) {
-        return v;
+        return ScheduleModel(
+          id: v['id'],
+          user_id: v['user_id'],
+          cars_list_id: v['cars_list_id'],
+          selected_date: v['selected_date'],
+          address: v['address'],
+          observation_address: v['observation_address'],
+          coupon_id: v['coupon_id'],
+          payment_schedule_id: v['payment_schedule_id'],
+          status: v['status'],
+          washer_id: v['washer_id'],
+          rate: v['rate'],
+        );
       } else if (v['errors'] != '') {
         await comumDialog(
           context,
@@ -256,7 +268,19 @@ class ScheduleProvider with ChangeNotifier {
       var v = jsonDecode(response.body);
 
       if (response.statusCode == 200) {
-        return v;
+        return ScheduleModel(
+          id: v['id'],
+          user_id: v['user_id'],
+          cars_list_id: v['cars_list_id'],
+          selected_date: v['selected_date'],
+          address: v['address'],
+          observation_address: v['observation_address'],
+          coupon_id: v['coupon_id'],
+          payment_schedule_id: v['payment_schedule_id'],
+          status: v['status'],
+          washer_id: v['washer_id'],
+          rate: v['rate'],
+        );
       } else if (v['errors'] != '') {
         await comumDialog(
           context,
@@ -295,7 +319,7 @@ class ScheduleProvider with ChangeNotifier {
       var v = jsonDecode(response.body);
 
       if (response.statusCode == 200) {
-        return v;
+        return ClientModel(id: v['id'], name: v['name']);
       } else if (v['errors'] != '') {
         await comumDialog(
           context,
@@ -336,7 +360,12 @@ class ScheduleProvider with ChangeNotifier {
       var v = jsonDecode(response.body);
 
       if (response.statusCode == 200) {
-        return v['price'];
+        return CarObjectModel(
+          id: v['id'],
+          car_id: v['car_id'],
+          wash_type: v['wash_type'],
+          additional_list_id: v['additional_list_id'],
+        );
       } else if (v['errors'] != '') {
         await comumDialog(
           context,
@@ -480,7 +509,8 @@ class ScheduleProvider with ChangeNotifier {
     );
     try {
       final response = await http.get(
-        Uri.parse('${Constants.BACKEND_BASE_URL}/schedule/washer/number-cancel'),
+        Uri.parse(
+            '${Constants.BACKEND_BASE_URL}/schedule/washer/number-cancel'),
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',

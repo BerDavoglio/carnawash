@@ -1,7 +1,5 @@
 // ignore_for_file: use_build_context_synchronously, must_be_immutable
 
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -41,7 +39,7 @@ class _WashRequestPageState extends State<WashRequestPage> {
       for (var i in widget.preData!.cars_list_id.split(';')) {
         CarObjectModel? car = await scheduleProvider.loadObjectCar(
           context,
-          json.decode(i).car_id as int,
+          int.parse(i),
         );
         if (car != null) {
           carsObjectList.add(car);
@@ -107,9 +105,9 @@ class _WashRequestPageState extends State<WashRequestPage> {
                       Column(
                         children: List.generate(
                           carsObjectList.length,
-                          (index) async {
-                            return await requestBox(context, index);
-                          } as Widget Function(int index),
+                          (index) {
+                            return requestBox(context, index);
+                          },
                         ),
                       ),
                       const SizedBox(height: 24),
@@ -194,17 +192,17 @@ class _WashRequestPageState extends State<WashRequestPage> {
     );
   }
 
-  Future<Widget> requestBox(
+  Widget requestBox(
     BuildContext context,
     int id,
-  ) async {
+  ) {
     VehiclesProvider vehiclesProvider = Provider.of(context, listen: false);
     ServicesProvider servicesProvider = Provider.of(context, listen: false);
 
     List<CarModel> carsList = [];
     List<AdditionalModel> addonList = [];
     for (var i in carsObjectList) {
-      CarModel? car = await vehiclesProvider.loadOneCar(
+      CarModel? car = vehiclesProvider.loadOneCar(
         context,
         i.car_id,
       );

@@ -193,7 +193,19 @@ class ScheduleProvider with ChangeNotifier {
       var v = jsonDecode(response.body);
 
       if (response.statusCode == 200) {
-        return v;
+        return ScheduleModel(
+          id: v['id'],
+          user_id: v['user_id'],
+          cars_list_id: v['cars_list_id'],
+          selected_date: v['selected_date'],
+          address: v['address'],
+          observation_address: v['observation_address'],
+          coupon_id: v['coupon_id'],
+          payment_schedule_id: v['payment_schedule_id'],
+          status: v['status'],
+          washer_id: v['washer_id'],
+          rate: v['rate'],
+        );
       } else if (v['errors'] != '') {
         await comumDialog(
           context,
@@ -231,7 +243,19 @@ class ScheduleProvider with ChangeNotifier {
       var v = jsonDecode(response.body);
 
       if (response.statusCode == 200) {
-        return v;
+        return ScheduleModel(
+          id: v['id'],
+          user_id: v['user_id'],
+          cars_list_id: v['cars_list_id'],
+          selected_date: v['selected_date'],
+          address: v['address'],
+          observation_address: v['observation_address'],
+          coupon_id: v['coupon_id'],
+          payment_schedule_id: v['payment_schedule_id'],
+          status: v['status'],
+          washer_id: v['washer_id'],
+          rate: v['rate'],
+        );
       } else if (v['errors'] != '') {
         await comumDialog(
           context,
@@ -269,7 +293,19 @@ class ScheduleProvider with ChangeNotifier {
       var v = jsonDecode(response.body);
 
       if (response.statusCode == 200) {
-        return v;
+        return ScheduleModel(
+          id: v['id'],
+          user_id: v['user_id'],
+          cars_list_id: v['cars_list_id'],
+          selected_date: v['selected_date'],
+          address: v['address'],
+          observation_address: v['observation_address'],
+          coupon_id: v['coupon_id'],
+          payment_schedule_id: v['payment_schedule_id'],
+          status: v['status'],
+          washer_id: v['washer_id'],
+          rate: v['rate'],
+        );
       } else if (v['errors'] != '') {
         await comumDialog(
           context,
@@ -494,7 +530,11 @@ class ScheduleProvider with ChangeNotifier {
       var v = jsonDecode(response.body);
 
       if (response.statusCode == 200) {
-        return v;
+        return WasherModel(
+          id: v['id'],
+          name: v['name'],
+          rate: v['rate'],
+        );
       } else if (v['errors'] != '') {
         await comumDialog(
           context,

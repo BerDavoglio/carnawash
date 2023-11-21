@@ -1,6 +1,4 @@
-// ignore_for_file: use_build_context_synchronously
-
-import 'dart:convert';
+// ignore_for_file: use_build_context_synchronously, must_be_immutable
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -103,12 +101,11 @@ class _SchedulesPageState extends State<SchedulesPage> {
                   Column(
                     children: List.generate(
                       scheduleProvider.listSchedules.length,
-                      (index) async {
-                        return await scheduleBox(
-                          context,
-                          scheduleProvider.listSchedules[index],
+                      (index) {
+                        return ScheduleBox(
+                          schedule: scheduleProvider.listSchedules[index],
                         );
-                      } as Widget Function(int index),
+                      },
                     ),
                   ),
                   const SizedBox(height: 16),
@@ -120,51 +117,73 @@ class _SchedulesPageState extends State<SchedulesPage> {
       ),
     );
   }
+}
 
-  Future<Container> scheduleBox(
-    BuildContext context,
-    ScheduleModel schedule,
-  ) async {
+class ScheduleBox extends StatefulWidget {
+  late ScheduleModel schedule;
+
+  ScheduleBox({super.key, required ScheduleModel schedule});
+
+  @override
+  State<ScheduleBox> createState() => _ScheduleBoxState();
+}
+
+class _ScheduleBoxState extends State<ScheduleBox> {
+  List<CarModel> carsList = [];
+  List<CarObjectModel> carsObjectList = [];
+  List<AdditionalModel> addonList = [];
+
+  ClientModel? client;
+
+  List status = [
+    'Accept',
+    const Color.fromRGBO(237, 189, 58, 1),
+    'Reject',
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      ScheduleProvider scheduleProvider = Provider.of(context, listen: false);
+      ServicesProvider servicesProvider = Provider.of(context, listen: false);
+      VehiclesProvider vehiclesProvider = Provider.of(context, listen: false);
+
+      client = await scheduleProvider.loadClient(context, widget.schedule.id!);
+
+      for (var i in widget.schedule.cars_list_id.split(';')) {
+        CarObjectModel? car = await scheduleProvider.loadObjectCar(
+          context,
+          int.parse(i[0]),
+        );
+        if (car != null) {
+          carsObjectList.add(car);
+        }
+        for (var j in car!.additional_list_id.split(';')) {
+          AdditionalModel? addon =
+              servicesProvider.getAdditionalComplete(int.parse(j));
+          if (addon != null) {
+            addonList.add(addon);
+          }
+        }
+      }
+      for (var i in carsObjectList) {
+        CarModel? car = vehiclesProvider.loadOneCar(
+          context,
+          i.car_id,
+        );
+        if (car != null) {
+          carsList.add(car);
+        }
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     ScheduleProvider scheduleProvider = Provider.of(context, listen: false);
-    VehiclesProvider vehiclesProvider = Provider.of(context, listen: false);
     ServicesProvider servicesProvider = Provider.of(context, listen: false);
-
-    List<CarModel> carsList = [];
-    List<CarObjectModel> carsObjectList = [];
-    List<AdditionalModel> addonList = [];
-
-    ClientModel? client =
-        await scheduleProvider.loadClient(context, schedule.id!);
-
-    for (var i in schedule.cars_list_id.split(';')) {
-      CarObjectModel? car = await scheduleProvider.loadObjectCar(
-        context,
-        json.decode(i).id as int,
-      );
-      if (car != null) {
-        carsObjectList.add(car);
-      }
-      for (var j in car!.additional_list_id.split(';')) {
-        AdditionalModel? addon =
-            servicesProvider.getAdditionalComplete(int.parse(j));
-        addonList.add(addon!);
-      }
-    }
-    for (var i in carsObjectList) {
-      CarModel? car = await vehiclesProvider.loadOneCar(
-        context,
-        i.car_id,
-      );
-      if (car != null) {
-        carsList.add(car);
-      }
-    }
-
-    List status = [
-      'Accept',
-      const Color.fromRGBO(237, 189, 58, 1),
-      'Reject',
-    ];
 
     if (status[0] == 'accepted') {
       status = [
@@ -221,7 +240,7 @@ class _SchedulesPageState extends State<SchedulesPage> {
                           children: [
                             Text(
                               DateFormat('yMMMMd')
-                                  .format(schedule.selected_date)
+                                  .format(widget.schedule.selected_date)
                                   .toString(),
                               style: const TextStyle(
                                 fontSize: 16,
@@ -229,7 +248,7 @@ class _SchedulesPageState extends State<SchedulesPage> {
                             ),
                             Text(
                               DateFormat('jm')
-                                  .format(schedule.selected_date)
+                                  .format(widget.schedule.selected_date)
                                   .toString(),
                               style: const TextStyle(
                                 fontSize: 16,
@@ -250,7 +269,7 @@ class _SchedulesPageState extends State<SchedulesPage> {
                           context,
                           MaterialPageRoute(
                             builder: (context) => WashRequestPage(
-                              preData: schedule,
+                              preData: widget.schedule,
                             ),
                           ),
                         );
@@ -293,7 +312,7 @@ class _SchedulesPageState extends State<SchedulesPage> {
                                 color: Color.fromRGBO(237, 189, 58, 1),
                               ),
                               Text(
-                                schedule.address,
+                                widget.schedule.address,
                                 style: const TextStyle(color: Colors.grey),
                               ),
                             ],
@@ -357,7 +376,7 @@ class _SchedulesPageState extends State<SchedulesPage> {
                               child: const Text('Yes'),
                               onPressed: () async {
                                 await scheduleProvider.declineSchedule(
-                                    context, schedule.id!);
+                                    context, widget.schedule.id!);
                                 Navigator.of(context).pop();
                               },
                             ),

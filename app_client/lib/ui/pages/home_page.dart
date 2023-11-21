@@ -1,8 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
@@ -46,13 +45,14 @@ class _HomePageState extends State<HomePage> {
       for (var i in scheduleRebook!.cars_list_id.split(';')) {
         CarObjectModel? car = await scheduleProvider.loadObjectCar(
           context,
-          json.decode(i).id as int,
+          int.parse(i[0]),
         );
         if (car != null) {
           carsObjectListRebook.add(car);
         }
-        for (var j in json.decode(i).additional_list_id.split(';')) {
-          AdditionalModel? addon = servicesProvider.getAdditionalComplete(j);
+        for (var j in car!.additional_list_id.split(';')) {
+          AdditionalModel? addon =
+              servicesProvider.getAdditionalComplete(int.parse(j));
           if (addon != null) {
             addonListRebook.add(addon);
           }
@@ -71,23 +71,24 @@ class _HomePageState extends State<HomePage> {
           await scheduleProvider.loadPrice(context, scheduleRebook!.id!);
 
       scheduleOngoing = await scheduleProvider.loadOngoingSchedule(context);
-      washer = await scheduleProvider.loadWasher(context, scheduleOngoing!.id!);
+      washer = await scheduleProvider.loadWasher(context, scheduleOngoing!.washer_id!);
 
       for (var i in scheduleOngoing!.cars_list_id.split(';')) {
         CarObjectModel? car = await scheduleProvider.loadObjectCar(
           context,
-          json.decode(i).id as int,
+          int.parse(i[0]),
         );
         if (car != null) {
           carsObjectListOngoing.add(car);
         }
-        for (var j in json.decode(i).additional_list_id.split(';')) {
-          AdditionalModel? addon = servicesProvider.getAdditionalComplete(j);
+        for (var j in car!.additional_list_id.split(';')) {
+          AdditionalModel? addon =
+              servicesProvider.getAdditionalComplete(int.parse(j));
           if (addon != null) {
             addonListOngoing.add(addon);
           }
         }
-        sideOngoing = json.decode(i).wash_type;
+        sideOngoing = car.wash_type.toString();
       }
       for (var i in carsObjectListOngoing) {
         CarModel? car = await vehiclesProvider.loadOneCar(
@@ -209,7 +210,11 @@ class _HomePageState extends State<HomePage> {
                                             ),
                                           ),
                                         ),
-                                        onPressed: () {},
+                                        onPressed: () async {
+                                          await Clipboard.setData(
+                                              const ClipboardData(
+                                                  text: 'CARNA10'));
+                                        },
                                         child: const Text(
                                           'CARNA10',
                                           style: TextStyle(
@@ -233,13 +238,15 @@ class _HomePageState extends State<HomePage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          'Washing Process:',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
+                        scheduleOngoing != null
+                            ? const Text(
+                                'Washing Process:',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              )
+                            : const SizedBox(),
                         const SizedBox(height: 16),
                         scheduleOngoing != null
                             ? ongoingScheduleBox(
@@ -249,11 +256,13 @@ class _HomePageState extends State<HomePage> {
                                 addonListOngoing,
                                 sideOngoing,
                               )
-                            : Container(),
+                            : const SizedBox(),
                       ],
                     ),
                   ),
-                  const SizedBox(height: 32),
+                  scheduleOngoing != null
+                      ? const SizedBox(height: 32)
+                      : const SizedBox(),
                   TextButton(
                     style: ButtonStyle(
                       elevation: MaterialStateProperty.all(5),
@@ -318,13 +327,15 @@ class _HomePageState extends State<HomePage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          'Your last Wash:',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
+                        scheduleRebook != null
+                            ? const Text(
+                                'Your last Wash:',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              )
+                            : const SizedBox(),
                         const SizedBox(height: 16),
                         scheduleRebook != null
                             ? rebookScheduleBox(
@@ -339,7 +350,9 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 32),
+                  scheduleRebook != null
+                      ? const SizedBox(height: 32)
+                      : const SizedBox(),
                   SizedBox(
                     width: MediaQuery.of(context).size.width * 0.85,
                     child: Column(

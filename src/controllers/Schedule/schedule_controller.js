@@ -430,9 +430,6 @@ class ScheduleController {
         },
         order: [['updated_at', 'DESC']],
       });
-      if (!schedule) {
-        return res.status(400).json({ errors: 'Schedule not finded' });
-      }
 
       return res.json(schedule);
     } catch (err) {
@@ -461,9 +458,6 @@ class ScheduleController {
           },
         },
       });
-      if (!schedule) {
-        return res.status(400).json({ errors: 'Schedule not finded' });
-      }
 
       return res.json(schedule);
     } catch (err) {
