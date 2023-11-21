@@ -124,7 +124,7 @@ class UserProvider with ChangeNotifier {
       );
 
       var v = jsonDecode(response.body);
-      print(v);
+      ;
 
       if (response.statusCode == 200) {
         _perfil = UserCompleteModel(
