@@ -52,3 +52,112 @@ To make migrations (*SERVER DO IT BY ITSELF WHEN STARTS*)
 npx sequelize db:migrate
 
 ```
+
+## Front-End (Vue)
+To create a new Store with Pinea
+
+```js
+export const useStore = defineStore('Store', {
+  state: () => ({
+    variable: [],
+  }),
+  getters: {
+    get() {
+      return this.variable;
+    },
+  },
+  actions: {
+    async request() {
+      // try {
+      // axios
+      //   .get(
+      //     'http://127.0.0.1:3096/',
+      //     { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
+      //   )
+      //   .then((response) => {
+      //      this.clients = response.data;
+      //   })
+      //     .catch((err) => {
+      //       toast.error(err.response.data.errors, {
+      //         autoClose: 5000,
+      //         position: toast.POSITION.BOTTOM_RIGHT,
+      //       });
+      //     });
+      //   return 0;
+      // } catch (error) {
+      //   return error;
+      // }
+    },
+
+    async create() {
+      // try {
+      // axios
+      //   .post(
+      //     'http://127.0.0.1:3096/',
+      //     obj,
+      //     { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
+      //   )
+      //   .then((response) => {
+      //      this.clients = response.data;
+      //   })
+      //     .catch((err) => {
+      //       toast.error(err.response.data.errors, {
+      //         autoClose: 5000,
+      //         position: toast.POSITION.BOTTOM_RIGHT,
+      //       });
+      //     });
+      //   return 0;
+      // } catch (error) {
+      //   return error;
+      // }
+    },
+
+    async edit() {
+      // try {
+      // axios
+      //   .post(
+      //     'http://127.0.0.1:3096/',
+      //     obj,
+      //     { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
+      //   )
+      //   .then((response) => {
+      //      this.clients = response.data;
+      //   })
+      //     .catch((err) => {
+      //       toast.error(err.response.data.errors, {
+      //         autoClose: 5000,
+      //         position: toast.POSITION.BOTTOM_RIGHT,
+      //       });
+      //     });
+      //   return 0;
+      // } catch (error) {
+      //   return error;
+      // }
+    },
+
+    async delete() {
+      // try {
+      // axios
+      //   .post(
+      //     'http://127.0.0.1:3096/',
+      //     obj,
+      //     { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
+      //   )
+      //   .then((response) => {
+      //      this.clients = response.data;
+      //   })
+      //     .catch((err) => {
+      //       toast.error(err.response.data.errors, {
+      //         autoClose: 5000,
+      //         position: toast.POSITION.BOTTOM_RIGHT,
+      //       });
+      //     });
+      //   return 0;
+      // } catch (error) {
+      //   return error;
+      // }
+    },
+  },
+  persist: true,
+});
+```

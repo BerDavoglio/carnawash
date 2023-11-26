@@ -70,11 +70,11 @@
 </template>
 
 <script>
-import ConfirmNewRegularwashPopup from '../../PopupComponents/ServicesPopups/ConfirmNewRegularwashPopup.vue';
+import ConfirmNewRegularWashPopup from '../../PopupComponents/ServicesPopups/ConfirmNewRegularWashPopup.vue';
 
 export default {
   name: 'ServicesNewwashBlockComponent',
-  components: { ConfirmNewRegularwashPopup },
+  components: { ConfirmNewRegularWashPopup },
   data() {
     return {
       size: '',

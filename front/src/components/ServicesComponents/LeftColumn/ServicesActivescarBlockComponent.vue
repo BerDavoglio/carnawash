@@ -22,10 +22,10 @@
 </template>
 
 <script>
-import CarsizeSubboxComponent from './CarsizeSubboxComponent.vue';
+import CarSizeSubboxComponent from './CarSizeSubboxComponent.vue';
 
 export default {
   name: 'ServicesActivescarBlockComponent',
-  components: { CarsizeSubboxComponent },
+  components: { CarSizeSubboxComponent },
 };
 </script>

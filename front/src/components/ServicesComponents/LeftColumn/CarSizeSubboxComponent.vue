@@ -56,7 +56,7 @@
 
 <script>
 export default {
-  name: 'CarsizeSubboxComponent',
+  name: 'CarSizeSubboxComponent',
   data() {
     return {
       size: '',

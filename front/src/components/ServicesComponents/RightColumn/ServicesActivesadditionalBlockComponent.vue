@@ -22,10 +22,10 @@
 </template>
 
 <script>
-import AdditionalservicesSubboxComponent from './AdditionalservicesSubboxComponent.vue';
+import AdditionalServicesSubboxComponent from './AdditionalServicesSubboxComponent.vue';
 
 export default {
   name: 'ServicesActiveswashBlockComponent',
-  components: { AdditionalservicesSubboxComponent },
+  components: { AdditionalServicesSubboxComponent },
 };
 </script>

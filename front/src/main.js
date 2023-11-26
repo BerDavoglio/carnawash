@@ -50,7 +50,11 @@ import * as directives from 'vuetify/directives';
 
 import VCalendar from 'v-calendar';
 
+import Vue3Toasity from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
+
 import router from './router';
+
 import store from './store/store';
 
 import './assets/tailwind.css';
@@ -107,6 +111,12 @@ createApp(App)
   .use(router)
   .use(vuetify)
   .use(VCalendar, {})
+  .use(
+    Vue3Toasity,
+    {
+      autoClose: 3000,
+    },
+  )
   .component('v-icon', OhVueIcon)
   .component('VueDatePicker', VueDatePicker)
   .mount('#app');

@@ -22,10 +22,10 @@
 </template>
 
 <script>
-import RegularwashSubboxComponent from './RegularwashSubboxComponent.vue';
+import RegularWashSubboxComponent from './RegularWashSubboxComponent.vue';
 
 export default {
   name: 'ServicesActiveswashBlockComponent',
-  components: { RegularwashSubboxComponent },
+  components: { RegularWashSubboxComponent },
 };
 </script>
