@@ -15,6 +15,10 @@ export default class Carsize extends Model {
         type: Sequelize.TEXT,
         defaultValue: '',
       },
+      times_used: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0,
+      },
     }, {
       sequelize,
     });

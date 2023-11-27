@@ -6,6 +6,7 @@ import User from '../models/User/User_models';
 import Car from '../models/Car/Car_models';
 import Coupon from '../models/Coupon/Coupon_models';
 import Couponbanner from '../models/Coupon/CouponBanner_models';
+import Historycoupon from '../models/Coupon/HistoryCoupon_models';
 import Faq from '../models/FaqTerms/Faq_models';
 import Condition from '../models/FaqTerms/Condition_models';
 import Notification from '../models/Notification/Notification_models';
@@ -35,6 +36,7 @@ const models = [
   Car,
   Coupon,
   Couponbanner,
+  Historycoupon,
   Faq,
   Condition,
   Notification,

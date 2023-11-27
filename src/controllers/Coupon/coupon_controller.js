@@ -1,4 +1,5 @@
 import Coupon from '../../models/Coupon/Coupon_models';
+import Couponhistory from '../../models/Coupon/HistoryCoupon_models';
 
 class CouponController {
   async store(req, res) {
@@ -26,6 +27,16 @@ class CouponController {
   async show(req, res) {
     try {
       const coupons = await Coupon.findAll();
+
+      return res.json(coupons);
+    } catch (err) {
+      return res.status(400).json({ errors: `Show Coupon / ${err.message}` });
+    }
+  }
+
+  async showHistory(req, res) {
+    try {
+      const coupons = await Couponhistory.findAll();
 
       return res.json(coupons);
     } catch (err) {

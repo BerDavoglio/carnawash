@@ -1,23 +1,22 @@
-
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('additionalservices', {
+    await queryInterface.createTable('historycoupon', {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
       },
-      title: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      price: {
-        type: Sequelize.FLOAT,
-        allowNull: false,
-      },
-      times_used: {
+      schedule_id: {
         type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      coupon_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      total: {
+        type: Sequelize.FLOAT,
         allowNull: false,
       },
       created_at: {
@@ -32,6 +31,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('additionalservices');
+    await queryInterface.dropTable('historycoupon');
   }
 };

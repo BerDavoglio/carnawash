@@ -46,6 +46,8 @@ router.post('/admin/washers/', loginRequired, isAdmin, adminWasherController.cre
 router.get('/admin/washers/', loginRequired, isAdmin, adminWasherController.showWashers);
 router.get('/admin/washers/new/', loginRequired, isAdmin, adminWasherController.showWashersNew);
 router.put('/admin/washers/by-id/:id', loginRequired, isAdmin, adminWasherController.updateWashers);
+router.put('/admin/washers/by-id/:id/approval/:change', loginRequired, isAdmin, adminWasherController.updateApproval);
+router.put('/admin/washers/by-id/:id/enable/:change', loginRequired, isAdmin, adminWasherController.updateEnable);
 router.get('/admin/washers/by-id/:id/bank/', loginRequired, isAdmin, adminWasherController.showBank);
 router.put('/admin/washers/by-id/:id/bank/', loginRequired, isAdmin, adminWasherController.updateBank);
 router.get('/admin/washers/by-id/:id/bank/', loginRequired, isAdmin, adminWasherController.showBank);

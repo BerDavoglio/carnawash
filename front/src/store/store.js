@@ -1,3 +1,4 @@
+/* eslint-disable prefer-destructuring */
 /* eslint-disable import/prefer-default-export */
 import { defineStore } from 'pinia';
 import axios from 'axios';
@@ -588,12 +589,16 @@ export const useClientStore = defineStore('clientStore', {
 export const useWashersStore = defineStore('washerStore', {
   state: () => ({
     washers: [],
+    infos: [],
     newWashers: 0,
     inactiveWashers: 0,
   }),
   getters: {
     getWashers() {
       return this.washers;
+    },
+    getInfos() {
+      return this.infos;
     },
     getNewWashers() {
       return this.newWashers;
@@ -611,7 +616,8 @@ export const useWashersStore = defineStore('washerStore', {
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
           .then((response) => {
-            this.washers = response.data;
+            this.washers = response.data[0];
+            this.infos = response.data[1];
           })
           .catch((err) => {
             toast.error(err.response.data.errors, {
@@ -775,51 +781,47 @@ export const useWashersStore = defineStore('washerStore', {
         return error;
       }
     },
-    // FALTA CHANGEAPPROVAL
-    async changeApprovalWasher() {
-      // try {
-      // axios
-      //   .post(
-      //     'http://127.0.0.1:3096/',
-      //     obj,
-      //     { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
-      //   )
-      //   .then((response) => {
-      //     await this.requestWashers();
-      //   })
-      //     .catch((err) => {
-      //       toast.error(err.response.data.errors, {
-      //         autoClose: 5000,
-      //         position: toast.POSITION.BOTTOM_RIGHT,
-      //       });
-      //     });
-      //   return 0;
-      // } catch (error) {
-      //   return error;
-      // }
+    async changeApprovalWasher(id, change) {
+      try {
+        axios
+          .put(
+            `http://127.0.0.1:3096/users/admin/washers/by-id/${id}/approval/${change}`,
+            { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
+          )
+          .then(async () => {
+            await this.requestWashers();
+          })
+          .catch((err) => {
+            toast.error(err.response.data.errors, {
+              autoClose: 5000,
+              position: toast.POSITION.BOTTOM_RIGHT,
+            });
+          });
+        return 0;
+      } catch (error) {
+        return error;
+      }
     },
-    // FALTAENABLEWASHER
-    async changeEnableWasher() {
-      // try {
-      // axios
-      //   .post(
-      //     'http://127.0.0.1:3096/',
-      //     obj,
-      //     { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
-      //   )
-      //   .then((response) => {
-      //     await this.requestWashers();
-      //   })
-      //     .catch((err) => {
-      //       toast.error(err.response.data.errors, {
-      //         autoClose: 5000,
-      //         position: toast.POSITION.BOTTOM_RIGHT,
-      //       });
-      //     });
-      //   return 0;
-      // } catch (error) {
-      //   return error;
-      // }
+    async changeEnableWasher(id, change) {
+      try {
+        axios
+          .put(
+            `http://127.0.0.1:3096/users/admin/washers/by-id/${id}/enable/${change}`,
+            { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
+          )
+          .then(async () => {
+            await this.requestWashers();
+          })
+          .catch((err) => {
+            toast.error(err.response.data.errors, {
+              autoClose: 5000,
+              position: toast.POSITION.BOTTOM_RIGHT,
+            });
+          });
+        return 0;
+      } catch (error) {
+        return error;
+      }
     },
 
     async deleteWasher(id) {
@@ -2244,7 +2246,6 @@ export const useNotificationStore = defineStore('notificationStore', {
   persist: true,
 });
 
-// INCOMPLETO - MÉDIO/COMPL
 export const useCouponsStore = defineStore('couponsStore', {
   state: () => ({
     coupons: [],
@@ -2284,27 +2285,26 @@ export const useCouponsStore = defineStore('couponsStore', {
         return error;
       }
     },
-    // FALTA FAZER CÓDIGO
     async requestCouponsHistory() {
-      // try {
-      // axios
-      //   .get(
-      //     'http://127.0.0.1:3096/',
-      //     { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
-      //   )
-      //   .then((response) => {
-      //      this.clients = response.data;
-      //   })
-      //     .catch((err) => {
-      //       toast.error(err.response.data.errors, {
-      //         autoClose: 5000,
-      //         position: toast.POSITION.BOTTOM_RIGHT,
-      //       });
-      //     });
-      //   return 0;
-      // } catch (error) {
-      //   return error;
-      // }
+      try {
+        axios
+          .get(
+            'http://127.0.0.1:3096/coupons/history/',
+            { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
+          )
+          .then((response) => {
+            this.couponsHistory = response.data;
+          })
+          .catch((err) => {
+            toast.error(err.response.data.errors, {
+              autoClose: 5000,
+              position: toast.POSITION.BOTTOM_RIGHT,
+            });
+          });
+        return 0;
+      } catch (error) {
+        return error;
+      }
     },
     async requestCouponBanner() {
       try {
@@ -2356,8 +2356,6 @@ export const useCouponsStore = defineStore('couponsStore', {
         return error;
       }
     },
-
-    // SENDER AND RECIVIER É APENAS CRIAR COUPON E ENVIAR NOTIFICAÇÃO
 
     async editCoupon(id, obj) {
       try {

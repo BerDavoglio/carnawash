@@ -82,6 +82,70 @@ class AdminWasherController {
     }
   }
 
+  async updateApproval(req, res) {
+    try {
+      const washer = User.findByPk(req.params.id);
+      if (!washer) {
+        return res.status(400).json({ errors: 'Washer not Found' });
+      };
+
+      const info = Washerinfo.findOne({
+        where: {
+          user_id: req.params.id
+        }
+      });
+      if (!info) {
+        return res.status(400).json({ errors: 'Washerinfo not Found' });
+      };
+
+      if (req.params.change == 1) {
+        info.update({
+          contract_accept: true,
+        });
+      } else {
+        info.update({
+          contract_accept: false,
+        });
+      }
+
+      return res.json({ message: 'Washer approved with success' });
+    } catch (err) {
+      return res.status(400).json({ errors: `Update Approval Washer / ${err.message}` });
+    }
+  }
+
+  async updateEnable(req, res) {
+    try {
+      const washer = User.findByPk(req.params.id);
+      if (!washer) {
+        return res.status(400).json({ errors: 'Washer not Found' });
+      };
+
+      const info = Washerinfo.findOne({
+        where: {
+          user_id: req.params.id
+        }
+      });
+      if (!info) {
+        return res.status(400).json({ errors: 'Washerinfo not Found' });
+      };
+
+      if (req.params.change == 1) {
+        info.update({
+          enable: true,
+        });
+      } else {
+        info.update({
+          enable: false,
+        });
+      }
+
+      return res.json({ message: 'Washer enable with success' });
+    } catch (err) {
+      return res.status(400).json({ errors: `Update Admin Washer / ${err.message}` });
+    }
+  }
+
   async deleteWasher(req, res) {
     try {
       const washer = User.findByPk(req.params.id);

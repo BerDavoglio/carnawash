@@ -10,6 +10,7 @@ const router = new Router();
 router.post('/', loginRequired, isAdmin, couponController.store);
 router.get('/:id', loginRequired, couponController.index);
 router.get('/all/', loginRequired, isAdmin, couponController.show);
+router.get('/history/', loginRequired, isAdmin, couponController.showHistory);
 router.put('/', loginRequired, isAdmin, couponController.update);
 router.delete('/', loginRequired, isAdmin, couponController.delete);
 

@@ -1,18 +1,18 @@
 import Sequelize, { Model } from 'sequelize';
 
-export default class Additionalservice extends Model {
+export default class Historycoupon extends Model {
   static init(sequelize) {
     super.init({
-      title: {
-        type: Sequelize.STRING,
-        defaultValue: '',
-      },
-      price: {
-        type: Sequelize.FLOAT,
+      schedule_id: {
+        type: Sequelize.INTEGER,
         defaultValue: 0,
       },
-      times_used: {
+      coupon_id: {
         type: Sequelize.INTEGER,
+        defaultValue: 0,
+      },
+      total: {
+        type: Sequelize.FLOAT,
         defaultValue: 0,
       },
     }, {

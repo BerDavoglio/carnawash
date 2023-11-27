@@ -37,39 +37,14 @@ class CarsizeController {
 
   async showNumberUsed(req, res) {
     try {
-      exemple = [];
-      val = 0;
-
-      const sched = await Carsobjects.findAll();
       const sizes = await Carsize.findAll({
         attributes: [
           'id',
-        ],
-      });
-      const cars = await Car.findAll({
-        attributes: [
-          'id',
-          'car_size_id',
+          'times_used',
         ],
       });
 
-      sizes.forEach((si) => {
-        exemple.push([si, 0]);
-
-        sched.forEach((sched) => {
-          cars.forEach((ca) => {
-            if (sched.car_id = ca.id) {
-              if (ca.car_size_id == si) {
-                exemple[val][1]++;
-              }
-            }
-          })
-        });
-
-        val++;
-      })
-
-      return res.json(additionals);
+      return res.json(sizes);
     } catch (err) {
       return res.status(400).json({ errors: `Show Additional Service / ${err.message}` });
     }

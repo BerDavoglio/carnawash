@@ -7,6 +7,7 @@ import Carsize from '../../models/Services/CarSize_models';
 import Regularwash from '../../models/Services/RegularWash_models';
 
 import Coupon from '../../models/Coupon/Coupon_models';
+import Historycoupon from '../../models/Coupon/HistoryCoupon_models';
 
 import Paymentcard from '../../models/Payment/PaymentCard_models';
 import Paymentschedule from '../../models/Payment/PaymentSchedule_models';
@@ -31,6 +32,17 @@ class ScheduleController {
         });
         cars_list_id += newCarsobjects.id;
         cars_list_id += ';';
+        const car = await Car.findByPk(cars_obj.car_id);
+        const size = await Carsize.findByPk(car.car_size_id);
+        await size.update({
+          times_used: (size.times_used + 1)
+        });
+        cars_obj.additional_list_id.split(';').forEach(async (addId) => {
+          const additi = await Additionalservice.findByPk(addId);
+          await additi.update({
+            times_used: (additi.times_used + 1)
+          });
+        })
       });
 
       const newPaymentschedule = await Paymentschedule.create({
@@ -38,6 +50,7 @@ class ScheduleController {
         card_id: req.body.credit_card_id,
         three: req.body.three,
       });
+
 
       const newSchedule = await Schedule.create({
         user_id: idUser,
@@ -49,6 +62,12 @@ class ScheduleController {
         washer_id: null,
         status: 'not-assign',
         rate: null,
+      });
+
+      await Historycoupon.create({
+        schedule_id: newSchedule.id,
+        coupon_id: req.body.coupon_id,
+        total: await this.calcTotalPriceInternal(newSchedule.id),
       });
 
       const paymentUpdate = await Paymentschedule.findByPk(newPaymentschedule.id);
