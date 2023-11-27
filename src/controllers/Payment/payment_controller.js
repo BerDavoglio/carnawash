@@ -1,6 +1,7 @@
 import Paymentcard from '../../models/Payment/PaymentCard_models';
 import Paymentschedule from '../../models/Payment/PaymentSchedule_models';
 import Paymentwasher from '../../models/Payment/PaymentWasher_models';
+import Autopayment from '../../models/Payment/Autopayment_models';
 
 class PaymentController {
   async store(req, res) {
@@ -189,11 +190,50 @@ class PaymentController {
 
       const payment = await Paymentwasher.findByPk(req.params.id);
 
+      // REALIZAR PAGAMENTO
+
       const updatedPayment = await payment.update({
         pay_data: new Date(),
       })
 
       return res.json(updatedPayment);
+    } catch (err) {
+      return res.status(400).json({ errors: `Show Paymentcard / ${err.message}` });
+    }
+  }
+
+  async getPaymentwasher(req, res) {
+    try {
+      const idReq = req.userId;
+      if (!idReq) {
+        return res.status(400).json({ errors: 'ID not Found' });
+      }
+
+      const payments = await Paymentwasher.findAll();
+
+      return res.json(payments);
+    } catch (err) {
+      return res.status(400).json({ errors: `Show Paymentcard / ${err.message}` });
+    }
+  }
+
+  async indexAutopay(req, res) {
+    try {
+      const auto = await Autopayment.findByPk(req.params.id);
+
+      return res.json(auto);
+    } catch (err) {
+      return res.status(400).json({ errors: `Show Paymentcard / ${err.message}` });
+    }
+  }
+
+  async updateAutopay(req, res) {
+    try {
+      const auto = await Autopayment.findByPk(req.params.id);
+
+      await auto.update(req.body);
+
+      return res.json(payments);
     } catch (err) {
       return res.status(400).json({ errors: `Show Paymentcard / ${err.message}` });
     }

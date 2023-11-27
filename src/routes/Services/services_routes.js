@@ -11,11 +11,13 @@ const router = new Router();
 
 router.post('/additional/', loginRequired, isAdmin, additionalServicesController.store);
 router.get('/additional/', additionalServicesController.show);
+router.get('/additional/number-used/', additionalServicesController.showNumberUsed);
 router.put('/additional/:id', loginRequired, isAdmin, additionalServicesController.update);
 router.delete('/additional/:id', loginRequired, isAdmin, additionalServicesController.delete);
 
 router.post('/size/', loginRequired, isAdmin, carSizeController.store);
 router.get('/size/', carSizeController.show);
+router.get('/size/number-used', carSizeController.showNumberUsed);
 router.put('/size/:id', loginRequired, isAdmin, carSizeController.update);
 router.delete('/size/:id', loginRequired, isAdmin, carSizeController.delete);
 

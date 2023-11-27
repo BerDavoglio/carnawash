@@ -8,7 +8,7 @@ import isAdmin from '../../middlewares/is_admin';
 const router = new Router();
 
 router.post('/', loginRequired, isAdmin, couponController.store);
-router.get('/', loginRequired, couponController.index);
+router.get('/:id', loginRequired, couponController.index);
 router.get('/all/', loginRequired, isAdmin, couponController.show);
 router.put('/', loginRequired, isAdmin, couponController.update);
 router.delete('/', loginRequired, isAdmin, couponController.delete);

@@ -70,6 +70,16 @@ class FaqController {
       return res.status(400).json({ errors: `Delete FAQ / ${err.message}` });
     }
   }
+
+  async deleteAll(req, res) {
+    try {
+      await Faq.destroyAll();
+
+      return res.json({ message: 'FAQs deleted with success' });
+    } catch (err) {
+      return res.status(400).json({ errors: `Delete FAQ / ${err.message}` });
+    }
+  }
 }
 
 export default new FaqController();

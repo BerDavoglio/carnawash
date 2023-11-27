@@ -115,7 +115,7 @@ export const useStore = defineStore('Store', {
     async edit() {
       // try {
       // axios
-      //   .post(
+      //   .put(
       //     'http://127.0.0.1:3096/',
       //     obj,
       //     { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
@@ -138,7 +138,7 @@ export const useStore = defineStore('Store', {
     async delete() {
       // try {
       // axios
-      //   .post(
+      //   .delete(
       //     'http://127.0.0.1:3096/',
       //     obj,
       //     { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },

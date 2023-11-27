@@ -6,6 +6,7 @@ import Condition from './models/FaqTerms/Condition_models';
 import Markup from './models/Services/Markup_models';
 import Carsize from './models/Services/CarSize_models';
 import Additionalservice from './models/Services/AdditionalService_models';
+import Autopayment from './models/Payment/Autopayment_models';
 
 const { execSync } = require('child_process');
 
@@ -118,7 +119,18 @@ app.listen(process.env.APP_PORT, async () => {
     console.log('Additionalservice Pet Hair already has been created');
   }
 
+  const autopayment = await Autopayment.findByPk(1);
+  if (!autopayment) {
+    await Autopayment.create({
+      selected_date: null,
+    });
+  } else {
+    console.log('Autopayment has been created');
+  }
+
   // UMA VEZ NO DIA, VERIFICA OS REGULAR WASHS
+  // UMA VEZ NO DIA, VERIFICA O AUTOPAYMENT
+  // UMA VEZ NO DIA, LANÇAR NOTIFICAÇÃO PROGRAMADA
 
   console.log('Started!');
 });

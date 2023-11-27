@@ -60,7 +60,7 @@ class QuizController {
     }
   }
 
-  async delete(req, res) {
+  async deleteOne(req, res) {
     try {
       const quiz = await Quiz.findByPk(req.params.id);
       if (!quiz) {
@@ -68,6 +68,16 @@ class QuizController {
       }
 
       await quiz.destroy();
+
+      return res.json({ message: 'Quiz deleted with success' });
+    } catch (err) {
+      return res.status(400).json({ errors: `Delete Quiz / ${err.message}` });
+    }
+  }
+
+  async deleteAll(req, res) {
+    try {
+      await Quiz.destroyAll();
 
       return res.json({ message: 'Quiz deleted with success' });
     } catch (err) {

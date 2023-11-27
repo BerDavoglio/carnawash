@@ -43,6 +43,54 @@ class QuizresponseController {
       return res.status(400).json({ errors: `Make Quiz Response / ${err.message}` });
     }
   }
+
+  async showAverage(req, res) {
+    try {
+      const averageOne = await Quizresponse.findAll({
+        grade: { [Op.between]: [0, 10] },
+      });
+      const averageTwo = await Quizresponse.findAll({
+        grade: { [Op.between]: [10, 30] },
+      });
+      const averageThree = await Quizresponse.findAll({
+        grade: { [Op.between]: [30, 60] },
+      });
+      const averageFour = await Quizresponse.findAll({
+        grade: { [Op.between]: [60, 80] },
+      });
+      const averageFive = await Quizresponse.findAll({
+        grade: { [Op.between]: [80, 100] },
+      });
+
+      return res.json([
+        averageOne.length,
+        averageTwo.length,
+        averageThree.length,
+        averageFour.length,
+        averageFive.length,
+      ]);
+    } catch (err) {
+      return res.status(400).json({ errors: `Make Quiz Response / ${err.message}` });
+    }
+  }
+
+  async showStatistics(req, res) {
+    try {
+      const approved = await Quizresponse.findAll({
+        grade: { [Op.between]: [80, 100] },
+      });
+      const reproved = await Quizresponse.findAll({
+        grade: { [Op.between]: [0, 80] },
+      });
+
+      return res.json([
+        approved.length,
+        reproved.length,
+      ]);
+    } catch (err) {
+      return res.status(400).json({ errors: `Make Quiz Response / ${err.message}` });
+    }
+  }
 }
 
 export default new QuizresponseController();

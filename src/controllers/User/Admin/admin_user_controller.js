@@ -2,6 +2,23 @@ import User from '../../../models/User/User_models';
 import Usertype from '../../../models/User/UserType_models';
 
 class AdminUserController {
+  async createAdmin(req, res) {
+    try {
+      const admin = await User.create({
+        name: req.body.name,
+        email: req.body.email,
+        address: req.body.address,
+        phone: req.body.phone,
+        role: 'admin',
+        password: req.body.password,
+      });
+
+      return res.json(admin);
+    } catch (err) {
+      return res.status(400).json({ errors: `Show Admin / ${err.message}` });
+    }
+  }
+
   async showAdmins(req, res) {
     try {
       const admins = await User.findAll({
@@ -45,6 +62,21 @@ class AdminUserController {
       });
 
       return res.json({ message: 'Subrole changed with success' });
+    } catch (err) {
+      return res.status(400).json({ errors: `Show Admin / ${err.message}` });
+    }
+  }
+
+  async deleteAdmin(req, res) {
+    try {
+      const user = await User.findByPk(req.params.id);
+      if (!user) {
+        return res.status(400).json({ errors: 'User not found' });
+      }
+
+      user.destroy();
+
+      return res.json({ message: 'Admin deleted with success' });
     } catch (err) {
       return res.status(400).json({ errors: `Show Admin / ${err.message}` });
     }

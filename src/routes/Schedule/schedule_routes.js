@@ -31,5 +31,6 @@ router.get('/washer/number-next', loginRequired, scheduleController.countNext);
 router.get('/washer/number-cancel', loginRequired, scheduleController.countCancel);
 
 router.put('/admin/:id', loginRequired, isAdmin, scheduleController.updateWasher);
+router.put('/admin/cancel/:id', loginRequired, isAdmin, scheduleController.adminCancel);
 
 export default router;

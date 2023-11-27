@@ -10,8 +10,11 @@ import Faq from '../models/FaqTerms/Faq_models';
 import Condition from '../models/FaqTerms/Condition_models';
 import Notification from '../models/Notification/Notification_models';
 import Sentnotification from '../models/Notification/SentNotification_models';
+import Programmednotification from '../models/Notification/Programmednotification_models';
 import Paymentcard from '../models/Payment/PaymentCard_models';
 import Paymentschedule from '../models/Payment/PaymentSchedule_models';
+import Autopayment from '../models/Payment/Autopayment_models';
+import Paymentwasher from '../models/Payment/PaymentWasher_models';
 import Quiz from '../models/Quiz/Quiz_models';
 import Quizresponse from '../models/Quiz/QuizResponse_models';
 import Schedule from '../models/Schedules/Schedule_models';
@@ -52,6 +55,9 @@ const models = [
   Usertype,
   Washerinfo,
   Referedfriend,
+  Autopayment,
+  Paymentwasher,
+  Programmednotification,
 ];
 const connection = new Sequelize(databaseConfig);
 

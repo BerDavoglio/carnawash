@@ -16,6 +16,36 @@ class AdminClientController {
     }
   }
 
+  async showClientsNew(req, res) {
+    try {
+      const clients = await User.findAll({
+        where: {
+          role: 'client',
+          created_at: {
+            [Op.between]: [
+              new Date().setDate(date.getDate() - 7),
+              new Date()
+            ]
+          },
+        }
+      });
+
+      return res.json(clients.length);
+    } catch (err) {
+      return res.status(400).json({ errors: `Show Admin Client / ${err.message}` });
+    }
+  }
+
+  async createClient(req, res) {
+    try {
+      const user = await User.create(req.body);
+
+      return res.json(user);
+    } catch (err) {
+      return res.status(400).json({ errors: `Update Admin Client / ${err.message}` });
+    }
+  }
+
   async updateClient(req, res) {
     try {
       const idReq = req.params.id;
@@ -93,7 +123,6 @@ class AdminClientController {
     try {
       const cars = Car.findAll({
         where: {
-          id: req.params.car,
           user_id: req.params.client,
         }
       });

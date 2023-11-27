@@ -1,3 +1,5 @@
+import Carsobjects from '../../models/Schedules/CarsObject_models';
+import Schedule from '../../models/Schedules/Schedule_models';
 import Additionalservice from '../../models/Services/AdditionalService_models';
 
 class AdditionalservicesController {
@@ -24,6 +26,36 @@ class AdditionalservicesController {
   async show(req, res) {
     try {
       const additionals = await Additionalservice.findAll();
+
+      return res.json(additionals);
+    } catch (err) {
+      return res.status(400).json({ errors: `Show Additional Service / ${err.message}` });
+    }
+  }
+
+  async showNumberUsed(req, res) {
+    try {
+      exemple = [];
+      val = 0;
+
+      const sched = await Carsobjects.findAll();
+      const additionals = await Additionalservice.findAll({
+        attributes: [
+          'id',
+        ],
+      });
+
+      additionals.forEach((addit) => {
+        exemple.push([addit, 0]);
+
+        sched.forEach((sched) => {
+          if (sched.additional_list_id.includes(addit)) {
+            exemple[val][1]++;
+          }
+        });
+
+        val++;
+      })
 
       return res.json(additionals);
     } catch (err) {

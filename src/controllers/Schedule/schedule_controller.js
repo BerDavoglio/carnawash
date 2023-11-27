@@ -607,6 +607,26 @@ class ScheduleController {
     }
   }
 
+  async adminCancel(req, res) {
+    try {
+      const schedule = await Schedule.findOne({
+        where: {
+          id: req.params.id,
+        },
+      });
+
+      if (schedule.selected_date - new Date() > 2 * 60 * 60 * 1000) {
+        const newSchedule = await schedule.update({
+          status: 'cancel',
+        });
+        return res.json(newSchedule);
+      }
+      return res.status(400).json({ errors: ["Can't cancel a wash 2 hours or less before"] });
+    } catch (err) {
+      return res.status(400).json({ errors: err.message });
+    }
+  }
+
   async rate(req, res) {
     try {
       const idUser = req.userId;
