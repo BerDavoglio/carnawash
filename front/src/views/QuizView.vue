@@ -1,3 +1,4 @@
+<!-- eslint-disable vuejs-accessibility/click-events-have-key-events -->
 <template>
   <div>
     <div class="header">
@@ -41,7 +42,8 @@
         <div className="w-[237px] h-[44px]
         px-[16px] py-[8px] font-semibold  ml-auto
             rounded-[10px] bg-[#EDBD3A] text-black text-[16px]
-            cursor-pointer">
+            cursor-pointer"
+            @click="createQuiz()">
           <v-icon name="bi-plus-circle"
                   scale="1.25"
                   fill="black" />Add question
@@ -52,7 +54,8 @@
         <div class="subbuttons flex flex-row ml-auto">
           <div className="mr-[28px] font-medium
             rounded-[10px] text-[#EDBD3A] text-[16px]
-            cursor-pointer">
+            cursor-pointer"
+               @click="deleteAllQuiz()">
             <v-icon name="bi-trash"
                     scale="1.25"
                     fill="#EDBD3A" /> Delete all
@@ -72,7 +75,7 @@
 </template>
 
 <script setup>
-import { useLoginStore } from '../store/store';
+import { useLoginStore, useQuizStore } from '../store/store';
 </script>
 
 <script>
@@ -96,12 +99,28 @@ export default {
     changePage(val) {
       this.isQuiz = val;
     },
+    async createQuiz() {
+      const quizStore = useQuizStore();
+      await quizStore.createQuiz({
+        question: '',
+        answer: '',
+        alternatives_list: '',
+      });
+    },
+    async deleteAllQuiz() {
+      const quizStore = useQuizStore();
+      await quizStore.deleteAllQuiz();
+    },
   },
-  beforeMount() {
-    const store = useLoginStore();
-    if (store.getToken === '') {
+  async beforeMount() {
+    const storeLogin = useLoginStore();
+    if (storeLogin.getToken === '') {
       this.$router.push({ name: 'login' });
     }
+
+    const storeQuiz = useQuizStore();
+    await storeQuiz.requestAverage();
+    await storeQuiz.requestStatistics();
   },
 };
 </script>

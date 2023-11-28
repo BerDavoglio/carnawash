@@ -5,7 +5,10 @@
       <div className="flex flex-row justify-between mb-4">
         <div className="text-[16px] font-semibold">Quiz Statistics</div>
         <div className="text-[16px] font-semibold">
-          <span className="text-[#1486CA]">1560</span> answers
+          <span className="text-[#1486CA]">
+            {{
+              this.values.datasets[0].data.reduce((partialSum, a) => partialSum + a, 0)
+            }}</span> answers
         </div>
       </div>
       <div className="flex flex-row justify-between">
@@ -17,23 +20,23 @@
           <div>
             <div className="text-right text-[#1486CA]
                 text-[16px] font-semibold">
-              332
+              {{ this.values.datasets[0].data[0] }}
             </div>
             <div className="text-right text-[#FBC820]
                 text-[16px] font-semibold">
-              233
+              {{ this.values.datasets[0].data[1] }}
             </div>
             <div className="text-right text-[#79CCFF]
                 text-[16px] font-semibold">
-              127
+              {{ this.values.datasets[0].data[2] }}
             </div>
             <div className="text-right text-[#E5333E]
                 text-[16px] font-semibold">
-              232
+              {{ this.values.datasets[0].data[3] }}
             </div>
             <div className="text-right text-[#1C8E33]
                 text-[16px] font-semibold">
-              350
+              {{ this.values.datasets[0].data[4] }}
             </div>
           </div>
           <div>
@@ -64,6 +67,7 @@ import {
   Chart as ChartJS, ArcElement, Tooltip, Legend,
 } from 'chart.js';
 import { Doughnut } from 'vue-chartjs';
+import { useQuizStore } from '../../store/store';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -80,6 +84,7 @@ export default {
         datasets: [
           {
             backgroundColor: ['#1486CA', '#FBC820', '#79CCFF', '#E5333E', '#1C8E33'],
+            // MUDAR VALORES
             data: [332, 233, 127, 232, 350],
           },
         ],
@@ -99,6 +104,12 @@ export default {
         },
       },
     };
+  },
+  async beforeMount() {
+    const storeQuiz = useQuizStore();
+    await storeQuiz.requestStatistics();
+
+    this.values.datasets[0].data = storeQuiz.getStatistics;
   },
 };
 </script>

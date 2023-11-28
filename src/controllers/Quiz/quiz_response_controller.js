@@ -44,22 +44,22 @@ class QuizresponseController {
     }
   }
 
-  async showAverage(req, res) {
+  async showStatistics(req, res) {
     try {
       const averageOne = await Quizresponse.findAll({
-        grade: { [Op.between]: [0, 10] },
+        grade: { $between: [0, 10] },
       });
       const averageTwo = await Quizresponse.findAll({
-        grade: { [Op.between]: [10, 30] },
+        grade: { $between: [10, 30] },
       });
       const averageThree = await Quizresponse.findAll({
-        grade: { [Op.between]: [30, 60] },
+        grade: { $between: [30, 60] },
       });
       const averageFour = await Quizresponse.findAll({
-        grade: { [Op.between]: [60, 80] },
+        grade: { $between: [60, 80] },
       });
       const averageFive = await Quizresponse.findAll({
-        grade: { [Op.between]: [80, 100] },
+        grade: { $between: [80, 100] },
       });
 
       return res.json([
@@ -74,15 +74,19 @@ class QuizresponseController {
     }
   }
 
-  async showStatistics(req, res) {
+  async showAverage(req, res) {
     try {
       const approved = await Quizresponse.findAll({
-        grade: { [Op.between]: [80, 100] },
+        grade: { $between: [80, 100] },
       });
       const reproved = await Quizresponse.findAll({
-        grade: { [Op.between]: [0, 80] },
+        grade: { $between: [0, 80] },
       });
 
+      return res.json([
+        10,
+        20,
+      ]);
       return res.json([
         approved.length,
         reproved.length,

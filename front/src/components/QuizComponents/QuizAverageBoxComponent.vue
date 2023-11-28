@@ -6,11 +6,14 @@
         <div className="text-[16px] font-semibold">
           Average grade 80%
           <v-icon name="la-get-pocket"
-                    scale="1.5"
-                    fill="#EDBD3A" />
+                  scale="1.5"
+                  fill="#EDBD3A" />
         </div>
         <div className="text-[16px] font-semibold">
-          <span className="text-[#1486CA]">1560</span> answers
+          <span className="text-[#1486CA]">
+            {{
+              this.values.datasets[0].data.reduce((partialSum, a) => partialSum + a, 0)
+            }}</span> answers
         </div>
       </div>
       <div className="flex flex-row justify-between">
@@ -18,15 +21,11 @@
           <div>
             <div className="text-right text-[#1486CA]
                 text-[16px] font-semibold mb-4">
-              332
+              {{ this.values.datasets[0].data[0] }}
             </div>
             <div className="text-right text-[#79CCFF]
                 text-[16px] font-semibold mb-4">
-              127
-            </div>
-            <div className="text-right text-[#1C8E33]
-                text-[16px] font-semibold">
-              350
+              {{ this.values.datasets[0].data[1] }}
             </div>
           </div>
           <div>
@@ -35,9 +34,6 @@
             </div>
             <div className="text-left text-[16px] font-normal mb-4 ml-4">
               Reproved
-            </div>
-            <div className="text-left text-[16px] font-normal ml-4">
-              Retake
             </div>
           </div>
         </div>
@@ -55,6 +51,7 @@ import {
   Chart as ChartJS, ArcElement, Tooltip, Legend,
 } from 'chart.js';
 import { Doughnut } from 'vue-chartjs';
+import { useQuizStore } from '../../store/store';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -67,11 +64,12 @@ export default {
     return {
       isQuiz: true,
       values: {
-        labels: ['Approved', 'Reproved', 'Retake'],
+        labels: ['Approved', 'Reproved'],
         datasets: [
           {
-            backgroundColor: ['#1486CA', '#79CCFF', '#1C8E33'],
-            data: [332, 127, 350],
+            backgroundColor: ['#1486CA', '#79CCFF'],
+            // MUDAR VALORES
+            data: [332, 127],
           },
         ],
       },
@@ -90,6 +88,12 @@ export default {
         },
       },
     };
+  },
+  async beforeMount() {
+    const storeQuiz = useQuizStore();
+    await storeQuiz.requestAverage();
+
+    this.values.datasets[0].data = storeQuiz.getAverage;
   },
 };
 </script>

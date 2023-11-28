@@ -1459,7 +1459,7 @@ export const useQuizStore = defineStore('faqQuizStore', {
     async createQuiz(obj) {
       try {
         axios
-          .put(
+          .post(
             'http://127.0.0.1:3096/quiz/',
             obj,
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
@@ -1467,6 +1467,7 @@ export const useQuizStore = defineStore('faqQuizStore', {
           .then(async () => {
             await this.requestQuizes();
           })
+          .then(() => window.location.reload())
           .then(() => {
             toast.success('Quiz criado com sucesso!', {
               autoClose: 5000,
@@ -1474,6 +1475,7 @@ export const useQuizStore = defineStore('faqQuizStore', {
             });
           })
           .catch((err) => {
+            console.log(err);
             toast.error(err.response.data.errors, {
               autoClose: 5000,
               position: toast.POSITION.BOTTOM_RIGHT,
@@ -1494,7 +1496,7 @@ export const useQuizStore = defineStore('faqQuizStore', {
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
           .then(async () => {
-            await this.requestQuizes();
+            await this.requestQuizes().then(() => window.location.reload());
           })
           .then(() => {
             toast.success('Quiz atualizado com sucesso!', {
@@ -1524,6 +1526,7 @@ export const useQuizStore = defineStore('faqQuizStore', {
           .then(async () => {
             await this.requestQuizes();
           })
+          .then(() => window.location.reload())
           .then(() => {
             toast.success('Quiz deletado com sucesso!', {
               autoClose: 5000,
@@ -1551,6 +1554,7 @@ export const useQuizStore = defineStore('faqQuizStore', {
           .then(async () => {
             await this.requestQuizes();
           })
+          .then(() => window.location.reload())
           .then(() => {
             toast.success('Quizes deletados com sucesso!', {
               autoClose: 5000,

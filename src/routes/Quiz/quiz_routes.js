@@ -15,6 +15,6 @@ router.delete('/all', loginRequired, isAdmin, quizController.deleteAll);
 
 router.post('/respon/', loginRequired, quizResponseController.makeResponse);
 router.get('/respon/average/', loginRequired, quizResponseController.showAverage);
-router.post('/respon/statistics/', loginRequired, quizResponseController.showStatistics);
+router.get('/respon/statistics/', loginRequired, quizResponseController.showStatistics);
 
 export default router;
