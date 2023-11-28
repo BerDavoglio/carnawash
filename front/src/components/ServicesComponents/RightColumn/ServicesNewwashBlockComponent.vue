@@ -57,17 +57,21 @@
         px-[16px] py-[8px] font-semibold m-auto
             rounded-[10px] bg-[#EDBD3A] text-black text-[16px]
             cursor-pointer"
-             @click="confirmNewwash = true;">
+             @click="confirmNewwash[0] = true;">
           Add new regular wash
         </div>
       </div>
     </div>
-    <v-dialog v-model="confirmNewwash"
+    <v-dialog v-model="confirmNewwash[0]"
               width="auto">
       <confirm-new-regular-wash-popup @confirmNewRegularwash="confirmNewRegularwash" />
     </v-dialog>
   </div>
 </template>
+
+<script setup>
+import { useServicesStore } from '../../../store/store';
+</script>
 
 <script>
 import ConfirmNewRegularWashPopup from '../../PopupComponents/ServicesPopups/ConfirmNewRegularWashPopup.vue';
@@ -80,12 +84,21 @@ export default {
       size: '',
       price: '',
       additional: '',
-      confirmNewwash: false,
+      confirmNewwash: [false, false],
     };
   },
   methods: {
-    confirmNewRegularwash(val) {
+    async confirmNewRegularwash(val) {
+      // eslint-disable-next-line prefer-destructuring
       this.confirmNewwash = val;
+      if (val[1]) {
+        const store = useServicesStore();
+        await store.createRegular({
+          car_size: this.size,
+          price: this.price,
+          additional_services: this.additional,
+        });
+      }
     },
   },
 };

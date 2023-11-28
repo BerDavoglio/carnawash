@@ -9,7 +9,7 @@
           Confirm new car size?
         </div>
         <div className="cursor-pointer"
-             @click="this.$emit('confirmNewCarsize', false)">
+             @click="this.$emit('confirmNewCarsize', [false, false])">
           <v-icon name="io-close" />
         </div>
       </div>
@@ -17,13 +17,13 @@
         <div className="w-[241px] p-[12.5px] border-[#EDBD3A]
               border-2 text-[#EDBD3A] rounded-[8px] cursor-pointer
               mx-auto font-semibold text-center bg-white"
-             @click="this.$emit('confirmNewCarsize', false)">
+             @click="this.$emit('confirmNewCarsize', [false, false])">
           Cancel
         </div>
         <div className="w-[241px] p-[12.5px] bg-[#EDBD3A]
               text-black rounded-[8px] cursor-pointer
               mx-auto font-semibold text-center"
-             @click="this.$emit('confirmNewCarsize', false)">
+             @click="this.$emit('confirmNewCarsize', [false, true])">
           Confirm
         </div>
       </div>

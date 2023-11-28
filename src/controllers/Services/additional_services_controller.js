@@ -37,7 +37,7 @@ class AdditionalservicesController {
     try {
       const additionals = await Additionalservice.findAll({
         attributes: [
-          'id',
+          'title',
           'times_used',
         ],
       });

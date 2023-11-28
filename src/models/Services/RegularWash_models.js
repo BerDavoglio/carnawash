@@ -5,7 +5,7 @@ export default class Regularwash extends Model {
     super.init({
       car_size: {
         type: Sequelize.STRING,
-        defaultValue: 0,
+        defaultValue: '',
       },
       price: {
         type: Sequelize.FLOAT,

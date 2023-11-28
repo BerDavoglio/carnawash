@@ -95,11 +95,9 @@ export default {
   },
   methods: {
     notificationSend(val) {
-      console.log(val);
       this.send = val;
     },
     notificationResend(val) {
-      console.log(val);
       this.resend = val;
     },
   },

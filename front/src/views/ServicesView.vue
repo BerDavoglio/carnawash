@@ -47,7 +47,7 @@
 </template>
 
 <script setup>
-import { useLoginStore } from '../store/store';
+import { useLoginStore, useServicesStore } from '../store/store';
 </script>
 
 <script>
@@ -74,53 +74,56 @@ export default {
   },
   data() {
     return {
+      listAddLabel: [],
+      listAddValues: [],
+      listSizeLabel: [],
+      listSizeValues: [],
       values_1: {
-        labels: [
-          'Extra Dirty',
-          'Pet Hair',
-          'Seats Wiped',
-          'Heavy Dirty',
-        ],
+        labels: this.listAddLabel,
         datasets: [
           {
-            label: [
-              'Extra Dirty',
-              'Pet Hair',
-              'Seats Wiped',
-              'Heavy Dirty',
-            ],
+            label: this.listAddLabel,
             backgroundColor: ['#1486CA', '#EDBD3A', '#1C8E33', '#E5333E'],
-            data: [80000, 70000, 30000, 50000],
+            data: this.listAddValues,
           },
         ],
       },
       values_2: {
-        labels: [
-          'Small',
-          'SUVs',
-          '4WD SUVs',
-          'Extra Large 4WD SUVs',
-        ],
+        labels: this.listSizeLabel,
         datasets: [
           {
-            label: [
-              'Small',
-              'SUVs',
-              '4WD SUVs',
-              'Extra Large 4WD SUVs',
-            ],
+            label: this.listSizeLabel,
             backgroundColor: ['#1486CA', '#EDBD3A', '#1C8E33', '#E5333E'],
-            data: [80000, 70000, 30000, 50000],
+            data: this.listSizeValues,
           },
         ],
       },
     };
   },
-  beforeMount() {
-    const store = useLoginStore();
-    if (store.getToken === '') {
+  async beforeMount() {
+    const loginStore = useLoginStore();
+    if (loginStore.getToken === '') {
       this.$router.push({ name: 'login' });
     }
+    const servicesStore = useServicesStore();
+    await servicesStore.requestAdditional();
+    await servicesStore.requestMarkup();
+    await servicesStore.requestRegular();
+    await servicesStore.requestSize();
+
+    await servicesStore.requestAdditionalData();
+    const addData = servicesStore.getAdditionalData;
+    addData.forEach((obj) => {
+      this.listAddLabel.push(obj.title);
+      this.listAddValues.push(obj.times_used);
+    });
+
+    await servicesStore.requestSizeData();
+    const sizeData = servicesStore.getSizeData;
+    sizeData.forEach((obj) => {
+      this.listSizeLabel.push(obj.title);
+      this.listSizeValues.push(obj.times_used);
+    });
   },
 };
 </script>

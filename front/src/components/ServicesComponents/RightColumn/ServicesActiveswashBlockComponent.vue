@@ -6,17 +6,6 @@
         Active regular washes
       </div>
       <regular-wash-subbox-component />
-      <regular-wash-subbox-component />
-      <regular-wash-subbox-component />
-      <regular-wash-subbox-component />
-      <div>
-        <div className="w-[272px] h-[44px] mt-6
-        px-[16px] py-[8px] font-semibold m-auto
-            rounded-[10px] bg-[#EDBD3A] text-black text-[16px]
-            cursor-pointer">
-          Confirm Changes
-        </div>
-      </div>
     </div>
   </div>
 </template>

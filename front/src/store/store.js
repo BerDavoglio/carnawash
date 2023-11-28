@@ -5,6 +5,7 @@ import axios from 'axios';
 
 import { toast } from 'vue3-toastify';
 
+// FINISHED
 export const useLoginStore = defineStore('loginStore', {
   state: () => ({
     token: '',
@@ -1121,6 +1122,7 @@ export const useAdminStore = defineStore('adminStore', {
   persist: true,
 });
 
+// "FINISHED" DOWNLOAD
 export const useFAQTermsStore = defineStore('faqTermsStore', {
   state: () => ({
     faq: [],
@@ -1374,6 +1376,7 @@ export const useFAQTermsStore = defineStore('faqTermsStore', {
   persist: true,
 });
 
+// "FINISHED" DOWNLOAD
 export const useQuizStore = defineStore('faqQuizStore', {
   state: () => ({
     quiz: [],
@@ -1604,6 +1607,8 @@ export const useServicesStore = defineStore('servicesStore', {
   state: () => ({
     additional: [],
     size: [],
+    additional_data: [],
+    size_data: [],
     regular: [],
     markup: {},
   }),
@@ -1613,6 +1618,12 @@ export const useServicesStore = defineStore('servicesStore', {
     },
     getSize() {
       return this.size;
+    },
+    getAdditionalData() {
+      return this.additional_data;
+    },
+    getSizeData() {
+      return this.size_data;
     },
     getRegular() {
       return this.regular;
@@ -1708,40 +1719,42 @@ export const useServicesStore = defineStore('servicesStore', {
     },
     async requestAdditionalData() {
       try {
-        let returnData = [];
         axios
           .get(
             'http://127.0.0.1:3096/services/additional/number-used/',
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
-          .then((response) => { returnData = response.data; })
+          .then((response) => {
+            this.additional_data = response.data;
+          })
           .catch((err) => {
             toast.error(err.response.data.errors, {
               autoClose: 5000,
               position: toast.POSITION.BOTTOM_RIGHT,
             });
           });
-        return returnData;
+        return 0;
       } catch (error) {
         return error;
       }
     },
     async requestSizeData() {
       try {
-        let returnData = [];
         axios
           .get(
             'http://127.0.0.1:3096/services/size/number-used/',
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
-          .then((response) => { returnData = response.data; })
+          .then((response) => {
+            this.size_data = response.data;
+          })
           .catch((err) => {
             toast.error(err.response.data.errors, {
               autoClose: 5000,
               position: toast.POSITION.BOTTOM_RIGHT,
             });
           });
-        return returnData;
+        return 0;
       } catch (error) {
         return error;
       }
@@ -1756,7 +1769,7 @@ export const useServicesStore = defineStore('servicesStore', {
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
           .then(async () => {
-            await this.requestAdditional();
+            await this.requestAdditional().then(() => window.location.reload());
           })
           .then(() => {
             toast.success('Additional criado com sucesso!', {
@@ -1784,7 +1797,7 @@ export const useServicesStore = defineStore('servicesStore', {
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
           .then(async () => {
-            await this.requestSize();
+            await this.requestSize().then(() => window.location.reload());
           })
           .then(() => {
             toast.success('Size criado com sucesso!', {
@@ -1812,7 +1825,7 @@ export const useServicesStore = defineStore('servicesStore', {
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
           .then(async () => {
-            await this.requestRegular();
+            await this.requestRegular().then(() => window.location.reload());
           })
           .then(() => {
             toast.success('Regular criado com sucesso!', {
@@ -1956,7 +1969,7 @@ export const useServicesStore = defineStore('servicesStore', {
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
           .then(async () => {
-            await this.requestAdditional();
+            await this.requestAdditional().then(() => window.location.reload());
           })
           .then(() => {
             toast.success('Additional deletado com sucesso!', {
@@ -1983,7 +1996,7 @@ export const useServicesStore = defineStore('servicesStore', {
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
           .then(async () => {
-            await this.requestSize();
+            await this.requestSize().then(() => window.location.reload());
           })
           .then(() => {
             toast.success('Size deletado com sucesso!', {
@@ -2010,7 +2023,7 @@ export const useServicesStore = defineStore('servicesStore', {
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
           .then(async () => {
-            await this.requestRegular();
+            await this.requestRegular().then(() => window.location.reload());
           })
           .then(() => {
             toast.success('Regular deletado com sucesso!', {

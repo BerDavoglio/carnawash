@@ -39,7 +39,7 @@ class CarsizeController {
     try {
       const sizes = await Carsize.findAll({
         attributes: [
-          'id',
+          'title',
           'times_used',
         ],
       });

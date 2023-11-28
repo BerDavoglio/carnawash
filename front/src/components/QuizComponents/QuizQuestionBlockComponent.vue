@@ -90,7 +90,6 @@ export default {
     await store.requestQuizes();
 
     store.getQuiz.forEach((obj) => {
-      console.log(obj.alternatives_list.split(';'));
       this.listQuiz.push({
         id: obj.id,
         question: obj.question,

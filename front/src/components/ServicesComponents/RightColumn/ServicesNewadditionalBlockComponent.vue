@@ -41,17 +41,21 @@
         px-[16px] py-[8px] font-semibold m-auto
             rounded-[10px] bg-[#EDBD3A] text-black text-[16px]
             cursor-pointer"
-             @click="confirmNewAdd = true;">
+             @click="confirmNewAdd[0] = true;">
           Confirm new additional service
         </div>
       </div>
     </div>
-    <v-dialog v-model="confirmNewAdd"
+    <v-dialog v-model="confirmNewAdd[0]"
               width="auto">
       <confirm-new-additional-popup @confirmNewAdditional="confirmNewAdditional" />
     </v-dialog>
   </div>
 </template>
+
+<script setup>
+import { useServicesStore } from '../../../store/store';
+</script>
 
 <script>
 import ConfirmNewAdditionalPopup from '../../PopupComponents/ServicesPopups/ConfirmNewAdditionalPopup.vue';
@@ -63,12 +67,20 @@ export default {
     return {
       type: '',
       price: '',
-      confirmNewAdd: false,
+      confirmNewAdd: [false, false],
     };
   },
   methods: {
-    confirmNewAdditional(val) {
+    async confirmNewAdditional(val) {
+      // eslint-disable-next-line prefer-destructuring
       this.confirmNewAdd = val;
+      if (val[1]) {
+        const store = useServicesStore();
+        await store.createAdditional({
+          title: this.type,
+          price: this.price,
+        });
+      }
     },
   },
 };
