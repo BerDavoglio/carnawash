@@ -71,7 +71,6 @@ class ServicesProvider with ChangeNotifier {
       );
 
       var v = jsonDecode(response.body);
-      ;
 
       if (response.statusCode == 200) {
         for (Map i in v) {

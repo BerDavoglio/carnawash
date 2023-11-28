@@ -25,11 +25,6 @@ class UserProvider with ChangeNotifier {
   Future<void> submitLogin(
       BuildContext context, String email, String password) async {
     try {
-      print(jsonEncode({
-        "email": email,
-        "password": password,
-      }));
-
       final response = await http.post(
         Uri.parse('${Constants.BACKEND_BASE_URL}/jwt/'),
         headers: {
