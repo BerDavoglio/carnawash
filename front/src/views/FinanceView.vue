@@ -39,6 +39,10 @@
   </div>
 </template>
 
+<script setup>
+import { useLoginStore } from '../store/store';
+</script>
+
 <script>
 import FinanceFilterComponent from '../components/FinanceComponents/FinanceFilterComponent.vue';
 import FinanceAutomaticComponent from '../components/FinanceComponents/FinanceAutomaticComponent.vue';
@@ -63,6 +67,12 @@ export default {
     changeToDescript(val) {
       this.isGeral = val;
     },
+  },
+  beforeMount() {
+    const store = useLoginStore();
+    if (store.getToken === '') {
+      this.$router.push({ name: 'login' });
+    }
   },
 };
 </script>

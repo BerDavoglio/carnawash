@@ -102,6 +102,10 @@
   </div>
 </template>
 
+<script setup>
+import { useLoginStore } from '../store/store';
+</script>
+
 <script>
 import BarsGraphComponent from '../components/ReportsComponents/BarsGraphComponent.vue';
 import BarsCompositionGraphComponent from '../components/ReportsComponents/BarsCompositionGraphComponent.vue';
@@ -125,6 +129,12 @@ export default {
       end_date: new Date(),
       isShow: true,
     };
+  },
+  beforeMount() {
+    const store = useLoginStore();
+    if (store.getToken === '') {
+      this.$router.push({ name: 'login' });
+    }
   },
 };
 </script>

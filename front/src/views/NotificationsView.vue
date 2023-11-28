@@ -63,6 +63,10 @@
   </div>
 </template>
 
+<script setup>
+import { useLoginStore } from '../store/store';
+</script>
+
 <script>
 import NotificationsActiveTableComponent from '../components/NotificationsComponents/ActiveComponents/NotificationsActiveTableComponent.vue';
 import NotificationsProgramBoxComponent from '../components/NotificationsComponents/NotificationsProgramBoxComponent.vue';
@@ -93,6 +97,12 @@ export default {
     registerNewNotification(val) {
       this.newNot = val;
     },
+  },
+  beforeMount() {
+    const store = useLoginStore();
+    if (store.getToken === '') {
+      this.$router.push({ name: 'login' });
+    }
   },
 };
 </script>

@@ -46,6 +46,10 @@
   </div>
 </template>
 
+<script setup>
+import { useLoginStore } from '../store/store';
+</script>
+
 <script>
 import GraphServicesGeralComponent from '../components/ServicesComponents/GraphServicesGeralComponent.vue';
 import ServicesMarkupBlockComponent from '../components/ServicesComponents/LeftColumn/ServicesMarkupBlockComponent.vue';
@@ -111,6 +115,12 @@ export default {
         ],
       },
     };
+  },
+  beforeMount() {
+    const store = useLoginStore();
+    if (store.getToken === '') {
+      this.$router.push({ name: 'login' });
+    }
   },
 };
 </script>

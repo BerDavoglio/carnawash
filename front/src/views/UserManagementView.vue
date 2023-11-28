@@ -44,6 +44,10 @@
   </div>
 </template>
 
+<script setup>
+import { useLoginStore } from '../store/store';
+</script>
+
 <script>
 import GeralCustomerSubpageComponent from '../components/UserManagementComponents/Subpages/CustomersComponents/GeralSubpage/GeralCustomerSubpageComponent.vue';
 import GeralWashersSubpageComponent from '../components/UserManagementComponents/Subpages/WashersComponents/GeralSubpage/GeralWashersSubpageComponent.vue';
@@ -65,6 +69,12 @@ export default {
     changePage(val) {
       this.isUser = val;
     },
+  },
+  beforeMount() {
+    const store = useLoginStore();
+    if (store.getToken === '') {
+      this.$router.push({ name: 'login' });
+    }
   },
 };
 </script>

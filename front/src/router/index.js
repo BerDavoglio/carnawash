@@ -81,7 +81,7 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  document.title = `CarWash | ${to.name.charAt(0).toUpperCase() + to.name.slice(1)}`;
+  document.title = `CarnaWash | ${to.name.charAt(0).toUpperCase() + to.name.slice(1)}`;
   next();
 });
 

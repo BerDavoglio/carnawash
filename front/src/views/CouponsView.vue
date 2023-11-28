@@ -40,6 +40,10 @@
   </div>
 </template>
 
+<script setup>
+import { useLoginStore } from '../store/store';
+</script>
+
 <script>
 import CouponsSubpageComponent from '../components/CouponsComponents/CouponsSubpageComponent.vue';
 import ReferentialSubpageComponent from '../components/CouponsComponents/ReferentialSubpageComponent.vue';
@@ -59,6 +63,12 @@ export default {
     changePage(val) {
       this.isCoupons = val;
     },
+  },
+  beforeMount() {
+    const store = useLoginStore();
+    if (store.getToken === '') {
+      this.$router.push({ name: 'login' });
+    }
   },
 };
 </script>

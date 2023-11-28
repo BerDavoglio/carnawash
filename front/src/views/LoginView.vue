@@ -31,7 +31,7 @@
         </div>
         <div className="w-full p-[12.5px] bg-[#EDBD3A]
         text-white rounded-[8px] cursor-pointer"
-             @click="this.$router.push({ name: 'home' })">
+             @click="this.login()">
           Login
         </div>
       </div>
@@ -88,9 +88,9 @@
   </div>
 </template>
 
-<!-- <script setup>
+<script setup>
 import { useLoginStore } from '../store/store';
-</script> -->
+</script>
 
 <script>
 export default {
@@ -107,14 +107,14 @@ export default {
   },
   methods: {
     async login() {
-      // const store = useLoginStore();
-      // await store.requestLogin(
-      //   this.email,
-      //   this.password,
-      //   (destiny) => {
-      //     this.goPage(destiny);
-      //   },
-      // );
+      const store = useLoginStore();
+      await store.login(
+        this.email,
+        this.password,
+        (destiny) => {
+          this.goPage(destiny);
+        },
+      );
     },
     async signin() {
       // const store = useLoginStore();

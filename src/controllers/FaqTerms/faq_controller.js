@@ -73,7 +73,10 @@ class FaqController {
 
   async deleteAll(req, res) {
     try {
-      await Faq.destroyAll();
+      await Faq.destroy({
+        where: {},
+        truncate: true
+      });
 
       return res.json({ message: 'FAQs deleted with success' });
     } catch (err) {

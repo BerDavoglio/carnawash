@@ -54,6 +54,10 @@
   </div>
 </template>
 
+<script setup>
+import { useLoginStore } from '../store/store';
+</script>
+
 <script>
 import BoxInfoComponent from '../components/HomeComponents/BoxInfoComponent.vue';
 import LastBoxInfoComponent from '../components/HomeComponents/LastBoxInfoComponent.vue';
@@ -74,36 +78,14 @@ export default {
   },
   data() {
     return {
-      isCell: false,
-      windowWidth: window.innerWidth,
       search: '',
     };
   },
-  methods: {
-    onResize() {
-      this.windowWidth = window.innerWidth;
-    },
-    verifyResize(i) {
-      if (i < 768) {
-        return true;
-      } return false;
-    },
-  },
-  watch: {
-    windowWidth(newWidth) {
-      this.isCell = this.verifyResize(newWidth);
-    },
-  },
   beforeMount() {
-    this.isCell = this.verifyResize(window.innerWidth);
-  },
-  mounted() {
-    this.$nextTick(() => {
-      window.addEventListener('resize', this.onResize);
-    });
-  },
-  beforeUnmount() {
-    window.removeEventListener('resize', this.onResize);
+    const store = useLoginStore();
+    if (store.getToken === '') {
+      this.$router.push({ name: 'login' });
+    }
   },
 };
 </script>

@@ -24,7 +24,7 @@
         <div className="h-[0.5px] w-[90%] mx-auto bg-[#C9C9C9]" />
         <!-- eslint-disable-next-line vuejs-accessibility/click-events-have-key-events -->
         <div v-show="!isClosed"
-             @click="goPage('login')"
+             @click="logout()"
              className="text-[16px] ml-[40px] my-[28px]
              cursor-pointer">
           <v-icon name="md-logout"
@@ -36,13 +36,16 @@
     </sidebar-menu>
     <router-view :className="['max-w-[1920px] '
       + (currentRouteName != 'login'
-      ? (!isClosed ? 'ml-[300px] mr-[50px] my-20 ' : 'ml-[100px] mr-[50px] my-20 ') : ''),
+        ? (!isClosed ? 'ml-[300px] mr-[50px] my-20 ' : 'ml-[100px] mr-[50px] my-20 ') : ''),
     ]" />
   </div>
 </template>
 
-<script>
+<script setup>
+import { useLoginStore } from './store/store';
+</script>
 
+<script>
 export default {
   name: 'App',
   components: {},
@@ -119,6 +122,10 @@ export default {
     },
     goPage(route) {
       this.$router.push({ name: route });
+    },
+    async logout() {
+      const store = useLoginStore();
+      await store.logout();
     },
   },
   computed: {

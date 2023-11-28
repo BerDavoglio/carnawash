@@ -71,6 +71,10 @@
   </div>
 </template>
 
+<script setup>
+import { useLoginStore } from '../store/store';
+</script>
+
 <script>
 import QuizStatisticsBoxComponent from '../components/QuizComponents/QuizStatisticsBoxComponent.vue';
 import QuizAverageBoxComponent from '../components/QuizComponents/QuizAverageBoxComponent.vue';
@@ -92,6 +96,12 @@ export default {
     changePage(val) {
       this.isQuiz = val;
     },
+  },
+  beforeMount() {
+    const store = useLoginStore();
+    if (store.getToken === '') {
+      this.$router.push({ name: 'login' });
+    }
   },
 };
 </script>

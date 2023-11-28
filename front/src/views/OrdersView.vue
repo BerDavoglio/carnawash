@@ -53,6 +53,10 @@
   </div>
 </template>
 
+<script setup>
+import { useLoginStore } from '../store/store';
+</script>
+
 <script>
 import GeralOrdersSubpageComponent from '../components/OrdersComponents/GeralOrdersSubpageComponent.vue';
 
@@ -68,6 +72,12 @@ export default {
     changePage(val) {
       this.isGeral = val;
     },
+  },
+  beforeMount() {
+    const store = useLoginStore();
+    if (store.getToken === '') {
+      this.$router.push({ name: 'login' });
+    }
   },
 };
 </script>

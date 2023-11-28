@@ -77,7 +77,10 @@ class QuizController {
 
   async deleteAll(req, res) {
     try {
-      await Quiz.destroyAll();
+      await Quiz.destroy({
+        where: {},
+        truncate: true
+      });
 
       return res.json({ message: 'Quiz deleted with success' });
     } catch (err) {

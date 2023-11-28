@@ -19,17 +19,22 @@ export const useLoginStore = defineStore('loginStore', {
     },
   },
   actions: {
-    async login(email, password) {
+    async login(email, password, func) {
       try {
-        axios
+        console.log('LOGIN');
+        await axios
           .post('http://127.0.0.1:3096/jwt/', {
             email,
             password,
           })
           .then((response) => {
             this.token = response.data.token;
-          }).then(() => {
-            this.requestPerfil();
+          })
+          .then(() => {
+            func('home');
+          })
+          .then(async () => {
+            await this.requestPerfil();
           })
           .catch((err) => {
             toast.error(err.response.data.errors, {
@@ -1184,6 +1189,7 @@ export const useFAQTermsStore = defineStore('faqTermsStore', {
           .then(async () => {
             await this.requestFAQs();
           })
+          .then(() => window.location.reload())
           .then(() => {
             toast.success('FAQ criado com sucesso!', {
               autoClose: 5000,
@@ -1213,6 +1219,7 @@ export const useFAQTermsStore = defineStore('faqTermsStore', {
           .then(async () => {
             await this.requestFAQs();
           })
+          .then(() => window.location.reload())
           .then(() => {
             toast.success('FAQ atualizado com sucesso!', {
               autoClose: 5000,
@@ -1241,6 +1248,7 @@ export const useFAQTermsStore = defineStore('faqTermsStore', {
           .then(async () => {
             await this.requestTerms();
           })
+          .then(() => window.location.reload())
           .then(() => {
             toast.success('Terms atualizado com sucesso!', {
               autoClose: 5000,
@@ -1269,6 +1277,7 @@ export const useFAQTermsStore = defineStore('faqTermsStore', {
           .then(async () => {
             await this.requestFAQs();
           })
+          .then(() => window.location.reload())
           .then(() => {
             toast.success('FAQ deletado com sucesso!', {
               autoClose: 5000,
@@ -1296,6 +1305,7 @@ export const useFAQTermsStore = defineStore('faqTermsStore', {
           .then(async () => {
             await this.requestFAQs();
           })
+          .then(() => window.location.reload())
           .then(() => {
             toast.success('FAQs deletados com sucesso!', {
               autoClose: 5000,
