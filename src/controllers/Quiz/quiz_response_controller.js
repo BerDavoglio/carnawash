@@ -84,10 +84,6 @@ class QuizresponseController {
       });
 
       return res.json([
-        10,
-        20,
-      ]);
-      return res.json([
         approved.length,
         reproved.length,
       ]);
