@@ -1,3 +1,4 @@
+<!-- eslint-disable vuejs-accessibility/click-events-have-key-events -->
 <template>
   <div class="user-data">
     <div class="header"
@@ -43,12 +44,17 @@
       </div>
       <div className="w-[241px] p-[12.5px] bg-[#EDBD3A]
         text-black rounded-[8px] cursor-pointer
-        m-auto font-semibold">
+        m-auto font-semibold"
+           @click="this.update()">
         Save Changes
       </div>
     </div>
   </div>
 </template>
+
+<script setup>
+import { useLoginStore } from '../../store/store';
+</script>
 
 <script>
 export default {
@@ -59,6 +65,22 @@ export default {
       phone: '',
       email: '',
     };
+  },
+  methods: {
+    async update() {
+      const store = useLoginStore();
+      await store.updatePerfil({
+        name: this.name,
+        email: this.email,
+        phone: this.phone,
+      });
+    },
+  },
+  beforeMount() {
+    const store = useLoginStore();
+    this.name = store.getPerfil.name;
+    this.phone = store.getPerfil.phone;
+    this.email = store.getPerfil.email;
   },
 };
 </script>

@@ -66,6 +66,10 @@
   </div>
 </template>
 
+<script setup>
+import { useLoginStore } from '../../store/store';
+</script>
+
 <script>
 export default {
   name: 'PasswordDataComponent',
@@ -83,6 +87,14 @@ export default {
     },
     changeConfirmPass() {
       this.isHiddenTwo = !this.isHiddenTwo;
+    },
+    async update() {
+      const store = useLoginStore();
+      if (this.password === this.confirmPass) {
+        await store.updatePerfil({
+          password: this.password,
+        });
+      }
     },
   },
 };
