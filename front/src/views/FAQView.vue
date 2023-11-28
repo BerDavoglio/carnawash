@@ -1,3 +1,4 @@
+<!-- eslint-disable vuejs-accessibility/click-events-have-key-events -->
 <template>
   <div className="home">
     <div class="header">
@@ -40,7 +41,8 @@
                v-if="this.isFaq">
             <div className="px-[16px] py-[8px] font-semibold
             rounded-[10px] bg-[#EDBD3A] text-black text-[16px]
-            cursor-pointer">
+            cursor-pointer"
+                 @click="createFaq()">
               <v-icon name="io-add-circle-outline"
                       scale="1.25" /> Add Question
             </div>
@@ -49,7 +51,8 @@
                v-if="this.isFaq">
             <div className="mt-[28px] mr-[28px] font-medium
             rounded-[10px] text-[#EDBD3A] text-[16px]
-            cursor-pointer">
+            cursor-pointer"
+            @click="deleteAllFaq()">
               <v-icon name="bi-trash"
                       scale="1.25"
                       fill="#EDBD3A" /> Delete all
@@ -80,7 +83,8 @@
             </div>
             <div className="mt-[28px] font-medium
             rounded-[10px] text-[#EDBD3A] text-[16px]
-            cursor-pointer">
+            cursor-pointer"
+            @click="editTerms()">
               <v-icon name="md-edit-outlined"
                       scale="1.25"
                       fill="#EDBD3A" /> Edit
@@ -96,6 +100,10 @@
   </div>
 </template>
 
+<script setup>
+import { useLoginStore, useFAQTermsStore } from '../store/store';
+</script>
+
 <script>
 import FAQBlockComponent from '../components/FAQComponents/FAQBlockComponent.vue';
 import TermsBlockComponent from '../components/FAQComponents/TermsBlockComponent.vue';
@@ -105,39 +113,37 @@ export default {
   components: { FAQBlockComponent, TermsBlockComponent },
   data() {
     return {
-      isCell: false,
-      windowWidth: window.innerWidth,
       isFaq: true,
     };
   },
   methods: {
-    onResize() {
-      this.windowWidth = window.innerWidth;
-    },
-    verifyResize(i) {
-      if (i < 768) {
-        return true;
-      } return false;
-    },
     changePage(val) {
       this.isFaq = val;
     },
-  },
-  watch: {
-    windowWidth(newWidth) {
-      this.isCell = this.verifyResize(newWidth);
+    async createFaq() {
+      const faqStore = useFAQTermsStore();
+      await faqStore.createFAQ({
+        question: '',
+        answer: '',
+      });
+    },
+    async deleteAllFaq() {
+      const faqStore = useFAQTermsStore();
+      await faqStore.deleteAllFAQ();
+    },
+    async editTerms() {
+      const faqStore = useFAQTermsStore();
+      await faqStore.editTerms(faqStore.getTerms().id, {
+        // MUDAR TERMS
+        question: '',
+      });
     },
   },
   beforeMount() {
-    this.isCell = this.verifyResize(window.innerWidth);
-  },
-  mounted() {
-    this.$nextTick(() => {
-      window.addEventListener('resize', this.onResize);
-    });
-  },
-  beforeUnmount() {
-    window.removeEventListener('resize', this.onResize);
+    const store = useLoginStore();
+    if (store.getToken === '') {
+      this.$router.push({ name: 'login' });
+    }
   },
 };
 </script>

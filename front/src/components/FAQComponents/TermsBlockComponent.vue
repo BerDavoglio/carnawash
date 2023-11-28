@@ -14,8 +14,33 @@
   </div>
 </template>
 
+<script setup>
+import { useFAQTermsStore } from '../../store/store';
+</script>
+
 <script>
 export default {
   name: 'FAQBlockComponent',
+  data() {
+    return {
+      question: '',
+    };
+  },
+  methods: {
+    async update(id, obj) {
+      const store = useFAQTermsStore();
+      await store.editFAQ(id, obj);
+    },
+    async delete(id) {
+      const store = useFAQTermsStore();
+      await store.deleteOneFAQ(id);
+    },
+  },
+  async beforeMount() {
+    const store = useFAQTermsStore();
+    await store.requestTerms();
+
+    this.question = store.getTerms.question;
+  },
 };
 </script>
