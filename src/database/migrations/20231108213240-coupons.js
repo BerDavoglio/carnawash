@@ -28,6 +28,14 @@ module.exports = {
         type: Sequelize.BOOLEAN,
         allowNull: false,
       },
+      uses_allowed: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+      },
+      is_unlimited: {
+        type: Sequelize.BOOLEAN,
+        allowNull: true,
+      },
       created_at: {
         type: Sequelize.DATE,
         allowNull: false,

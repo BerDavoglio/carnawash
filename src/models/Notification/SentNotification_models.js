@@ -7,9 +7,9 @@ export default class Sentnotification extends Model {
         type: Sequelize.INTEGER,
         defaultValue: 0,
       },
-      user_type_id: {
-        type: Sequelize.INTEGER,
-        defaultValue: 0,
+      user_type: {
+        type: Sequelize.STRING,
+        defaultValue: '',
       },
       user_id: {
         type: Sequelize.INTEGER,

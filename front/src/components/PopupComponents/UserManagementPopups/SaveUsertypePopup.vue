@@ -10,7 +10,7 @@
         </div>
         <div className="cursor-pointer"
              @click="this.$emit('saveUsertype', false)">
-          <v-icon name="io-close" />
+          <v-icon name="io-close" scale="1.25"/>
         </div>
       </div>
       <div className="flex flex-row justify-between">

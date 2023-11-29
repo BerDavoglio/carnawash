@@ -23,6 +23,14 @@ export default class Coupon extends Model {
         type: Sequelize.BOOLEAN,
         defaultValue: false,
       },
+      uses_allowed: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0,
+      },
+      is_unlimited: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
+      },
     }, {
       sequelize,
     });

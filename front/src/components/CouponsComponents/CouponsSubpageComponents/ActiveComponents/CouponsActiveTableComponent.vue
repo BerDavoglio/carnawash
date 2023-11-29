@@ -1,3 +1,4 @@
+<!-- eslint-disable vuejs-accessibility/click-events-have-key-events -->
 <template>
   <div>
     <div className="w-[1063px] h-[420px]
@@ -16,14 +17,16 @@
           <div className="w-[257px] h-[44px] mr-4
         px-[16px] py-[8px] font-semibold m-auto
             rounded-[10px] bg-[#EDBD3A] text-black text-[16px]
-            cursor-pointer">
+            cursor-pointer"
+               @click="newCoup = true;">
             <v-icon name="bi-plus-circle"
                     scale="1.25" />New coupon
           </div>
           <div className="w-[257px] h-[44px]
         px-[16px] py-[8px] font-semibold m-auto
             rounded-[10px] bg-[#EDBD3A] text-black text-[16px]
-            cursor-pointer">
+            cursor-pointer"
+               @click="sendNoti = true;">
             <v-icon name="bi-plus-circle"
                     scale="1.25" />New notification
           </div>
@@ -46,36 +49,81 @@
           </tr>
         </thead>
         <tbody className="font-light">
-          <coupons-active-table-item-component :obj="this.objeto" />
-          <coupons-active-table-item-component :obj="this.objeto" />
-          <coupons-active-table-item-component :obj="this.objeto" />
-          <coupons-active-table-item-component :obj="this.objeto" />
-          <coupons-active-table-item-component :obj="this.objeto" />
-          <coupons-active-table-item-component :obj="this.objeto" />
-          <coupons-active-table-item-component :obj="this.objeto" />
-          <coupons-active-table-item-component :obj="this.objeto" />
+          <coupons-active-table-item-component v-for="i in listActive"
+                                               v-bind:key="i"
+                                               :obj="i"
+                                               @editPopCoupon="editPopCoupon" />
         </tbody>
       </table>
     </div>
+    <v-dialog v-model="sendNoti"
+              width="auto">
+      <register-new-notification-popup @newNotification="newNotification" />
+    </v-dialog>
+    <v-dialog v-model="newCoup"
+              width="auto">
+      <register-new-coupon-popup :pre_data="editCoup"
+                                 @newCoupon="newCoupon" />
+    </v-dialog>
   </div>
 </template>
+
+<script setup>
+import { useCouponsStore, useClientStore } from '../../../../store/store';
+</script>
 
 <script>
 import CouponsActiveTableItemComponent from './CouponsActiveTableItemComponent.vue';
 
+import RegisterNewNotificationPopup from '../../../PopupComponents/CouponsPopups/RegisterNewNotificationPopup.vue';
+import RegisterNewCouponPopup from '../../../PopupComponents/CouponsPopups/RegisterNewCouponPopup.vue';
+
 export default {
   name: 'NotificationsActiveTableComponent',
-  components: { CouponsActiveTableItemComponent },
+  components: {
+    CouponsActiveTableItemComponent,
+    RegisterNewNotificationPopup,
+    RegisterNewCouponPopup,
+  },
   data() {
     return {
-      objeto: {
-        id: 1,
-        name: 'Home Coming',
-        code: 'CLIENT20',
-        discount: 20,
-        times_used: 350,
-      },
+      listActive: [],
+      sendNoti: false,
+      newCoup: false,
+      editCoup: null,
     };
+  },
+  methods: {
+    newNotification(val) {
+      this.sendNoti = val;
+    },
+    newCoupon(val) {
+      this.newCoup = val;
+      this.editCoup = null;
+    },
+    editPopCoupon(val) {
+      console.log('ALGO');
+      this.newCoup = true;
+      this.editCoup = val;
+    },
+    async editCoupon(id, obj) {
+      const couponStore = useCouponsStore();
+      await couponStore.editCoupon(id, obj);
+    },
+    async deleteCoupon(id) {
+      const couponStore = useCouponsStore();
+      await couponStore.deleteCoupon(id);
+    },
+  },
+  async beforeMount() {
+    const couponStore = useCouponsStore();
+    await couponStore.requestCoupons();
+
+    const clientStore = useClientStore();
+    await clientStore.requestClients();
+
+    // eslint-disable-next-line prefer-destructuring
+    this.listActive = couponStore.getCoupons;
   },
 };
 </script>

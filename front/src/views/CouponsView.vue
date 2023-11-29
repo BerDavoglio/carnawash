@@ -41,7 +41,7 @@
 </template>
 
 <script setup>
-import { useLoginStore } from '../store/store';
+import { useLoginStore, useCouponsStore } from '../store/store';
 </script>
 
 <script>
@@ -64,11 +64,16 @@ export default {
       this.isCoupons = val;
     },
   },
-  beforeMount() {
-    const store = useLoginStore();
-    if (store.getToken === '') {
+  async beforeMount() {
+    const loginStore = useLoginStore();
+    if (loginStore.getToken === '') {
       this.$router.push({ name: 'login' });
     }
+
+    const couponStore = useCouponsStore();
+    await couponStore.requestCoupons();
+    await couponStore.requestCouponBanner();
+    await couponStore.requestCouponsHistory();
   },
 };
 </script>

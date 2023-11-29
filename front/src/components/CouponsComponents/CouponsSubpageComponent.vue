@@ -1,3 +1,4 @@
+<!-- eslint-disable vuejs-accessibility/click-events-have-key-events -->
 <template>
   <div>
     <div className="flex flex-row justify-between">
@@ -12,7 +13,7 @@
             <div className="ml-auto">
               <div className="w-[368px] h-fit rounded-lg
               bg-[#F8F8F8] border-1 border-solid border-[#EBF0ED]">
-                <input v-model="code"
+                <input v-model="this.coupon_banner.code"
                        className="h-[40px] w-[88%] rounded-lg  px-4 py-6
                       bg-[#F8F8F8] border-1 border-solid border-[#EBF0ED]">
                 <v-icon name="md-edit-outlined"
@@ -26,7 +27,7 @@
             <div className="ml-auto">
               <div className="w-[368px] h-fit rounded-lg
               bg-[#F8F8F8] border-1 border-solid border-[#EBF0ED]">
-                <input v-model="porcentage"
+                <input v-model="this.coupon_banner.discount"
                        className="h-[40px] w-[88%] rounded-lg  px-4 py-6
                       bg-[#F8F8F8] border-1 border-solid border-[#EBF0ED]">
                 <v-icon name="md-edit-outlined"
@@ -44,7 +45,7 @@
                 <div className="my-auto ml-[16px] text-[14px] font-light text-[#3F3F44]">
                   Coupon active
                 </div>
-                <VueToggles v-model="enable"
+                <VueToggles v-model="this.coupon_banner.is_disabled"
                             :height="28"
                             :width="54"
                             checkedBg="#1C8E33"
@@ -59,7 +60,8 @@
         <div className="w-[257px] h-[44px]
         px-[16px] py-[8px] font-semibold mx-auto
             rounded-[10px] bg-[#EDBD3A] text-black text-[16px]
-            cursor-pointer">
+            cursor-pointer"
+             @click="editBanner(coupon_banner.id)">
           Save changes
         </div>
       </div>
@@ -70,8 +72,12 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { VueToggles } from 'vue-toggles';
+import { useCouponsStore } from '../../store/store';
+</script>
+
+<script>
 
 import CouponsActiveTableComponent from './CouponsSubpageComponents/ActiveComponents/CouponsActiveTableComponent.vue';
 import CouponsHistoryTableComponent from './CouponsSubpageComponents/HistoryComponents/CouponsHistoryTableComponent.vue';
@@ -82,6 +88,24 @@ export default {
     VueToggles,
     CouponsActiveTableComponent,
     CouponsHistoryTableComponent,
+  },
+  data() {
+    return {
+      coupon_banner: [],
+    };
+  },
+  methods: {
+    async editBanner(id) {
+      const couponStore = useCouponsStore();
+      await couponStore.editCouponBanner(id, this.coupon_banner);
+    },
+  },
+  async beforeMount() {
+    const couponStore = useCouponsStore();
+    await couponStore.requestCouponBanner();
+
+    // eslint-disable-next-line prefer-destructuring
+    this.coupon_banner = couponStore.getCouponBanner[0];
   },
 };
 </script>

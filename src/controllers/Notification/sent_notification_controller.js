@@ -11,14 +11,14 @@ class SentNotificationController {
       const {
         id,
         notification_id,
-        user_type_id,
+        user_type,
         user_id,
       } = newNotification;
 
       return res.json({
         id,
         notification_id,
-        user_type_id,
+        user_type,
         user_id,
       });
     } catch (err) {
@@ -36,22 +36,10 @@ class SentNotificationController {
       if (!user) {
         return res.status(400).json({ errors: 'User not Found' });
       }
-      let type = 2;
-      switch (user.role) {
-        case 'client':
-          type = 0;
-          break;
-        case 'washer':
-          type = 1;
-          break;
-        case 'admin':
-          type = 2;
-          break;
-      }
 
       const notifications = await Sentnotification.findAll({
         where: {
-          [Op.or]: [{ user_id: id }, { user_type_id: type }]
+          [Op.or]: [{user_type: user.role}, {user_id: id}],
         }
       });
 

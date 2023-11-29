@@ -10,7 +10,7 @@
         </div>
         <div className="cursor-pointer"
              @click="this.$emit('editCostumers', false)">
-          <v-icon name="io-close" />
+          <v-icon name="io-close" scale="1.25"/>
         </div>
       </div>
       <div className="text-left text-[16px] font-normal text-[#3F3F44]">

@@ -345,6 +345,7 @@ export const useClientStore = defineStore('clientStore', {
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
           .then((response) => {
+            console.log(response.data);
             this.clients = response.data;
           })
           .catch((err) => {
@@ -1603,6 +1604,7 @@ export const useQuizStore = defineStore('faqQuizStore', {
   persist: true,
 });
 
+// FINISHED
 export const useServicesStore = defineStore('servicesStore', {
   state: () => ({
     additional: [],
@@ -2364,6 +2366,40 @@ export const useCouponsStore = defineStore('couponsStore', {
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
           .then(async () => {
+            await this.requestCoupons().then(() => window.location.reload());
+          })
+          .then(() => {
+            toast.success('Coupon criada com sucesso!', {
+              autoClose: 5000,
+              position: toast.POSITION.BOTTOM_RIGHT,
+            });
+          })
+          .catch((err) => {
+            toast.error(err.response.data.errors, {
+              autoClose: 5000,
+              position: toast.POSITION.BOTTOM_RIGHT,
+            });
+          });
+        return 0;
+      } catch (error) {
+        return error;
+      }
+    },
+    async createUniqueCoupon(obj, users) {
+      try {
+        axios
+          .post(
+            'http://127.0.0.1:3096/coupons/',
+            obj,
+            { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
+          )
+          .then(async (response) => {
+            await useNotificationStore.createSent({
+              notification_id: response.id,
+              user_type: users,
+            });
+          })
+          .then(async () => {
             await this.requestCoupons();
           })
           .then(() => {
@@ -2393,7 +2429,7 @@ export const useCouponsStore = defineStore('couponsStore', {
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
           .then(async () => {
-            await this.requestCoupons();
+            await this.requestCoupons().then(() => window.location.reload());
           })
           .then(() => {
             toast.success('Coupon atualizado com sucesso!', {
@@ -2449,7 +2485,7 @@ export const useCouponsStore = defineStore('couponsStore', {
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
           .then(async () => {
-            await this.requestCoupons();
+            await this.requestCoupons().then(() => window.location.reload());
           })
           .then(() => {
             toast.success('Coupon deletado com sucesso!', {

@@ -28,19 +28,18 @@
           </tr>
         </thead>
         <tbody className="font-light">
-          <coupons-history-table-item-component :obj="this.objeto" />
-          <coupons-history-table-item-component :obj="this.objeto" />
-          <coupons-history-table-item-component :obj="this.objeto" />
-          <coupons-history-table-item-component :obj="this.objeto" />
-          <coupons-history-table-item-component :obj="this.objeto" />
-          <coupons-history-table-item-component :obj="this.objeto" />
-          <coupons-history-table-item-component :obj="this.objeto" />
-          <coupons-history-table-item-component :obj="this.objeto" />
+          <div v-for="i in listHistory" v-bind:key="i">
+            <coupons-history-table-item-component :obj="i" />
+          </div>
         </tbody>
       </table>
     </div>
   </div>
 </template>
+
+<script setup>
+import { useCouponsStore, useOrdersStore } from '../../../../store/store';
+</script>
 
 <script>
 import CouponsHistoryTableItemComponent from './CouponsHistoryTableItemComponent.vue';
@@ -50,16 +49,32 @@ export default {
   components: { CouponsHistoryTableItemComponent },
   data() {
     return {
-      objeto: {
-        id: 1,
-        coupon: '10OFF',
-        user: 'User A',
-        total: 160,
-        saved: 16,
-        spent: 144,
-        date: '25-08-2023 07:55',
-      },
+      listHistory: [],
     };
+  },
+  async beforeMount() {
+    const couponStore = useCouponsStore();
+    await couponStore.requestCoupons();
+    await couponStore.requestCouponsHistory();
+
+    const orderStore = useOrdersStore();
+    await orderStore.requestWashes();
+
+    // eslint-disable-next-line prefer-destructuring
+    this.listAux = couponStore.getCouponsHistory;
+    this.listAux.forEach((obj) => {
+      const sched = orderStore.getWashesRequests.find((item) => item.id === obj.schedule_id);
+      const coup = couponStore.getCoupons.find((item) => item.id === obj.coupon_id);
+      const aux = {
+        coupon: coup.name,
+        user: sched.user_id,
+        total: obj.total,
+        saved: obj.total * coup.discount,
+        spent: obj.total - (obj.total * coup.discount),
+        date: obj.created_at,
+      };
+      this.listHistory.push(aux);
+    });
   },
 };
 </script>

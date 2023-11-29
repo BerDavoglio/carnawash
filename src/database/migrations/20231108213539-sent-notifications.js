@@ -12,13 +12,13 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
-      user_type_id: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
+      user_type: {
+        type: Sequelize.STRING,
+        allowNull: true,
       },
       user_id: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true,
       },
       created_at: {
         type: Sequelize.DATE,

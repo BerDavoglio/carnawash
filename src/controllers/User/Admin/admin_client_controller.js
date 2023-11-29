@@ -4,13 +4,13 @@ import Car from '../../../models/Car/Car_models';
 class AdminClientController {
   async showClients(req, res) {
     try {
-      const clients = User.findAll({
+      const admins = await User.findAll({
         where: {
-          role: 'client'
-        }
+          role: 'client',
+        },
       });
 
-      return res.json(clients);
+      return res.json(admins);
     } catch (err) {
       return res.status(400).json({ errors: `Show Admin Client / ${err.message}` });
     }

@@ -1,10 +1,10 @@
 import { Router } from 'express';
-import clientUserController from '../../controllers/User/client_user_controller';
 import signRegularwashController from '../../controllers/User/sign_regular_wash_controller';
+import clientUserController from '../../controllers/User/client_user_controller';
 import washerUserController from '../../controllers/User/washer_user_controller';
-import adminUserController from '../../controllers/User/Admin/admin_user_controller';
 import adminClientController from '../../controllers/User/Admin/admin_client_controller';
 import adminWasherController from '../../controllers/User/Admin/admin_washer_controller';
+import adminUserController from '../../controllers/User/Admin/admin_user_controller';
 
 import loginRequired from '../../middlewares/login_required';
 import isAdmin from '../../middlewares/is_admin';
