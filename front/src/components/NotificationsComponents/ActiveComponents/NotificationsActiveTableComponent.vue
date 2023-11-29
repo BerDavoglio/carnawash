@@ -1,3 +1,4 @@
+<!-- eslint-disable max-len -->
 <template>
   <div>
     <div className="w-[1210px] h-[406px] my-6
@@ -43,34 +44,40 @@
           </tr>
         </thead>
         <tbody className="font-light">
-          <notifications-active-table-item-component :obj="this.objeto"
-                                                     @notificationResend="notificationResend"
-                                                     @notificationSend="notificationSend" />
-          <notifications-active-table-item-component :obj="this.objeto"
-                                                     @notificationResend="notificationResend"
-                                                     @notificationSend="notificationSend" />
-          <notifications-active-table-item-component :obj="this.objeto"
-                                                     @notificationResend="notificationResend"
-                                                     @notificationSend="notificationSend" />
-          <notifications-active-table-item-component :obj="this.objeto"
+          <notifications-active-table-item-component v-for="i in listActive"
+                                                     v-bind:key="i"
+                                                     :obj="i"
+                                                     @registerNewNotification="registerNewNotification"
                                                      @notificationResend="notificationResend"
                                                      @notificationSend="notificationSend" />
         </tbody>
       </table>
     </div>
-    <v-dialog v-model="send"
+    <v-dialog v-model="editNot[0]"
               width="auto">
-      <notification-send-popup @notificationSend="notificationSend" />
+      <register-new-notification-popup :pre_data="editNot[1]"
+                                       @registerNewNotification="registerNewNotification" />
     </v-dialog>
-    <v-dialog v-model="resend"
+    <v-dialog v-model="send[0]"
               width="auto">
-      <notification-resend-popup @notificationResend="notificationResend" />
+      <notification-send-popup :pre_data="send[1]"
+                               @notificationSend="notificationSend" />
+    </v-dialog>
+    <v-dialog v-model="resend[0]"
+              width="auto">
+      <notification-resend-popup :pre_data="send[1]"
+                                 @notificationResend="notificationResend" />
     </v-dialog>
   </div>
 </template>
 
+<script setup>
+import { useNotificationStore } from '../../../store/store';
+</script>
+
 <script>
 import NotificationsActiveTableItemComponent from './NotificationsActiveTableItemComponent.vue';
+import RegisterNewNotificationPopup from '../../PopupComponents/NotificationsPopups/RegisterNewNotificationPopup.vue';
 import NotificationSendPopup from '../../PopupComponents/NotificationsPopups/SendNotificationPopup.vue';
 import NotificationResendPopup from '../../PopupComponents/NotificationsPopups/ResendNotificationPopup.vue';
 
@@ -80,17 +87,14 @@ export default {
     NotificationsActiveTableItemComponent,
     NotificationSendPopup,
     NotificationResendPopup,
+    RegisterNewNotificationPopup,
   },
   data() {
     return {
-      objeto: {
-        id: 1,
-        title: 'RESCHEDULE ALL WASHES - RESCHEDULE ALL WASHES - RESCHEDULE ALL WASHES - RESCHEDULE ALL WASHES - RESCHEDULE ALL WASHES - v',
-        destinated: 'Clients',
-        type: 'Congratulations',
-      },
-      send: false,
-      resend: false,
+      listActive: [],
+      send: [false, null],
+      resend: [false, null],
+      editNot: [false, null],
     };
   },
   methods: {
@@ -100,6 +104,16 @@ export default {
     notificationResend(val) {
       this.resend = val;
     },
+    registerNewNotification(val) {
+      this.editNot = val;
+    },
+  },
+  async beforeMount() {
+    const notificationStore = useNotificationStore();
+    await notificationStore.requestNotification();
+
+    // eslint-disable-next-line prefer-destructuring
+    this.listActive = notificationStore.getNotification;
   },
 };
 </script>

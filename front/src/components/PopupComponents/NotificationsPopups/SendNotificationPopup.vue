@@ -9,21 +9,22 @@
           Send notification?
         </div>
         <div className="cursor-pointer"
-             @click="this.$emit('notificationSend', false)">
-          <v-icon name="io-close" scale="1.25"/>
+             @click="this.$emit('notificationSend', [false, null])">
+          <v-icon name="io-close"
+                  scale="1.25" />
         </div>
       </div>
       <div className="flex flex-row justify-between">
         <div className="w-[241px] p-[12.5px] border-[#EDBD3A]
               border-2 text-[#EDBD3A] rounded-[8px] cursor-pointer
               mx-auto font-semibold text-center bg-white"
-             @click="this.$emit('notificationSend', false)">
+             @click="this.$emit('notificationSend', [false, null])">
           Cancel
         </div>
         <div className="w-[241px] p-[12.5px] bg-[#EDBD3A]
               text-black rounded-[8px] cursor-pointer
               mx-auto font-semibold text-center"
-             @click="this.$emit('notificationSend', false)">
+             @click="sendNotification()">
           Send
         </div>
       </div>
@@ -32,11 +33,21 @@
 </template>
 
 <script>
+import { useNotificationStore } from '../../../store/store';
+
 export default {
   name: 'NotificationSendPopup',
+  props: ['pre_data'],
   data() {
     return {};
   },
-  methods: {},
+  methods: {
+    async sendNotification() {
+      const notificationStore = useNotificationStore();
+      await notificationStore.createSent(this.pre_data).then(() => {
+        this.$emit('notificationSend', [false, null]);
+      });
+    },
+  },
 };
 </script>

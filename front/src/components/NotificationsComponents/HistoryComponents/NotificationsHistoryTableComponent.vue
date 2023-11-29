@@ -28,37 +28,77 @@
           </tr>
         </thead>
         <tbody className="font-light">
-          <notifications-history-table-item-component :obj="this.objeto" />
-          <notifications-history-table-item-component :obj="this.objeto" />
-          <notifications-history-table-item-component :obj="this.objeto" />
-          <notifications-history-table-item-component :obj="this.objeto" />
-          <notifications-history-table-item-component :obj="this.objeto" />
-          <notifications-history-table-item-component :obj="this.objeto" />
-          <notifications-history-table-item-component :obj="this.objeto" />
-          <notifications-history-table-item-component :obj="this.objeto" />
+          <notifications-history-table-item-component v-for="i in listHistory"
+                                                      v-bind:key="i"
+                                                      :obj="i"
+                                                      @notificationResend="notificationResend" />
         </tbody>
       </table>
     </div>
+    <v-dialog v-model="resend[0]"
+              width="auto">
+      <notification-resend-popup :pre_data="resend[1]"
+                                 @notificationResend="notificationResend" />
+    </v-dialog>
   </div>
 </template>
 
+<script setup>
+import { useNotificationStore, useClientStore } from '../../../store/store';
+</script>
+
 <script>
 import NotificationsHistoryTableItemComponent from './NotificationsHistoryTableItemComponent.vue';
+import NotificationResendPopup from '../../PopupComponents/NotificationsPopups/ResendNotificationPopup.vue';
 
 export default {
   name: 'NotificationsHistoryTableComponent',
-  components: { NotificationsHistoryTableItemComponent },
+  components: { NotificationsHistoryTableItemComponent, NotificationResendPopup },
   data() {
     return {
-      objeto: {
-        id: 1,
-        title: 'RESCHEDULE ALL WASHES - RESCHEDULE ALL WASHES - RESCHEDULE ALL WASHES - RESCHEDULE ALL WASHES - RESCHEDULE ALL WASHES - v',
-        user_type: 'Clients',
-        name: 'Client A',
-        type: 'Congratulations',
-        date: '25-08-2023 07:55',
-      },
+      listHistory: [],
+      resend: [false, null],
     };
+  },
+  methods: {
+    notificationResend(val) {
+      this.resend = val;
+    },
+    registerNewNotification(val) {
+      this.editNot = val;
+    },
+  },
+  async beforeMount() {
+    const notificationStore = useNotificationStore();
+    const clientStore = useClientStore();
+
+    await notificationStore.requestNotificationHistory();
+    await clientStore.requestClients();
+
+    const listAux = notificationStore.getNotificationHistory;
+    listAux.forEach((item) => {
+      console.log(item);
+      const especificNotification = notificationStore.getNotification.find(
+        (aux) => aux.id === item.notification_id,
+      );
+      console.log(especificNotification);
+
+      const especificUser = clientStore.getClients.find(
+        (aux) => aux.id === item.user_id,
+      );
+      console.log(especificUser);
+
+      this.listHistory.push({
+        id: item.id,
+        notification_id: item.notification_id,
+        title: (especificNotification === undefined ? 'ERROR' : especificNotification.title),
+        user_type: item.user_type,
+        user_id: item.user_id,
+        name: (especificUser === undefined ? '-' : especificUser.name),
+        type: (especificNotification === undefined ? '-' : especificNotification.type),
+        date: item.created_at,
+      });
+    });
   },
 };
 </script>

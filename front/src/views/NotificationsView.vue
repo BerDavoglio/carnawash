@@ -39,7 +39,7 @@
         px-[16px] py-[8px] font-semibold
             rounded-[10px] bg-[#EDBD3A] text-black text-[16px]
             cursor-pointer"
-           @click="newNot = true;">
+           @click="newNot = [true, null];">
         <v-icon name="bi-plus-circle"
                 scale="1.25" /> New notification
       </div>
@@ -52,9 +52,10 @@
     <div>
       <notifications-history-table-component />
     </div>
-    <v-dialog v-model="newNot"
+    <v-dialog v-model="newNot[0]"
               width="auto">
-      <register-new-notification-popup @registerNewNotification="registerNewNotification" />
+      <register-new-notification-popup :pre_data="null"
+                                       @registerNewNotification="registerNewNotification" />
     </v-dialog>
     <v-dialog v-model="sendNotUser"
               width="auto">
@@ -87,7 +88,17 @@ export default {
   data() {
     return {
       sendNotUser: false,
-      newNot: false,
+      newNot: [false, null],
+      new_sent: {
+        name: '',
+        type: false,
+        user: '',
+      },
+      new_notification: {
+        name: '',
+        type: '',
+        user: '',
+      },
     };
   },
   methods: {

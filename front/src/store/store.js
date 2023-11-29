@@ -2108,11 +2108,11 @@ export const useNotificationStore = defineStore('notificationStore', {
         return error;
       }
     },
-    async requestProgrammedNotification(id) {
+    async requestProgrammedNotification() {
       try {
         axios
           .get(
-            `http://127.0.0.1:3096/notification/programmed/${id}`,
+            'http://127.0.0.1:3096/notification/programmed/',
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
           .then((response) => {
@@ -2139,7 +2139,7 @@ export const useNotificationStore = defineStore('notificationStore', {
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
           .then(async () => {
-            await this.requestNotification();
+            await this.requestNotification().then(() => window.location.reload());
           })
           .then(() => {
             toast.success('Notification criada com sucesso!', {
@@ -2167,7 +2167,7 @@ export const useNotificationStore = defineStore('notificationStore', {
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
           .then(async () => {
-            await this.requestNotificationHistory();
+            await this.requestNotificationHistory().then(() => window.location.reload());
           })
           .then(() => {
             toast.success('NotificationSent criada com sucesso!', {
@@ -2196,7 +2196,7 @@ export const useNotificationStore = defineStore('notificationStore', {
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
           .then(async () => {
-            await this.requestNotification();
+            await this.requestNotification().then(() => window.location.reload());
           })
           .then(() => {
             toast.success('Notification atualizado com sucesso!', {
@@ -2224,7 +2224,7 @@ export const useNotificationStore = defineStore('notificationStore', {
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
           .then(async () => {
-            await this.requestProgrammedNotification();
+            await this.requestProgrammedNotification().then(() => window.location.reload());
           })
           .then(() => {
             toast.success('ProgrammedNotification atualizado com sucesso!', {
@@ -2252,7 +2252,7 @@ export const useNotificationStore = defineStore('notificationStore', {
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
           .then(async () => {
-            await this.requestNotification();
+            await this.requestNotification().then(() => window.location.reload());
           })
           .then(() => {
             toast.success('Notification deletada com sucesso!', {
@@ -2275,6 +2275,7 @@ export const useNotificationStore = defineStore('notificationStore', {
   persist: true,
 });
 
+// FINISHED
 export const useCouponsStore = defineStore('couponsStore', {
   state: () => ({
     coupons: [],

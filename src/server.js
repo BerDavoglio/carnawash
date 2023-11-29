@@ -7,6 +7,7 @@ import Markup from './models/Services/Markup_models';
 import Carsize from './models/Services/CarSize_models';
 import Additionalservice from './models/Services/AdditionalService_models';
 import Autopayment from './models/Payment/Autopayment_models';
+import Programmednotification from './models/Notification/Programmednotification_models';
 
 const { execSync } = require('child_process');
 
@@ -126,6 +127,16 @@ app.listen(process.env.APP_PORT, async () => {
     });
   } else {
     console.log('Autopayment has been created');
+  }
+
+  const programmedNot = await Programmednotification.findByPk(1);
+  if (!programmedNot) {
+    await Programmednotification.create({
+      title: '',
+      selected_date: new Date(),
+    });
+  } else {
+    console.log('Programmednotification has been created');
   }
 
   // UMA VEZ NO DIA, VERIFICA OS REGULAR WASHS

@@ -13,7 +13,7 @@ export default class Notification extends Model {
       },
       type: {
         type: Sequelize.INTEGER,
-        defaultValue: '',
+        defaultValue: 0,
       },
     }, {
       sequelize,

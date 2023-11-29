@@ -102,7 +102,6 @@ export default {
       this.editCoup = null;
     },
     editPopCoupon(val) {
-      console.log('ALGO');
       this.newCoup = true;
       this.editCoup = val;
     },

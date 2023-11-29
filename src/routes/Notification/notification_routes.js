@@ -8,6 +8,7 @@ import isAdmin from '../../middlewares/is_admin';
 
 const router = new Router();
 
+router.get('/not-prog/', loginRequired, isAdmin, programmedNotificationController.showProgrammed);
 router.post('/', loginRequired, isAdmin, notificationController.store);
 router.get('/', loginRequired, isAdmin, notificationController.show);
 router.get('/user/', loginRequired, notificationController.showUser);
@@ -18,7 +19,7 @@ router.post('/sent/', loginRequired, isAdmin, sentNotificationController.send);
 router.get('/sent/', loginRequired, sentNotificationController.indexUser);
 router.get('/sent/all/', loginRequired, isAdmin, sentNotificationController.show);
 
-router.get('/programmed/:id', loginRequired, isAdmin, programmedNotificationController.showProgrammed);
+router.get('/programmed/', loginRequired, isAdmin, programmedNotificationController.showProgrammed);
 router.put('/programmed/:id', loginRequired, isAdmin, programmedNotificationController.updateProgrammed);
 
 export default router;

@@ -3,10 +3,7 @@ import Programmednotification from '../../models/Notification/Programmednotifica
 class ProgrammedNotificationController {
   async showProgrammed(req, res) {
     try {
-      const not = await Programmednotification.findByPk(req.params.id);
-      if (!not) {
-        return res.status(400).json({ errors: 'ProgrammedNotification not Found' });
-      }
+      const not = await Programmednotification.findAll();
 
       return res.json(not);
     } catch (err) {
