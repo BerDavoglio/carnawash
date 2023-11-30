@@ -4,6 +4,7 @@ import cors from 'cors';
 
 import './database';
 
+import testRoutes from './routes/User/test_routes';
 import userRoutes from './routes/User/user_routes';
 import jwtRoutes from './routes/User/jwt_routes';
 import carRoutes from './routes/Car/car_routes';
@@ -33,6 +34,7 @@ class App {
   }
 
   routes() {
+    this.app.use('/', testRoutes);
     this.app.use('/users/', userRoutes);
     this.app.use('/jwt/', jwtRoutes);
     this.app.use('/cars/', carRoutes);
