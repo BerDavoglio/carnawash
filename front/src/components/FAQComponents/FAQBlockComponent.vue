@@ -21,7 +21,7 @@
           <div className="ml-[28px] font-medium
             rounded-[10px] text-[#EDBD3A] text-[16px]
             cursor-pointer"
-               @click="this.delete(faq.id)">
+               @click="deleteFaq(faq.id)">
             <v-icon name="bi-trash"
                     scale="1.25"
                     fill="#EDBD3A" /> Delete
@@ -61,7 +61,7 @@ export default {
       const store = useFAQTermsStore();
       await store.editFAQ(id, obj);
     },
-    async delete(id) {
+    async deleteFaq(id) {
       const store = useFAQTermsStore();
       await store.deleteOneFAQ(id);
     },

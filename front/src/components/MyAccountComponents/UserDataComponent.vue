@@ -45,7 +45,7 @@
       <div className="w-[241px] p-[12.5px] bg-[#EDBD3A]
         text-black rounded-[8px] cursor-pointer
         m-auto font-semibold"
-           @click="this.update()">
+           @click="update()">
         Save Changes
       </div>
     </div>

@@ -41,7 +41,7 @@
         px-[16px] py-[8px] font-semibold m-auto
             rounded-[10px] bg-[#EDBD3A] text-black text-[16px]
             cursor-pointer"
-             @click="this.confirmMarkups[0] = true;">
+             @click="confirmMarkups[0] = true;">
           Confirm Markup
         </div>
       </div>
