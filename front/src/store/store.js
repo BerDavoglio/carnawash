@@ -23,7 +23,7 @@ export const useLoginStore = defineStore('loginStore', {
     async login(email, password, func) {
       try {
         await axios
-          .post('http://127.0.0.1:3096/jwt/', {
+          .post('http://191.96.251.106:3096/jwt/', {
             email,
             password,
           })
@@ -51,7 +51,7 @@ export const useLoginStore = defineStore('loginStore', {
       try {
         axios
           .get(
-            'http://127.0.0.1:3096/users',
+            'http://191.96.251.106:3096/users',
             { headers: { Authorization: `Bearer ${this.token}` } },
           )
           .then((response) => {
@@ -67,7 +67,7 @@ export const useLoginStore = defineStore('loginStore', {
       try {
         axios
           .put(
-            'http://127.0.0.1:3096/users/',
+            'http://191.96.251.106:3096/users/',
             obj,
             { headers: { Authorization: `Bearer ${this.token}` } },
           )
@@ -150,7 +150,7 @@ export const useDashboardStore = defineStore('dashboardStore', {
       // try {
       // axios
       //   .get(
-      //     'http://127.0.0.1:3096/',
+      //     'http://191.96.251.106:3096/',
       //     { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
       //   )
       //   .then((response) => {
@@ -171,7 +171,7 @@ export const useDashboardStore = defineStore('dashboardStore', {
       // try {
       // axios
       //   .get(
-      //     'http://127.0.0.1:3096/',
+      //     'http://191.96.251.106:3096/',
       //     { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
       //   )
       //   .then((response) => {
@@ -192,7 +192,7 @@ export const useDashboardStore = defineStore('dashboardStore', {
       // try {
       // axios
       //   .get(
-      //     'http://127.0.0.1:3096/',
+      //     'http://191.96.251.106:3096/',
       //     { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
       //   )
       //   .then((response) => {
@@ -213,7 +213,7 @@ export const useDashboardStore = defineStore('dashboardStore', {
       // try {
       // axios
       //   .get(
-      //     'http://127.0.0.1:3096/',
+      //     'http://191.96.251.106:3096/',
       //     { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
       //   )
       //   .then((response) => {
@@ -234,7 +234,7 @@ export const useDashboardStore = defineStore('dashboardStore', {
       // try {
       // axios
       //   .get(
-      //     'http://127.0.0.1:3096/',
+      //     'http://191.96.251.106:3096/',
       //     { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
       //   )
       //   .then((response) => {
@@ -255,7 +255,7 @@ export const useDashboardStore = defineStore('dashboardStore', {
       // try {
       // axios
       //   .get(
-      //     'http://127.0.0.1:3096/',
+      //     'http://191.96.251.106:3096/',
       //     { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
       //   )
       //   .then((response) => {
@@ -276,7 +276,7 @@ export const useDashboardStore = defineStore('dashboardStore', {
       // try {
       // axios
       //   .get(
-      //     'http://127.0.0.1:3096/',
+      //     'http://191.96.251.106:3096/',
       //     { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
       //   )
       //   .then((response) => {
@@ -297,7 +297,7 @@ export const useDashboardStore = defineStore('dashboardStore', {
       // try {
       // axios
       //   .get(
-      //     'http://127.0.0.1:3096/',
+      //     'http://191.96.251.106:3096/',
       //     { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
       //   )
       //   .then((response) => {
@@ -349,7 +349,7 @@ export const useClientStore = defineStore('clientStore', {
       try {
         axios
           .get(
-            'http://127.0.0.1:3096/users/admin/clients/',
+            'http://191.96.251.106:3096/users/admin/clients/',
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
           .then((response) => {
@@ -371,7 +371,7 @@ export const useClientStore = defineStore('clientStore', {
         let returnData = {};
         axios
           .get(
-            `http://127.0.0.1:3096/users/admin/clients/by-id/${id}`,
+            `http://191.96.251.106:3096/users/admin/clients/by-id/${id}`,
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
           .then((response) => { returnData = response.data; })
@@ -390,7 +390,7 @@ export const useClientStore = defineStore('clientStore', {
       try {
         axios
           .get(
-            `http://127.0.0.1:3096/users/admin/clients/by-id/${id}/car/`,
+            `http://191.96.251.106:3096/users/admin/clients/by-id/${id}/car/`,
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
           .then((response) => { this.clientCar = response.data; })
@@ -409,7 +409,7 @@ export const useClientStore = defineStore('clientStore', {
       try {
         axios
           .get(
-            `http://127.0.0.1:3096/users/admin/clients/by-id/${id}/wash/`,
+            `http://191.96.251.106:3096/users/admin/clients/by-id/${id}/wash/`,
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
           .then((response) => { this.clientWash = response.data; })
@@ -428,7 +428,7 @@ export const useClientStore = defineStore('clientStore', {
       try {
         axios
           .get(
-            'http://127.0.0.1:3096/users/admin/clients/new/',
+            'http://191.96.251.106:3096/users/admin/clients/new/',
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
           .then((response) => {
@@ -450,7 +450,7 @@ export const useClientStore = defineStore('clientStore', {
       try {
         axios
           .post(
-            'http://127.0.0.1:3096/users/admin/clients/',
+            'http://191.96.251.106:3096/users/admin/clients/',
             obj,
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
@@ -478,7 +478,7 @@ export const useClientStore = defineStore('clientStore', {
       try {
         axios
           .post(
-            `http://127.0.0.1:3096/users/admin/clients/by-id/${id}/car/`,
+            `http://191.96.251.106:3096/users/admin/clients/by-id/${id}/car/`,
             obj,
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
@@ -507,7 +507,7 @@ export const useClientStore = defineStore('clientStore', {
       try {
         axios
           .put(
-            `http://127.0.0.1:3096/users/admin/clients/by-id/${id}`,
+            `http://191.96.251.106:3096/users/admin/clients/by-id/${id}`,
             obj,
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
@@ -535,7 +535,7 @@ export const useClientStore = defineStore('clientStore', {
       try {
         axios
           .put(
-            `http://127.0.0.1:3096/users/admin/clients/by-id/${idClient}/car/${idCar}`,
+            `http://191.96.251.106:3096/users/admin/clients/by-id/${idClient}/car/${idCar}`,
             obj,
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
@@ -564,7 +564,7 @@ export const useClientStore = defineStore('clientStore', {
       try {
         axios
           .delete(
-            `http://127.0.0.1:3096/users/admin/clients/by-id/${id}`,
+            `http://191.96.251.106:3096/users/admin/clients/by-id/${id}`,
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
           .then(() => {
@@ -591,7 +591,7 @@ export const useClientStore = defineStore('clientStore', {
       try {
         axios
           .delete(
-            `http://127.0.0.1:3096/users/admin/clients/by-id/${idClient}/car/${idCar}`,
+            `http://191.96.251.106:3096/users/admin/clients/by-id/${idClient}/car/${idCar}`,
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
           .then(() => {
@@ -644,7 +644,7 @@ export const useWashersStore = defineStore('washerStore', {
       try {
         axios
           .get(
-            'http://127.0.0.1:3096/users/admin/washers/',
+            'http://191.96.251.106:3096/users/admin/washers/',
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
           .then((response) => {
@@ -667,7 +667,7 @@ export const useWashersStore = defineStore('washerStore', {
         let returnData = {};
         axios
           .get(
-            `http://127.0.0.1:3096/users/admin/washers/by-id/${id}`,
+            `http://191.96.251.106:3096/users/admin/washers/by-id/${id}`,
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
           .then((response) => { returnData = response.data; })
@@ -686,7 +686,7 @@ export const useWashersStore = defineStore('washerStore', {
       try {
         axios
           .get(
-            'http://127.0.0.1:3096/users/admin/washers/new/',
+            'http://191.96.251.106:3096/users/admin/washers/new/',
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
           .then((response) => {
@@ -707,7 +707,7 @@ export const useWashersStore = defineStore('washerStore', {
       try {
         axios
           .post(
-            `http://127.0.0.1:3096/users/admin/washers/by-id/${id}/bank/`,
+            `http://191.96.251.106:3096/users/admin/washers/by-id/${id}/bank/`,
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
           .then(async () => {
@@ -729,7 +729,7 @@ export const useWashersStore = defineStore('washerStore', {
       try {
         axios
           .post(
-            'http://127.0.0.1:3096/users/admin/washers/',
+            'http://191.96.251.106:3096/users/admin/washers/',
             obj,
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
@@ -758,7 +758,7 @@ export const useWashersStore = defineStore('washerStore', {
       try {
         axios
           .put(
-            `http://127.0.0.1:3096/users/admin/washers/by-id/${id}/bank/`,
+            `http://191.96.251.106:3096/users/admin/washers/by-id/${id}/bank/`,
             obj,
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
@@ -786,7 +786,7 @@ export const useWashersStore = defineStore('washerStore', {
       try {
         axios
           .put(
-            `http://127.0.0.1:3096/users/admin/washers/by-id/${id}`,
+            `http://191.96.251.106:3096/users/admin/washers/by-id/${id}`,
             {
               washer: objWasher,
               info: objInfo,
@@ -817,7 +817,7 @@ export const useWashersStore = defineStore('washerStore', {
       try {
         axios
           .put(
-            `http://127.0.0.1:3096/users/admin/washers/by-id/${id}/approval/${change}`,
+            `http://191.96.251.106:3096/users/admin/washers/by-id/${id}/approval/${change}`,
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
           .then(async () => {
@@ -838,7 +838,7 @@ export const useWashersStore = defineStore('washerStore', {
       try {
         axios
           .put(
-            `http://127.0.0.1:3096/users/admin/washers/by-id/${id}/enable/${change}`,
+            `http://191.96.251.106:3096/users/admin/washers/by-id/${id}/enable/${change}`,
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
           .then(async () => {
@@ -860,7 +860,7 @@ export const useWashersStore = defineStore('washerStore', {
       try {
         axios
           .delete(
-            `http://127.0.0.1:3096/users/admin/washers/by-id/${id}`,
+            `http://191.96.251.106:3096/users/admin/washers/by-id/${id}`,
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
           .then(async () => {
@@ -905,7 +905,7 @@ export const useAdminStore = defineStore('adminStore', {
       try {
         axios
           .get(
-            'http://127.0.0.1:3096/users/admin/admins/',
+            'http://191.96.251.106:3096/users/admin/admins/',
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
           .then((response) => {
@@ -926,7 +926,7 @@ export const useAdminStore = defineStore('adminStore', {
       try {
         axios
           .get(
-            'http://127.0.0.1:3096/users/admin/usertype/',
+            'http://191.96.251.106:3096/users/admin/usertype/',
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
           .then((response) => {
@@ -948,7 +948,7 @@ export const useAdminStore = defineStore('adminStore', {
       try {
         axios
           .post(
-            'http://127.0.0.1:3096/users/admin/admins/',
+            'http://191.96.251.106:3096/users/admin/admins/',
             obj,
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
@@ -976,7 +976,7 @@ export const useAdminStore = defineStore('adminStore', {
       try {
         axios
           .post(
-            'http://127.0.0.1:3096/users/admin/usertype/',
+            'http://191.96.251.106:3096/users/admin/usertype/',
             obj,
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
@@ -1005,7 +1005,7 @@ export const useAdminStore = defineStore('adminStore', {
       try {
         axios
           .put(
-            `http://127.0.0.1:3096/users/admin/admins/role/${id}`,
+            `http://191.96.251.106:3096/users/admin/admins/role/${id}`,
             {
               role: changedRole,
             },
@@ -1035,7 +1035,7 @@ export const useAdminStore = defineStore('adminStore', {
       try {
         axios
           .put(
-            `http://127.0.0.1:3096/users/admin/admins/subrole/${id}`,
+            `http://191.96.251.106:3096/users/admin/admins/subrole/${id}`,
             {
               subrole: changedSub,
             },
@@ -1065,7 +1065,7 @@ export const useAdminStore = defineStore('adminStore', {
       try {
         axios
           .put(
-            `http://127.0.0.1:3096/users/admin/usertype/${id}`,
+            `http://191.96.251.106:3096/users/admin/usertype/${id}`,
             obj,
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
@@ -1094,7 +1094,7 @@ export const useAdminStore = defineStore('adminStore', {
       try {
         axios
           .delete(
-            `http://127.0.0.1:3096/users/admin/admins/${id}`,
+            `http://191.96.251.106:3096/users/admin/admins/${id}`,
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
           .then(() => {
@@ -1121,7 +1121,7 @@ export const useAdminStore = defineStore('adminStore', {
       try {
         axios
           .delete(
-            `http://127.0.0.1:3096/users/admin/usertype/${id}`,
+            `http://191.96.251.106:3096/users/admin/usertype/${id}`,
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
           .then(() => {
@@ -1167,7 +1167,7 @@ export const useFAQTermsStore = defineStore('faqTermsStore', {
       try {
         axios
           .get(
-            'http://127.0.0.1:3096/faq-terms/faq/',
+            'http://191.96.251.106:3096/faq-terms/faq/',
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
           .then((response) => {
@@ -1188,7 +1188,7 @@ export const useFAQTermsStore = defineStore('faqTermsStore', {
       try {
         axios
           .get(
-            'http://127.0.0.1:3096/faq-terms/condition/',
+            'http://191.96.251.106:3096/faq-terms/condition/',
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
           .then((response) => {
@@ -1210,7 +1210,7 @@ export const useFAQTermsStore = defineStore('faqTermsStore', {
       try {
         axios
           .post(
-            'http://127.0.0.1:3096/faq-terms/faq/',
+            'http://191.96.251.106:3096/faq-terms/faq/',
             obj,
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
@@ -1240,7 +1240,7 @@ export const useFAQTermsStore = defineStore('faqTermsStore', {
       try {
         axios
           .put(
-            `http://127.0.0.1:3096/faq-terms/faq/${id}`,
+            `http://191.96.251.106:3096/faq-terms/faq/${id}`,
             obj,
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
@@ -1269,7 +1269,7 @@ export const useFAQTermsStore = defineStore('faqTermsStore', {
       try {
         axios
           .put(
-            `http://127.0.0.1:3096/faq-terms/condition/${id}`,
+            `http://191.96.251.106:3096/faq-terms/condition/${id}`,
             obj,
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
@@ -1299,7 +1299,7 @@ export const useFAQTermsStore = defineStore('faqTermsStore', {
       try {
         axios
           .delete(
-            `http://127.0.0.1:3096/faq-terms/faq/one/${id}`,
+            `http://191.96.251.106:3096/faq-terms/faq/one/${id}`,
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
           .then(async () => {
@@ -1327,7 +1327,7 @@ export const useFAQTermsStore = defineStore('faqTermsStore', {
       try {
         axios
           .delete(
-            'http://127.0.0.1:3096/faq-terms/faq/all',
+            'http://191.96.251.106:3096/faq-terms/faq/all',
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
           .then(async () => {
@@ -1357,7 +1357,7 @@ export const useFAQTermsStore = defineStore('faqTermsStore', {
     //   // try {
     //   // axios
     //   //   .post(
-    //   //     'http://127.0.0.1:3096/',
+    //   //     'http://191.96.251.106:3096/',
     //   //     obj,
     //   //     { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
     //   //   )
@@ -1380,7 +1380,7 @@ export const useFAQTermsStore = defineStore('faqTermsStore', {
     //   // try {
     //   // axios
     //   //   .post(
-    //   //     'http://127.0.0.1:3096/',
+    //   //     'http://191.96.251.106:3096/',
     //   //     obj,
     //   //     { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
     //   //   )
@@ -1425,7 +1425,7 @@ export const useQuizStore = defineStore('faqQuizStore', {
       try {
         axios
           .get(
-            'http://127.0.0.1:3096/quiz/',
+            'http://191.96.251.106:3096/quiz/',
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
           .then((response) => {
@@ -1446,7 +1446,7 @@ export const useQuizStore = defineStore('faqQuizStore', {
       try {
         axios
           .get(
-            'http://127.0.0.1:3096/quiz/respon/average/',
+            'http://191.96.251.106:3096/quiz/respon/average/',
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
           .then((response) => {
@@ -1467,7 +1467,7 @@ export const useQuizStore = defineStore('faqQuizStore', {
       try {
         axios
           .get(
-            'http://127.0.0.1:3096/quiz/respon/statistics/',
+            'http://191.96.251.106:3096/quiz/respon/statistics/',
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
           .then((response) => {
@@ -1489,7 +1489,7 @@ export const useQuizStore = defineStore('faqQuizStore', {
       try {
         axios
           .post(
-            'http://127.0.0.1:3096/quiz/',
+            'http://191.96.251.106:3096/quiz/',
             obj,
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
@@ -1519,7 +1519,7 @@ export const useQuizStore = defineStore('faqQuizStore', {
       try {
         axios
           .put(
-            `http://127.0.0.1:3096/quiz/${id}`,
+            `http://191.96.251.106:3096/quiz/${id}`,
             obj,
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
@@ -1548,7 +1548,7 @@ export const useQuizStore = defineStore('faqQuizStore', {
       try {
         axios
           .delete(
-            `http://127.0.0.1:3096/quiz/one/${id}`,
+            `http://191.96.251.106:3096/quiz/one/${id}`,
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
           .then(async () => {
@@ -1576,7 +1576,7 @@ export const useQuizStore = defineStore('faqQuizStore', {
       try {
         axios
           .delete(
-            'http://127.0.0.1:3096/quiz/all',
+            'http://191.96.251.106:3096/quiz/all',
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
           .then(async () => {
@@ -1606,7 +1606,7 @@ export const useQuizStore = defineStore('faqQuizStore', {
     //   // try {
     //   // axios
     //   //   .post(
-    //   //     'http://127.0.0.1:3096/',
+    //   //     'http://191.96.251.106:3096/',
     //   //     obj,
     //   //     { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
     //   //   )
@@ -1663,7 +1663,7 @@ export const useServicesStore = defineStore('servicesStore', {
       try {
         axios
           .get(
-            'http://127.0.0.1:3096/services/additional',
+            'http://191.96.251.106:3096/services/additional',
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
           .then((response) => {
@@ -1684,7 +1684,7 @@ export const useServicesStore = defineStore('servicesStore', {
       try {
         axios
           .get(
-            'http://127.0.0.1:3096/services/size',
+            'http://191.96.251.106:3096/services/size',
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
           .then((response) => {
@@ -1705,7 +1705,7 @@ export const useServicesStore = defineStore('servicesStore', {
       try {
         axios
           .get(
-            'http://127.0.0.1:3096/services/regular/',
+            'http://191.96.251.106:3096/services/regular/',
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
           .then((response) => {
@@ -1726,7 +1726,7 @@ export const useServicesStore = defineStore('servicesStore', {
       try {
         axios
           .get(
-            'http://127.0.0.1:3096/services/markup/',
+            'http://191.96.251.106:3096/services/markup/',
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
           .then((response) => {
@@ -1747,7 +1747,7 @@ export const useServicesStore = defineStore('servicesStore', {
       try {
         axios
           .get(
-            'http://127.0.0.1:3096/services/additional/number-used/',
+            'http://191.96.251.106:3096/services/additional/number-used/',
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
           .then((response) => {
@@ -1768,7 +1768,7 @@ export const useServicesStore = defineStore('servicesStore', {
       try {
         axios
           .get(
-            'http://127.0.0.1:3096/services/size/number-used/',
+            'http://191.96.251.106:3096/services/size/number-used/',
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
           .then((response) => {
@@ -1790,7 +1790,7 @@ export const useServicesStore = defineStore('servicesStore', {
       try {
         axios
           .post(
-            'http://127.0.0.1:3096/services/additional',
+            'http://191.96.251.106:3096/services/additional',
             obj,
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
@@ -1818,7 +1818,7 @@ export const useServicesStore = defineStore('servicesStore', {
       try {
         axios
           .post(
-            'http://127.0.0.1:3096/services/size',
+            'http://191.96.251.106:3096/services/size',
             obj,
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
@@ -1846,7 +1846,7 @@ export const useServicesStore = defineStore('servicesStore', {
       try {
         axios
           .post(
-            'http://127.0.0.1:3096/services/regular',
+            'http://191.96.251.106:3096/services/regular',
             obj,
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
@@ -1875,7 +1875,7 @@ export const useServicesStore = defineStore('servicesStore', {
       try {
         axios
           .put(
-            `http://127.0.0.1:3096/services/additional/${id}`,
+            `http://191.96.251.106:3096/services/additional/${id}`,
             obj,
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
@@ -1903,7 +1903,7 @@ export const useServicesStore = defineStore('servicesStore', {
       try {
         axios
           .put(
-            `http://127.0.0.1:3096/services/size/${id}`,
+            `http://191.96.251.106:3096/services/size/${id}`,
             obj,
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
@@ -1931,7 +1931,7 @@ export const useServicesStore = defineStore('servicesStore', {
       try {
         axios
           .put(
-            `http://127.0.0.1:3096/services/regular/${id}`,
+            `http://191.96.251.106:3096/services/regular/${id}`,
             obj,
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
@@ -1959,7 +1959,7 @@ export const useServicesStore = defineStore('servicesStore', {
       try {
         axios
           .put(
-            `http://127.0.0.1:3096/services/markup/${id}`,
+            `http://191.96.251.106:3096/services/markup/${id}`,
             {
               washer_porcentage: washer,
               carnawash_porcentage: carnawash,
@@ -1991,7 +1991,7 @@ export const useServicesStore = defineStore('servicesStore', {
       try {
         axios
           .delete(
-            `http://127.0.0.1:3096/services/additional/${id}`,
+            `http://191.96.251.106:3096/services/additional/${id}`,
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
           .then(async () => {
@@ -2018,7 +2018,7 @@ export const useServicesStore = defineStore('servicesStore', {
       try {
         axios
           .delete(
-            `http://127.0.0.1:3096/services/size/${id}`,
+            `http://191.96.251.106:3096/services/size/${id}`,
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
           .then(async () => {
@@ -2045,7 +2045,7 @@ export const useServicesStore = defineStore('servicesStore', {
       try {
         axios
           .delete(
-            `http://127.0.0.1:3096/services/regular/${id}`,
+            `http://191.96.251.106:3096/services/regular/${id}`,
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
           .then(async () => {
@@ -2094,7 +2094,7 @@ export const useNotificationStore = defineStore('notificationStore', {
       try {
         axios
           .get(
-            'http://127.0.0.1:3096/notification/',
+            'http://191.96.251.106:3096/notification/',
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
           .then((response) => {
@@ -2115,7 +2115,7 @@ export const useNotificationStore = defineStore('notificationStore', {
       try {
         axios
           .get(
-            'http://127.0.0.1:3096/notification/sent/all/',
+            'http://191.96.251.106:3096/notification/sent/all/',
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
           .then((response) => {
@@ -2136,7 +2136,7 @@ export const useNotificationStore = defineStore('notificationStore', {
       try {
         axios
           .get(
-            'http://127.0.0.1:3096/notification/programmed/',
+            'http://191.96.251.106:3096/notification/programmed/',
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
           .then((response) => {
@@ -2158,7 +2158,7 @@ export const useNotificationStore = defineStore('notificationStore', {
       try {
         axios
           .post(
-            'http://127.0.0.1:3096/notification/',
+            'http://191.96.251.106:3096/notification/',
             obj,
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
@@ -2186,7 +2186,7 @@ export const useNotificationStore = defineStore('notificationStore', {
       try {
         axios
           .post(
-            'http://127.0.0.1:3096/notification/sent/',
+            'http://191.96.251.106:3096/notification/sent/',
             obj,
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
@@ -2215,7 +2215,7 @@ export const useNotificationStore = defineStore('notificationStore', {
       try {
         axios
           .put(
-            `http://127.0.0.1:3096/notification/${id}`,
+            `http://191.96.251.106:3096/notification/${id}`,
             obj,
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
@@ -2243,7 +2243,7 @@ export const useNotificationStore = defineStore('notificationStore', {
       try {
         axios
           .put(
-            `http://127.0.0.1:3096/notification/programmed/${id}`,
+            `http://191.96.251.106:3096/notification/programmed/${id}`,
             obj,
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
@@ -2272,7 +2272,7 @@ export const useNotificationStore = defineStore('notificationStore', {
       try {
         axios
           .delete(
-            `http://127.0.0.1:3096/notification/${id}`,
+            `http://191.96.251.106:3096/notification/${id}`,
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
           .then(async () => {
@@ -2322,7 +2322,7 @@ export const useCouponsStore = defineStore('couponsStore', {
       try {
         axios
           .get(
-            'http://127.0.0.1:3096/coupons/all/',
+            'http://191.96.251.106:3096/coupons/all/',
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
           .then((response) => {
@@ -2343,7 +2343,7 @@ export const useCouponsStore = defineStore('couponsStore', {
       try {
         axios
           .get(
-            'http://127.0.0.1:3096/coupons/history/',
+            'http://191.96.251.106:3096/coupons/history/',
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
           .then((response) => {
@@ -2364,7 +2364,7 @@ export const useCouponsStore = defineStore('couponsStore', {
       try {
         axios
           .get(
-            'http://127.0.0.1:3096/coupons/banner/',
+            'http://191.96.251.106:3096/coupons/banner/',
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
           .then((response) => {
@@ -2386,7 +2386,7 @@ export const useCouponsStore = defineStore('couponsStore', {
       try {
         axios
           .post(
-            'http://127.0.0.1:3096/coupons/',
+            'http://191.96.251.106:3096/coupons/',
             obj,
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
@@ -2414,7 +2414,7 @@ export const useCouponsStore = defineStore('couponsStore', {
       try {
         axios
           .post(
-            'http://127.0.0.1:3096/coupons/',
+            'http://191.96.251.106:3096/coupons/',
             obj,
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
@@ -2449,7 +2449,7 @@ export const useCouponsStore = defineStore('couponsStore', {
       try {
         axios
           .put(
-            `http://127.0.0.1:3096/coupons/${id}`,
+            `http://191.96.251.106:3096/coupons/${id}`,
             obj,
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
@@ -2477,7 +2477,7 @@ export const useCouponsStore = defineStore('couponsStore', {
       try {
         axios
           .put(
-            `http://127.0.0.1:3096/coupons/banner/${id}`,
+            `http://191.96.251.106:3096/coupons/banner/${id}`,
             obj,
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
@@ -2506,7 +2506,7 @@ export const useCouponsStore = defineStore('couponsStore', {
       try {
         axios
           .delete(
-            `http://127.0.0.1:3096/coupons/${id}`,
+            `http://191.96.251.106:3096/coupons/${id}`,
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
           .then(async () => {
@@ -2547,7 +2547,7 @@ export const useOrdersStore = defineStore('ordersStore', {
       try {
         axios
           .get(
-            'http://127.0.0.1:3096/schedule/all/',
+            'http://191.96.251.106:3096/schedule/all/',
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
           .then((response) => {
@@ -2569,7 +2569,7 @@ export const useOrdersStore = defineStore('ordersStore', {
     //   // try {
     //   // axios
     //   //   .post(
-    //   //     'http://127.0.0.1:3096/',
+    //   //     'http://191.96.251.106:3096/',
     //   //     obj,
     //   //     { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
     //   //   )
@@ -2592,7 +2592,7 @@ export const useOrdersStore = defineStore('ordersStore', {
     //   // try {
     //   // axios
     //   //   .post(
-    //   //     'http://127.0.0.1:3096/',
+    //   //     'http://191.96.251.106:3096/',
     //   //     obj,
     //   //     { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
     //   //   )
@@ -2615,7 +2615,7 @@ export const useOrdersStore = defineStore('ordersStore', {
       try {
         axios
           .put(
-            `http://127.0.0.1:3096/schedule/admin/${id}`,
+            `http://191.96.251.106:3096/schedule/admin/${id}`,
             {
               washer_id: washerId,
             },
@@ -2645,7 +2645,7 @@ export const useOrdersStore = defineStore('ordersStore', {
       try {
         axios
           .put(
-            `http://127.0.0.1:3096/schedule/admin/cancel/${id}`,
+            `http://191.96.251.106:3096/schedule/admin/cancel/${id}`,
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
           .then(async () => {
@@ -2690,7 +2690,7 @@ export const useFinanceStore = defineStore('financeStore', {
       try {
         axios
           .get(
-            'http://127.0.0.1:3096/schedule/all/',
+            'http://191.96.251.106:3096/schedule/all/',
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
           .then((response) => {
@@ -2712,7 +2712,7 @@ export const useFinanceStore = defineStore('financeStore', {
         let returnData = [];
         axios
           .get(
-            'http://127.0.0.1:3096/payment/admin/pay-washer/all',
+            'http://191.96.251.106:3096/payment/admin/pay-washer/all',
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
           .then((response) => { returnData = response.data; })
@@ -2731,7 +2731,7 @@ export const useFinanceStore = defineStore('financeStore', {
       try {
         axios
           .get(
-            `http://127.0.0.1:3096/payment/auto-pay/${id}`,
+            `http://191.96.251.106:3096/payment/auto-pay/${id}`,
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
           .then((response) => {
@@ -2753,7 +2753,7 @@ export const useFinanceStore = defineStore('financeStore', {
     //   // try {
     //   // axios
     //   //   .post(
-    //   //     'http://127.0.0.1:3096/',
+    //   //     'http://191.96.251.106:3096/',
     //   //     obj,
     //   //     { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
     //   //   )
@@ -2776,7 +2776,7 @@ export const useFinanceStore = defineStore('financeStore', {
       try {
         axios
           .post(
-            `http://127.0.0.1:3096/payment/admin/pay-washer/${id}`,
+            `http://191.96.251.106:3096/payment/admin/pay-washer/${id}`,
             obj,
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
@@ -2804,7 +2804,7 @@ export const useFinanceStore = defineStore('financeStore', {
       try {
         axios
           .put(
-            `http://127.0.0.1:3096/payment/admin/auto-pay/${id}`,
+            `http://191.96.251.106:3096/payment/admin/auto-pay/${id}`,
             obj,
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
@@ -2834,7 +2834,7 @@ export const useFinanceStore = defineStore('financeStore', {
     //   // try {
     //   // axios
     //   //   .post(
-    //   //     'http://127.0.0.1:3096/',
+    //   //     'http://191.96.251.106:3096/',
     //   //     obj,
     //   //     { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
     //   //   )
