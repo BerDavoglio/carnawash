@@ -22,7 +22,6 @@ export const useLoginStore = defineStore('loginStore', {
   actions: {
     async login(email, password, func) {
       try {
-        console.log('LOGIN');
         await axios
           .post('http://127.0.0.1:3096/jwt/', {
             email,
@@ -98,7 +97,7 @@ export const useLoginStore = defineStore('loginStore', {
       try {
         this.token = '';
         this.role = '';
-        func();
+        func('login');
         return 0;
       } catch (error) {
         return error;
@@ -319,6 +318,7 @@ export const useDashboardStore = defineStore('dashboardStore', {
   persist: true,
 });
 
+// FINISHED
 export const useClientStore = defineStore('clientStore', {
   state: () => ({
     clients: [],
@@ -353,7 +353,6 @@ export const useClientStore = defineStore('clientStore', {
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
           .then((response) => {
-            console.log(response.data);
             this.clients = response.data;
           })
           .catch((err) => {
@@ -1505,7 +1504,6 @@ export const useQuizStore = defineStore('faqQuizStore', {
             });
           })
           .catch((err) => {
-            console.log(err);
             toast.error(err.response.data.errors, {
               autoClose: 5000,
               position: toast.POSITION.BOTTOM_RIGHT,

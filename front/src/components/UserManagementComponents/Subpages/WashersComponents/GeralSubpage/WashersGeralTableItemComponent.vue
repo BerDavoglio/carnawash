@@ -18,7 +18,7 @@
     </td>
     <td className="text-[#3F3F44] text-[14px] font-light py-[24px] text-center
     cursor-pointer underline underline-offset-1"
-    @click="this.$emit('showW', true);">
+    @click="this.$emit('showW', [true, this.obj.id]);">
       View History
     </td>
     <td className="text-[#3F3F44] text-[14px] font-light py-[24px] text-center">
@@ -48,7 +48,7 @@
     </td>
     <td className="py-[24px] text-center">
       <span className="cursor-pointer"
-            @click="editWs">
+            @click="editWs(this.obj)">
         <v-icon name="md-edit-outlined"
                 scale="1.25" />
       </span>
@@ -74,8 +74,8 @@ export default {
     };
   },
   methods: {
-    editWs() {
-      this.$emit('editWs', true);
+    editWs(obj) {
+      this.$emit('editWs', [true, obj]);
     },
   },
 };

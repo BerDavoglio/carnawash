@@ -125,7 +125,9 @@ export default {
     },
     async logout() {
       const store = useLoginStore();
-      await store.logout();
+      await store.logout((destiny) => {
+        this.goPage(destiny);
+      });
     },
   },
   computed: {

@@ -69,7 +69,6 @@ export default {
     await clientStore.requestClientWash(this.pre_data);
 
     this.listWash = clientStore.getClientWash;
-    console.log(this.listWash);
   },
 };
 </script>

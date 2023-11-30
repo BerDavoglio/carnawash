@@ -1,24 +1,24 @@
 <template>
   <div>
     <div class="geral-sub-page"
-         v-if="!edit">
+         v-if="!edit[0]">
       <div className="mt-8 flex flex-row justify-between">
         <data-block-component :obj="{
           icon: 'pr-users',
           text: 'Total Washers',
-          value: 300,
+          value: all,
         }"
                               :hasFilter="0" />
         <data-block-component :obj="{
           icon: 'pr-user-plus',
           text: 'New Washers',
-          value: 15,
+          value: newWasher,
         }"
                               :hasFilter="1" />
         <data-block-component :obj="{
           icon: 'pr-user-minus',
           text: 'Inactive Washers',
-          value: 8,
+          value: inactive,
         }"
                               :hasFilter="2" />
       </div>
@@ -29,19 +29,23 @@
       </div>
     </div>
     <div class="edit-sub-page"
-         v-if="edit">
+         v-if="edit[0]">
       <edit-washers-subpage-component @showWasher="(val) => this.edit = val" />
     </div>
     <v-dialog v-model="registerWasher"
               width="auto">
       <create-washer-popup @registerWashers="registerWashers" />
     </v-dialog>
-    <v-dialog v-model="editWasher"
+    <v-dialog v-model="editWasher[0]"
               width="auto">
       <edit-washer-popup @editWashers="editWashers" />
     </v-dialog>
   </div>
 </template>
+
+<script setup>
+import { useWashersStore } from '../../../../../store/store';
+</script>
 
 <script>
 import DataBlockComponent from '../../../DataBlockComponent.vue';
@@ -62,9 +66,12 @@ export default {
   },
   data() {
     return {
-      edit: false,
+      edit: [false, null],
       registerWasher: false,
-      editWasher: false,
+      editWasher: [false, null],
+      all: 0,
+      newClients: 0,
+      inactive: 0,
     };
   },
   methods: {
@@ -74,6 +81,15 @@ export default {
     editWashers(val) {
       this.editWasher = val;
     },
+  },
+  async beforeMount() {
+    const washerStore = useWashersStore();
+    await washerStore.requestWashers();
+    await washerStore.requestNewWashers();
+
+    this.all = washerStore.getWashers.length;
+    this.newWasher = washerStore.getNewWashers;
+    this.inactive = washerStore.getInactiveWashers;
   },
 };
 </script>

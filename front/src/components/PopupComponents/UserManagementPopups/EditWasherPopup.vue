@@ -9,7 +9,7 @@
           Edit washer
         </div>
         <div className="cursor-pointer"
-             @click="this.$emit('editWashers', false)">
+             @click="this.$emit('editWashers', [false, null])">
           <v-icon name="io-close" scale="1.25"/>
         </div>
       </div>
@@ -93,7 +93,7 @@
       <div className="w-[241px] p-[12.5px] bg-[#EDBD3A]
             text-black rounded-[8px] cursor-pointer
             mx-auto font-semibold text-center"
-           @click="this.$emit('editWashers', false)">
+           @click="this.$emit('editWashers', [false, null])">
         Save Changes
       </div>
     </div>
