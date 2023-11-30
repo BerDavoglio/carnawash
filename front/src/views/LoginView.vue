@@ -31,7 +31,7 @@
         </div>
         <div className="w-full p-[12.5px] bg-[#EDBD3A]
         text-white rounded-[8px] cursor-pointer"
-             @click="this.login()">
+             @click="login()">
           Login
         </div>
       </div>
