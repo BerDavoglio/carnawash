@@ -19,13 +19,13 @@
                text-[16px] font-normal">
             <!-- eslint-disable-next-line vuejs-accessibility/click-events-have-key-events -->
             <div :className="['mr-[57px] cursor-pointer '
-              + (this.isFaq ? 'font-semibold' : '')]"
+              + (isFaq ? 'font-semibold' : '')]"
                  @click="changePage(true)">
               FAQ
             </div>
             <!-- eslint-disable-next-line vuejs-accessibility/click-events-have-key-events -->
             <div :className="['cursor-pointer '
-              + (!this.isFaq ? 'font-semibold' : '')]"
+              + (!isFaq ? 'font-semibold' : '')]"
                  @click="changePage(false)">
               Terms and Conditions
             </div>
@@ -33,12 +33,12 @@
           <div class="title"
                className="text-left font-semibold
                mt-[42.5px] mb-[21.5px]">
-            {{ this.isFaq ? 'FAQ' : 'Terms and Conditions' }}
+            {{ isFaq ? 'FAQ' : 'Terms and Conditions' }}
           </div>
         </div>
         <div className="ml-auto">
           <div class="button"
-               v-if="this.isFaq">
+               v-if="isFaq">
             <div className="px-[16px] py-[8px] font-semibold
             rounded-[10px] bg-[#EDBD3A] text-black text-[16px]
             cursor-pointer"
@@ -48,7 +48,7 @@
             </div>
           </div>
           <div class="subbuttons flex flex-row"
-               v-if="this.isFaq">
+               v-if="isFaq">
             <div className="mt-[28px] mr-[28px] font-medium
             rounded-[10px] text-[#EDBD3A] text-[16px]
             cursor-pointer"
@@ -66,7 +66,7 @@
             </div>
           </div>
           <div class="subbuttons flex flex-row"
-               v-if="!this.isFaq">
+               v-if="!isFaq">
             <div className="mt-[28px] mr-[28px] font-medium
             rounded-[10px] text-[#EDBD3A] text-[16px]
             cursor-pointer">
@@ -94,8 +94,8 @@
       </div>
     </div>
     <div class="faq-block">
-      <f-a-q-block-component v-if="this.isFaq" />
-      <terms-block-component v-if="!this.isFaq" />
+      <f-a-q-block-component v-if="isFaq" />
+      <terms-block-component v-if="!isFaq" />
     </div>
   </div>
 </template>

@@ -33,13 +33,13 @@
                text-[16px] font-normal">
             <!-- eslint-disable-next-line vuejs-accessibility/click-events-have-key-events -->
             <div :className="['mr-[57px] cursor-pointer '
-              + (this.isGeral ? 'font-semibold' : '')]"
+              + (isGeral ? 'font-semibold' : '')]"
                  @click="changePage(true)">
               Appointment
             </div>
             <!-- eslint-disable-next-line vuejs-accessibility/click-events-have-key-events -->
             <div :className="['cursor-pointer '
-              + (!this.isGeral ? 'font-semibold' : '')]"
+              + (!isGeral ? 'font-semibold' : '')]"
                  @click="changePage(false)">
               Appointment History
             </div>

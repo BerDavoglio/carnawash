@@ -15,7 +15,7 @@
     <td className="text-[#3F3F44] font-light pt-[24px] text-center
     h-[44px] w-[160px]">
       <v-select label="Washers"
-                :items="this.items"
+                :items="items"
                 variant="outlined"
                 density="compact"
                 style="height: 44px;" />

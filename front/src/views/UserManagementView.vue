@@ -17,19 +17,19 @@
                text-[16px] font-normal">
           <!-- eslint-disable-next-line vuejs-accessibility/click-events-have-key-events -->
           <div :className="['mr-[57px] cursor-pointer '
-            + (this.isUser == 'customers' ? 'font-semibold' : '')]"
+            + (isUser == 'customers' ? 'font-semibold' : '')]"
                @click="changePage('customers')">
             Customers
           </div>
           <!-- eslint-disable-next-line vuejs-accessibility/click-events-have-key-events -->
           <div :className="['mr-[57px] cursor-pointer '
-            + (this.isUser == 'washers' ? 'font-semibold' : '')]"
+            + (isUser == 'washers' ? 'font-semibold' : '')]"
                @click="changePage('washers')">
             Washers
           </div>
           <!-- eslint-disable-next-line vuejs-accessibility/click-events-have-key-events -->
           <div :className="['mr-[57px] cursor-pointer '
-            + (this.isUser == 'admins' ? 'font-semibold' : '')]"
+            + (isUser == 'admins' ? 'font-semibold' : '')]"
                @click="changePage('admins')">
             Admins
           </div>

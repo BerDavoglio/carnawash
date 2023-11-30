@@ -28,13 +28,9 @@ export default {
   name: 'MyAccountView',
   components: { UserDataComponent, PasswordDataComponent },
   data() {
-    return { };
+    return {};
   },
-  methods: {
-    changePage(val) {
-      this.isFaq = val;
-    },
-  },
+  methods: {},
   beforeMount() {
     const store = useLoginStore();
     if (store.getToken === '') {

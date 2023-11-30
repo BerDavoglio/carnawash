@@ -12,13 +12,13 @@
                text-[16px] font-normal mt-4">
             <!-- eslint-disable-next-line vuejs-accessibility/click-events-have-key-events -->
             <div :className="['mr-[57px] cursor-pointer '
-              + (this.isUser == 'registered' ? 'font-semibold' : '')]"
+              + (isUser == 'registered' ? 'font-semibold' : '')]"
                  @click="changePage('registered')">
               Registered Admins
             </div>
             <!-- eslint-disable-next-line vuejs-accessibility/click-events-have-key-events -->
             <div :className="['mr-[57px] cursor-pointer '
-              + (this.isUser == 'types' ? 'font-semibold' : '')]"
+              + (isUser == 'types' ? 'font-semibold' : '')]"
                  @click="changePage('types')">
               User Types
             </div>
@@ -29,7 +29,7 @@
             <div className="w-[230px] text-right mr-4"
                  v-if="isUser == 'registered'">
               <v-select label="Filter"
-                        :items="this.items"
+                        :items="items"
                         variant="outlined" />
             </div>
             <div className="w-[241px] p-[12.5px] bg-[#EDBD3A]

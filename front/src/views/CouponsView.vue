@@ -19,13 +19,13 @@
                text-[16px] font-normal">
             <!-- eslint-disable-next-line vuejs-accessibility/click-events-have-key-events -->
             <div :className="['mr-[57px] cursor-pointer '
-              + (this.isCoupons ? 'font-semibold' : '')]"
+              + (isCoupons ? 'font-semibold' : '')]"
                  @click="changePage(true)">
               Coupons
             </div>
             <!-- eslint-disable-next-line vuejs-accessibility/click-events-have-key-events -->
             <div :className="['cursor-pointer '
-              + (!this.isCoupons ? 'font-semibold' : '')]"
+              + (!isCoupons ? 'font-semibold' : '')]"
                  @click="changePage(false)">
               Referential coupons
             </div>

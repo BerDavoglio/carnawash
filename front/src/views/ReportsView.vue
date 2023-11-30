@@ -55,7 +55,7 @@
             <div className="my-auto">Or search for period:</div>
             <div className="w-[533px]">
               <v-select label="Filter"
-                        :items="this.items"
+                        :items="items"
                         variant="outlined" />
             </div>
           </div>

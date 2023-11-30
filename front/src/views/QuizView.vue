@@ -18,13 +18,13 @@
                text-[16px] font-normal">
           <!-- eslint-disable-next-line vuejs-accessibility/click-events-have-key-events -->
           <div :className="['mr-[57px] cursor-pointer '
-            + (this.isQuiz ? 'font-semibold' : '')]"
+            + (isQuiz ? 'font-semibold' : '')]"
                @click="changePage(true)">
             Quiz
           </div>
           <!-- eslint-disable-next-line vuejs-accessibility/click-events-have-key-events -->
           <div :className="['cursor-pointer '
-            + (!this.isQuiz ? 'font-semibold' : '')]"
+            + (!isQuiz ? 'font-semibold' : '')]"
                @click="changePage(false)">
             Training
           </div>

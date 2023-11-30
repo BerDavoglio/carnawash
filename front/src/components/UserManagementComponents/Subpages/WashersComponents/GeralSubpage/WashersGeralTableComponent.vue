@@ -29,7 +29,7 @@
         <div className="flex flex-row">
           <div className="w-[230px] text-right mb-[16px] mr-[40px]">
             <v-select label="Filter"
-                      :items="this.items"
+                      :items="items"
                       variant="outlined" />
           </div>
           <div className="w-[241px] p-[12.5px] bg-[#EDBD3A]
