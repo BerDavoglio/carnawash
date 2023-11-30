@@ -7,7 +7,7 @@
       <div className="flex flex-row">
         <div className="w-9 h-9 rounded-full bg-amber-400 flex my-auto">
           <div className="m-auto cursor-pointer"
-               @click="this.$emit('showC', false)">
+               @click="this.$emit('showC', [false, null])">
             <v-icon name="md-arrowback"
                     fill="white" />
           </div>
@@ -31,7 +31,7 @@
         <div>
           <div className="text-left text-[16px] font-normal text-[#3F3F44]">
             Complete Name
-            <input v-model="name"
+            <input v-model="userObj.name"
                    className="h-[16px] w-full rounded-lg  px-4 py-6 mb-4
                               bg-[#F8F8F8] border-1 border-solid border-[#EBF0ED]">
           </div>
@@ -39,7 +39,7 @@
         <div>
           <div className="text-left text-[16px] font-normal text-[#3F3F44]">
             E-mail
-            <input v-model="email"
+            <input v-model="userObj.email"
                    className="h-[16px] w-full rounded-lg  px-4 py-6 mb-4
                     bg-[#F8F8F8] border-1 border-solid border-[#EBF0ED]">
           </div>
@@ -47,7 +47,7 @@
         <div>
           <div className="text-left text-[16px] font-normal text-[#3F3F44]">
             Telephone
-            <input v-model="phone"
+            <input v-model="userObj.phone"
                    className="h-[16px] w-full rounded-lg  px-4 py-6 mb-4
                     bg-[#F8F8F8] border-1 border-solid border-[#EBF0ED]">
           </div>
@@ -55,7 +55,7 @@
         <div>
           <div className="text-left text-[16px] font-normal text-[#3F3F44]">
             Address
-            <input v-model="address"
+            <input v-model="userObj.address"
                    className="h-[16px] w-full rounded-lg  px-4 py-6 mb-4
                          bg-[#F8F8F8] border-1 border-solid border-[#EBF0ED]">
           </div>
@@ -63,7 +63,7 @@
         <div>
           <div className="text-left text-[16px] font-normal text-[#3F3F44]">
             User Type
-            <input v-model="type"
+            <input v-model="userObj.role"
                    className="h-[16px] w-full rounded-lg  px-4 py-6 mb-4
                          bg-[#F8F8F8] border-1 border-solid border-[#EBF0ED]">
           </div>
@@ -88,37 +88,64 @@
           </div>
         </div>
       </div>
-      <!-- <div className="w-[241px] p-[12.5px] bg-[#EDBD3A]
+      <div className="w-[241px] p-[12.5px] bg-[#EDBD3A]
         text-black rounded-[8px] cursor-pointer
-        m-auto font-semibold">
-          Save Changes
-        </div> -->
-      <div className="text-right font-medium text-[16px] text-[#EDBD3A] cursor-pointer">
+        m-auto font-semibold"
+           @click="editUser()">
+        Save Changes
+      </div>
+      <!-- <div className="text-right font-medium text-[16px] text-[#EDBD3A] cursor-pointer">
         <v-icon name="md-edit-outlined"
                 fill="#EDBD3A" />Change Password
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
 
+<script setup>
+import { useClientStore } from '../../../../../store/store';
+</script>
+
 <script>
 export default {
   name: 'UserDataComponent',
+  props: ['pre_data'],
   data() {
     return {
-      name: '',
-      email: '',
-      phone: '',
-      address: '',
-      type: '',
+      userObj: {},
       pass: '',
-      isHiddenOne: '',
+      isHiddenOne: true,
+      edit: false,
     };
   },
   methods: {
     changePass() {
       this.isHiddenOne = !this.isHiddenOne;
     },
+    async editUser() {
+      const clientStore = useClientStore();
+      await clientStore.updateClient(this.pre_data, {
+        name: this.userObj.name,
+        email: this.userObj.email,
+        address: this.userObj.address,
+        phone: this.userObj.phone,
+        role: this.userObj.role,
+      });
+      if (this.pass !== '') {
+        await clientStore.updateClient(this.pre_data, {
+          password: this.pass,
+        });
+      }
+    },
+  },
+  async beforeMount() {
+    const clientStore = useClientStore();
+    await clientStore.requestClients();
+
+    const aux = clientStore.getClients.find(
+      (item) => item.id === this.pre_data,
+    );
+    this.userObj = aux;
   },
 };
 </script>

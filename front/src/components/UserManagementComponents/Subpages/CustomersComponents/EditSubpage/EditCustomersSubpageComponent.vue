@@ -1,11 +1,12 @@
 <template>
   <div>
     <div className="grid grid-cols-2 gap-[51px] mb-[36px]">
-      <user-data-component @showC="(val) => this.$emit('showCostumer', val)" />
-      <car-data-component />
+      <user-data-component :pre_data="pre_data"
+                           @showC="(val) => this.$emit('showCostumer', val)" />
+      <car-data-component :pre_data="pre_data" />
     </div>
     <div>
-      <wash-history-table-component />
+      <wash-history-table-component :pre_data="pre_data" />
     </div>
   </div>
 </template>
@@ -18,16 +19,9 @@ import WashHistoryTableComponent from './WashHistoryTableComponent.vue';
 export default {
   name: 'EditCustomersSubpageComponent',
   components: { UserDataComponent, CarDataComponent, WashHistoryTableComponent },
+  props: ['pre_data'],
   data() {
-    return {
-      name: '',
-      email: '',
-      phone: '',
-      address: '',
-      type: '',
-      password: '',
-      isHiddenOne: true,
-    };
+    return {};
   },
   methods: {
     changePass() {

@@ -1,5 +1,6 @@
 import User from '../../../models/User/User_models';
 import Car from '../../../models/Car/Car_models';
+import Schedule from '../../../models/Schedules/Schedule_models';
 
 class AdminClientController {
   async showClients(req, res) {
@@ -12,7 +13,7 @@ class AdminClientController {
 
       return res.json(admins);
     } catch (err) {
-      return res.status(400).json({ errors: `Show Admin Client / ${err.message}` });
+      return res.status(400).json({ errors: `Show Admin Client All / ${err.message}` });
     }
   }
 
@@ -32,7 +33,7 @@ class AdminClientController {
 
       return res.json(clients.length);
     } catch (err) {
-      return res.status(400).json({ errors: `Show Admin Client / ${err.message}` });
+      return res.status(400).json({ errors: `Show Admin Client New / ${err.message}` });
     }
   }
 
@@ -76,12 +77,12 @@ class AdminClientController {
         return res.status(400).json({ errors: 'User not Found' });
       }
 
-      const cars = Car.findAll({
+      const cars = await Car.findAll({
         where: {
           user_id: idReq,
         }
       });
-      if (cars) {
+      if (cars.length > 0) {
         return res.status(401).json({ errors: ["Can't delete Client because have Cars in it's name"] });
       }
 
@@ -195,6 +196,20 @@ class AdminClientController {
       return res.json({ message: 'Car deleted with success' });
     } catch (err) {
       return res.status(400).json({ errors: `Delete Admin Client Car / ${err.message}` });
+    }
+  }
+
+  async showClientWashes(req, res) {
+    try {
+      const sche = Schedule.findAll({
+        where: {
+          user_id: req.params.client,
+        }
+      });
+
+      return res.json(sche);
+    } catch (err) {
+      return res.status(400).json({ errors: `Show Admin Client Car / ${err.message}` });
     }
   }
 }

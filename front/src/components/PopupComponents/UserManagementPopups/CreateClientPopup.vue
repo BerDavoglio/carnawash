@@ -10,7 +10,8 @@
         </div>
         <div className="cursor-pointer"
              @click="this.$emit('registerCostumers', false)">
-          <v-icon name="io-close" scale="1.25"/>
+          <v-icon name="io-close"
+                  scale="1.25" />
         </div>
       </div>
       <div className="text-left text-[16px] font-normal text-[#3F3F44]">
@@ -96,12 +97,17 @@
       <div className="w-[241px] p-[12.5px] bg-[#EDBD3A]
             text-black rounded-[8px] cursor-pointer
             mx-auto font-semibold text-center"
-           @click="this.$emit('registerCostumers', false)">
+           @click="createClient()">
         Register Client
       </div>
     </div>
   </div>
 </template>
+
+<script setup>
+import { toast } from 'vue3-toastify';
+import { useClientStore } from '../../../store/store';
+</script>
 
 <script>
 export default {
@@ -121,6 +127,18 @@ export default {
     };
   },
   methods: {
+    async createClient() {
+      const clientStore = useClientStore();
+      if (this.confirmPass === this.new_client.password) {
+        await clientStore.createClient(this.new_client);
+        this.$emit('registerCostumers', false);
+      } else {
+        toast.error('Passwords need to be the same!', {
+          autoClose: 5000,
+          position: toast.POSITION.BOTTOM_RIGHT,
+        });
+      }
+    },
     changePass() {
       this.isHiddenOne = !this.isHiddenOne;
     },

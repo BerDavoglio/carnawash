@@ -77,16 +77,13 @@ export default {
 
     const listAux = notificationStore.getNotificationHistory;
     listAux.forEach((item) => {
-      console.log(item);
       const especificNotification = notificationStore.getNotification.find(
         (aux) => aux.id === item.notification_id,
       );
-      console.log(especificNotification);
 
       const especificUser = clientStore.getClients.find(
         (aux) => aux.id === item.user_id,
       );
-      console.log(especificUser);
 
       this.listHistory.push({
         id: item.id,

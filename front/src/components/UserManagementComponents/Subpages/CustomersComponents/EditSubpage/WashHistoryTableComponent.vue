@@ -38,20 +38,18 @@
           </tr>
         </thead>
         <tbody className="font-light">
-          <wash-history-table-item-component :obj="this.objeto" />
-          <wash-history-table-item-component :obj="this.objeto" />
-          <wash-history-table-item-component :obj="this.objeto" />
-          <wash-history-table-item-component :obj="this.objeto" />
-          <wash-history-table-item-component :obj="this.objeto" />
-          <wash-history-table-item-component :obj="this.objeto" />
-          <wash-history-table-item-component :obj="this.objeto" />
-          <wash-history-table-item-component :obj="this.objeto" />
-          <wash-history-table-item-component :obj="this.objeto" />
+          <wash-history-table-item-component v-for="i in listWash"
+                                             v-bind:key="i"
+                                             :obj="i" />
         </tbody>
       </table>
     </div>
   </div>
 </template>
+
+<script setup>
+import { useClientStore } from '../../../../../store/store';
+</script>
 
 <script>
 import WashHistoryTableItemComponent from './WashHistoryTableItemComponent.vue';
@@ -59,20 +57,19 @@ import WashHistoryTableItemComponent from './WashHistoryTableItemComponent.vue';
 export default {
   name: 'WashHistoryTableComponent',
   components: { WashHistoryTableItemComponent },
+  props: ['pre_data'],
   data() {
     return {
-      objeto: {
-        id: 1234,
-        car: 'Car A',
-        washer: 'Washer A',
-        date: 'dd/mm/yyyy 00:00',
-        appointment: 'To Confirm',
-        wash: 'Not Started',
-        rating: '-',
-        payment: '-',
-      },
+      listWash: [],
       items: ['Alfabetical', 'Date'],
     };
+  },
+  async beforeMount() {
+    const clientStore = useClientStore();
+    await clientStore.requestClientWash(this.pre_data);
+
+    this.listWash = clientStore.getClientWash;
+    console.log(this.listWash);
   },
 };
 </script>

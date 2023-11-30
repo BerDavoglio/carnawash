@@ -322,6 +322,8 @@ export const useDashboardStore = defineStore('dashboardStore', {
 export const useClientStore = defineStore('clientStore', {
   state: () => ({
     clients: [],
+    clientCar: [],
+    clientWash: [],
     newClients: 0,
     inactiveClients: 0,
   }),
@@ -334,6 +336,12 @@ export const useClientStore = defineStore('clientStore', {
     },
     getInactiveClients() {
       return this.inactiveClients;
+    },
+    getClientCars() {
+      return this.clientCar;
+    },
+    getClientWash() {
+      return this.clientWash;
     },
   },
   actions: {
@@ -381,20 +389,38 @@ export const useClientStore = defineStore('clientStore', {
     },
     async requestClientCars(id) {
       try {
-        let returnData = {};
         axios
           .get(
             `http://127.0.0.1:3096/users/admin/clients/by-id/${id}/car/`,
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
-          .then((response) => { returnData = response.data; })
+          .then((response) => { this.clientCar = response.data; })
           .catch((err) => {
             toast.error(err.response.data.errors, {
               autoClose: 5000,
               position: toast.POSITION.BOTTOM_RIGHT,
             });
           });
-        return returnData;
+        return 0;
+      } catch (error) {
+        return error;
+      }
+    },
+    async requestClientWash(id) {
+      try {
+        axios
+          .get(
+            `http://127.0.0.1:3096/users/admin/clients/by-id/${id}/wash/`,
+            { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
+          )
+          .then((response) => { this.clientWash = response.data; })
+          .catch((err) => {
+            toast.error(err.response.data.errors, {
+              autoClose: 5000,
+              position: toast.POSITION.BOTTOM_RIGHT,
+            });
+          });
+        return 0;
       } catch (error) {
         return error;
       }
@@ -430,7 +456,7 @@ export const useClientStore = defineStore('clientStore', {
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
           .then(() => {
-            this.requestClients();
+            this.requestClients().then(() => window.location.reload());
           })
           .then(() => {
             toast.success('Client criado com sucesso!', {
@@ -461,7 +487,7 @@ export const useClientStore = defineStore('clientStore', {
             this.requestClientCars(id);
           })
           .then(() => {
-            toast.success('Carro criado com sucesso!', {
+            toast.success('Carro criado com sucesso! Talvez seja necessário recarregar a página', {
               autoClose: 5000,
               position: toast.POSITION.BOTTOM_RIGHT,
             });
@@ -543,7 +569,7 @@ export const useClientStore = defineStore('clientStore', {
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
           .then(() => {
-            this.requestClients();
+            this.requestClients().then(() => window.location.reload());
           })
           .then(() => {
             toast.success('Cliente deletado com sucesso!', {
@@ -570,7 +596,7 @@ export const useClientStore = defineStore('clientStore', {
             { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
           )
           .then(() => {
-            this.requestClientCars(idClient);
+            this.requestClientCars(idClient).then(() => window.location.reload());
           })
           .then(() => {
             toast.success('Carro deletado com sucesso!', {

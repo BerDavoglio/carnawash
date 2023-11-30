@@ -58,7 +58,9 @@
           </tr>
         </thead>
         <tbody className="font-light">
-          <user-table-item-component :obj="this.objeto"
+          <user-table-item-component v-for="i in listClients"
+                                     v-bind:key="i"
+                                     :obj="i"
                                      @editCs="(val) => this.$emit('editCostumers', val)"
                                      @showC="(val) => this.$emit('showCostumer', val)" />
         </tbody>
@@ -66,6 +68,10 @@
     </div>
   </div>
 </template>
+
+<script setup>
+import { useClientStore } from '../../../../../store/store';
+</script>
 
 <script>
 import UserTableItemComponent from './UserTableItemComponent.vue';
@@ -75,13 +81,7 @@ export default {
   components: { UserTableItemComponent },
   data() {
     return {
-      objeto: {
-        id: 1,
-        name: 'Client A',
-        email: 'clienta@gmail.com',
-        phone: '419909230',
-        address: 'Rua das Peras',
-      },
+      listClients: [],
       items: ['Alfabetical', 'Date'],
     };
   },
@@ -89,6 +89,12 @@ export default {
     registerCostumers() {
       this.$emit('registerCostumers', true);
     },
+  },
+  async beforeMount() {
+    const clientStore = useClientStore();
+    await clientStore.requestClients();
+
+    this.listClients = clientStore.getClients;
   },
 };
 </script>

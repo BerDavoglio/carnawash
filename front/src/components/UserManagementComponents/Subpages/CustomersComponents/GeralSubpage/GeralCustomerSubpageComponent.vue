@@ -1,26 +1,26 @@
 <template>
   <div>
     <div class="geral-sub-page"
-         v-if="!edit">
+         v-if="!edit[0]">
       <div className="mt-8 flex flex-row justify-between">
         <data-block-component :obj="{
           icon: 'pr-users',
           text: 'Total Clients',
-          value: 300,
+          value: all,
         }"
-        :hasFilter="0" />
+                              :hasFilter="0" />
         <data-block-component :obj="{
           icon: 'pr-user-plus',
           text: 'New Clients',
-          value: 15,
+          value: newClients,
         }"
-        :hasFilter="1" />
+                              :hasFilter="1" />
         <data-block-component :obj="{
           icon: 'pr-user-minus',
           text: 'Inactive Clients',
-          value: 8,
+          value: inactive,
         }"
-        :hasFilter="2" />
+                              :hasFilter="2" />
       </div>
       <div className="my-8">
         <user-table-component @input="alert(displayToKey($event))"
@@ -30,19 +30,25 @@
       </div>
     </div>
     <div class="edit-sub-page"
-         v-if="edit">
-      <edit-customers-subpage-component @showCostumer="(val) => this.edit = val" />
+         v-if="edit[0]">
+      <edit-customers-subpage-component @showCostumer="(val) => this.edit = val"
+                                        :pre_data="this.edit[1]" />
     </div>
     <v-dialog v-model="registerCostumer"
               width="auto">
       <create-client-popup @registerCostumers="registerCostumers" />
     </v-dialog>
-    <v-dialog v-model="editCostumer"
+    <v-dialog v-model="editCostumer[0]"
               width="auto">
-      <edit-client-popup @editCostumers="editCostumers" />
+      <edit-client-popup @editCostumers="editCostumers"
+                         :pre_data="editCostumer[1]" />
     </v-dialog>
   </div>
 </template>
+
+<script setup>
+import { useClientStore } from '../../../../../store/store';
+</script>
 
 <script>
 import DataBlockComponent from '../../../DataBlockComponent.vue';
@@ -63,9 +69,12 @@ export default {
   },
   data() {
     return {
-      edit: false,
+      edit: [false, null],
       registerCostumer: false,
-      editCostumer: false,
+      editCostumer: [false, null],
+      all: 0,
+      newClients: 0,
+      inactive: 0,
     };
   },
   methods: {
@@ -75,6 +84,15 @@ export default {
     editCostumers(val) {
       this.editCostumer = val;
     },
+  },
+  async beforeMount() {
+    const clientStore = useClientStore();
+    await clientStore.requestClients();
+    await clientStore.requestNewClients();
+
+    this.all = clientStore.getClients.length;
+    this.newClients = clientStore.getNewClients;
+    this.inactive = clientStore.getInactiveClients;
   },
 };
 </script>

@@ -41,6 +41,7 @@ router.post('/admin/clients/by-id/:client/car/', loginRequired, isAdmin, adminCl
 router.get('/admin/clients/by-id/:client/car/:car', loginRequired, isAdmin, adminClientController.showClientCar);
 router.put('/admin/clients/by-id/:client/car/:car', loginRequired, isAdmin, adminClientController.updateClientCar);
 router.delete('/admin/clients/by-id/:client/car/:car', loginRequired, isAdmin, adminClientController.deleteClientCar);
+router.get('/admin/clients/by-id/:client/wash/', loginRequired, isAdmin, adminClientController.showClientWashes);
 
 router.post('/admin/washers/', loginRequired, isAdmin, adminWasherController.createWashers);
 router.get('/admin/washers/', loginRequired, isAdmin, adminWasherController.showWashers);
