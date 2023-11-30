@@ -2,17 +2,17 @@
   <tr>
     <td className="py-[12px]">
       <span className="text-[#045C9C] font-medium mr-2">
-        {{ this.obj.id }}
+        {{ obj.id }}
       </span>
-      {{ this.obj.client }}
+      {{ obj.client }}
     </td>
-    <td className="py-[12px]">{{ this.obj.washer }}</td>
-    <td className="py-[12px]">{{ this.obj.quantity }}</td>
-    <td className="py-[12px]">{{ this.obj.addon }}</td>
+    <td className="py-[12px]">{{ obj.washer }}</td>
+    <td className="py-[12px]">{{ obj.quantity }}</td>
+    <td className="py-[12px]">{{ obj.addon }}</td>
     <td className="text-[#045C9C] font-semibold py-[12px]">
-      {{ this.obj.price }}
+      {{ obj.price }}
     </td>
-    <td className="py-[12px]">{{ this.obj.date }}</td>
+    <td className="py-[12px]">{{ obj.date }}</td>
   </tr>
 </template>
 

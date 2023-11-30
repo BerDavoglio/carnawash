@@ -1,10 +1,10 @@
 <template>
   <tr>
     <td className="text-[#3F3F44] text-[14px] font-light py-[24px] text-center">
-      {{ this.obj.type }}
+      {{ obj.type }}
     </td>
     <td className="text-[#3F3F44] text-[14px] font-light py-[24px] text-center max-w-[300px]">
-      <span v-for="i in this.obj.users"
+      <span v-for="i in obj.users"
             v-bind:key="i">
         {{ i }},
       </span>

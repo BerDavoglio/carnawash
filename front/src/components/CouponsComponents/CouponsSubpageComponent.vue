@@ -13,7 +13,7 @@
             <div className="ml-auto">
               <div className="w-[368px] h-fit rounded-lg
               bg-[#F8F8F8] border-1 border-solid border-[#EBF0ED]">
-                <input v-model="this.coupon_banner.code"
+                <input v-model="coupon_banner.code"
                        className="h-[40px] w-[88%] rounded-lg  px-4 py-6
                       bg-[#F8F8F8] border-1 border-solid border-[#EBF0ED]">
                 <v-icon name="md-edit-outlined"
@@ -27,7 +27,7 @@
             <div className="ml-auto">
               <div className="w-[368px] h-fit rounded-lg
               bg-[#F8F8F8] border-1 border-solid border-[#EBF0ED]">
-                <input v-model="this.coupon_banner.discount"
+                <input v-model="coupon_banner.discount"
                        className="h-[40px] w-[88%] rounded-lg  px-4 py-6
                       bg-[#F8F8F8] border-1 border-solid border-[#EBF0ED]">
                 <v-icon name="md-edit-outlined"
@@ -45,7 +45,7 @@
                 <div className="my-auto ml-[16px] text-[14px] font-light text-[#3F3F44]">
                   Coupon active
                 </div>
-                <VueToggles v-model="this.coupon_banner.is_disabled"
+                <VueToggles v-model="coupon_banner.is_disabled"
                             :height="28"
                             :width="54"
                             checkedBg="#1C8E33"

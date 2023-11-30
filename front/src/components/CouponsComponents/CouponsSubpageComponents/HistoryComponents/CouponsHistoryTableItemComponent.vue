@@ -1,22 +1,22 @@
 <template>
   <tr>
     <td className="w-[400px] text-[#3F3F44] text-[14px] font-light pt-[24px] text-left">
-      {{ this.obj.coupon }}
+      {{ obj.coupon }}
     </td>
     <td className="text-[#3F3F44] text-[14px] font-light pt-[24px] text-center">
-      {{ this.obj.user }}
+      {{ obj.user }}
     </td>
     <td className="text-[#3F3F44] text-[14px] font-light pt-[24px] text-center">
-      {{ formatPrice(this.obj.total) }}
+      {{ formatPrice(obj.total) }}
     </td>
     <td className="text-[#1486CA] text-[16px] pt-[24px] font-semibold text-center">
-      {{ formatPrice(this.obj.saved) }}
+      {{ formatPrice(obj.saved) }}
     </td>
     <td className="text-[#3F3F44] text-[14px] font-light pt-[24px] text-center">
-      {{ formatPrice(this.obj.spent) }}
+      {{ formatPrice(obj.spent) }}
     </td>
     <td className="text-[#3F3F44] text-[14px] font-light pt-[24px] text-center">
-      {{ this.obj.date }}
+      {{ obj.date }}
     </td>
   </tr>
 </template>

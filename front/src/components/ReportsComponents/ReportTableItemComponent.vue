@@ -1,19 +1,19 @@
 <template>
   <tr>
     <td className="py-[12px] text-[#3F3F44] font-light">
-      {{ this.obj.date }}
+      {{ obj.date }}
     </td>
     <td className="py-[12px] text-[#3F3F44] text-center font-medium">
-      {{ this.obj.washes }}
+      {{ obj.washes }}
     </td>
     <td className="py-[12px] text-[#1486CA] text-center font-medium">
-      {{ formatPrice(this.obj.profit) }}
+      {{ formatPrice(obj.profit) }}
     </td>
     <td className="py-[12px] text-[#3F3F44] text-center font-medium">
-      {{ formatPrice(this.obj.payment) }}
+      {{ formatPrice(obj.payment) }}
     </td>
     <td className="py-[12px] text-[#3F3F44] text-center font-medium">
-      {{ this.obj.markup }}
+      {{ obj.markup }}
     </td>
   </tr>
 </template>

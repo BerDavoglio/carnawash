@@ -2,16 +2,16 @@
 <template>
   <tr>
     <td className="text-[#3F3F44] text-[14px] font-light pt-[24px] text-left">
-      {{ this.obj.name }}
+      {{ obj.name }}
     </td>
     <td className="text-[#3F3F44] text-[14px] font-light pt-[24px] text-center">
-      {{ this.obj.code }}
+      {{ obj.code }}
     </td>
     <td className="text-[#1486CA] text-[16px] pt-[24px] font-semibold text-center">
-      {{ this.obj.discount }}%
+      {{ obj.discount }}%
     </td>
     <td className="text-[#3F3F44] text-[14px] font-light pt-[24px] text-center">
-      {{ this.obj.times_used }}
+      {{ obj.times_used }}
     </td>
     <td className="text-[#3F3F44] text-[14px] font-light pt-[24px] text-center
     cursor-pointer underline underline-offset-1">
@@ -23,7 +23,7 @@
     </td>
     <td className="text-[#3F3F44] text-[14px] font-light py-[24px]">
       <VueToggles v-model="is_enable"
-                  @click="editAble(this.obj.id);"
+                  @click="editAble(obj.id);"
                   :height="28"
                   :width="54"
                   checkedBg="#1C8E33"
@@ -31,12 +31,12 @@
     </td>
     <td className="pt-[24px] text-center">
       <span className="cursor-pointer"
-            @click="this.$emit('editPopCoupon', this.obj)">
+            @click="this.$emit('editPopCoupon', obj)">
         <v-icon name="md-edit-outlined"
                 scale="1.25" />
       </span>
       <span className="cursor-pointer"
-            @click="deleteCoupon(this.obj.id)">
+            @click="deleteCoupon(obj.id)">
         <v-icon name="bi-trash"
                 scale="1.25" />
       </span>

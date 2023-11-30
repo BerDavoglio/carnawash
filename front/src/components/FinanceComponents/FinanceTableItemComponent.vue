@@ -9,25 +9,25 @@
              className="mr-2 w-[17px] h-[17px]" />
     </td>
     <td className="text-[#3F3F44] text-[14px] font-light py-[24px] text-center">
-      {{ this.obj.id }}
+      {{ obj.id }}
     </td>
     <td className="text-[#3F3F44] text-[14px] font-light py-[24px] text-center">
-      {{ this.obj.client }}
+      {{ obj.client }}
     </td>
     <td className="text-[#3F3F44] text-[14px] font-light py-[24px] text-center">
-      {{ this.obj.washer }}
+      {{ obj.washer }}
     </td>
     <td className="text-[#3F3F44] text-[14px] font-light py-[24px] text-center">
-      {{ this.obj.date }}
+      {{ obj.date }}
     </td>
     <td className="text-[#3F3F44] text-[14px] font-light py-[24px] text-center">
-      {{ this.obj.status }}
+      {{ obj.status }}
     </td>
     <td className="text-[#3F3F44] text-[14px] font-light py-[24px] text-center">
-      {{ this.obj.time }}
+      {{ obj.time }}
     </td>
     <td className="text-[#3F3F44] text-[14px] font-light py-[24px] text-center">
-      {{ this.obj.rating }}
+      {{ obj.rating }}
     </td>
     <td className="text-[#3F3F44] text-[14px] font-light py-[24px] text-center">
       <div className="w-[144px] px-[16px] py-[8px] font-semibold m-auto

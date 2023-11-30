@@ -1,16 +1,16 @@
 <template>
   <tr>
-    <td className="text-[#3F3F44] font-light pt-[24px] text-left"> {{ this.obj.id }} </td>
-    <td className="text-[#3F3F44] font-light pt-[24px] text-center">{{ this.obj.client }}</td>
+    <td className="text-[#3F3F44] font-light pt-[24px] text-left"> {{ obj.id }} </td>
+    <td className="text-[#3F3F44] font-light pt-[24px] text-center">{{ obj.client }}</td>
     <td className="text-[#1486CA] text-[16px] pt-[24px] font-semibold text-center">
-      {{ formatPrice(this.obj.price) }}
+      {{ formatPrice(obj.price) }}
     </td>
     <td className="text-[#3F3F44] font-light pt-[24px] text-center
     cursor-pointer underline underline-offset-1">
       View Details
     </td>
     <td className="text-[#3F3F44] font-light pt-[24px] text-center w-[90px]">
-      {{ this.obj.date }}
+      {{ obj.date }}
     </td>
     <td className="text-[#3F3F44] font-light pt-[24px] text-center
     h-[44px] w-[160px]">
@@ -27,7 +27,7 @@
         Confirm
       </div>
     </td>
-    <td className="text-[#3F3F44] font-light pt-[24px] text-center">{{ this.obj.acceptance }}</td>
+    <td className="text-[#3F3F44] font-light pt-[24px] text-center">{{ obj.acceptance }}</td>
     <td className="pt-[24px] text-center max-w-[110px]">
       <span className="cursor-pointer">
         <v-icon name="bi-plus-circle"

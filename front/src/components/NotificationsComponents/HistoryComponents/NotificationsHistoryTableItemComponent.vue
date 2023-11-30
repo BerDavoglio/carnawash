@@ -2,24 +2,24 @@
 <template>
   <tr>
     <td className="w-[400px] text-[#3F3F44] text-[14px] font-light pt-[24px] text-left">
-      {{ this.obj.title }}
+      {{ obj.title }}
     </td>
     <td className="text-[#3F3F44] text-[14px] font-light pt-[24px] text-center">
-      {{ this.obj.user_type }}
+      {{ obj.user_type }}
     </td>
     <td className="text-[#3F3F44] text-[14px] font-light pt-[24px] text-center">
-      {{ this.obj.name }}
+      {{ obj.name }}
     </td>
     <td className="text-[#3F3F44] text-[14px] font-light pt-[24px] text-center">
-      {{ this.obj.type }}
+      {{ obj.type }}
     </td>
     <td className="text-[#3F3F44] text-[14px] font-light pt-[24px] text-center
     cursor-pointer underline underline-offset-1"
-        @click="this.$emit('notificationResend', [true, this.obj]);">
+        @click="this.$emit('notificationResend', [true, obj]);">
       Resend
     </td>
     <td className="text-[#3F3F44] text-[14px] font-light pt-[24px] text-center">
-      {{ this.obj.date }}
+      {{ obj.date }}
     </td>
   </tr>
 </template>

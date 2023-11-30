@@ -2,16 +2,16 @@
 <template>
   <tr>
     <td className="text-[#3F3F44] text-[14px] font-light py-[24px] text-center">
-      {{ this.obj.name }}
+      {{ obj.name }}
     </td>
     <td className="text-[#3F3F44] text-[14px] font-light py-[24px] text-center">
-      {{ this.obj.email }}
+      {{ obj.email }}
     </td>
     <td className="text-[#3F3F44] text-[14px] font-light py-[24px] text-center">
-      {{ this.obj.phone }}
+      {{ obj.phone }}
     </td>
     <td className="text-[#3F3F44] text-[14px] font-light py-[24px] text-center">
-      {{ this.obj.type }}
+      {{ obj.type }}
     </td>
     <td className="text-[#3F3F44] text-[14px] font-light py-[24px]">
       <VueToggles v-model="enable"

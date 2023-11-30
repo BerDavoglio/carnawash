@@ -2,30 +2,30 @@
 <template>
   <tr>
     <td className="text-[#3F3F44] text-[14px] font-light py-[24px] text-center">
-      {{ this.obj.name }}
+      {{ obj.name }}
     </td>
     <td className="text-[#3F3F44] text-[14px] font-light py-[24px] text-center">
-      {{ this.obj.email }}
+      {{ obj.email }}
     </td>
     <td className="text-[#3F3F44] text-[14px] font-light py-[24px] text-center">
-      {{ this.obj.phone }}
+      {{ obj.phone }}
     </td>
     <td className="text-[#3F3F44] text-[14px] font-light py-[24px] text-center">
-      {{ this.obj.address }}
+      {{ obj.address }}
     </td>
     <td className="text-[#3F3F44] text-[14px] font-light py-[24px] text-center">
-      {{ this.obj.licence }}
+      {{ obj.licence }}
     </td>
     <td className="text-[#3F3F44] text-[14px] font-light py-[24px] text-center
     cursor-pointer underline underline-offset-1"
-    @click="this.$emit('showW', [true, this.obj.id]);">
+    @click="this.$emit('showW', [true, obj.id]);">
       View History
     </td>
     <td className="text-[#3F3F44] text-[14px] font-light py-[24px] text-center">
-      {{ this.obj.rating }}
+      {{ obj.rating }}
     </td>
     <td className="text-[#3F3F44] text-[14px] font-light py-[24px] text-center">
-      {{ this.obj.quiz }}
+      {{ obj.quiz }}
     </td>
     <td className="text-[#3F3F44] text-[14px] font-light py-[24px]">
       <VueToggles v-model="contract"
@@ -48,7 +48,7 @@
     </td>
     <td className="py-[24px] text-center">
       <span className="cursor-pointer"
-            @click="editWs(this.obj)">
+            @click="editWs(obj)">
         <v-icon name="md-edit-outlined"
                 scale="1.25" />
       </span>

@@ -1,33 +1,33 @@
 <template>
   <tr className="mb-4">
     <td className="text-[#3F3F44] text-[14px] font-light text-left">
-      <div v-for="i in this.obj.type" v-bind:key="i">
+      <div v-for="i in obj.type" v-bind:key="i">
         <div className="mb-2 font-normal text-[16px]">
           {{ i }}
         </div>
       </div>
     </td>
     <td className="text-[#3F3F44] text-[16px] font-semibold text-center">
-      {{ formatPrice(this.obj.type_price) }}
+      {{ formatPrice(obj.type_price) }}
     </td>
     <td className="text-[#3F3F44] text-[14px] font-light text-center">
-      <div v-for="i in this.obj.add" v-bind:key="i">
+      <div v-for="i in obj.add" v-bind:key="i">
         <div className="mb-2 font-normal text-[16px]">
           {{ i }}
         </div>
       </div>
     </td>
     <td className="text-[#3F3F44] text-[16px] font-semibold text-center">
-      {{ formatPrice(this.obj.add_price) }}
+      {{ formatPrice(obj.add_price) }}
     </td>
     <td className="text-[#3F3F44] text-[16px] font-semibold text-center">
-      {{ this.obj.code }}
+      {{ obj.code }}
     </td>
     <td className="text-[#3F3F44] text-[14px] font-light text-center">
-      {{ this.obj.quantity }}x
+      {{ obj.quantity }}x
     </td>
     <td className="text-[#1486CA] text-[16px] font-semibold text-right">
-      {{ formatPrice(this.obj.total) }}
+      {{ formatPrice(obj.total) }}
     </td>
   </tr>
 </template>
