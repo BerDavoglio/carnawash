@@ -28,7 +28,7 @@ class App {
     this.app.use(express.urlencoded({ extended: true }));
     this.app.use(express.json());
     this.app.use(cors({
-      origin: 'http://191.96.251.106'
+      origin: '*'
     }));
   }
 
