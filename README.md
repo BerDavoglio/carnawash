@@ -71,7 +71,7 @@ export const useStore = defineStore('Store', {
       // try {
       // axios
       //   .get(
-      //     'http://191.96.251.106:3096/',
+      //     'http://127.0.0.1:3096/',
       //     { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
       //   )
       //   .then((response) => {
@@ -93,7 +93,7 @@ export const useStore = defineStore('Store', {
       // try {
       // axios
       //   .post(
-      //     'http://191.96.251.106:3096/',
+      //     'http://127.0.0.1:3096/',
       //     obj,
       //     { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
       //   )
@@ -116,7 +116,7 @@ export const useStore = defineStore('Store', {
       // try {
       // axios
       //   .put(
-      //     'http://191.96.251.106:3096/',
+      //     'http://127.0.0.1:3096/',
       //     obj,
       //     { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
       //   )
@@ -139,7 +139,7 @@ export const useStore = defineStore('Store', {
       // try {
       // axios
       //   .delete(
-      //     'http://191.96.251.106:3096/',
+      //     'http://127.0.0.1:3096/',
       //     obj,
       //     { headers: { Authorization: `Bearer ${useLoginStore().getToken}` } },
       //   )

@@ -1,6 +1,5 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import cors from 'cors';
 
 import './database';
 
@@ -27,7 +26,10 @@ class App {
   middlewares() {
     this.app.use(express.urlencoded({ extended: true }));
     this.app.use(express.json());
-    this.app.use(cors());
+    this.app.use((req, res, next) => {
+      res.header('Access-Control-Allow-Origin', '*');
+      next();
+    });
   }
 
   routes() {
