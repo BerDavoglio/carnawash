@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="geral-sub-page"
-         v-if="!edit">
+         v-if="!editPage">
       <div className="mt-8 flex flex-row justify-between">
         <data-block-component :obj="{
           icon: 'pr-users',
@@ -25,12 +25,12 @@
       <div className="my-8">
         <washers-geral-table-component @registerWashers="registerWashers"
                                        @editWashers="editWashers"
-                                       @showWasher="(val) => this.edit = val" />
+                                       @showWasher="(val) => this.editPage = val" />
       </div>
     </div>
     <div class="edit-sub-page"
-         v-if="edit">
-      <edit-washers-subpage-component @showWasher="(val) => this.edit = val" />
+         v-if="editPage">
+      <edit-washers-subpage-component @showWasher="(val) => this.editPage = val" />
     </div>
     <v-dialog v-model="registerWasher"
               width="auto">
@@ -66,7 +66,7 @@ export default {
   },
   data() {
     return {
-      edit: false,
+      editPage: false,
       registerWasher: false,
       editWasher: [false, null],
       all: 0,
