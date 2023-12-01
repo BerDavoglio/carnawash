@@ -21,7 +21,6 @@ import WashHistoryTableComponent from './WashHistoryTableComponent.vue';
 
 export default {
   name: 'EditWashersSubpageComponent',
-  props: ['pre_data'],
   components: {
     UserDataComponent,
     PhotoDataComponent,

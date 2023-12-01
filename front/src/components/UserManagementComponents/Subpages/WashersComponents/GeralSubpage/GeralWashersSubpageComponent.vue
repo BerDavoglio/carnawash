@@ -30,8 +30,7 @@
     </div>
     <div class="edit-sub-page"
          v-if="edit">
-      <edit-washers-subpage-component :pre_data="edit"
-                                      @showWasher="(val) => this.edit = val" />
+      <edit-washers-subpage-component @showWasher="(val) => this.edit = val" />
     </div>
     <v-dialog v-model="registerWasher"
               width="auto">
