@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="geral-sub-page"
-         v-if="!edit[0]">
+         v-if="!edit">
       <div className="mt-8 flex flex-row justify-between">
         <data-block-component :obj="{
           icon: 'pr-users',
@@ -29,8 +29,8 @@
       </div>
     </div>
     <div class="edit-sub-page"
-         v-if="edit[0]">
-      <edit-washers-subpage-component :pre_data="edit[1]"
+         v-if="edit">
+      <edit-washers-subpage-component :pre_data="edit"
                                       @showWasher="(val) => this.edit = val" />
     </div>
     <v-dialog v-model="registerWasher"
@@ -67,7 +67,7 @@ export default {
   },
   data() {
     return {
-      edit: [false, null],
+      edit: false,
       registerWasher: false,
       editWasher: [false, null],
       all: 0,
