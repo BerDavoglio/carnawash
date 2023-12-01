@@ -25,12 +25,12 @@
       <div className="my-8">
         <washers-geral-table-component @registerWashers="registerWashers"
                                        @editWashers="editWashers"
-                                       @showWasher="(val) => this.edit = val" />
+                                       @showWasher="showWasher" />
       </div>
     </div>
     <div class="edit-sub-page"
          v-if="edit[0]">
-      <edit-washers-subpage-component @showWasher="(val) => this.edit = val" />
+      <edit-washers-subpage-component @showWasher="showWasher" />
     </div>
     <v-dialog v-model="registerWasher"
               width="auto">
@@ -80,6 +80,9 @@ export default {
     },
     editWashers(val) {
       this.editWasher = val;
+    },
+    showWasher(val) {
+      this.edit = val;
     },
   },
   async beforeMount() {
