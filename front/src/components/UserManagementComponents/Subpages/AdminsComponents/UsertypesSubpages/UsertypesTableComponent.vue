@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div className="w-full max-h-[650px] mt-4
+    <div className="w-full h-[650px] mt-4
       shadow-[4px_6px_30px_0px_#00000020] rounded-lg
       py-[16px] px-[24px] overflow-y-auto
       scrollbar scrollbar-thumb-[#EDBD3A]
@@ -18,17 +18,9 @@
           </tr>
         </thead>
         <tbody className="font-light">
-          <usertypes-table-item-component :obj="this.objeto" />
-          <usertypes-table-item-component :obj="this.objeto" />
-          <usertypes-table-item-component :obj="this.objeto" />
-          <usertypes-table-item-component :obj="this.objeto" />
-          <usertypes-table-item-component :obj="this.objeto" />
-          <usertypes-table-item-component :obj="this.objeto" />
-          <usertypes-table-item-component :obj="this.objeto" />
-          <usertypes-table-item-component :obj="this.objeto" />
-          <usertypes-table-item-component :obj="this.objeto" />
-          <usertypes-table-item-component :obj="this.objeto" />
-          <usertypes-table-item-component :obj="this.objeto" />
+          <usertypes-table-item-component @editU="(val) => { this.$emit('editUsertype', val); }"
+                                          @deleteU="(val) => { this.$emit('deleteUsertype', val); }"
+                                          :obj="this.objeto" />
         </tbody>
       </table>
     </div>

@@ -1,3 +1,4 @@
+<!-- eslint-disable vuejs-accessibility/click-events-have-key-events -->
 <template>
   <tr>
     <td className="text-[#3F3F44] text-[14px] font-light py-[24px] text-center">
@@ -17,11 +18,13 @@
                   style="margin-left: auto; margin-right: auto;" />
     </td>
     <td className="py-[24px] text-center">
-      <span className="cursor-pointer">
+      <span className="cursor-pointer"
+            @click="this.$emit('editU', 'EditUsertype')">
         <v-icon name="md-edit-outlined"
                 scale="1.25" />
       </span>
-      <span className="cursor-pointer">
+      <span className="cursor-pointer"
+            @click="this.$emit('deleteU', true)">
         <v-icon name="bi-trash"
                 scale="1.25" />
       </span>

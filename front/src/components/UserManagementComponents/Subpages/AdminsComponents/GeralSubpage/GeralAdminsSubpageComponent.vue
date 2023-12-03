@@ -35,7 +35,7 @@
             <div className="w-[241px] p-[12.5px] bg-[#EDBD3A]
             text-black rounded-[8px] cursor-pointer
             m-auto font-semibold"
-                 @click="changeGeral('NewUsertype')">
+                 @click="changeGeral('EditUsertype')">
               <v-icon name="bi-plus-square"
                       scale="1.25"
                       fill="black" />
@@ -44,7 +44,7 @@
             <div className="w-[241px] p-[12.5px] bg-[#EDBD3A]
             text-black rounded-[8px] cursor-pointer
             m-auto font-semibold ml-4"
-            @click="newAdminVal = true">
+                 @click="newAdminVal = true">
               <v-icon name="pr-user-plus"
                       scale="1.25"
                       fill="black" />
@@ -69,11 +69,13 @@
                                         this.editAdminVal = val
                                       }" />
         <usertypes-subpage-component v-if="isUser == 'types'"
-                                     @changeGeral="changeGeral" />
+                                     @editUsertype="changeGeral"
+                                     @deleteUsertype="deleteUsertype" />
       </div>
     </div>
-    <div v-if="isGeral == 'NewUsertype'"></div>
-    <div v-if="isGeral == 'EditUsertype'"></div>
+    <div v-if="isGeral == 'EditUsertype'">
+      <usertypes-subpage-edit-component @changeGeral="changeGeral" />
+    </div>
     <v-dialog v-model="newAdminVal"
               width="auto">
       <create-admin-popup @registerAdmin="(val) => this.newAdminVal = val" />
@@ -82,15 +84,27 @@
               width="auto">
       <edit-admin-popup @editAdmin="(val) => this.editAdminVal = val" />
     </v-dialog>
+    <!-- <v-dialog v-model="editUsert"
+              width="auto">
+      <edit-usertype-popup @editUsertype="editUsertype" />
+    </v-dialog> -->
+    <v-dialog v-model="deleteUsert"
+              width="auto">
+      <delete-usertype-popup @deleteUsertype="deleteUsertype" />
+    </v-dialog>
   </div>
 </template>
 
 <script>
 import RegisteredSubpageComponent from '../RegisteredSubpages/RegisteredSubpageComponent.vue';
 import UsertypesSubpageComponent from '../UsertypesSubpages/UsertypesSubpageComponent.vue';
+import UsertypesSubpageEditComponent from '../UsertypesSubpages/UsertypesEditSubpages/UsertypesSubpageEditComponent.vue';
 
 import CreateAdminPopup from '../../../../PopupComponents/UserManagementPopups/CreateAdminPopup.vue';
 import EditAdminPopup from '../../../../PopupComponents/UserManagementPopups/EditAdminPopup.vue';
+// eslint-disable-next-line max-len
+// import EditUsertypePopup from '../../../../PopupComponents/UserManagementPopups/EditUsertypePopup.vue';
+import DeleteUsertypePopup from '../../../../PopupComponents/UserManagementPopups/DeleteUsertypePopup.vue';
 
 export default {
   name: 'GeralAdminsSubpageComponent',
@@ -99,6 +113,9 @@ export default {
     UsertypesSubpageComponent,
     CreateAdminPopup,
     EditAdminPopup,
+    UsertypesSubpageEditComponent,
+    // EditUsertypePopup,
+    DeleteUsertypePopup,
   },
   data() {
     return {
@@ -106,6 +123,8 @@ export default {
       isGeral: 'Page',
       editAdminVal: false,
       newAdminVal: false,
+      editUsert: false,
+      deleteUsert: false,
       items: [
         'Admin',
         'SubAdmin',
@@ -118,6 +137,12 @@ export default {
     },
     changeGeral(val) {
       this.isGeral = val;
+    },
+    editUsertype(val) {
+      this.editUsert = val;
+    },
+    deleteUsertype(val) {
+      this.deleteUsert = val;
     },
   },
 };
